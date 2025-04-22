@@ -19,12 +19,12 @@ endif
 
 .PHONY: generate
 generate:
-	@mkdir -p $(PWD)/semconv/$(TAG)
+	@mkdir -p $(PWD)/$(TAG)
 	@mkdir -p ~/.weaver
 	@docker run --rm \
 		-u $(DOCKER_USER) \
 		--mount 'type=bind,source=$(PWD)/templates,target=/home/weaver/templates,readonly' \
-		--mount 'type=bind,source=$(PWD)/semconv/$(TAG),target=/home/weaver/target' \
+		--mount 'type=bind,source=$(PWD)/$(TAG),target=/home/weaver/target' \
 		--mount 'type=bind,source=$(HOME)/.weaver,target=/tmp/weaver/.weaver' \
 		${WEAVER_IMAGE} registry generate \
 		--registry=https://github.com/open-telemetry/semantic-conventions/archive/refs/tags/$(TAG).zip[model] \
