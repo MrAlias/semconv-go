@@ -23,7 +23,6 @@ generate:
 	@mkdir -p ~/.weaver
 	@docker run --rm \
 		-u $(DOCKER_USER) \
-		--mount 'type=bind,source=$(PWD)/semantic-conventions/model,target=/home/weaver/source,readonly' \
 		--mount 'type=bind,source=$(PWD)/templates,target=/home/weaver/templates,readonly' \
 		--mount 'type=bind,source=$(PWD)/semconv/$(TAG),target=/home/weaver/target' \
 		--mount 'type=bind,source=$(HOME)/.weaver,target=/tmp/weaver/.weaver' \
