@@ -1,5 +1,5 @@
 params:
-  excluded_namespaces: ["aspnetcore", "dotnet", "jvm", "kestrel", "nodejs", "v8js"]
+  excluded_namespaces: ["aspnetcore", "cpython", "dotnet", "jvm", "kestrel", "nodejs", "v8js"]
 templates:
   - pattern: metric.go.j2
     filter: >
