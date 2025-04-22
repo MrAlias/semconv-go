@@ -1,9 +1,6 @@
-// Copyright The OpenTelemetry Authors
-// SPDX-License-Identifier: Apache-2.0
-
 // Code generated from semantic convention specification. DO NOT EDIT.
 
-package semconv // import "github.com/MrAlias/semconv-go/semconv/v1.32.0/cpython"
+package cpython
 
 import (
 	"context"

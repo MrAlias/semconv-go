@@ -1,6 +1,6 @@
 // Code generated from semantic convention specification. DO NOT EDIT.
 
-package semconv
+package rpc
 
 import (
 	"context"
