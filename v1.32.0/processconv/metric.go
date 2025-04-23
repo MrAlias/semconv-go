@@ -353,6 +353,7 @@ func (MemoryUsage) Description() string {
 	return "The amount of physical memory in use."
 }
 
+// Add adds incr to the existing count.
 func (m MemoryUsage) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -396,6 +397,7 @@ func (MemoryVirtual) Description() string {
 	return "The amount of committed virtual memory."
 }
 
+// Add adds incr to the existing count.
 func (m MemoryVirtual) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -498,6 +500,7 @@ func (OpenFileDescriptorCount) Description() string {
 	return "Number of file descriptors in use by the process."
 }
 
+// Add adds incr to the existing count.
 func (m OpenFileDescriptorCount) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -601,6 +604,7 @@ func (ThreadCount) Description() string {
 	return "Process threads count."
 }
 
+// Add adds incr to the existing count.
 func (m ThreadCount) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -644,6 +648,11 @@ func (Uptime) Description() string {
 	return "The time the process has been running."
 }
 
+// Record records val to the current distribution.
+//
+// Instrumentations SHOULD use a gauge with type `double` and measure uptime in
+// seconds as a floating point number with the highest precision available.
+// The actual accuracy would depend on the instrumentation and operating system.
 func (m Uptime) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)

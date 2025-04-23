@@ -488,6 +488,11 @@ func (HostPower) Description() string {
 // monitored host
 //
 // All additional attrs passed are included in the recorded value.
+//
+// The overall energy usage of a host MUST be reported using the specific
+// `hw.host.energy` and `hw.host.power` metrics **only**, instead of the generic
+// `hw.energy` and `hw.power` described in the previous section, to prevent
+// summing up overlapping values.
 func (m HostPower) Record(
 	ctx context.Context,
 	val int64,
@@ -562,6 +567,8 @@ func (Power) Description() string {
 // The hwType is the type of the component
 //
 // All additional attrs passed are included in the recorded value.
+//
+// It is recommended to report `hw.energy` instead of `hw.power` when possible.
 func (m Power) Record(
 	ctx context.Context,
 	val int64,

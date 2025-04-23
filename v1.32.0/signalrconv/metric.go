@@ -147,6 +147,9 @@ func (ServerConnectionDuration) Description() string {
 // Record records val to the current distribution.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// Meter name: `Microsoft.AspNetCore.Http.Connections`; Added in: ASP.NET Core
+// 8.0
 func (m ServerConnectionDuration) Record(
 	ctx context.Context,
 	val float64,

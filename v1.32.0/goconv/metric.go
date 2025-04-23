@@ -57,6 +57,9 @@ func (ConfigGogc) Description() string {
 	return "Heap size target percentage configured by the user, otherwise 100."
 }
 
+// Add adds incr to the existing count.
+//
+// The value range is [0.0,100.0]. Computed from `/gc/gogc:percent`.
 func (m ConfigGogc) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -100,6 +103,9 @@ func (GoroutineCount) Description() string {
 	return "Count of live goroutines."
 }
 
+// Add adds incr to the existing count.
+//
+// Computed from `/sched/goroutines:goroutines`.
 func (m GoroutineCount) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -143,6 +149,9 @@ func (MemoryAllocated) Description() string {
 	return "Memory allocated to the heap by the application."
 }
 
+// Add adds incr to the existing count.
+//
+// Computed from `/gc/heap/allocs:bytes`.
 func (m MemoryAllocated) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -186,6 +195,9 @@ func (MemoryAllocations) Description() string {
 	return "Count of allocations to the heap by the application."
 }
 
+// Add adds incr to the existing count.
+//
+// Computed from `/gc/heap/allocs:objects`.
 func (m MemoryAllocations) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -229,6 +241,9 @@ func (MemoryGCGoal) Description() string {
 	return "Heap size target for the end of the GC cycle."
 }
 
+// Add adds incr to the existing count.
+//
+// Computed from `/gc/heap/goal:bytes`.
 func (m MemoryGCGoal) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -272,6 +287,10 @@ func (MemoryLimit) Description() string {
 	return "Go runtime memory limit configured by the user, if a limit exists."
 }
 
+// Add adds incr to the existing count.
+//
+// Computed from `/gc/gomemlimit:bytes`. This metric is excluded if the limit
+// obtained from the Go runtime is math.MaxInt64.
 func (m MemoryLimit) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -376,6 +395,9 @@ func (ProcessorLimit) Description() string {
 	return "The number of OS threads that can execute user-level Go code simultaneously."
 }
 
+// Add adds incr to the existing count.
+//
+// Computed from `/sched/gomaxprocs:threads`.
 func (m ProcessorLimit) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -420,6 +442,10 @@ func (ScheduleDuration) Description() string {
 	return "The time goroutines have spent in the scheduler in a runnable state before actually running."
 }
 
+// Record records val to the current distribution.
+//
+// Computed from `/sched/latencies:seconds`. Bucket boundaries are provided by
+// the runtime, and are subject to change.
 func (m ScheduleDuration) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)

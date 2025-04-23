@@ -465,6 +465,7 @@ func (SDKLogCreated) Description() string {
 	return "The number of logs submitted to enabled SDK Loggers"
 }
 
+// Add adds incr to the existing count.
 func (m SDKLogCreated) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)

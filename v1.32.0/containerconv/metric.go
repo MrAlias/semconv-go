@@ -156,6 +156,9 @@ func (CPUUsage) Description() string {
 // Record records val to the current distribution.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// CPU usage of the specific container on all available CPU cores, averaged over
+// the sample window
 func (m CPUUsage) Record(
 	ctx context.Context,
 	val int64,
@@ -280,6 +283,9 @@ func (MemoryUsage) Description() string {
 	return "Memory usage of the container."
 }
 
+// Add adds incr to the existing count.
+//
+// Memory usage of the container.
 func (m MemoryUsage) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -391,6 +397,11 @@ func (Uptime) Description() string {
 	return "The time the container has been running"
 }
 
+// Record records val to the current distribution.
+//
+// Instrumentations SHOULD use a gauge with type `double` and measure uptime in
+// seconds as a floating point number with the highest precision available.
+// The actual accuracy would depend on the instrumentation and operating system.
 func (m Uptime) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)

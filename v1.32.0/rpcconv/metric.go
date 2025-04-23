@@ -44,6 +44,12 @@ func (ClientDuration) Description() string {
 	return "Measures the duration of outbound RPC."
 }
 
+// Record records val to the current distribution.
+//
+// While streaming RPCs may record this metric as start-of-batch
+// to end-of-batch, it's hard to interpret in practice.
+//
+// **Streaming**: N/A.
 func (m ClientDuration) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
@@ -87,6 +93,9 @@ func (ClientRequestSize) Description() string {
 	return "Measures the size of RPC request messages (uncompressed)."
 }
 
+// Record records val to the current distribution.
+//
+// **Streaming**: Recorded per message in a streaming batch
 func (m ClientRequestSize) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
@@ -130,6 +139,11 @@ func (ClientRequestsPerRPC) Description() string {
 	return "Measures the number of messages received per RPC."
 }
 
+// Record records val to the current distribution.
+//
+// Should be 1 for all non-streaming RPCs.
+//
+// **Streaming**: This metric is required for server and client streaming RPCs
 func (m ClientRequestsPerRPC) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
@@ -173,6 +187,9 @@ func (ClientResponseSize) Description() string {
 	return "Measures the size of RPC response messages (uncompressed)."
 }
 
+// Record records val to the current distribution.
+//
+// **Streaming**: Recorded per response in a streaming batch
 func (m ClientResponseSize) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
@@ -216,6 +233,11 @@ func (ClientResponsesPerRPC) Description() string {
 	return "Measures the number of messages sent per RPC."
 }
 
+// Record records val to the current distribution.
+//
+// Should be 1 for all non-streaming RPCs.
+//
+// **Streaming**: This metric is required for server and client streaming RPCs
 func (m ClientResponsesPerRPC) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
@@ -259,6 +281,12 @@ func (ServerDuration) Description() string {
 	return "Measures the duration of inbound RPC."
 }
 
+// Record records val to the current distribution.
+//
+// While streaming RPCs may record this metric as start-of-batch
+// to end-of-batch, it's hard to interpret in practice.
+//
+// **Streaming**: N/A.
 func (m ServerDuration) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
@@ -302,6 +330,9 @@ func (ServerRequestSize) Description() string {
 	return "Measures the size of RPC request messages (uncompressed)."
 }
 
+// Record records val to the current distribution.
+//
+// **Streaming**: Recorded per message in a streaming batch
 func (m ServerRequestSize) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
@@ -345,6 +376,11 @@ func (ServerRequestsPerRPC) Description() string {
 	return "Measures the number of messages received per RPC."
 }
 
+// Record records val to the current distribution.
+//
+// Should be 1 for all non-streaming RPCs.
+//
+// **Streaming** : This metric is required for server and client streaming RPCs
 func (m ServerRequestsPerRPC) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
@@ -388,6 +424,9 @@ func (ServerResponseSize) Description() string {
 	return "Measures the size of RPC response messages (uncompressed)."
 }
 
+// Record records val to the current distribution.
+//
+// **Streaming**: Recorded per response in a streaming batch
 func (m ServerResponseSize) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
@@ -431,6 +470,11 @@ func (ServerResponsesPerRPC) Description() string {
 	return "Measures the number of messages sent per RPC."
 }
 
+// Record records val to the current distribution.
+//
+// Should be 1 for all non-streaming RPCs.
+//
+// **Streaming**: This metric is required for server and client streaming RPCs
 func (m ServerResponsesPerRPC) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)

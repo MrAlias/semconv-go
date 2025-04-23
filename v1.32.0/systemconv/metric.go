@@ -228,6 +228,10 @@ func (CPULogicalCount) Description() string {
 	return "Reports the number of logical (virtual) processor cores created by the operating system to manage multitasking"
 }
 
+// Add adds incr to the existing count.
+//
+// Calculated by multiplying the number of sockets by the number of cores per
+// socket, and then by the number of threads per core
 func (m CPULogicalCount) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -271,6 +275,10 @@ func (CPUPhysicalCount) Description() string {
 	return "Reports the number of actual physical processor cores on the hardware"
 }
 
+// Add adds incr to the existing count.
+//
+// Calculated by multiplying the number of sockets by the number of cores per
+// socket
 func (m CPUPhysicalCount) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -944,6 +952,17 @@ func (LinuxMemoryAvailable) Description() string {
 	return "An estimate of how much memory is available for starting new applications, without causing swapping"
 }
 
+// Add adds incr to the existing count.
+//
+// This is an alternative to `system.memory.usage` metric with `state=free`.
+// Linux starting from 3.14 exports "available" memory. It takes "free" memory as
+// a baseline, and then factors in kernel-specific values.
+// This is supposed to be more accurate than just "free" memory.
+// For reference, see the calculations [here].
+// See also `MemAvailable` in [/proc/meminfo].
+//
+// [here]: https://superuser.com/a/980821
+// [/proc/meminfo]: https://man7.org/linux/man-pages/man5/proc.5.html
 func (m LinuxMemoryAvailable) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -1056,6 +1075,9 @@ func (MemoryLimit) Description() string {
 	return "Total memory available in the system."
 }
 
+// Add adds incr to the existing count.
+//
+// Its value SHOULD equal the sum of `system.memory.state` over all states.
 func (m MemoryLimit) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -1099,6 +1121,13 @@ func (MemoryShared) Description() string {
 	return "Shared memory used (mostly by tmpfs)."
 }
 
+// Add adds incr to the existing count.
+//
+// Equivalent of `shared` from [`free` command] or
+// `Shmem` from [`/proc/meminfo`]"
+//
+// [`free` command]: https://man7.org/linux/man-pages/man1/free.1.html
+// [`/proc/meminfo`]: https://man7.org/linux/man-pages/man5/proc.5.html
 func (m MemoryShared) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -1894,6 +1923,7 @@ func (ProcessCreated) Description() string {
 	return "Total number of processes created over uptime of the host"
 }
 
+// Add adds incr to the existing count.
 func (m ProcessCreated) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -1937,6 +1967,11 @@ func (Uptime) Description() string {
 	return "The time the system has been running"
 }
 
+// Record records val to the current distribution.
+//
+// Instrumentations SHOULD use a gauge with type `double` and measure uptime in
+// seconds as a floating point number with the highest precision available.
+// The actual accuracy would depend on the instrumentation and operating system.
 func (m Uptime) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)

@@ -396,6 +396,13 @@ func (ClientRequestBodySize) Description() string {
 //
 // ["URI origin"]: https://www.rfc-editor.org/rfc/rfc9110.html#name-uri-origin
 // ["URI origin"]: https://www.rfc-editor.org/rfc/rfc9110.html#name-uri-origin
+//
+// The size of the request payload body in bytes. This is the number of bytes
+// transferred excluding headers and is often, but not always, present as the
+// [Content-Length] header. For requests using transport encoding, this should be
+// the compressed size.
+//
+// [Content-Length]: https://www.rfc-editor.org/rfc/rfc9110.html#field.content-length
 func (m ClientRequestBodySize) Record(
 	ctx context.Context,
 	val int64,
@@ -638,6 +645,13 @@ func (ClientResponseBodySize) Description() string {
 //
 // ["URI origin"]: https://www.rfc-editor.org/rfc/rfc9110.html#name-uri-origin
 // ["URI origin"]: https://www.rfc-editor.org/rfc/rfc9110.html#name-uri-origin
+//
+// The size of the response payload body in bytes. This is the number of bytes
+// transferred excluding headers and is often, but not always, present as the
+// [Content-Length] header. For requests using transport encoding, this should be
+// the compressed size.
+//
+// [Content-Length]: https://www.rfc-editor.org/rfc/rfc9110.html#field.content-length
 func (m ClientResponseBodySize) Record(
 	ctx context.Context,
 	val int64,
@@ -832,6 +846,13 @@ func (ServerRequestBodySize) Description() string {
 // All additional attrs passed are included in the recorded value.
 //
 // [URI scheme]: https://www.rfc-editor.org/rfc/rfc3986#section-3.1
+//
+// The size of the request payload body in bytes. This is the number of bytes
+// transferred excluding headers and is often, but not always, present as the
+// [Content-Length] header. For requests using transport encoding, this should be
+// the compressed size.
+//
+// [Content-Length]: https://www.rfc-editor.org/rfc/rfc9110.html#field.content-length
 func (m ServerRequestBodySize) Record(
 	ctx context.Context,
 	val int64,
@@ -1080,6 +1101,13 @@ func (ServerResponseBodySize) Description() string {
 // All additional attrs passed are included in the recorded value.
 //
 // [URI scheme]: https://www.rfc-editor.org/rfc/rfc3986#section-3.1
+//
+// The size of the response payload body in bytes. This is the number of bytes
+// transferred excluding headers and is often, but not always, present as the
+// [Content-Length] header. For requests using transport encoding, this should be
+// the compressed size.
+//
+// [Content-Length]: https://www.rfc-editor.org/rfc/rfc9110.html#field.content-length
 func (m ServerResponseBodySize) Record(
 	ctx context.Context,
 	val int64,

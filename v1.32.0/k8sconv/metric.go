@@ -72,6 +72,16 @@ func (CronJobActiveJobs) Description() string {
 	return "The number of actively running jobs for a cronjob"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `active` field of the
+// [K8s CronJobStatus].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.cronjob`] resource.
+//
+// [K8s CronJobStatus]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#cronjobstatus-v1-batch
+// [`k8s.cronjob`]: ../resource/k8s.md#cronjob
 func (m CronJobActiveJobs) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -117,6 +127,16 @@ func (DaemonSetCurrentScheduledNodes) Description() string {
 	return "Number of nodes that are running at least 1 daemon pod and are supposed to run the daemon pod"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `currentNumberScheduled` field of the
+// [K8s DaemonSetStatus].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.daemonset`] resource.
+//
+// [K8s DaemonSetStatus]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#daemonsetstatus-v1-apps
+// [`k8s.daemonset`]: ../resource/k8s.md#daemonset
 func (m DaemonSetCurrentScheduledNodes) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -162,6 +182,16 @@ func (DaemonSetDesiredScheduledNodes) Description() string {
 	return "Number of nodes that should be running the daemon pod (including nodes currently running the daemon pod)"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `desiredNumberScheduled` field of the
+// [K8s DaemonSetStatus].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.daemonset`] resource.
+//
+// [K8s DaemonSetStatus]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#daemonsetstatus-v1-apps
+// [`k8s.daemonset`]: ../resource/k8s.md#daemonset
 func (m DaemonSetDesiredScheduledNodes) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -207,6 +237,16 @@ func (DaemonSetMisscheduledNodes) Description() string {
 	return "Number of nodes that are running the daemon pod, but are not supposed to run the daemon pod"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `numberMisscheduled` field of the
+// [K8s DaemonSetStatus].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.daemonset`] resource.
+//
+// [K8s DaemonSetStatus]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#daemonsetstatus-v1-apps
+// [`k8s.daemonset`]: ../resource/k8s.md#daemonset
 func (m DaemonSetMisscheduledNodes) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -251,6 +291,16 @@ func (DaemonSetReadyNodes) Description() string {
 	return "Number of nodes that should be running the daemon pod and have one or more of the daemon pod running and ready"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `numberReady` field of the
+// [K8s DaemonSetStatus].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.daemonset`] resource.
+//
+// [K8s DaemonSetStatus]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#daemonsetstatus-v1-apps
+// [`k8s.daemonset`]: ../resource/k8s.md#daemonset
 func (m DaemonSetReadyNodes) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -295,6 +345,16 @@ func (DeploymentAvailablePods) Description() string {
 	return "Total number of available replica pods (ready for at least minReadySeconds) targeted by this deployment"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `availableReplicas` field of the
+// [K8s DeploymentStatus].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.deployment`] resource.
+//
+// [K8s DeploymentStatus]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#deploymentstatus-v1-apps
+// [`k8s.deployment`]: ../resource/k8s.md#deployment
 func (m DeploymentAvailablePods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -338,6 +398,16 @@ func (DeploymentDesiredPods) Description() string {
 	return "Number of desired replica pods in this deployment"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `replicas` field of the
+// [K8s DeploymentSpec].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.deployment`] resource.
+//
+// [K8s DeploymentSpec]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#deploymentspec-v1-apps
+// [`k8s.deployment`]: ../resource/k8s.md#deployment
 func (m DeploymentDesiredPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -382,6 +452,16 @@ func (HpaCurrentPods) Description() string {
 	return "Current number of replica pods managed by this horizontal pod autoscaler, as last seen by the autoscaler"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `currentReplicas` field of the
+// [K8s HorizontalPodAutoscalerStatus]
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.hpa`] resource.
+//
+// [K8s HorizontalPodAutoscalerStatus]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#horizontalpodautoscalerstatus-v2-autoscaling
+// [`k8s.hpa`]: ../resource/k8s.md#horizontalpodautoscaler
 func (m HpaCurrentPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -426,6 +506,16 @@ func (HpaDesiredPods) Description() string {
 	return "Desired number of replica pods managed by this horizontal pod autoscaler, as last calculated by the autoscaler"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `desiredReplicas` field of the
+// [K8s HorizontalPodAutoscalerStatus]
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.hpa`] resource.
+//
+// [K8s HorizontalPodAutoscalerStatus]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#horizontalpodautoscalerstatus-v2-autoscaling
+// [`k8s.hpa`]: ../resource/k8s.md#horizontalpodautoscaler
 func (m HpaDesiredPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -469,6 +559,16 @@ func (HpaMaxPods) Description() string {
 	return "The upper limit for the number of replica pods to which the autoscaler can scale up"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `maxReplicas` field of the
+// [K8s HorizontalPodAutoscalerSpec]
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.hpa`] resource.
+//
+// [K8s HorizontalPodAutoscalerSpec]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#horizontalpodautoscalerspec-v2-autoscaling
+// [`k8s.hpa`]: ../resource/k8s.md#horizontalpodautoscaler
 func (m HpaMaxPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -512,6 +612,16 @@ func (HpaMinPods) Description() string {
 	return "The lower limit for the number of replica pods to which the autoscaler can scale down"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `minReplicas` field of the
+// [K8s HorizontalPodAutoscalerSpec]
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.hpa`] resource.
+//
+// [K8s HorizontalPodAutoscalerSpec]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#horizontalpodautoscalerspec-v2-autoscaling
+// [`k8s.hpa`]: ../resource/k8s.md#horizontalpodautoscaler
 func (m HpaMinPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -555,6 +665,16 @@ func (JobActivePods) Description() string {
 	return "The number of pending and actively running pods for a job"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `active` field of the
+// [K8s JobStatus].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.job`] resource.
+//
+// [K8s JobStatus]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#jobstatus-v1-batch
+// [`k8s.job`]: ../resource/k8s.md#job
 func (m JobActivePods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -599,6 +719,16 @@ func (JobDesiredSuccessfulPods) Description() string {
 	return "The desired number of successfully finished pods the job should be run with"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `completions` field of the
+// [K8s JobSpec].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.job`] resource.
+//
+// [K8s JobSpec]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#jobspec-v1-batch
+// [`k8s.job`]: ../resource/k8s.md#job
 func (m JobDesiredSuccessfulPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -642,6 +772,16 @@ func (JobFailedPods) Description() string {
 	return "The number of pods which reached phase Failed for a job"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `failed` field of the
+// [K8s JobStatus].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.job`] resource.
+//
+// [K8s JobStatus]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#jobstatus-v1-batch
+// [`k8s.job`]: ../resource/k8s.md#job
 func (m JobFailedPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -685,6 +825,16 @@ func (JobMaxParallelPods) Description() string {
 	return "The max desired number of pods the job should run at any given time"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `parallelism` field of the
+// [K8s JobSpec].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.job`] resource.
+//
+// [K8s JobSpec]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#jobspec-v1-batch
+// [`k8s.job`]: ../resource/k8s.md#job
 func (m JobMaxParallelPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -728,6 +878,16 @@ func (JobSuccessfulPods) Description() string {
 	return "The number of pods which reached phase Succeeded for a job"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `succeeded` field of the
+// [K8s JobStatus].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.job`] resource.
+//
+// [K8s JobStatus]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#jobstatus-v1-batch
+// [`k8s.job`]: ../resource/k8s.md#job
 func (m JobSuccessfulPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -832,6 +992,9 @@ func (NodeCPUTime) Description() string {
 	return "Total CPU time consumed"
 }
 
+// Add adds incr to the existing count.
+//
+// Total CPU time consumed by the specific Node on all available CPU cores
 func (m NodeCPUTime) Add(ctx context.Context, incr float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -875,6 +1038,10 @@ func (NodeCPUUsage) Description() string {
 	return "Node's CPU usage, measured in cpus. Range from 0 to the number of allocatable CPUs"
 }
 
+// Record records val to the current distribution.
+//
+// CPU usage of the specific Node on all available CPU cores, averaged over the
+// sample window
 func (m NodeCPUUsage) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
@@ -918,6 +1085,9 @@ func (NodeMemoryUsage) Description() string {
 	return "Memory usage of the Node"
 }
 
+// Record records val to the current distribution.
+//
+// Total memory usage of the Node
 func (m NodeMemoryUsage) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
@@ -1093,6 +1263,11 @@ func (NodeUptime) Description() string {
 	return "The time the Node has been running"
 }
 
+// Record records val to the current distribution.
+//
+// Instrumentations SHOULD use a gauge with type `double` and measure uptime in
+// seconds as a floating point number with the highest precision available.
+// The actual accuracy would depend on the instrumentation and operating system.
 func (m NodeUptime) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
@@ -1136,6 +1311,9 @@ func (PodCPUTime) Description() string {
 	return "Total CPU time consumed"
 }
 
+// Add adds incr to the existing count.
+//
+// Total CPU time consumed by the specific Pod on all available CPU cores
 func (m PodCPUTime) Add(ctx context.Context, incr float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -1179,6 +1357,10 @@ func (PodCPUUsage) Description() string {
 	return "Pod's CPU usage, measured in cpus. Range from 0 to the number of allocatable CPUs"
 }
 
+// Record records val to the current distribution.
+//
+// CPU usage of the specific Pod on all available CPU cores, averaged over the
+// sample window
 func (m PodCPUUsage) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
@@ -1222,6 +1404,9 @@ func (PodMemoryUsage) Description() string {
 	return "Memory usage of the Pod"
 }
 
+// Record records val to the current distribution.
+//
+// Total memory usage of the Pod
 func (m PodMemoryUsage) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
@@ -1397,6 +1582,11 @@ func (PodUptime) Description() string {
 	return "The time the Pod has been running"
 }
 
+// Record records val to the current distribution.
+//
+// Instrumentations SHOULD use a gauge with type `double` and measure uptime in
+// seconds as a floating point number with the highest precision available.
+// The actual accuracy would depend on the instrumentation and operating system.
 func (m PodUptime) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
@@ -1441,6 +1631,16 @@ func (ReplicaSetAvailablePods) Description() string {
 	return "Total number of available replica pods (ready for at least minReadySeconds) targeted by this replicaset"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `availableReplicas` field of the
+// [K8s ReplicaSetStatus].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.replicaset`] resource.
+//
+// [K8s ReplicaSetStatus]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#replicasetstatus-v1-apps
+// [`k8s.replicaset`]: ../resource/k8s.md#replicaset
 func (m ReplicaSetAvailablePods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -1484,6 +1684,16 @@ func (ReplicaSetDesiredPods) Description() string {
 	return "Number of desired replica pods in this replicaset"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `replicas` field of the
+// [K8s ReplicaSetSpec].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.replicaset`] resource.
+//
+// [K8s ReplicaSetSpec]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#replicasetspec-v1-apps
+// [`k8s.replicaset`]: ../resource/k8s.md#replicaset
 func (m ReplicaSetDesiredPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -1529,6 +1739,16 @@ func (ReplicationControllerAvailablePods) Description() string {
 	return "Total number of available replica pods (ready for at least minReadySeconds) targeted by this replication controller"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `availableReplicas` field of the
+// [K8s ReplicationControllerStatus]
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.replicationcontroller`] resource.
+//
+// [K8s ReplicationControllerStatus]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#replicationcontrollerstatus-v1-core
+// [`k8s.replicationcontroller`]: ../resource/k8s.md#replicationcontroller
 func (m ReplicationControllerAvailablePods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -1574,6 +1794,16 @@ func (ReplicationControllerDesiredPods) Description() string {
 	return "Number of desired replica pods in this replication controller"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `replicas` field of the
+// [K8s ReplicationControllerSpec]
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.replicationcontroller`] resource.
+//
+// [K8s ReplicationControllerSpec]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#replicationcontrollerspec-v1-core
+// [`k8s.replicationcontroller`]: ../resource/k8s.md#replicationcontroller
 func (m ReplicationControllerDesiredPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -1618,6 +1848,16 @@ func (StatefulSetCurrentPods) Description() string {
 	return "The number of replica pods created by the statefulset controller from the statefulset version indicated by currentRevision"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `currentReplicas` field of the
+// [K8s StatefulSetStatus].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.statefulset`] resource.
+//
+// [K8s StatefulSetStatus]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#statefulsetstatus-v1-apps
+// [`k8s.statefulset`]: ../resource/k8s.md#statefulset
 func (m StatefulSetCurrentPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -1661,6 +1901,16 @@ func (StatefulSetDesiredPods) Description() string {
 	return "Number of desired replica pods in this statefulset"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `replicas` field of the
+// [K8s StatefulSetSpec].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.statefulset`] resource.
+//
+// [K8s StatefulSetSpec]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#statefulsetspec-v1-apps
+// [`k8s.statefulset`]: ../resource/k8s.md#statefulset
 func (m StatefulSetDesiredPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -1704,6 +1954,16 @@ func (StatefulSetReadyPods) Description() string {
 	return "The number of replica pods created for this statefulset with a Ready Condition"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `readyReplicas` field of the
+// [K8s StatefulSetStatus].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.statefulset`] resource.
+//
+// [K8s StatefulSetStatus]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#statefulsetstatus-v1-apps
+// [`k8s.statefulset`]: ../resource/k8s.md#statefulset
 func (m StatefulSetReadyPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
@@ -1748,6 +2008,16 @@ func (StatefulSetUpdatedPods) Description() string {
 	return "Number of replica pods created by the statefulset controller from the statefulset version indicated by updateRevision"
 }
 
+// Add adds incr to the existing count.
+//
+// This metric aligns with the `updatedReplicas` field of the
+// [K8s StatefulSetStatus].
+//
+// This metric SHOULD, at a minimum, be reported against a
+// [`k8s.statefulset`] resource.
+//
+// [K8s StatefulSetStatus]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/#statefulsetstatus-v1-apps
+// [`k8s.statefulset`]: ../resource/k8s.md#statefulset
 func (m StatefulSetUpdatedPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)

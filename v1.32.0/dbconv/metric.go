@@ -841,6 +841,8 @@ func (ClientOperationDuration) Description() string {
 // identified by the client instrumentation.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// Batch operations SHOULD be recorded as a single operation.
 func (m ClientOperationDuration) Record(
 	ctx context.Context,
 	val float64,

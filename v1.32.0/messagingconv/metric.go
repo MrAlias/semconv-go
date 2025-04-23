@@ -244,6 +244,9 @@ func (ClientOperationDuration) Description() string {
 // instrumentation.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// This metric SHOULD NOT be used to report processing duration - processing
+// duration is reported in `messaging.process.duration` metric.
 func (m ClientOperationDuration) Record(
 	ctx context.Context,
 	val float64,
@@ -478,6 +481,9 @@ func (ProcessDuration) Description() string {
 // instrumentation.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// This metric MUST be reported for operations with `messaging.operation.type`
+// that matches `process`.
 func (m ProcessDuration) Record(
 	ctx context.Context,
 	val float64,

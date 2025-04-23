@@ -106,13 +106,6 @@ Int64
 {%- macro add_method_with_optional(metric, pkg="") -%}
 {%- set name = h.to_go_name(metric.metric_name, pkg) -%}
 {%- set req_attr = metric.attributes | required | attribute_sort -%}
-
-// Add adds incr to the existing count.
-{{ params_docs(metric.attributes, pkg=pkg) }}
-{%- if metric.note is defined %}
-//
-{{ metric.note | comment }}
-{%- endif %}
 func (m {{ name }}) Add(
 	ctx context.Context,
 	incr {{ value_type(metric) | lower }},
@@ -127,11 +120,21 @@ func (m {{ name }}) Add(
 {%- endmacro -%}
 
 {%- macro add_method(metric, pkg="") -%}
-{%- if metric.attributes | length > 0 -%}
+
+// Add adds incr to the existing count.
+{%- if metric.attributes | length > 0 %}
+{{ params_docs(metric.attributes, pkg=pkg) }}
+{%- if metric.note is defined %}
+//
+{{ metric.note | comment }}
+{%- endif %}
 {{ add_method_with_optional(metric, pkg) }}
-{%- else -%}
-{%- set name = h.to_go_name(metric.metric_name, pkg) -%}
-func (m {{ name }}) Add(ctx context.Context, incr {{ value_type(metric) | lower }}, attrs ...attribute.KeyValue) {
+{%- else %}
+{%- if metric.note is defined %}
+//
+{{ metric.note | comment }}
+{%- endif %}
+func (m {{ h.to_go_name(metric.metric_name, pkg) }}) Add(ctx context.Context, incr {{ value_type(metric) | lower }}, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Add(ctx, incr)
 	} else {
@@ -144,9 +147,6 @@ func (m {{ name }}) Add(ctx context.Context, incr {{ value_type(metric) | lower 
 {%- macro record_method_with_optional(metric, pkg="") -%}
 {%- set name = h.to_go_name(metric.metric_name, pkg) -%}
 {%- set req_attr = metric.attributes | required | attribute_sort -%}
-
-// Record records val to the current distribution.
-{{ params_docs(metric.attributes, pkg=pkg) }}
 func (m {{ name }}) Record(
 	ctx context.Context,
 	val {{ value_type(metric) | lower }},
@@ -161,10 +161,21 @@ func (m {{ name }}) Record(
 {%- endmacro -%}
 
 {%- macro record_method(metric, pkg="") -%}
-{%- if metric.attributes | length > 0 -%}
+
+// Record records val to the current distribution.
+{%- if metric.attributes | length > 0 %}
+{{ params_docs(metric.attributes, pkg=pkg) }}
+{%- if metric.note is defined %}
+//
+{{ metric.note | comment }}
+{%- endif %}
 {{ record_method_with_optional(metric, pkg) }}
-{%- else -%}
+{%- else %}
 {%- set name = h.to_go_name(metric.metric_name, pkg) -%}
+{%- if metric.note is defined %}
+//
+{{ metric.note | comment }}
+{%- endif %}
 func (m {{ name }}) Record(ctx context.Context, val {{ value_type(metric) | lower }}, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
