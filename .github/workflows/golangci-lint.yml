@@ -15,8 +15,8 @@ jobs:
     outputs:
       modules: ${{ steps.set-modules.outputs.modules }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/setup-go@0aaccfd150d50ccaeb58ebd88d36e91967a5f35b # v5
         with:
           go-version: ${{ env.GO_VERSION }}
       - id: set-modules
@@ -29,12 +29,12 @@ jobs:
       matrix:
         modules: ${{ fromJSON(needs.detect-modules.outputs.modules) }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/setup-go@0aaccfd150d50ccaeb58ebd88d36e91967a5f35b # v5
         with:
           go-version: ${{ env.GO_VERSION }}
       - name: golangci-lint ${{ matrix.modules }}
-        uses: golangci/golangci-lint-action@v7
+        uses: golangci/golangci-lint-action@1481404843c368bc19ca9406f87d6e0fc97bdcfd # v7
         with:
           version: ${{ env.GOLANGCI_LINT_VERSION }}
           working-directory: ${{ matrix.modules }}
