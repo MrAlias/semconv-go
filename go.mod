@@ -1,4 +1,4 @@
-module github.com/MrAlias/semconv-go/v1.32.0
+module github.com/MrAlias/semconv-go
 
 go 1.23.0
 
