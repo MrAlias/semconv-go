@@ -46,7 +46,7 @@ func New{{ metric_name }}(m metric.Meter) ({{ metric_name }}, error) {
 	    metric.WithUnit("{{metric.unit}}"),
 	)
 	if err != nil {
-	    return {{metric_name}}{inst: noop.{{ i.instrument(metric) }}}, err
+	    return {{metric_name}}{inst: noop.{{ i.instrument(metric) }}{}}, err
 	}
 	return {{ metric_name }}{i}, nil
 }

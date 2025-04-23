@@ -97,7 +97,7 @@ func NewContextSwitches(m metric.Meter) (ContextSwitches, error) {
 	    metric.WithUnit("{context_switch}"),
 	)
 	if err != nil {
-	    return ContextSwitches{inst: noop.Int64Counter}, err
+	    return ContextSwitches{inst: noop.Int64Counter{}}, err
 	}
 	return ContextSwitches{i}, nil
 }
@@ -157,7 +157,7 @@ func NewCPUTime(m metric.Meter) (CPUTime, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return CPUTime{inst: noop.Float64Counter}, err
+	    return CPUTime{inst: noop.Float64Counter{}}, err
 	}
 	return CPUTime{i}, nil
 }
@@ -217,7 +217,7 @@ func NewCPUUtilization(m metric.Meter) (CPUUtilization, error) {
 	    metric.WithUnit("1"),
 	)
 	if err != nil {
-	    return CPUUtilization{inst: noop.Int64Gauge}, err
+	    return CPUUtilization{inst: noop.Int64Gauge{}}, err
 	}
 	return CPUUtilization{i}, nil
 }
@@ -276,7 +276,7 @@ func NewDiskIO(m metric.Meter) (DiskIO, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return DiskIO{inst: noop.Int64Counter}, err
+	    return DiskIO{inst: noop.Int64Counter{}}, err
 	}
 	return DiskIO{i}, nil
 }
@@ -334,7 +334,7 @@ func NewMemoryUsage(m metric.Meter) (MemoryUsage, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return MemoryUsage{inst: noop.Int64UpDownCounter}, err
+	    return MemoryUsage{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return MemoryUsage{i}, nil
 }
@@ -378,7 +378,7 @@ func NewMemoryVirtual(m metric.Meter) (MemoryVirtual, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return MemoryVirtual{inst: noop.Int64UpDownCounter}, err
+	    return MemoryVirtual{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return MemoryVirtual{i}, nil
 }
@@ -422,7 +422,7 @@ func NewNetworkIO(m metric.Meter) (NetworkIO, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return NetworkIO{inst: noop.Int64Counter}, err
+	    return NetworkIO{inst: noop.Int64Counter{}}, err
 	}
 	return NetworkIO{i}, nil
 }
@@ -481,7 +481,7 @@ func NewOpenFileDescriptorCount(m metric.Meter) (OpenFileDescriptorCount, error)
 	    metric.WithUnit("{file_descriptor}"),
 	)
 	if err != nil {
-	    return OpenFileDescriptorCount{inst: noop.Int64UpDownCounter}, err
+	    return OpenFileDescriptorCount{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return OpenFileDescriptorCount{i}, nil
 }
@@ -525,7 +525,7 @@ func NewPagingFaults(m metric.Meter) (PagingFaults, error) {
 	    metric.WithUnit("{fault}"),
 	)
 	if err != nil {
-	    return PagingFaults{inst: noop.Int64Counter}, err
+	    return PagingFaults{inst: noop.Int64Counter{}}, err
 	}
 	return PagingFaults{i}, nil
 }
@@ -585,7 +585,7 @@ func NewThreadCount(m metric.Meter) (ThreadCount, error) {
 	    metric.WithUnit("{thread}"),
 	)
 	if err != nil {
-	    return ThreadCount{inst: noop.Int64UpDownCounter}, err
+	    return ThreadCount{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return ThreadCount{i}, nil
 }
@@ -629,7 +629,7 @@ func NewUptime(m metric.Meter) (Uptime, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return Uptime{inst: noop.Float64Gauge}, err
+	    return Uptime{inst: noop.Float64Gauge{}}, err
 	}
 	return Uptime{i}, nil
 }

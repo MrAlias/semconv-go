@@ -72,7 +72,7 @@ func NewCPUTime(m metric.Meter) (CPUTime, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return CPUTime{inst: noop.Float64Counter}, err
+	    return CPUTime{inst: noop.Float64Counter{}}, err
 	}
 	return CPUTime{i}, nil
 }
@@ -134,7 +134,7 @@ func NewCPUUsage(m metric.Meter) (CPUUsage, error) {
 	    metric.WithUnit("{cpu}"),
 	)
 	if err != nil {
-	    return CPUUsage{inst: noop.Int64Gauge}, err
+	    return CPUUsage{inst: noop.Int64Gauge{}}, err
 	}
 	return CPUUsage{i}, nil
 }
@@ -197,7 +197,7 @@ func NewDiskIO(m metric.Meter) (DiskIO, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return DiskIO{inst: noop.Int64Counter}, err
+	    return DiskIO{inst: noop.Int64Counter{}}, err
 	}
 	return DiskIO{i}, nil
 }
@@ -264,7 +264,7 @@ func NewMemoryUsage(m metric.Meter) (MemoryUsage, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return MemoryUsage{inst: noop.Int64Counter}, err
+	    return MemoryUsage{inst: noop.Int64Counter{}}, err
 	}
 	return MemoryUsage{i}, nil
 }
@@ -310,7 +310,7 @@ func NewNetworkIO(m metric.Meter) (NetworkIO, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return NetworkIO{inst: noop.Int64Counter}, err
+	    return NetworkIO{inst: noop.Int64Counter{}}, err
 	}
 	return NetworkIO{i}, nil
 }
@@ -378,7 +378,7 @@ func NewUptime(m metric.Meter) (Uptime, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return Uptime{inst: noop.Float64Gauge}, err
+	    return Uptime{inst: noop.Float64Gauge{}}, err
 	}
 	return Uptime{i}, nil
 }

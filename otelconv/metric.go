@@ -88,7 +88,7 @@ func NewSDKExporterLogExported(m metric.Meter) (SDKExporterLogExported, error) {
 	    metric.WithUnit("{log_record}"),
 	)
 	if err != nil {
-	    return SDKExporterLogExported{inst: noop.Int64Counter}, err
+	    return SDKExporterLogExported{inst: noop.Int64Counter{}}, err
 	}
 	return SDKExporterLogExported{i}, nil
 }
@@ -183,7 +183,7 @@ func NewSDKExporterLogInflight(m metric.Meter) (SDKExporterLogInflight, error) {
 	    metric.WithUnit("{log_record}"),
 	)
 	if err != nil {
-	    return SDKExporterLogInflight{inst: noop.Int64UpDownCounter}, err
+	    return SDKExporterLogInflight{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return SDKExporterLogInflight{i}, nil
 }
@@ -267,7 +267,7 @@ func NewSDKExporterSpanExportedCount(m metric.Meter) (SDKExporterSpanExportedCou
 	    metric.WithUnit("{span}"),
 	)
 	if err != nil {
-	    return SDKExporterSpanExportedCount{inst: noop.Int64Counter}, err
+	    return SDKExporterSpanExportedCount{inst: noop.Int64Counter{}}, err
 	}
 	return SDKExporterSpanExportedCount{i}, nil
 }
@@ -364,7 +364,7 @@ func NewSDKExporterSpanInflightCount(m metric.Meter) (SDKExporterSpanInflightCou
 	    metric.WithUnit("{span}"),
 	)
 	if err != nil {
-	    return SDKExporterSpanInflightCount{inst: noop.Int64UpDownCounter}, err
+	    return SDKExporterSpanInflightCount{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return SDKExporterSpanInflightCount{i}, nil
 }
@@ -446,7 +446,7 @@ func NewSDKLogCreated(m metric.Meter) (SDKLogCreated, error) {
 	    metric.WithUnit("{log_record}"),
 	)
 	if err != nil {
-	    return SDKLogCreated{inst: noop.Int64Counter}, err
+	    return SDKLogCreated{inst: noop.Int64Counter{}}, err
 	}
 	return SDKLogCreated{i}, nil
 }
@@ -491,7 +491,7 @@ func NewSDKProcessorLogProcessed(m metric.Meter) (SDKProcessorLogProcessed, erro
 	    metric.WithUnit("{log_record}"),
 	)
 	if err != nil {
-	    return SDKProcessorLogProcessed{inst: noop.Int64Counter}, err
+	    return SDKProcessorLogProcessed{inst: noop.Int64Counter{}}, err
 	}
 	return SDKProcessorLogProcessed{i}, nil
 }
@@ -573,7 +573,7 @@ func NewSDKProcessorLogQueueCapacity(m metric.Meter) (SDKProcessorLogQueueCapaci
 	    metric.WithUnit("{log_record}"),
 	)
 	if err != nil {
-	    return SDKProcessorLogQueueCapacity{inst: noop.Int64UpDownCounter}, err
+	    return SDKProcessorLogQueueCapacity{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return SDKProcessorLogQueueCapacity{i}, nil
 }
@@ -643,7 +643,7 @@ func NewSDKProcessorLogQueueSize(m metric.Meter) (SDKProcessorLogQueueSize, erro
 	    metric.WithUnit("{log_record}"),
 	)
 	if err != nil {
-	    return SDKProcessorLogQueueSize{inst: noop.Int64UpDownCounter}, err
+	    return SDKProcessorLogQueueSize{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return SDKProcessorLogQueueSize{i}, nil
 }
@@ -714,7 +714,7 @@ func NewSDKProcessorSpanProcessedCount(m metric.Meter) (SDKProcessorSpanProcesse
 	    metric.WithUnit("{span}"),
 	)
 	if err != nil {
-	    return SDKProcessorSpanProcessedCount{inst: noop.Int64Counter}, err
+	    return SDKProcessorSpanProcessedCount{inst: noop.Int64Counter{}}, err
 	}
 	return SDKProcessorSpanProcessedCount{i}, nil
 }
@@ -796,7 +796,7 @@ func NewSDKProcessorSpanQueueCapacity(m metric.Meter) (SDKProcessorSpanQueueCapa
 	    metric.WithUnit("{span}"),
 	)
 	if err != nil {
-	    return SDKProcessorSpanQueueCapacity{inst: noop.Int64UpDownCounter}, err
+	    return SDKProcessorSpanQueueCapacity{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return SDKProcessorSpanQueueCapacity{i}, nil
 }
@@ -867,7 +867,7 @@ func NewSDKProcessorSpanQueueSize(m metric.Meter) (SDKProcessorSpanQueueSize, er
 	    metric.WithUnit("{span}"),
 	)
 	if err != nil {
-	    return SDKProcessorSpanQueueSize{inst: noop.Int64UpDownCounter}, err
+	    return SDKProcessorSpanQueueSize{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return SDKProcessorSpanQueueSize{i}, nil
 }
@@ -936,7 +936,7 @@ func NewSDKSpanEndedCount(m metric.Meter) (SDKSpanEndedCount, error) {
 	    metric.WithUnit("{span}"),
 	)
 	if err != nil {
-	    return SDKSpanEndedCount{inst: noop.Int64Counter}, err
+	    return SDKSpanEndedCount{inst: noop.Int64Counter{}}, err
 	}
 	return SDKSpanEndedCount{i}, nil
 }
@@ -1000,7 +1000,7 @@ func NewSDKSpanLiveCount(m metric.Meter) (SDKSpanLiveCount, error) {
 	    metric.WithUnit("{span}"),
 	)
 	if err != nil {
-	    return SDKSpanLiveCount{inst: noop.Int64UpDownCounter}, err
+	    return SDKSpanLiveCount{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return SDKSpanLiveCount{i}, nil
 }

@@ -90,7 +90,7 @@ func NewClientConsumedMessages(m metric.Meter) (ClientConsumedMessages, error) {
 	    metric.WithUnit("{message}"),
 	)
 	if err != nil {
-	    return ClientConsumedMessages{inst: noop.Int64Counter}, err
+	    return ClientConsumedMessages{inst: noop.Int64Counter{}}, err
 	}
 	return ClientConsumedMessages{i}, nil
 }
@@ -217,7 +217,7 @@ func NewClientOperationDuration(m metric.Meter) (ClientOperationDuration, error)
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ClientOperationDuration{inst: noop.Float64Histogram}, err
+	    return ClientOperationDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return ClientOperationDuration{i}, nil
 }
@@ -346,7 +346,7 @@ func NewClientSentMessages(m metric.Meter) (ClientSentMessages, error) {
 	    metric.WithUnit("{message}"),
 	)
 	if err != nil {
-	    return ClientSentMessages{inst: noop.Int64Counter}, err
+	    return ClientSentMessages{inst: noop.Int64Counter{}}, err
 	}
 	return ClientSentMessages{i}, nil
 }
@@ -454,7 +454,7 @@ func NewProcessDuration(m metric.Meter) (ProcessDuration, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ProcessDuration{inst: noop.Float64Histogram}, err
+	    return ProcessDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return ProcessDuration{i}, nil
 }

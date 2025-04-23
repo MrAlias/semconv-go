@@ -88,7 +88,7 @@ func NewClientActiveRequests(m metric.Meter) (ClientActiveRequests, error) {
 	    metric.WithUnit("{request}"),
 	)
 	if err != nil {
-	    return ClientActiveRequests{inst: noop.Int64UpDownCounter}, err
+	    return ClientActiveRequests{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return ClientActiveRequests{i}, nil
 }
@@ -179,7 +179,7 @@ func NewClientConnectionDuration(m metric.Meter) (ClientConnectionDuration, erro
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ClientConnectionDuration{inst: noop.Float64Histogram}, err
+	    return ClientConnectionDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return ClientConnectionDuration{i}, nil
 }
@@ -269,7 +269,7 @@ func NewClientOpenConnections(m metric.Meter) (ClientOpenConnections, error) {
 	    metric.WithUnit("{connection}"),
 	)
 	if err != nil {
-	    return ClientOpenConnections{inst: noop.Int64UpDownCounter}, err
+	    return ClientOpenConnections{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return ClientOpenConnections{i}, nil
 }
@@ -363,7 +363,7 @@ func NewClientRequestBodySize(m metric.Meter) (ClientRequestBodySize, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return ClientRequestBodySize{inst: noop.Int64Histogram}, err
+	    return ClientRequestBodySize{inst: noop.Int64Histogram{}}, err
 	}
 	return ClientRequestBodySize{i}, nil
 }
@@ -491,7 +491,7 @@ func NewClientRequestDuration(m metric.Meter) (ClientRequestDuration, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ClientRequestDuration{inst: noop.Float64Histogram}, err
+	    return ClientRequestDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return ClientRequestDuration{i}, nil
 }
@@ -612,7 +612,7 @@ func NewClientResponseBodySize(m metric.Meter) (ClientResponseBodySize, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return ClientResponseBodySize{inst: noop.Int64Histogram}, err
+	    return ClientResponseBodySize{inst: noop.Int64Histogram{}}, err
 	}
 	return ClientResponseBodySize{i}, nil
 }
@@ -740,7 +740,7 @@ func NewServerActiveRequests(m metric.Meter) (ServerActiveRequests, error) {
 	    metric.WithUnit("{request}"),
 	)
 	if err != nil {
-	    return ServerActiveRequests{inst: noop.Int64UpDownCounter}, err
+	    return ServerActiveRequests{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return ServerActiveRequests{i}, nil
 }
@@ -818,7 +818,7 @@ func NewServerRequestBodySize(m metric.Meter) (ServerRequestBodySize, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return ServerRequestBodySize{inst: noop.Int64Histogram}, err
+	    return ServerRequestBodySize{inst: noop.Int64Histogram{}}, err
 	}
 	return ServerRequestBodySize{i}, nil
 }
@@ -949,7 +949,7 @@ func NewServerRequestDuration(m metric.Meter) (ServerRequestDuration, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ServerRequestDuration{inst: noop.Float64Histogram}, err
+	    return ServerRequestDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return ServerRequestDuration{i}, nil
 }
@@ -1073,7 +1073,7 @@ func NewServerResponseBodySize(m metric.Meter) (ServerResponseBodySize, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return ServerResponseBodySize{inst: noop.Int64Histogram}, err
+	    return ServerResponseBodySize{inst: noop.Int64Histogram{}}, err
 	}
 	return ServerResponseBodySize{i}, nil
 }

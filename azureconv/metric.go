@@ -57,7 +57,7 @@ func NewCosmosDBClientActiveInstanceCount(m metric.Meter) (CosmosDBClientActiveI
 	    metric.WithUnit("{instance}"),
 	)
 	if err != nil {
-	    return CosmosDBClientActiveInstanceCount{inst: noop.Int64UpDownCounter}, err
+	    return CosmosDBClientActiveInstanceCount{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return CosmosDBClientActiveInstanceCount{i}, nil
 }
@@ -125,7 +125,7 @@ func NewCosmosDBClientOperationRequestCharge(m metric.Meter) (CosmosDBClientOper
 	    metric.WithUnit("{request_unit}"),
 	)
 	if err != nil {
-	    return CosmosDBClientOperationRequestCharge{inst: noop.Int64Histogram}, err
+	    return CosmosDBClientOperationRequestCharge{inst: noop.Int64Histogram{}}, err
 	}
 	return CosmosDBClientOperationRequestCharge{i}, nil
 }

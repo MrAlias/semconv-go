@@ -48,7 +48,7 @@ func NewFrequency(m metric.Meter) (Frequency, error) {
 	    metric.WithUnit("Hz"),
 	)
 	if err != nil {
-	    return Frequency{inst: noop.Int64Gauge}, err
+	    return Frequency{inst: noop.Int64Gauge{}}, err
 	}
 	return Frequency{i}, nil
 }
@@ -106,7 +106,7 @@ func NewTime(m metric.Meter) (Time, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return Time{inst: noop.Float64Counter}, err
+	    return Time{inst: noop.Float64Counter{}}, err
 	}
 	return Time{i}, nil
 }
@@ -171,7 +171,7 @@ func NewUtilization(m metric.Meter) (Utilization, error) {
 	    metric.WithUnit("1"),
 	)
 	if err != nil {
-	    return Utilization{inst: noop.Int64Gauge}, err
+	    return Utilization{inst: noop.Int64Gauge{}}, err
 	}
 	return Utilization{i}, nil
 }

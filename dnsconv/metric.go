@@ -35,7 +35,7 @@ func NewLookupDuration(m metric.Meter) (LookupDuration, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return LookupDuration{inst: noop.Float64Histogram}, err
+	    return LookupDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return LookupDuration{i}, nil
 }

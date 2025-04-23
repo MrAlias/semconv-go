@@ -83,7 +83,7 @@ func NewEnergy(m metric.Meter) (Energy, error) {
 	    metric.WithUnit("J"),
 	)
 	if err != nil {
-	    return Energy{inst: noop.Int64Counter}, err
+	    return Energy{inst: noop.Int64Counter{}}, err
 	}
 	return Energy{i}, nil
 }
@@ -159,7 +159,7 @@ func NewErrors(m metric.Meter) (Errors, error) {
 	    metric.WithUnit("{error}"),
 	)
 	if err != nil {
-	    return Errors{inst: noop.Int64Counter}, err
+	    return Errors{inst: noop.Int64Counter{}}, err
 	}
 	return Errors{i}, nil
 }
@@ -241,7 +241,7 @@ func NewHostAmbientTemperature(m metric.Meter) (HostAmbientTemperature, error) {
 	    metric.WithUnit("Cel"),
 	)
 	if err != nil {
-	    return HostAmbientTemperature{inst: noop.Int64Gauge}, err
+	    return HostAmbientTemperature{inst: noop.Int64Gauge{}}, err
 	}
 	return HostAmbientTemperature{i}, nil
 }
@@ -313,7 +313,7 @@ func NewHostEnergy(m metric.Meter) (HostEnergy, error) {
 	    metric.WithUnit("J"),
 	)
 	if err != nil {
-	    return HostEnergy{inst: noop.Int64Counter}, err
+	    return HostEnergy{inst: noop.Int64Counter{}}, err
 	}
 	return HostEnergy{i}, nil
 }
@@ -391,7 +391,7 @@ func NewHostHeatingMargin(m metric.Meter) (HostHeatingMargin, error) {
 	    metric.WithUnit("Cel"),
 	)
 	if err != nil {
-	    return HostHeatingMargin{inst: noop.Int64Gauge}, err
+	    return HostHeatingMargin{inst: noop.Int64Gauge{}}, err
 	}
 	return HostHeatingMargin{i}, nil
 }
@@ -463,7 +463,7 @@ func NewHostPower(m metric.Meter) (HostPower, error) {
 	    metric.WithUnit("W"),
 	)
 	if err != nil {
-	    return HostPower{inst: noop.Int64Gauge}, err
+	    return HostPower{inst: noop.Int64Gauge{}}, err
 	}
 	return HostPower{i}, nil
 }
@@ -540,7 +540,7 @@ func NewPower(m metric.Meter) (Power, error) {
 	    metric.WithUnit("W"),
 	)
 	if err != nil {
-	    return Power{inst: noop.Int64Gauge}, err
+	    return Power{inst: noop.Int64Gauge{}}, err
 	}
 	return Power{i}, nil
 }
@@ -618,7 +618,7 @@ func NewStatus(m metric.Meter) (Status, error) {
 	    metric.WithUnit("1"),
 	)
 	if err != nil {
-	    return Status{inst: noop.Int64UpDownCounter}, err
+	    return Status{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return Status{i}, nil
 }
