@@ -7,6 +7,7 @@ import (
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
+	"go.opentelemetry.io/otel/metric/noop"
 )
 
 // ClientConnectionStateAttr is an attribute conforming to the
@@ -248,7 +249,7 @@ func NewClientConnectionCount(m metric.Meter) (ClientConnectionCount, error) {
 	    metric.WithUnit("{connection}"),
 	)
 	if err != nil {
-	    return ClientConnectionCount{}, err
+	    return ClientConnectionCount{inst: noop.Int64UpDownCounter}, err
 	}
 	return ClientConnectionCount{i}, nil
 }
@@ -315,7 +316,7 @@ func NewClientConnectionCreateTime(m metric.Meter) (ClientConnectionCreateTime, 
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ClientConnectionCreateTime{}, err
+	    return ClientConnectionCreateTime{inst: noop.Float64Histogram}, err
 	}
 	return ClientConnectionCreateTime{i}, nil
 }
@@ -377,7 +378,7 @@ func NewClientConnectionIdleMax(m metric.Meter) (ClientConnectionIdleMax, error)
 	    metric.WithUnit("{connection}"),
 	)
 	if err != nil {
-	    return ClientConnectionIdleMax{}, err
+	    return ClientConnectionIdleMax{inst: noop.Int64UpDownCounter}, err
 	}
 	return ClientConnectionIdleMax{i}, nil
 }
@@ -439,7 +440,7 @@ func NewClientConnectionIdleMin(m metric.Meter) (ClientConnectionIdleMin, error)
 	    metric.WithUnit("{connection}"),
 	)
 	if err != nil {
-	    return ClientConnectionIdleMin{}, err
+	    return ClientConnectionIdleMin{inst: noop.Int64UpDownCounter}, err
 	}
 	return ClientConnectionIdleMin{i}, nil
 }
@@ -501,7 +502,7 @@ func NewClientConnectionMax(m metric.Meter) (ClientConnectionMax, error) {
 	    metric.WithUnit("{connection}"),
 	)
 	if err != nil {
-	    return ClientConnectionMax{}, err
+	    return ClientConnectionMax{inst: noop.Int64UpDownCounter}, err
 	}
 	return ClientConnectionMax{i}, nil
 }
@@ -565,7 +566,7 @@ func NewClientConnectionPendingRequests(m metric.Meter) (ClientConnectionPending
 	    metric.WithUnit("{request}"),
 	)
 	if err != nil {
-	    return ClientConnectionPendingRequests{}, err
+	    return ClientConnectionPendingRequests{inst: noop.Int64UpDownCounter}, err
 	}
 	return ClientConnectionPendingRequests{i}, nil
 }
@@ -628,7 +629,7 @@ func NewClientConnectionTimeouts(m metric.Meter) (ClientConnectionTimeouts, erro
 	    metric.WithUnit("{timeout}"),
 	)
 	if err != nil {
-	    return ClientConnectionTimeouts{}, err
+	    return ClientConnectionTimeouts{inst: noop.Int64Counter}, err
 	}
 	return ClientConnectionTimeouts{i}, nil
 }
@@ -691,7 +692,7 @@ func NewClientConnectionUseTime(m metric.Meter) (ClientConnectionUseTime, error)
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ClientConnectionUseTime{}, err
+	    return ClientConnectionUseTime{inst: noop.Float64Histogram}, err
 	}
 	return ClientConnectionUseTime{i}, nil
 }
@@ -753,7 +754,7 @@ func NewClientConnectionWaitTime(m metric.Meter) (ClientConnectionWaitTime, erro
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ClientConnectionWaitTime{}, err
+	    return ClientConnectionWaitTime{inst: noop.Float64Histogram}, err
 	}
 	return ClientConnectionWaitTime{i}, nil
 }
@@ -815,7 +816,7 @@ func NewClientOperationDuration(m metric.Meter) (ClientOperationDuration, error)
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ClientOperationDuration{}, err
+	    return ClientOperationDuration{inst: noop.Float64Histogram}, err
 	}
 	return ClientOperationDuration{i}, nil
 }
@@ -958,7 +959,7 @@ func NewClientResponseReturnedRows(m metric.Meter) (ClientResponseReturnedRows, 
 	    metric.WithUnit("{row}"),
 	)
 	if err != nil {
-	    return ClientResponseReturnedRows{}, err
+	    return ClientResponseReturnedRows{inst: noop.Int64Histogram}, err
 	}
 	return ClientResponseReturnedRows{i}, nil
 }

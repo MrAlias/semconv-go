@@ -7,6 +7,7 @@ import (
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
+	"go.opentelemetry.io/otel/metric/noop"
 )
 
 // ConnectionStatusAttr is an attribute conforming to the
@@ -54,7 +55,7 @@ func NewServerActiveConnections(m metric.Meter) (ServerActiveConnections, error)
 	    metric.WithUnit("{connection}"),
 	)
 	if err != nil {
-	    return ServerActiveConnections{}, err
+	    return ServerActiveConnections{inst: noop.Int64UpDownCounter}, err
 	}
 	return ServerActiveConnections{i}, nil
 }
@@ -124,7 +125,7 @@ func NewServerConnectionDuration(m metric.Meter) (ServerConnectionDuration, erro
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ServerConnectionDuration{}, err
+	    return ServerConnectionDuration{inst: noop.Float64Histogram}, err
 	}
 	return ServerConnectionDuration{i}, nil
 }

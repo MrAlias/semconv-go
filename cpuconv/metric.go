@@ -7,6 +7,7 @@ import (
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
+	"go.opentelemetry.io/otel/metric/noop"
 )
 
 // ModeAttr is an attribute conforming to the cpu.mode semantic conventions. It
@@ -47,7 +48,7 @@ func NewFrequency(m metric.Meter) (Frequency, error) {
 	    metric.WithUnit("Hz"),
 	)
 	if err != nil {
-	    return Frequency{}, err
+	    return Frequency{inst: noop.Int64Gauge}, err
 	}
 	return Frequency{i}, nil
 }
@@ -105,7 +106,7 @@ func NewTime(m metric.Meter) (Time, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return Time{}, err
+	    return Time{inst: noop.Float64Counter}, err
 	}
 	return Time{i}, nil
 }
@@ -170,7 +171,7 @@ func NewUtilization(m metric.Meter) (Utilization, error) {
 	    metric.WithUnit("1"),
 	)
 	if err != nil {
-	    return Utilization{}, err
+	    return Utilization{inst: noop.Int64Gauge}, err
 	}
 	return Utilization{i}, nil
 }

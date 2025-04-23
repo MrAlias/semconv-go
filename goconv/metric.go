@@ -7,6 +7,7 @@ import (
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
+	"go.opentelemetry.io/otel/metric/noop"
 )
 
 // MemoryTypeAttr is an attribute conforming to the go.memory.type semantic
@@ -37,7 +38,7 @@ func NewConfigGogc(m metric.Meter) (ConfigGogc, error) {
 	    metric.WithUnit("%"),
 	)
 	if err != nil {
-	    return ConfigGogc{}, err
+	    return ConfigGogc{inst: noop.Int64UpDownCounter}, err
 	}
 	return ConfigGogc{i}, nil
 }
@@ -83,7 +84,7 @@ func NewGoroutineCount(m metric.Meter) (GoroutineCount, error) {
 	    metric.WithUnit("{goroutine}"),
 	)
 	if err != nil {
-	    return GoroutineCount{}, err
+	    return GoroutineCount{inst: noop.Int64UpDownCounter}, err
 	}
 	return GoroutineCount{i}, nil
 }
@@ -129,7 +130,7 @@ func NewMemoryAllocated(m metric.Meter) (MemoryAllocated, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return MemoryAllocated{}, err
+	    return MemoryAllocated{inst: noop.Int64Counter}, err
 	}
 	return MemoryAllocated{i}, nil
 }
@@ -175,7 +176,7 @@ func NewMemoryAllocations(m metric.Meter) (MemoryAllocations, error) {
 	    metric.WithUnit("{allocation}"),
 	)
 	if err != nil {
-	    return MemoryAllocations{}, err
+	    return MemoryAllocations{inst: noop.Int64Counter}, err
 	}
 	return MemoryAllocations{i}, nil
 }
@@ -221,7 +222,7 @@ func NewMemoryGCGoal(m metric.Meter) (MemoryGCGoal, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return MemoryGCGoal{}, err
+	    return MemoryGCGoal{inst: noop.Int64UpDownCounter}, err
 	}
 	return MemoryGCGoal{i}, nil
 }
@@ -267,7 +268,7 @@ func NewMemoryLimit(m metric.Meter) (MemoryLimit, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return MemoryLimit{}, err
+	    return MemoryLimit{inst: noop.Int64UpDownCounter}, err
 	}
 	return MemoryLimit{i}, nil
 }
@@ -314,7 +315,7 @@ func NewMemoryUsed(m metric.Meter) (MemoryUsed, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return MemoryUsed{}, err
+	    return MemoryUsed{inst: noop.Int64UpDownCounter}, err
 	}
 	return MemoryUsed{i}, nil
 }
@@ -375,7 +376,7 @@ func NewProcessorLimit(m metric.Meter) (ProcessorLimit, error) {
 	    metric.WithUnit("{thread}"),
 	)
 	if err != nil {
-	    return ProcessorLimit{}, err
+	    return ProcessorLimit{inst: noop.Int64UpDownCounter}, err
 	}
 	return ProcessorLimit{i}, nil
 }
@@ -422,7 +423,7 @@ func NewScheduleDuration(m metric.Meter) (ScheduleDuration, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ScheduleDuration{}, err
+	    return ScheduleDuration{inst: noop.Float64Histogram}, err
 	}
 	return ScheduleDuration{i}, nil
 }

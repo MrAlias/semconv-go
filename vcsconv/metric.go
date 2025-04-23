@@ -7,6 +7,7 @@ import (
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
+	"go.opentelemetry.io/otel/metric/noop"
 )
 
 // ChangeStateAttr is an attribute conforming to the vcs.change.state semantic
@@ -149,7 +150,7 @@ func NewChangeCount(m metric.Meter) (ChangeCount, error) {
 	    metric.WithUnit("{change}"),
 	)
 	if err != nil {
-	    return ChangeCount{}, err
+	    return ChangeCount{inst: noop.Int64UpDownCounter}, err
 	}
 	return ChangeCount{i}, nil
 }
@@ -237,7 +238,7 @@ func NewChangeDuration(m metric.Meter) (ChangeDuration, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ChangeDuration{}, err
+	    return ChangeDuration{inst: noop.Float64Gauge}, err
 	}
 	return ChangeDuration{i}, nil
 }
@@ -332,7 +333,7 @@ func NewChangeTimeToApproval(m metric.Meter) (ChangeTimeToApproval, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ChangeTimeToApproval{}, err
+	    return ChangeTimeToApproval{inst: noop.Float64Gauge}, err
 	}
 	return ChangeTimeToApproval{i}, nil
 }
@@ -451,7 +452,7 @@ func NewChangeTimeToMerge(m metric.Meter) (ChangeTimeToMerge, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ChangeTimeToMerge{}, err
+	    return ChangeTimeToMerge{inst: noop.Float64Gauge}, err
 	}
 	return ChangeTimeToMerge{i}, nil
 }
@@ -569,7 +570,7 @@ func NewContributorCount(m metric.Meter) (ContributorCount, error) {
 	    metric.WithUnit("{contributor}"),
 	)
 	if err != nil {
-	    return ContributorCount{}, err
+	    return ContributorCount{inst: noop.Int64Gauge}, err
 	}
 	return ContributorCount{i}, nil
 }
@@ -652,7 +653,7 @@ func NewRefCount(m metric.Meter) (RefCount, error) {
 	    metric.WithUnit("{ref}"),
 	)
 	if err != nil {
-	    return RefCount{}, err
+	    return RefCount{inst: noop.Int64UpDownCounter}, err
 	}
 	return RefCount{i}, nil
 }
@@ -741,7 +742,7 @@ func NewRefLinesDelta(m metric.Meter) (RefLinesDelta, error) {
 	    metric.WithUnit("{line}"),
 	)
 	if err != nil {
-	    return RefLinesDelta{}, err
+	    return RefLinesDelta{inst: noop.Int64Gauge}, err
 	}
 	return RefLinesDelta{i}, nil
 }
@@ -867,7 +868,7 @@ func NewRefRevisionsDelta(m metric.Meter) (RefRevisionsDelta, error) {
 	    metric.WithUnit("{revision}"),
 	)
 	if err != nil {
-	    return RefRevisionsDelta{}, err
+	    return RefRevisionsDelta{inst: noop.Int64Gauge}, err
 	}
 	return RefRevisionsDelta{i}, nil
 }
@@ -990,7 +991,7 @@ func NewRefTime(m metric.Meter) (RefTime, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return RefTime{}, err
+	    return RefTime{inst: noop.Float64Gauge}, err
 	}
 	return RefTime{i}, nil
 }
@@ -1084,7 +1085,7 @@ func NewRepositoryCount(m metric.Meter) (RepositoryCount, error) {
 	    metric.WithUnit("{repository}"),
 	)
 	if err != nil {
-	    return RepositoryCount{}, err
+	    return RepositoryCount{inst: noop.Int64UpDownCounter}, err
 	}
 	return RepositoryCount{i}, nil
 }

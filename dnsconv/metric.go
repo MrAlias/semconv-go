@@ -7,6 +7,7 @@ import (
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
+	"go.opentelemetry.io/otel/metric/noop"
 )
 
 // ErrorTypeAttr is an attribute conforming to the error.type semantic
@@ -34,7 +35,7 @@ func NewLookupDuration(m metric.Meter) (LookupDuration, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return LookupDuration{}, err
+	    return LookupDuration{inst: noop.Float64Histogram}, err
 	}
 	return LookupDuration{i}, nil
 }

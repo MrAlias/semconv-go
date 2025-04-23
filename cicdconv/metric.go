@@ -7,6 +7,7 @@ import (
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
+	"go.opentelemetry.io/otel/metric/noop"
 )
 
 // PipelineResultAttr is an attribute conforming to the cicd.pipeline.result
@@ -93,7 +94,7 @@ func NewPipelineRunActive(m metric.Meter) (PipelineRunActive, error) {
 	    metric.WithUnit("{run}"),
 	)
 	if err != nil {
-	    return PipelineRunActive{}, err
+	    return PipelineRunActive{inst: noop.Int64UpDownCounter}, err
 	}
 	return PipelineRunActive{i}, nil
 }
@@ -155,7 +156,7 @@ func NewPipelineRunDuration(m metric.Meter) (PipelineRunDuration, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return PipelineRunDuration{}, err
+	    return PipelineRunDuration{inst: noop.Float64Histogram}, err
 	}
 	return PipelineRunDuration{i}, nil
 }
@@ -233,7 +234,7 @@ func NewPipelineRunErrors(m metric.Meter) (PipelineRunErrors, error) {
 	    metric.WithUnit("{error}"),
 	)
 	if err != nil {
-	    return PipelineRunErrors{}, err
+	    return PipelineRunErrors{inst: noop.Int64Counter}, err
 	}
 	return PipelineRunErrors{i}, nil
 }
@@ -299,7 +300,7 @@ func NewSystemErrors(m metric.Meter) (SystemErrors, error) {
 	    metric.WithUnit("{error}"),
 	)
 	if err != nil {
-	    return SystemErrors{}, err
+	    return SystemErrors{inst: noop.Int64Counter}, err
 	}
 	return SystemErrors{i}, nil
 }
@@ -362,7 +363,7 @@ func NewWorkerCount(m metric.Meter) (WorkerCount, error) {
 	    metric.WithUnit("{count}"),
 	)
 	if err != nil {
-	    return WorkerCount{}, err
+	    return WorkerCount{inst: noop.Int64UpDownCounter}, err
 	}
 	return WorkerCount{i}, nil
 }

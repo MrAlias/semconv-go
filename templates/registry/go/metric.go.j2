@@ -9,6 +9,7 @@ import (
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
+	"go.opentelemetry.io/otel/metric/noop"
 )
 {%- for attr in ctx.metrics | map(attribute="attributes") | flatten | selectattr("type", "mapping") | unique(attribute="name") | sort(attribute="name") %}
 {%- set name = h.to_go_name(attr.name, ctx.root_namespace) %}
@@ -45,7 +46,7 @@ func New{{ metric_name }}(m metric.Meter) ({{ metric_name }}, error) {
 	    metric.WithUnit("{{metric.unit}}"),
 	)
 	if err != nil {
-	    return {{metric_name}}{}, err
+	    return {{metric_name}}{inst: noop.{{ i.instrument(metric) }}}, err
 	}
 	return {{ metric_name }}{i}, nil
 }

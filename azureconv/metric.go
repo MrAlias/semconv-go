@@ -7,6 +7,7 @@ import (
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
+	"go.opentelemetry.io/otel/metric/noop"
 )
 
 // CosmosDBConsistencyLevelAttr is an attribute conforming to the
@@ -56,7 +57,7 @@ func NewCosmosDBClientActiveInstanceCount(m metric.Meter) (CosmosDBClientActiveI
 	    metric.WithUnit("{instance}"),
 	)
 	if err != nil {
-	    return CosmosDBClientActiveInstanceCount{}, err
+	    return CosmosDBClientActiveInstanceCount{inst: noop.Int64UpDownCounter}, err
 	}
 	return CosmosDBClientActiveInstanceCount{i}, nil
 }
@@ -124,7 +125,7 @@ func NewCosmosDBClientOperationRequestCharge(m metric.Meter) (CosmosDBClientOper
 	    metric.WithUnit("{request_unit}"),
 	)
 	if err != nil {
-	    return CosmosDBClientOperationRequestCharge{}, err
+	    return CosmosDBClientOperationRequestCharge{inst: noop.Int64Histogram}, err
 	}
 	return CosmosDBClientOperationRequestCharge{i}, nil
 }

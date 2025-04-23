@@ -7,6 +7,7 @@ import (
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
+	"go.opentelemetry.io/otel/metric/noop"
 )
 
 // TriggerAttr is an attribute conforming to the faas.trigger semantic
@@ -44,7 +45,7 @@ func NewColdstarts(m metric.Meter) (Coldstarts, error) {
 	    metric.WithUnit("{coldstart}"),
 	)
 	if err != nil {
-	    return Coldstarts{}, err
+	    return Coldstarts{inst: noop.Int64Counter}, err
 	}
 	return Coldstarts{i}, nil
 }
@@ -103,7 +104,7 @@ func NewCPUUsage(m metric.Meter) (CPUUsage, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return CPUUsage{}, err
+	    return CPUUsage{inst: noop.Float64Histogram}, err
 	}
 	return CPUUsage{i}, nil
 }
@@ -162,7 +163,7 @@ func NewErrors(m metric.Meter) (Errors, error) {
 	    metric.WithUnit("{error}"),
 	)
 	if err != nil {
-	    return Errors{}, err
+	    return Errors{inst: noop.Int64Counter}, err
 	}
 	return Errors{i}, nil
 }
@@ -221,7 +222,7 @@ func NewInitDuration(m metric.Meter) (InitDuration, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return InitDuration{}, err
+	    return InitDuration{inst: noop.Float64Histogram}, err
 	}
 	return InitDuration{i}, nil
 }
@@ -280,7 +281,7 @@ func NewInvocations(m metric.Meter) (Invocations, error) {
 	    metric.WithUnit("{invocation}"),
 	)
 	if err != nil {
-	    return Invocations{}, err
+	    return Invocations{inst: noop.Int64Counter}, err
 	}
 	return Invocations{i}, nil
 }
@@ -339,7 +340,7 @@ func NewInvokeDuration(m metric.Meter) (InvokeDuration, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return InvokeDuration{}, err
+	    return InvokeDuration{inst: noop.Float64Histogram}, err
 	}
 	return InvokeDuration{i}, nil
 }
@@ -398,7 +399,7 @@ func NewMemUsage(m metric.Meter) (MemUsage, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return MemUsage{}, err
+	    return MemUsage{inst: noop.Int64Histogram}, err
 	}
 	return MemUsage{i}, nil
 }
@@ -457,7 +458,7 @@ func NewNetIO(m metric.Meter) (NetIO, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return NetIO{}, err
+	    return NetIO{inst: noop.Int64Histogram}, err
 	}
 	return NetIO{i}, nil
 }
@@ -516,7 +517,7 @@ func NewTimeouts(m metric.Meter) (Timeouts, error) {
 	    metric.WithUnit("{timeout}"),
 	)
 	if err != nil {
-	    return Timeouts{}, err
+	    return Timeouts{inst: noop.Int64Counter}, err
 	}
 	return Timeouts{i}, nil
 }

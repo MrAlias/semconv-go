@@ -7,6 +7,7 @@ import (
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
+	"go.opentelemetry.io/otel/metric/noop"
 )
 
 // ErrorTypeAttr is an attribute conforming to the error.type semantic
@@ -108,7 +109,7 @@ func NewClientOperationDuration(m metric.Meter) (ClientOperationDuration, error)
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ClientOperationDuration{}, err
+	    return ClientOperationDuration{inst: noop.Float64Histogram}, err
 	}
 	return ClientOperationDuration{i}, nil
 }
@@ -204,7 +205,7 @@ func NewClientTokenUsage(m metric.Meter) (ClientTokenUsage, error) {
 	    metric.WithUnit("{token}"),
 	)
 	if err != nil {
-	    return ClientTokenUsage{}, err
+	    return ClientTokenUsage{inst: noop.Int64Histogram}, err
 	}
 	return ClientTokenUsage{i}, nil
 }
@@ -298,7 +299,7 @@ func NewServerRequestDuration(m metric.Meter) (ServerRequestDuration, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ServerRequestDuration{}, err
+	    return ServerRequestDuration{inst: noop.Float64Histogram}, err
 	}
 	return ServerRequestDuration{i}, nil
 }
@@ -395,7 +396,7 @@ func NewServerTimePerOutputToken(m metric.Meter) (ServerTimePerOutputToken, erro
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ServerTimePerOutputToken{}, err
+	    return ServerTimePerOutputToken{inst: noop.Float64Histogram}, err
 	}
 	return ServerTimePerOutputToken{i}, nil
 }
@@ -484,7 +485,7 @@ func NewServerTimeToFirstToken(m metric.Meter) (ServerTimeToFirstToken, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ServerTimeToFirstToken{}, err
+	    return ServerTimeToFirstToken{inst: noop.Float64Histogram}, err
 	}
 	return ServerTimeToFirstToken{i}, nil
 }
