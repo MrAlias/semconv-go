@@ -88,6 +88,11 @@ func NewEnergy(m metric.Meter) (Energy, error) {
 	return Energy{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m Energy) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (Energy) Name() string {
 	return "hw.energy"
@@ -162,6 +167,11 @@ func NewErrors(m metric.Meter) (Errors, error) {
 	    return Errors{inst: noop.Int64Counter{}}, err
 	}
 	return Errors{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m Errors) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -246,6 +256,11 @@ func NewHostAmbientTemperature(m metric.Meter) (HostAmbientTemperature, error) {
 	return HostAmbientTemperature{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m HostAmbientTemperature) Inst() metric.Int64Gauge {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (HostAmbientTemperature) Name() string {
 	return "hw.host.ambient_temperature"
@@ -316,6 +331,11 @@ func NewHostEnergy(m metric.Meter) (HostEnergy, error) {
 	    return HostEnergy{inst: noop.Int64Counter{}}, err
 	}
 	return HostEnergy{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m HostEnergy) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -396,6 +416,11 @@ func NewHostHeatingMargin(m metric.Meter) (HostHeatingMargin, error) {
 	return HostHeatingMargin{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m HostHeatingMargin) Inst() metric.Int64Gauge {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (HostHeatingMargin) Name() string {
 	return "hw.host.heating_margin"
@@ -466,6 +491,11 @@ func NewHostPower(m metric.Meter) (HostPower, error) {
 	    return HostPower{inst: noop.Int64Gauge{}}, err
 	}
 	return HostPower{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m HostPower) Inst() metric.Int64Gauge {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -545,6 +575,11 @@ func NewPower(m metric.Meter) (Power, error) {
 	return Power{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m Power) Inst() metric.Int64Gauge {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (Power) Name() string {
 	return "hw.power"
@@ -621,6 +656,11 @@ func NewStatus(m metric.Meter) (Status, error) {
 	    return Status{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return Status{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m Status) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.

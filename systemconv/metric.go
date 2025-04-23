@@ -214,6 +214,11 @@ func NewCPULogicalCount(m metric.Meter) (CPULogicalCount, error) {
 	return CPULogicalCount{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m CPULogicalCount) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (CPULogicalCount) Name() string {
 	return "system.cpu.logical.count"
@@ -261,6 +266,11 @@ func NewCPUPhysicalCount(m metric.Meter) (CPUPhysicalCount, error) {
 	return CPUPhysicalCount{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m CPUPhysicalCount) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (CPUPhysicalCount) Name() string {
 	return "system.cpu.physical.count"
@@ -305,6 +315,11 @@ func NewDiskIO(m metric.Meter) (DiskIO, error) {
 	    return DiskIO{inst: noop.Int64Counter{}}, err
 	}
 	return DiskIO{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m DiskIO) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -364,6 +379,11 @@ func NewDiskIOTime(m metric.Meter) (DiskIOTime, error) {
 	    return DiskIOTime{inst: noop.Float64Counter{}}, err
 	}
 	return DiskIOTime{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m DiskIOTime) Inst() metric.Float64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -436,6 +456,11 @@ func NewDiskLimit(m metric.Meter) (DiskLimit, error) {
 	return DiskLimit{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m DiskLimit) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (DiskLimit) Name() string {
 	return "system.disk.limit"
@@ -491,6 +516,11 @@ func NewDiskMerged(m metric.Meter) (DiskMerged, error) {
 	    return DiskMerged{inst: noop.Int64Counter{}}, err
 	}
 	return DiskMerged{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m DiskMerged) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -550,6 +580,11 @@ func NewDiskOperationTime(m metric.Meter) (DiskOperationTime, error) {
 	    return DiskOperationTime{inst: noop.Float64Counter{}}, err
 	}
 	return DiskOperationTime{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m DiskOperationTime) Inst() metric.Float64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -625,6 +660,11 @@ func NewDiskOperations(m metric.Meter) (DiskOperations, error) {
 	return DiskOperations{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m DiskOperations) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (DiskOperations) Name() string {
 	return "system.disk.operations"
@@ -682,6 +722,11 @@ func NewFilesystemLimit(m metric.Meter) (FilesystemLimit, error) {
 	    return FilesystemLimit{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return FilesystemLimit{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m FilesystemLimit) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -762,6 +807,11 @@ func NewFilesystemUsage(m metric.Meter) (FilesystemUsage, error) {
 	    return FilesystemUsage{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return FilesystemUsage{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m FilesystemUsage) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -855,6 +905,11 @@ func NewFilesystemUtilization(m metric.Meter) (FilesystemUtilization, error) {
 	return FilesystemUtilization{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m FilesystemUtilization) Inst() metric.Int64Gauge {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (FilesystemUtilization) Name() string {
 	return "system.filesystem.utilization"
@@ -938,6 +993,11 @@ func NewLinuxMemoryAvailable(m metric.Meter) (LinuxMemoryAvailable, error) {
 	return LinuxMemoryAvailable{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m LinuxMemoryAvailable) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (LinuxMemoryAvailable) Name() string {
 	return "system.linux.memory.available"
@@ -991,6 +1051,11 @@ func NewLinuxMemorySlabUsage(m metric.Meter) (LinuxMemorySlabUsage, error) {
 	    return LinuxMemorySlabUsage{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return LinuxMemorySlabUsage{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m LinuxMemorySlabUsage) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1061,6 +1126,11 @@ func NewMemoryLimit(m metric.Meter) (MemoryLimit, error) {
 	return MemoryLimit{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m MemoryLimit) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (MemoryLimit) Name() string {
 	return "system.memory.limit"
@@ -1105,6 +1175,11 @@ func NewMemoryShared(m metric.Meter) (MemoryShared, error) {
 	    return MemoryShared{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return MemoryShared{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m MemoryShared) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1155,6 +1230,11 @@ func NewMemoryUsage(m metric.Meter) (MemoryUsage, error) {
 	    return MemoryUsage{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return MemoryUsage{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m MemoryUsage) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1217,6 +1297,11 @@ func NewMemoryUtilization(m metric.Meter) (MemoryUtilization, error) {
 	return MemoryUtilization{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m MemoryUtilization) Inst() metric.Int64Gauge {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (MemoryUtilization) Name() string {
 	return "system.memory.utilization"
@@ -1267,6 +1352,11 @@ func NewNetworkConnections(m metric.Meter) (NetworkConnections, error) {
 	    return NetworkConnections{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return NetworkConnections{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m NetworkConnections) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1338,6 +1428,11 @@ func NewNetworkDropped(m metric.Meter) (NetworkDropped, error) {
 	    return NetworkDropped{inst: noop.Int64Counter{}}, err
 	}
 	return NetworkDropped{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m NetworkDropped) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1417,6 +1512,11 @@ func NewNetworkErrors(m metric.Meter) (NetworkErrors, error) {
 	return NetworkErrors{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m NetworkErrors) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (NetworkErrors) Name() string {
 	return "system.network.errors"
@@ -1493,6 +1593,11 @@ func NewNetworkIO(m metric.Meter) (NetworkIO, error) {
 	return NetworkIO{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m NetworkIO) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (NetworkIO) Name() string {
 	return "system.network.io"
@@ -1551,6 +1656,11 @@ func NewNetworkPackets(m metric.Meter) (NetworkPackets, error) {
 	    return NetworkPackets{inst: noop.Int64Counter{}}, err
 	}
 	return NetworkPackets{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m NetworkPackets) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1612,6 +1722,11 @@ func NewPagingFaults(m metric.Meter) (PagingFaults, error) {
 	return PagingFaults{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m PagingFaults) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (PagingFaults) Name() string {
 	return "system.paging.faults"
@@ -1662,6 +1777,11 @@ func NewPagingOperations(m metric.Meter) (PagingOperations, error) {
 	    return PagingOperations{inst: noop.Int64Counter{}}, err
 	}
 	return PagingOperations{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m PagingOperations) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1722,6 +1842,11 @@ func NewPagingUsage(m metric.Meter) (PagingUsage, error) {
 	    return PagingUsage{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return PagingUsage{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m PagingUsage) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1788,6 +1913,11 @@ func NewPagingUtilization(m metric.Meter) (PagingUtilization, error) {
 	return PagingUtilization{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m PagingUtilization) Inst() metric.Int64Gauge {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (PagingUtilization) Name() string {
 	return "system.paging.utilization"
@@ -1846,6 +1976,11 @@ func NewProcessCount(m metric.Meter) (ProcessCount, error) {
 	    return ProcessCount{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return ProcessCount{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ProcessCount) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1909,6 +2044,11 @@ func NewProcessCreated(m metric.Meter) (ProcessCreated, error) {
 	return ProcessCreated{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ProcessCreated) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ProcessCreated) Name() string {
 	return "system.process.created"
@@ -1951,6 +2091,11 @@ func NewUptime(m metric.Meter) (Uptime, error) {
 	    return Uptime{inst: noop.Float64Gauge{}}, err
 	}
 	return Uptime{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m Uptime) Inst() metric.Float64Gauge {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.

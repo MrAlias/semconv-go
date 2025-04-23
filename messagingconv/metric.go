@@ -95,6 +95,11 @@ func NewClientConsumedMessages(m metric.Meter) (ClientConsumedMessages, error) {
 	return ClientConsumedMessages{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ClientConsumedMessages) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ClientConsumedMessages) Name() string {
 	return "messaging.client.consumed.messages"
@@ -220,6 +225,11 @@ func NewClientOperationDuration(m metric.Meter) (ClientOperationDuration, error)
 	    return ClientOperationDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return ClientOperationDuration{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ClientOperationDuration) Inst() metric.Float64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -351,6 +361,11 @@ func NewClientSentMessages(m metric.Meter) (ClientSentMessages, error) {
 	return ClientSentMessages{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ClientSentMessages) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ClientSentMessages) Name() string {
 	return "messaging.client.sent.messages"
@@ -457,6 +472,11 @@ func NewProcessDuration(m metric.Meter) (ProcessDuration, error) {
 	    return ProcessDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return ProcessDuration{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ProcessDuration) Inst() metric.Float64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.

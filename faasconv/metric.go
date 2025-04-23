@@ -50,6 +50,11 @@ func NewColdstarts(m metric.Meter) (Coldstarts, error) {
 	return Coldstarts{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m Coldstarts) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (Coldstarts) Name() string {
 	return "faas.coldstarts"
@@ -107,6 +112,11 @@ func NewCPUUsage(m metric.Meter) (CPUUsage, error) {
 	    return CPUUsage{inst: noop.Float64Histogram{}}, err
 	}
 	return CPUUsage{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m CPUUsage) Inst() metric.Float64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -168,6 +178,11 @@ func NewErrors(m metric.Meter) (Errors, error) {
 	return Errors{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m Errors) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (Errors) Name() string {
 	return "faas.errors"
@@ -225,6 +240,11 @@ func NewInitDuration(m metric.Meter) (InitDuration, error) {
 	    return InitDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return InitDuration{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m InitDuration) Inst() metric.Float64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -286,6 +306,11 @@ func NewInvocations(m metric.Meter) (Invocations, error) {
 	return Invocations{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m Invocations) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (Invocations) Name() string {
 	return "faas.invocations"
@@ -343,6 +368,11 @@ func NewInvokeDuration(m metric.Meter) (InvokeDuration, error) {
 	    return InvokeDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return InvokeDuration{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m InvokeDuration) Inst() metric.Float64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -404,6 +434,11 @@ func NewMemUsage(m metric.Meter) (MemUsage, error) {
 	return MemUsage{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m MemUsage) Inst() metric.Int64Histogram {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (MemUsage) Name() string {
 	return "faas.mem_usage"
@@ -463,6 +498,11 @@ func NewNetIO(m metric.Meter) (NetIO, error) {
 	return NetIO{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m NetIO) Inst() metric.Int64Histogram {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (NetIO) Name() string {
 	return "faas.net_io"
@@ -520,6 +560,11 @@ func NewTimeouts(m metric.Meter) (Timeouts, error) {
 	    return Timeouts{inst: noop.Int64Counter{}}, err
 	}
 	return Timeouts{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m Timeouts) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.

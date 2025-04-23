@@ -102,6 +102,11 @@ func NewContextSwitches(m metric.Meter) (ContextSwitches, error) {
 	return ContextSwitches{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ContextSwitches) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ContextSwitches) Name() string {
 	return "process.context_switches"
@@ -160,6 +165,11 @@ func NewCPUTime(m metric.Meter) (CPUTime, error) {
 	    return CPUTime{inst: noop.Float64Counter{}}, err
 	}
 	return CPUTime{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m CPUTime) Inst() metric.Float64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -222,6 +232,11 @@ func NewCPUUtilization(m metric.Meter) (CPUUtilization, error) {
 	return CPUUtilization{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m CPUUtilization) Inst() metric.Int64Gauge {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (CPUUtilization) Name() string {
 	return "process.cpu.utilization"
@@ -279,6 +294,11 @@ func NewDiskIO(m metric.Meter) (DiskIO, error) {
 	    return DiskIO{inst: noop.Int64Counter{}}, err
 	}
 	return DiskIO{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m DiskIO) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -339,6 +359,11 @@ func NewMemoryUsage(m metric.Meter) (MemoryUsage, error) {
 	return MemoryUsage{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m MemoryUsage) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (MemoryUsage) Name() string {
 	return "process.memory.usage"
@@ -383,6 +408,11 @@ func NewMemoryVirtual(m metric.Meter) (MemoryVirtual, error) {
 	return MemoryVirtual{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m MemoryVirtual) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (MemoryVirtual) Name() string {
 	return "process.memory.virtual"
@@ -425,6 +455,11 @@ func NewNetworkIO(m metric.Meter) (NetworkIO, error) {
 	    return NetworkIO{inst: noop.Int64Counter{}}, err
 	}
 	return NetworkIO{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m NetworkIO) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -486,6 +521,11 @@ func NewOpenFileDescriptorCount(m metric.Meter) (OpenFileDescriptorCount, error)
 	return OpenFileDescriptorCount{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m OpenFileDescriptorCount) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (OpenFileDescriptorCount) Name() string {
 	return "process.open_file_descriptor.count"
@@ -528,6 +568,11 @@ func NewPagingFaults(m metric.Meter) (PagingFaults, error) {
 	    return PagingFaults{inst: noop.Int64Counter{}}, err
 	}
 	return PagingFaults{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m PagingFaults) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -590,6 +635,11 @@ func NewThreadCount(m metric.Meter) (ThreadCount, error) {
 	return ThreadCount{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ThreadCount) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ThreadCount) Name() string {
 	return "process.thread.count"
@@ -632,6 +682,11 @@ func NewUptime(m metric.Meter) (Uptime, error) {
 	    return Uptime{inst: noop.Float64Gauge{}}, err
 	}
 	return Uptime{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m Uptime) Inst() metric.Float64Gauge {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.

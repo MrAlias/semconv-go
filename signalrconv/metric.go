@@ -60,6 +60,11 @@ func NewServerActiveConnections(m metric.Meter) (ServerActiveConnections, error)
 	return ServerActiveConnections{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ServerActiveConnections) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ServerActiveConnections) Name() string {
 	return "signalr.server.active_connections"
@@ -128,6 +133,11 @@ func NewServerConnectionDuration(m metric.Meter) (ServerConnectionDuration, erro
 	    return ServerConnectionDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return ServerConnectionDuration{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ServerConnectionDuration) Inst() metric.Float64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.

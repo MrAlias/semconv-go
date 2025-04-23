@@ -40,6 +40,11 @@ func NewLookupDuration(m metric.Meter) (LookupDuration, error) {
 	return LookupDuration{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m LookupDuration) Inst() metric.Float64Histogram {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (LookupDuration) Name() string {
 	return "dns.lookup.duration"

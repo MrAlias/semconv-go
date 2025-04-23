@@ -62,6 +62,11 @@ func NewCosmosDBClientActiveInstanceCount(m metric.Meter) (CosmosDBClientActiveI
 	return CosmosDBClientActiveInstanceCount{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m CosmosDBClientActiveInstanceCount) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (CosmosDBClientActiveInstanceCount) Name() string {
 	return "azure.cosmosdb.client.active_instance.count"
@@ -128,6 +133,11 @@ func NewCosmosDBClientOperationRequestCharge(m metric.Meter) (CosmosDBClientOper
 	    return CosmosDBClientOperationRequestCharge{inst: noop.Int64Histogram{}}, err
 	}
 	return CosmosDBClientOperationRequestCharge{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m CosmosDBClientOperationRequestCharge) Inst() metric.Int64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.

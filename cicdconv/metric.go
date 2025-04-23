@@ -99,6 +99,11 @@ func NewPipelineRunActive(m metric.Meter) (PipelineRunActive, error) {
 	return PipelineRunActive{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m PipelineRunActive) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (PipelineRunActive) Name() string {
 	return "cicd.pipeline.run.active"
@@ -159,6 +164,11 @@ func NewPipelineRunDuration(m metric.Meter) (PipelineRunDuration, error) {
 	    return PipelineRunDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return PipelineRunDuration{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m PipelineRunDuration) Inst() metric.Float64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -239,6 +249,11 @@ func NewPipelineRunErrors(m metric.Meter) (PipelineRunErrors, error) {
 	return PipelineRunErrors{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m PipelineRunErrors) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (PipelineRunErrors) Name() string {
 	return "cicd.pipeline.run.errors"
@@ -305,6 +320,11 @@ func NewSystemErrors(m metric.Meter) (SystemErrors, error) {
 	return SystemErrors{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m SystemErrors) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (SystemErrors) Name() string {
 	return "cicd.system.errors"
@@ -366,6 +386,11 @@ func NewWorkerCount(m metric.Meter) (WorkerCount, error) {
 	    return WorkerCount{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return WorkerCount{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m WorkerCount) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.

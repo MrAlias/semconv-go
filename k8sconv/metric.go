@@ -58,6 +58,11 @@ func NewCronJobActiveJobs(m metric.Meter) (CronJobActiveJobs, error) {
 	return CronJobActiveJobs{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m CronJobActiveJobs) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (CronJobActiveJobs) Name() string {
 	return "k8s.cronjob.active_jobs"
@@ -111,6 +116,11 @@ func NewDaemonSetCurrentScheduledNodes(m metric.Meter) (DaemonSetCurrentSchedule
 	    return DaemonSetCurrentScheduledNodes{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return DaemonSetCurrentScheduledNodes{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m DaemonSetCurrentScheduledNodes) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -168,6 +178,11 @@ func NewDaemonSetDesiredScheduledNodes(m metric.Meter) (DaemonSetDesiredSchedule
 	return DaemonSetDesiredScheduledNodes{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m DaemonSetDesiredScheduledNodes) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (DaemonSetDesiredScheduledNodes) Name() string {
 	return "k8s.daemonset.desired_scheduled_nodes"
@@ -221,6 +236,11 @@ func NewDaemonSetMisscheduledNodes(m metric.Meter) (DaemonSetMisscheduledNodes, 
 	    return DaemonSetMisscheduledNodes{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return DaemonSetMisscheduledNodes{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m DaemonSetMisscheduledNodes) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -277,6 +297,11 @@ func NewDaemonSetReadyNodes(m metric.Meter) (DaemonSetReadyNodes, error) {
 	return DaemonSetReadyNodes{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m DaemonSetReadyNodes) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (DaemonSetReadyNodes) Name() string {
 	return "k8s.daemonset.ready_nodes"
@@ -331,6 +356,11 @@ func NewDeploymentAvailablePods(m metric.Meter) (DeploymentAvailablePods, error)
 	return DeploymentAvailablePods{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m DeploymentAvailablePods) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (DeploymentAvailablePods) Name() string {
 	return "k8s.deployment.available_pods"
@@ -382,6 +412,11 @@ func NewDeploymentDesiredPods(m metric.Meter) (DeploymentDesiredPods, error) {
 	    return DeploymentDesiredPods{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return DeploymentDesiredPods{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m DeploymentDesiredPods) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -438,6 +473,11 @@ func NewHpaCurrentPods(m metric.Meter) (HpaCurrentPods, error) {
 	return HpaCurrentPods{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m HpaCurrentPods) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (HpaCurrentPods) Name() string {
 	return "k8s.hpa.current_pods"
@@ -490,6 +530,11 @@ func NewHpaDesiredPods(m metric.Meter) (HpaDesiredPods, error) {
 	    return HpaDesiredPods{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return HpaDesiredPods{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m HpaDesiredPods) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -545,6 +590,11 @@ func NewHpaMaxPods(m metric.Meter) (HpaMaxPods, error) {
 	return HpaMaxPods{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m HpaMaxPods) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (HpaMaxPods) Name() string {
 	return "k8s.hpa.max_pods"
@@ -598,6 +648,11 @@ func NewHpaMinPods(m metric.Meter) (HpaMinPods, error) {
 	return HpaMinPods{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m HpaMinPods) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (HpaMinPods) Name() string {
 	return "k8s.hpa.min_pods"
@@ -649,6 +704,11 @@ func NewJobActivePods(m metric.Meter) (JobActivePods, error) {
 	    return JobActivePods{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return JobActivePods{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m JobActivePods) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -705,6 +765,11 @@ func NewJobDesiredSuccessfulPods(m metric.Meter) (JobDesiredSuccessfulPods, erro
 	return JobDesiredSuccessfulPods{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m JobDesiredSuccessfulPods) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (JobDesiredSuccessfulPods) Name() string {
 	return "k8s.job.desired_successful_pods"
@@ -756,6 +821,11 @@ func NewJobFailedPods(m metric.Meter) (JobFailedPods, error) {
 	    return JobFailedPods{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return JobFailedPods{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m JobFailedPods) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -811,6 +881,11 @@ func NewJobMaxParallelPods(m metric.Meter) (JobMaxParallelPods, error) {
 	return JobMaxParallelPods{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m JobMaxParallelPods) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (JobMaxParallelPods) Name() string {
 	return "k8s.job.max_parallel_pods"
@@ -864,6 +939,11 @@ func NewJobSuccessfulPods(m metric.Meter) (JobSuccessfulPods, error) {
 	return JobSuccessfulPods{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m JobSuccessfulPods) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (JobSuccessfulPods) Name() string {
 	return "k8s.job.successful_pods"
@@ -915,6 +995,11 @@ func NewNamespacePhase(m metric.Meter) (NamespacePhase, error) {
 	    return NamespacePhase{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return NamespacePhase{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m NamespacePhase) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -978,6 +1063,11 @@ func NewNodeCPUTime(m metric.Meter) (NodeCPUTime, error) {
 	return NodeCPUTime{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m NodeCPUTime) Inst() metric.Float64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (NodeCPUTime) Name() string {
 	return "k8s.node.cpu.time"
@@ -1022,6 +1112,11 @@ func NewNodeCPUUsage(m metric.Meter) (NodeCPUUsage, error) {
 	    return NodeCPUUsage{inst: noop.Int64Gauge{}}, err
 	}
 	return NodeCPUUsage{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m NodeCPUUsage) Inst() metric.Int64Gauge {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1071,6 +1166,11 @@ func NewNodeMemoryUsage(m metric.Meter) (NodeMemoryUsage, error) {
 	return NodeMemoryUsage{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m NodeMemoryUsage) Inst() metric.Int64Gauge {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (NodeMemoryUsage) Name() string {
 	return "k8s.node.memory.usage"
@@ -1115,6 +1215,11 @@ func NewNodeNetworkErrors(m metric.Meter) (NodeNetworkErrors, error) {
 	    return NodeNetworkErrors{inst: noop.Int64Counter{}}, err
 	}
 	return NodeNetworkErrors{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m NodeNetworkErrors) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1183,6 +1288,11 @@ func NewNodeNetworkIO(m metric.Meter) (NodeNetworkIO, error) {
 	return NodeNetworkIO{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m NodeNetworkIO) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (NodeNetworkIO) Name() string {
 	return "k8s.node.network.io"
@@ -1249,6 +1359,11 @@ func NewNodeUptime(m metric.Meter) (NodeUptime, error) {
 	return NodeUptime{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m NodeUptime) Inst() metric.Float64Gauge {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (NodeUptime) Name() string {
 	return "k8s.node.uptime"
@@ -1297,6 +1412,11 @@ func NewPodCPUTime(m metric.Meter) (PodCPUTime, error) {
 	return PodCPUTime{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m PodCPUTime) Inst() metric.Float64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (PodCPUTime) Name() string {
 	return "k8s.pod.cpu.time"
@@ -1341,6 +1461,11 @@ func NewPodCPUUsage(m metric.Meter) (PodCPUUsage, error) {
 	    return PodCPUUsage{inst: noop.Int64Gauge{}}, err
 	}
 	return PodCPUUsage{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m PodCPUUsage) Inst() metric.Int64Gauge {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1390,6 +1515,11 @@ func NewPodMemoryUsage(m metric.Meter) (PodMemoryUsage, error) {
 	return PodMemoryUsage{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m PodMemoryUsage) Inst() metric.Int64Gauge {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (PodMemoryUsage) Name() string {
 	return "k8s.pod.memory.usage"
@@ -1434,6 +1564,11 @@ func NewPodNetworkErrors(m metric.Meter) (PodNetworkErrors, error) {
 	    return PodNetworkErrors{inst: noop.Int64Counter{}}, err
 	}
 	return PodNetworkErrors{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m PodNetworkErrors) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1502,6 +1637,11 @@ func NewPodNetworkIO(m metric.Meter) (PodNetworkIO, error) {
 	return PodNetworkIO{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m PodNetworkIO) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (PodNetworkIO) Name() string {
 	return "k8s.pod.network.io"
@@ -1568,6 +1708,11 @@ func NewPodUptime(m metric.Meter) (PodUptime, error) {
 	return PodUptime{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m PodUptime) Inst() metric.Float64Gauge {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (PodUptime) Name() string {
 	return "k8s.pod.uptime"
@@ -1615,6 +1760,11 @@ func NewReplicaSetAvailablePods(m metric.Meter) (ReplicaSetAvailablePods, error)
 	    return ReplicaSetAvailablePods{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return ReplicaSetAvailablePods{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ReplicaSetAvailablePods) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1668,6 +1818,11 @@ func NewReplicaSetDesiredPods(m metric.Meter) (ReplicaSetDesiredPods, error) {
 	    return ReplicaSetDesiredPods{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return ReplicaSetDesiredPods{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ReplicaSetDesiredPods) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1725,6 +1880,11 @@ func NewReplicationControllerAvailablePods(m metric.Meter) (ReplicationControlle
 	return ReplicationControllerAvailablePods{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ReplicationControllerAvailablePods) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ReplicationControllerAvailablePods) Name() string {
 	return "k8s.replicationcontroller.available_pods"
@@ -1778,6 +1938,11 @@ func NewReplicationControllerDesiredPods(m metric.Meter) (ReplicationControllerD
 	    return ReplicationControllerDesiredPods{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return ReplicationControllerDesiredPods{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ReplicationControllerDesiredPods) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1834,6 +1999,11 @@ func NewStatefulSetCurrentPods(m metric.Meter) (StatefulSetCurrentPods, error) {
 	return StatefulSetCurrentPods{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m StatefulSetCurrentPods) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (StatefulSetCurrentPods) Name() string {
 	return "k8s.statefulset.current_pods"
@@ -1885,6 +2055,11 @@ func NewStatefulSetDesiredPods(m metric.Meter) (StatefulSetDesiredPods, error) {
 	    return StatefulSetDesiredPods{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return StatefulSetDesiredPods{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m StatefulSetDesiredPods) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1940,6 +2115,11 @@ func NewStatefulSetReadyPods(m metric.Meter) (StatefulSetReadyPods, error) {
 	return StatefulSetReadyPods{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m StatefulSetReadyPods) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (StatefulSetReadyPods) Name() string {
 	return "k8s.statefulset.ready_pods"
@@ -1992,6 +2172,11 @@ func NewStatefulSetUpdatedPods(m metric.Meter) (StatefulSetUpdatedPods, error) {
 	    return StatefulSetUpdatedPods{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return StatefulSetUpdatedPods{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m StatefulSetUpdatedPods) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.

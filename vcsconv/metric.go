@@ -155,6 +155,11 @@ func NewChangeCount(m metric.Meter) (ChangeCount, error) {
 	return ChangeCount{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ChangeCount) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ChangeCount) Name() string {
 	return "vcs.change.count"
@@ -241,6 +246,11 @@ func NewChangeDuration(m metric.Meter) (ChangeDuration, error) {
 	    return ChangeDuration{inst: noop.Float64Gauge{}}, err
 	}
 	return ChangeDuration{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ChangeDuration) Inst() metric.Float64Gauge {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -336,6 +346,11 @@ func NewChangeTimeToApproval(m metric.Meter) (ChangeTimeToApproval, error) {
 	    return ChangeTimeToApproval{inst: noop.Float64Gauge{}}, err
 	}
 	return ChangeTimeToApproval{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ChangeTimeToApproval) Inst() metric.Float64Gauge {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -457,6 +472,11 @@ func NewChangeTimeToMerge(m metric.Meter) (ChangeTimeToMerge, error) {
 	return ChangeTimeToMerge{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ChangeTimeToMerge) Inst() metric.Float64Gauge {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ChangeTimeToMerge) Name() string {
 	return "vcs.change.time_to_merge"
@@ -575,6 +595,11 @@ func NewContributorCount(m metric.Meter) (ContributorCount, error) {
 	return ContributorCount{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ContributorCount) Inst() metric.Int64Gauge {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ContributorCount) Name() string {
 	return "vcs.contributor.count"
@@ -656,6 +681,11 @@ func NewRefCount(m metric.Meter) (RefCount, error) {
 	    return RefCount{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return RefCount{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m RefCount) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -745,6 +775,11 @@ func NewRefLinesDelta(m metric.Meter) (RefLinesDelta, error) {
 	    return RefLinesDelta{inst: noop.Int64Gauge{}}, err
 	}
 	return RefLinesDelta{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m RefLinesDelta) Inst() metric.Int64Gauge {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -873,6 +908,11 @@ func NewRefRevisionsDelta(m metric.Meter) (RefRevisionsDelta, error) {
 	return RefRevisionsDelta{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m RefRevisionsDelta) Inst() metric.Int64Gauge {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (RefRevisionsDelta) Name() string {
 	return "vcs.ref.revisions_delta"
@@ -996,6 +1036,11 @@ func NewRefTime(m metric.Meter) (RefTime, error) {
 	return RefTime{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m RefTime) Inst() metric.Float64Gauge {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (RefTime) Name() string {
 	return "vcs.ref.time"
@@ -1088,6 +1133,11 @@ func NewRepositoryCount(m metric.Meter) (RepositoryCount, error) {
 	    return RepositoryCount{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return RepositoryCount{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m RepositoryCount) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.

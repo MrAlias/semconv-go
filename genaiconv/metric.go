@@ -114,6 +114,11 @@ func NewClientOperationDuration(m metric.Meter) (ClientOperationDuration, error)
 	return ClientOperationDuration{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ClientOperationDuration) Inst() metric.Float64Histogram {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ClientOperationDuration) Name() string {
 	return "gen_ai.client.operation.duration"
@@ -210,6 +215,11 @@ func NewClientTokenUsage(m metric.Meter) (ClientTokenUsage, error) {
 	return ClientTokenUsage{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ClientTokenUsage) Inst() metric.Int64Histogram {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ClientTokenUsage) Name() string {
 	return "gen_ai.client.token.usage"
@@ -302,6 +312,11 @@ func NewServerRequestDuration(m metric.Meter) (ServerRequestDuration, error) {
 	    return ServerRequestDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return ServerRequestDuration{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ServerRequestDuration) Inst() metric.Float64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -401,6 +416,11 @@ func NewServerTimePerOutputToken(m metric.Meter) (ServerTimePerOutputToken, erro
 	return ServerTimePerOutputToken{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ServerTimePerOutputToken) Inst() metric.Float64Histogram {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ServerTimePerOutputToken) Name() string {
 	return "gen_ai.server.time_per_output_token"
@@ -488,6 +508,11 @@ func NewServerTimeToFirstToken(m metric.Meter) (ServerTimeToFirstToken, error) {
 	    return ServerTimeToFirstToken{inst: noop.Float64Histogram{}}, err
 	}
 	return ServerTimeToFirstToken{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ServerTimeToFirstToken) Inst() metric.Float64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.

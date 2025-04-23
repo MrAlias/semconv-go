@@ -93,6 +93,11 @@ func NewSDKExporterLogExported(m metric.Meter) (SDKExporterLogExported, error) {
 	return SDKExporterLogExported{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m SDKExporterLogExported) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (SDKExporterLogExported) Name() string {
 	return "otel.sdk.exporter.log.exported"
@@ -188,6 +193,11 @@ func NewSDKExporterLogInflight(m metric.Meter) (SDKExporterLogInflight, error) {
 	return SDKExporterLogInflight{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m SDKExporterLogInflight) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (SDKExporterLogInflight) Name() string {
 	return "otel.sdk.exporter.log.inflight"
@@ -270,6 +280,11 @@ func NewSDKExporterSpanExportedCount(m metric.Meter) (SDKExporterSpanExportedCou
 	    return SDKExporterSpanExportedCount{inst: noop.Int64Counter{}}, err
 	}
 	return SDKExporterSpanExportedCount{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m SDKExporterSpanExportedCount) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -369,6 +384,11 @@ func NewSDKExporterSpanInflightCount(m metric.Meter) (SDKExporterSpanInflightCou
 	return SDKExporterSpanInflightCount{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m SDKExporterSpanInflightCount) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (SDKExporterSpanInflightCount) Name() string {
 	return "otel.sdk.exporter.span.inflight.count"
@@ -451,6 +471,11 @@ func NewSDKLogCreated(m metric.Meter) (SDKLogCreated, error) {
 	return SDKLogCreated{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m SDKLogCreated) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (SDKLogCreated) Name() string {
 	return "otel.sdk.log.created"
@@ -494,6 +519,11 @@ func NewSDKProcessorLogProcessed(m metric.Meter) (SDKProcessorLogProcessed, erro
 	    return SDKProcessorLogProcessed{inst: noop.Int64Counter{}}, err
 	}
 	return SDKProcessorLogProcessed{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m SDKProcessorLogProcessed) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -578,6 +608,11 @@ func NewSDKProcessorLogQueueCapacity(m metric.Meter) (SDKProcessorLogQueueCapaci
 	return SDKProcessorLogQueueCapacity{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m SDKProcessorLogQueueCapacity) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (SDKProcessorLogQueueCapacity) Name() string {
 	return "otel.sdk.processor.log.queue.capacity"
@@ -646,6 +681,11 @@ func NewSDKProcessorLogQueueSize(m metric.Meter) (SDKProcessorLogQueueSize, erro
 	    return SDKProcessorLogQueueSize{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return SDKProcessorLogQueueSize{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m SDKProcessorLogQueueSize) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -717,6 +757,11 @@ func NewSDKProcessorSpanProcessedCount(m metric.Meter) (SDKProcessorSpanProcesse
 	    return SDKProcessorSpanProcessedCount{inst: noop.Int64Counter{}}, err
 	}
 	return SDKProcessorSpanProcessedCount{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m SDKProcessorSpanProcessedCount) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -801,6 +846,11 @@ func NewSDKProcessorSpanQueueCapacity(m metric.Meter) (SDKProcessorSpanQueueCapa
 	return SDKProcessorSpanQueueCapacity{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m SDKProcessorSpanQueueCapacity) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (SDKProcessorSpanQueueCapacity) Name() string {
 	return "otel.sdk.processor.span.queue.capacity"
@@ -872,6 +922,11 @@ func NewSDKProcessorSpanQueueSize(m metric.Meter) (SDKProcessorSpanQueueSize, er
 	return SDKProcessorSpanQueueSize{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m SDKProcessorSpanQueueSize) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (SDKProcessorSpanQueueSize) Name() string {
 	return "otel.sdk.processor.span.queue.size"
@@ -941,6 +996,11 @@ func NewSDKSpanEndedCount(m metric.Meter) (SDKSpanEndedCount, error) {
 	return SDKSpanEndedCount{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m SDKSpanEndedCount) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (SDKSpanEndedCount) Name() string {
 	return "otel.sdk.span.ended.count"
@@ -1003,6 +1063,11 @@ func NewSDKSpanLiveCount(m metric.Meter) (SDKSpanLiveCount, error) {
 	    return SDKSpanLiveCount{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return SDKSpanLiveCount{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m SDKSpanLiveCount) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.

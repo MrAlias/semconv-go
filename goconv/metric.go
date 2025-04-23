@@ -43,6 +43,11 @@ func NewConfigGogc(m metric.Meter) (ConfigGogc, error) {
 	return ConfigGogc{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ConfigGogc) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ConfigGogc) Name() string {
 	return "go.config.gogc"
@@ -87,6 +92,11 @@ func NewGoroutineCount(m metric.Meter) (GoroutineCount, error) {
 	    return GoroutineCount{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return GoroutineCount{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m GoroutineCount) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -135,6 +145,11 @@ func NewMemoryAllocated(m metric.Meter) (MemoryAllocated, error) {
 	return MemoryAllocated{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m MemoryAllocated) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (MemoryAllocated) Name() string {
 	return "go.memory.allocated"
@@ -179,6 +194,11 @@ func NewMemoryAllocations(m metric.Meter) (MemoryAllocations, error) {
 	    return MemoryAllocations{inst: noop.Int64Counter{}}, err
 	}
 	return MemoryAllocations{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m MemoryAllocations) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -227,6 +247,11 @@ func NewMemoryGCGoal(m metric.Meter) (MemoryGCGoal, error) {
 	return MemoryGCGoal{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m MemoryGCGoal) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (MemoryGCGoal) Name() string {
 	return "go.memory.gc.goal"
@@ -271,6 +296,11 @@ func NewMemoryLimit(m metric.Meter) (MemoryLimit, error) {
 	    return MemoryLimit{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return MemoryLimit{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m MemoryLimit) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -318,6 +348,11 @@ func NewMemoryUsed(m metric.Meter) (MemoryUsed, error) {
 	    return MemoryUsed{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return MemoryUsed{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m MemoryUsed) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -381,6 +416,11 @@ func NewProcessorLimit(m metric.Meter) (ProcessorLimit, error) {
 	return ProcessorLimit{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ProcessorLimit) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ProcessorLimit) Name() string {
 	return "go.processor.limit"
@@ -426,6 +466,11 @@ func NewScheduleDuration(m metric.Meter) (ScheduleDuration, error) {
 	    return ScheduleDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return ScheduleDuration{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ScheduleDuration) Inst() metric.Float64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.

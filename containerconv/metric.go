@@ -77,6 +77,11 @@ func NewCPUTime(m metric.Meter) (CPUTime, error) {
 	return CPUTime{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m CPUTime) Inst() metric.Float64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (CPUTime) Name() string {
 	return "container.cpu.time"
@@ -137,6 +142,11 @@ func NewCPUUsage(m metric.Meter) (CPUUsage, error) {
 	    return CPUUsage{inst: noop.Int64Gauge{}}, err
 	}
 	return CPUUsage{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m CPUUsage) Inst() metric.Int64Gauge {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -200,6 +210,11 @@ func NewDiskIO(m metric.Meter) (DiskIO, error) {
 	    return DiskIO{inst: noop.Int64Counter{}}, err
 	}
 	return DiskIO{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m DiskIO) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -269,6 +284,11 @@ func NewMemoryUsage(m metric.Meter) (MemoryUsage, error) {
 	return MemoryUsage{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m MemoryUsage) Inst() metric.Int64Counter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (MemoryUsage) Name() string {
 	return "container.memory.usage"
@@ -313,6 +333,11 @@ func NewNetworkIO(m metric.Meter) (NetworkIO, error) {
 	    return NetworkIO{inst: noop.Int64Counter{}}, err
 	}
 	return NetworkIO{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m NetworkIO) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -381,6 +406,11 @@ func NewUptime(m metric.Meter) (Uptime, error) {
 	    return Uptime{inst: noop.Float64Gauge{}}, err
 	}
 	return Uptime{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m Uptime) Inst() metric.Float64Gauge {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.

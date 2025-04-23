@@ -53,6 +53,11 @@ func NewFrequency(m metric.Meter) (Frequency, error) {
 	return Frequency{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m Frequency) Inst() metric.Int64Gauge {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (Frequency) Name() string {
 	return "cpu.frequency"
@@ -109,6 +114,11 @@ func NewTime(m metric.Meter) (Time, error) {
 	    return Time{inst: noop.Float64Counter{}}, err
 	}
 	return Time{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m Time) Inst() metric.Float64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -174,6 +184,11 @@ func NewUtilization(m metric.Meter) (Utilization, error) {
 	    return Utilization{inst: noop.Int64Gauge{}}, err
 	}
 	return Utilization{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m Utilization) Inst() metric.Int64Gauge {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.

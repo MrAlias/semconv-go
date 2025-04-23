@@ -254,6 +254,11 @@ func NewClientConnectionCount(m metric.Meter) (ClientConnectionCount, error) {
 	return ClientConnectionCount{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ClientConnectionCount) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ClientConnectionCount) Name() string {
 	return "db.client.connection.count"
@@ -321,6 +326,11 @@ func NewClientConnectionCreateTime(m metric.Meter) (ClientConnectionCreateTime, 
 	return ClientConnectionCreateTime{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ClientConnectionCreateTime) Inst() metric.Float64Histogram {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ClientConnectionCreateTime) Name() string {
 	return "db.client.connection.create_time"
@@ -381,6 +391,11 @@ func NewClientConnectionIdleMax(m metric.Meter) (ClientConnectionIdleMax, error)
 	    return ClientConnectionIdleMax{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return ClientConnectionIdleMax{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ClientConnectionIdleMax) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -445,6 +460,11 @@ func NewClientConnectionIdleMin(m metric.Meter) (ClientConnectionIdleMin, error)
 	return ClientConnectionIdleMin{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ClientConnectionIdleMin) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ClientConnectionIdleMin) Name() string {
 	return "db.client.connection.idle.min"
@@ -505,6 +525,11 @@ func NewClientConnectionMax(m metric.Meter) (ClientConnectionMax, error) {
 	    return ClientConnectionMax{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return ClientConnectionMax{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ClientConnectionMax) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -571,6 +596,11 @@ func NewClientConnectionPendingRequests(m metric.Meter) (ClientConnectionPending
 	return ClientConnectionPendingRequests{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ClientConnectionPendingRequests) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ClientConnectionPendingRequests) Name() string {
 	return "db.client.connection.pending_requests"
@@ -632,6 +662,11 @@ func NewClientConnectionTimeouts(m metric.Meter) (ClientConnectionTimeouts, erro
 	    return ClientConnectionTimeouts{inst: noop.Int64Counter{}}, err
 	}
 	return ClientConnectionTimeouts{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ClientConnectionTimeouts) Inst() metric.Int64Counter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -697,6 +732,11 @@ func NewClientConnectionUseTime(m metric.Meter) (ClientConnectionUseTime, error)
 	return ClientConnectionUseTime{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ClientConnectionUseTime) Inst() metric.Float64Histogram {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ClientConnectionUseTime) Name() string {
 	return "db.client.connection.use_time"
@@ -759,6 +799,11 @@ func NewClientConnectionWaitTime(m metric.Meter) (ClientConnectionWaitTime, erro
 	return ClientConnectionWaitTime{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ClientConnectionWaitTime) Inst() metric.Float64Histogram {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ClientConnectionWaitTime) Name() string {
 	return "db.client.connection.wait_time"
@@ -819,6 +864,11 @@ func NewClientOperationDuration(m metric.Meter) (ClientOperationDuration, error)
 	    return ClientOperationDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return ClientOperationDuration{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ClientOperationDuration) Inst() metric.Float64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -962,6 +1012,11 @@ func NewClientResponseReturnedRows(m metric.Meter) (ClientResponseReturnedRows, 
 	    return ClientResponseReturnedRows{inst: noop.Int64Histogram{}}, err
 	}
 	return ClientResponseReturnedRows{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ClientResponseReturnedRows) Inst() metric.Int64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.

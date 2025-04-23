@@ -93,6 +93,11 @@ func NewClientActiveRequests(m metric.Meter) (ClientActiveRequests, error) {
 	return ClientActiveRequests{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ClientActiveRequests) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ClientActiveRequests) Name() string {
 	return "http.client.active_requests"
@@ -184,6 +189,11 @@ func NewClientConnectionDuration(m metric.Meter) (ClientConnectionDuration, erro
 	return ClientConnectionDuration{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ClientConnectionDuration) Inst() metric.Float64Histogram {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ClientConnectionDuration) Name() string {
 	return "http.client.connection.duration"
@@ -272,6 +282,11 @@ func NewClientOpenConnections(m metric.Meter) (ClientOpenConnections, error) {
 	    return ClientOpenConnections{inst: noop.Int64UpDownCounter{}}, err
 	}
 	return ClientOpenConnections{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ClientOpenConnections) Inst() metric.Int64UpDownCounter {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -366,6 +381,11 @@ func NewClientRequestBodySize(m metric.Meter) (ClientRequestBodySize, error) {
 	    return ClientRequestBodySize{inst: noop.Int64Histogram{}}, err
 	}
 	return ClientRequestBodySize{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ClientRequestBodySize) Inst() metric.Int64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -496,6 +516,11 @@ func NewClientRequestDuration(m metric.Meter) (ClientRequestDuration, error) {
 	return ClientRequestDuration{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ClientRequestDuration) Inst() metric.Float64Histogram {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ClientRequestDuration) Name() string {
 	return "http.client.request.duration"
@@ -615,6 +640,11 @@ func NewClientResponseBodySize(m metric.Meter) (ClientResponseBodySize, error) {
 	    return ClientResponseBodySize{inst: noop.Int64Histogram{}}, err
 	}
 	return ClientResponseBodySize{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ClientResponseBodySize) Inst() metric.Int64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -745,6 +775,11 @@ func NewServerActiveRequests(m metric.Meter) (ServerActiveRequests, error) {
 	return ServerActiveRequests{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ServerActiveRequests) Inst() metric.Int64UpDownCounter {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ServerActiveRequests) Name() string {
 	return "http.server.active_requests"
@@ -821,6 +856,11 @@ func NewServerRequestBodySize(m metric.Meter) (ServerRequestBodySize, error) {
 	    return ServerRequestBodySize{inst: noop.Int64Histogram{}}, err
 	}
 	return ServerRequestBodySize{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ServerRequestBodySize) Inst() metric.Int64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -954,6 +994,11 @@ func NewServerRequestDuration(m metric.Meter) (ServerRequestDuration, error) {
 	return ServerRequestDuration{i}, nil
 }
 
+// Inst returns the underlying metric instrument.
+func (m ServerRequestDuration) Inst() metric.Float64Histogram {
+	return m.inst
+}
+
 // Name returns the semantic convention name of the instrument.
 func (ServerRequestDuration) Name() string {
 	return "http.server.request.duration"
@@ -1076,6 +1121,11 @@ func NewServerResponseBodySize(m metric.Meter) (ServerResponseBodySize, error) {
 	    return ServerResponseBodySize{inst: noop.Int64Histogram{}}, err
 	}
 	return ServerResponseBodySize{i}, nil
+}
+
+// Inst returns the underlying metric instrument.
+func (m ServerResponseBodySize) Inst() metric.Int64Histogram {
+	return m.inst
 }
 
 // Name returns the semantic convention name of the instrument.
