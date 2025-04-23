@@ -15,7 +15,8 @@ unknown
 {%- endmacro -%}
 
 {%- macro value_type(metric) -%}
-{%- if metric.unit == "s" -%}
+{%- set divisible = ["s", "ms"] -%}
+{%- if metric.unit is in divisible -%}
 Float64
 {%- else -%}
 Int64

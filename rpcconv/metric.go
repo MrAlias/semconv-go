@@ -14,18 +14,18 @@ import (
 // "rpc.client.duration" semantic conventions. It represents the measures the
 // duration of outbound RPC.
 type ClientDuration struct {
-	inst metric.Int64Histogram
+	inst metric.Float64Histogram
 }
 
 // NewClientDuration returns a new ClientDuration instrument.
 func NewClientDuration(m metric.Meter) (ClientDuration, error) {
-	i, err := m.Int64Histogram(
+	i, err := m.Float64Histogram(
 	    "rpc.client.duration",
 	    metric.WithDescription("Measures the duration of outbound RPC."),
 	    metric.WithUnit("ms"),
 	)
 	if err != nil {
-	    return ClientDuration{inst: noop.Int64Histogram{}}, err
+	    return ClientDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return ClientDuration{i}, nil
 }
@@ -51,7 +51,7 @@ func (ClientDuration) Description() string {
 // to end-of-batch, it's hard to interpret in practice.
 //
 // **Streaming**: N/A.
-func (m ClientDuration) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
+func (m ClientDuration) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
 	} else {
@@ -251,18 +251,18 @@ func (m ClientResponsesPerRPC) Record(ctx context.Context, val int64, attrs ...a
 // "rpc.server.duration" semantic conventions. It represents the measures the
 // duration of inbound RPC.
 type ServerDuration struct {
-	inst metric.Int64Histogram
+	inst metric.Float64Histogram
 }
 
 // NewServerDuration returns a new ServerDuration instrument.
 func NewServerDuration(m metric.Meter) (ServerDuration, error) {
-	i, err := m.Int64Histogram(
+	i, err := m.Float64Histogram(
 	    "rpc.server.duration",
 	    metric.WithDescription("Measures the duration of inbound RPC."),
 	    metric.WithUnit("ms"),
 	)
 	if err != nil {
-	    return ServerDuration{inst: noop.Int64Histogram{}}, err
+	    return ServerDuration{inst: noop.Float64Histogram{}}, err
 	}
 	return ServerDuration{i}, nil
 }
@@ -288,7 +288,7 @@ func (ServerDuration) Description() string {
 // to end-of-batch, it's hard to interpret in practice.
 //
 // **Streaming**: N/A.
-func (m ServerDuration) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
+func (m ServerDuration) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.inst.Record(ctx, val)
 	} else {
