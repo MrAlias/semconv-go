@@ -77,6 +77,9 @@ func (ServerActiveConnections) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// Meter name: `Microsoft.AspNetCore.Http.Connections`; Added in: ASP.NET Core
+// 8.0
 func (m ServerActiveConnections) Add(
 	ctx context.Context,
 	incr int64,

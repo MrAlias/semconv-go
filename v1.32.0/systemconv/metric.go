@@ -375,6 +375,18 @@ func (DiskIOTime) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// The real elapsed time ("wall clock") used in the I/O path (time from
+// operations running in parallel are not counted). Measured as:
+//
+//   - Linux: Field 13 from [procfs-diskstats]
+//   - Windows: The complement of
+//     ["Disk% Idle Time"]
+//     performance counter: `uptime * (100 - "Disk\% Idle Time") / 100`
+//
+//
+// [procfs-diskstats]: https://www.kernel.org/doc/Documentation/ABI/testing/procfs-diskstats
+// ["Disk% Idle Time"]: https://learn.microsoft.com/archive/blogs/askcore/windows-performance-monitor-disk-counters-explained#windows-performance-monitor-disk-counters-explained
 func (m DiskIOTime) Add(
 	ctx context.Context,
 	incr float64,
@@ -549,6 +561,16 @@ func (DiskOperationTime) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// Because it is the sum of time each request took, parallel-issued requests each
+// contribute to make the count grow. Measured as:
+//
+//   - Linux: Fields 7 & 11 from [procfs-diskstats]
+//   - Windows: "Avg. Disk sec/Read" perf counter multiplied by "Disk Reads/sec"
+//     perf counter (similar for Writes)
+//
+//
+// [procfs-diskstats]: https://www.kernel.org/doc/Documentation/ABI/testing/procfs-diskstats
 func (m DiskOperationTime) Add(
 	ctx context.Context,
 	incr float64,
@@ -751,6 +773,11 @@ func (FilesystemUsage) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// The sum of all `system.filesystem.usage` values over the different
+// `system.filesystem.state` attributes
+// SHOULD equal the total storage capacity of the filesystem, that is
+// `system.filesystem.limit`.
 func (m FilesystemUsage) Add(
 	ctx context.Context,
 	incr int64,
@@ -964,6 +991,15 @@ func (LinuxMemorySlabUsage) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// The sum over the `reclaimable` and `unreclaimable` state values in
+// `linux.memory.slab.usage` SHOULD be equal to the total slab memory available
+// on the system.
+// Note that the total slab memory is not constant and may vary over time.
+// See also the [Slab allocator] and `Slab` in [/proc/meminfo].
+//
+// [Slab allocator]: https://blogs.oracle.com/linux/post/understanding-linux-kernel-memory-statistics
+// [/proc/meminfo]: https://man7.org/linux/man-pages/man5/proc.5.html
 func (m LinuxMemorySlabUsage) Add(
 	ctx context.Context,
 	incr int64,
@@ -1109,6 +1145,9 @@ func (MemoryUsage) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// The sum over all `system.memory.state` values SHOULD equal the total memory
+// available on the system, that is `system.memory.limit`.
 func (m MemoryUsage) Add(
 	ctx context.Context,
 	incr int64,
@@ -1289,6 +1328,17 @@ func (NetworkDropped) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// Measured as:
+//
+//   - Linux: the `drop` column in `/proc/dev/net` ([source])
+//   - Windows: [`InDiscards`/`OutDiscards`]
+//     from [`GetIfEntry2`]
+//
+//
+// [source]: https://web.archive.org/web/20180321091318/http://www.onlamp.com/pub/a/linux/2000/11/16/LinuxAdmin.html
+// [`InDiscards`/`OutDiscards`]: https://docs.microsoft.com/windows/win32/api/netioapi/ns-netioapi-mib_if_row2
+// [`GetIfEntry2`]: https://docs.microsoft.com/windows/win32/api/netioapi/nf-netioapi-getifentry2
 func (m NetworkDropped) Add(
 	ctx context.Context,
 	incr int64,
@@ -1355,6 +1405,17 @@ func (NetworkErrors) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// Measured as:
+//
+//   - Linux: the `errs` column in `/proc/dev/net` ([source]).
+//   - Windows: [`InErrors`/`OutErrors`]
+//     from [`GetIfEntry2`].
+//
+//
+// [source]: https://web.archive.org/web/20180321091318/http://www.onlamp.com/pub/a/linux/2000/11/16/LinuxAdmin.html
+// [`InErrors`/`OutErrors`]: https://docs.microsoft.com/windows/win32/api/netioapi/ns-netioapi-mib_if_row2
+// [`GetIfEntry2`]: https://docs.microsoft.com/windows/win32/api/netioapi/nf-netioapi-getifentry2
 func (m NetworkErrors) Add(
 	ctx context.Context,
 	incr int64,

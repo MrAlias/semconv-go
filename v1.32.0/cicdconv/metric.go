@@ -259,6 +259,11 @@ func (PipelineRunErrors) Description() string {
 // system.
 //
 // The errorType is the describes a class of error the operation ended with.
+//
+// There might be errors in a pipeline run that are non fatal (eg. they are
+// suppressed) or in a parallel stage multiple stages could have a fatal error.
+// This means that this error count might not be the same as the count of metric
+// `cicd.pipeline.run.duration` with run result `failure`.
 func (m PipelineRunErrors) Add(
 	ctx context.Context,
 	incr int64,
@@ -319,6 +324,9 @@ func (SystemErrors) Description() string {
 // The systemComponent is the the name of a component of the CICD system.
 //
 // The errorType is the describes a class of error the operation ended with.
+//
+// Errors in pipeline run execution are explicitly excluded. Ie a test failure is
+// not counted in this metric.
 func (m SystemErrors) Add(
 	ctx context.Context,
 	incr int64,

@@ -94,6 +94,8 @@ func (CPUTime) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// Total CPU time consumed by the specific container on all available CPU cores
 func (m CPUTime) Add(
 	ctx context.Context,
 	incr float64,
@@ -214,6 +216,9 @@ func (DiskIO) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// The total number of bytes read/written successfully (aggregated from all
+// disks).
 func (m DiskIO) Add(
 	ctx context.Context,
 	incr int64,
@@ -321,6 +326,8 @@ func (NetworkIO) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// The number of bytes sent/received on all network interfaces by the container.
 func (m NetworkIO) Add(
 	ctx context.Context,
 	incr int64,

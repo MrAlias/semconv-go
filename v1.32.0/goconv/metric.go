@@ -318,6 +318,9 @@ func (MemoryUsed) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// Computed from
+// `(/memory/classes/total:bytes - /memory/classes/heap/released:bytes)`.
 func (m MemoryUsed) Add(
 	ctx context.Context,
 	incr int64,

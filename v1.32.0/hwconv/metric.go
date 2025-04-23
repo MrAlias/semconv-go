@@ -338,6 +338,11 @@ func (HostEnergy) Description() string {
 // monitored host
 //
 // All additional attrs passed are included in the recorded value.
+//
+// The overall energy usage of a host MUST be reported using the specific
+// `hw.host.energy` and `hw.host.power` metrics **only**, instead of the generic
+// `hw.energy` and `hw.power` described in the previous section, to prevent
+// summing up overlapping values.
 func (m HostEnergy) Add(
 	ctx context.Context,
 	incr int64,
@@ -635,6 +640,14 @@ func (Status) Description() string {
 // The hwType is the type of the component
 //
 // All additional attrs passed are included in the recorded value.
+//
+// `hw.status` is currently specified as an *UpDownCounter* but would ideally be
+// represented using a [*StateSet* as defined in OpenMetrics]. This semantic
+// convention will be updated once *StateSet* is specified in OpenTelemetry. This
+// planned change is not expected to have any consequence on the way users query
+// their timeseries backend to retrieve the values of `hw.status` over time.
+//
+// [ [*StateSet* as defined in OpenMetrics]: https://github.com/prometheus/OpenMetrics/blob/v1.0.0/specification/OpenMetrics.md#stateset
 func (m Status) Add(
 	ctx context.Context,
 	incr int64,

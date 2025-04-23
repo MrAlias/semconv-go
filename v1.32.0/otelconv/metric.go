@@ -110,6 +110,14 @@ func (SDKExporterLogExported) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// For successful exports, `error.type` MUST NOT be set. For failed exports,
+// `error.type` must contain the failure cause.
+// For exporters with partial success semantics (e.g. OTLP with
+// `rejected_log_records`), rejected log records must count as failed and only
+// non-rejected log records count as success.
+// If no rejection reason is available, `rejected` SHOULD be used as value for
+// `error.type`.
 func (m SDKExporterLogExported) Add(
 	ctx context.Context,
 	incr int64,
@@ -197,6 +205,9 @@ func (SDKExporterLogInflight) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// For successful exports, `error.type` MUST NOT be set. For failed exports,
+// `error.type` must contain the failure cause.
 func (m SDKExporterLogInflight) Add(
 	ctx context.Context,
 	incr int64,
@@ -278,6 +289,14 @@ func (SDKExporterSpanExportedCount) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// For successful exports, `error.type` MUST NOT be set. For failed exports,
+// `error.type` must contain the failure cause.
+// For exporters with partial success semantics (e.g. OTLP with `rejected_spans`
+// ), rejected spans must count as failed and only non-rejected spans count as
+// success.
+// If no rejection reason is available, `rejected` SHOULD be used as value for
+// `error.type`.
 func (m SDKExporterSpanExportedCount) Add(
 	ctx context.Context,
 	incr int64,
@@ -367,6 +386,9 @@ func (SDKExporterSpanInflightCount) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// For successful exports, `error.type` MUST NOT be set. For failed exports,
+// `error.type` must contain the failure cause.
 func (m SDKExporterSpanInflightCount) Add(
 	ctx context.Context,
 	incr int64,
@@ -490,6 +512,12 @@ func (SDKProcessorLogProcessed) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// For successful processing, `error.type` MUST NOT be set. For failed
+// processing, `error.type` must contain the failure cause.
+// For the SDK Simple and Batching Log Record Processor a log record is
+// considered to be processed already when it has been submitted to the exporter,
+// not when the corresponding export call has finished.
 func (m SDKProcessorLogProcessed) Add(
 	ctx context.Context,
 	incr int64,
@@ -566,6 +594,9 @@ func (SDKProcessorLogQueueCapacity) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// Only applies to Log Record processors which use a queue, e.g. the SDK Batching
+// Log Record Processor.
 func (m SDKProcessorLogQueueCapacity) Add(
 	ctx context.Context,
 	incr int64,
@@ -633,6 +664,9 @@ func (SDKProcessorLogQueueSize) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// Only applies to log record processors which use a queue, e.g. the SDK Batching
+// Log Record Processor.
 func (m SDKProcessorLogQueueSize) Add(
 	ctx context.Context,
 	incr int64,
@@ -701,6 +735,12 @@ func (SDKProcessorSpanProcessedCount) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// For successful processing, `error.type` MUST NOT be set. For failed
+// processing, `error.type` must contain the failure cause.
+// For the SDK Simple and Batching Span Processor a span is considered to be
+// processed already when it has been submitted to the exporter, not when the
+// corresponding export call has finished.
 func (m SDKProcessorSpanProcessedCount) Add(
 	ctx context.Context,
 	incr int64,
@@ -777,6 +817,9 @@ func (SDKProcessorSpanQueueCapacity) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// Only applies to span processors which use a queue, e.g. the SDK Batching Span
+// Processor.
 func (m SDKProcessorSpanQueueCapacity) Add(
 	ctx context.Context,
 	incr int64,
@@ -845,6 +888,9 @@ func (SDKProcessorSpanQueueSize) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// Only applies to span processors which use a queue, e.g. the SDK Batching Span
+// Processor.
 func (m SDKProcessorSpanQueueSize) Add(
 	ctx context.Context,
 	incr int64,
@@ -911,6 +957,11 @@ func (SDKSpanEndedCount) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// For spans with `recording=true`: Implementations MUST record both
+// `otel.sdk.span.live.count` and `otel.sdk.span.ended.count`.
+// For spans with `recording=false`: If implementations decide to record this
+// metric, they MUST also record `otel.sdk.span.live.count`.
 func (m SDKSpanEndedCount) Add(
 	ctx context.Context,
 	incr int64,
@@ -970,6 +1021,11 @@ func (SDKSpanLiveCount) Description() string {
 // Add adds incr to the existing count.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// For spans with `recording=true`: Implementations MUST record both
+// `otel.sdk.span.live.count` and `otel.sdk.span.ended.count`.
+// For spans with `recording=false`: If implementations decide to record this
+// metric, they MUST also record `otel.sdk.span.ended.count`.
 func (m SDKSpanLiveCount) Add(
 	ctx context.Context,
 	incr int64,

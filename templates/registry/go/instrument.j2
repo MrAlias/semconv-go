@@ -109,6 +109,10 @@ Int64
 
 // Add adds incr to the existing count.
 {{ params_docs(metric.attributes, pkg=pkg) }}
+{%- if metric.note is defined %}
+//
+{{ metric.note | comment }}
+{%- endif %}
 func (m {{ name }}) Add(
 	ctx context.Context,
 	incr {{ value_type(metric) | lower }},

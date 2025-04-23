@@ -117,6 +117,13 @@ func (ClientConsumedMessages) Description() string {
 // instrumentation.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// Records the number of messages pulled from the broker or number of messages
+// dispatched to the application in push-based scenarios.
+// The metric SHOULD be reported once per message delivery. For example, if
+// receiving and processing operations are both instrumented for a single message
+// delivery, this counter is incremented when the message is received and not
+// reported when it is processed.
 func (m ClientConsumedMessages) Add(
 	ctx context.Context,
 	incr int64,
@@ -363,6 +370,9 @@ func (ClientSentMessages) Description() string {
 // instrumentation.
 //
 // All additional attrs passed are included in the recorded value.
+//
+// This metric MUST NOT count messages that were created but haven't yet been
+// sent.
 func (m ClientSentMessages) Add(
 	ctx context.Context,
 	incr int64,
