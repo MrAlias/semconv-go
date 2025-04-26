@@ -46,6 +46,15 @@ text_maps:
     double[]: "...float64"
     boolean: bool
     boolean[]: "...bool"
+  instrument:
+    go.memory.used: Int64ObservableCounter
+    go.memory.limit: Int64ObservableUpDownCounter
+    go.memory.allocated: Int64ObservableCounter
+    go.memory.allocations: Int64ObservableCounter
+    go.memory.gc.goal: Int64ObservableUpDownCounter
+    go.goroutine.count: Int64ObservableUpDownCounter
+    go.processor.limit: Int64ObservableUpDownCounter
+    go.config.gogc: Int64ObservableUpDownCounter
 acronyms:
   - ACL
   - AI
