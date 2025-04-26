@@ -151,24 +151,24 @@ func (ContextSwitches) AttrContextSwitchType(val ContextSwitchTypeAttr) attribut
 // "process.cpu.time" semantic conventions. It represents the total CPU seconds
 // broken down by different states.
 type CPUTime struct {
-	inst metric.Float64Counter
+	inst metric.Float64ObservableCounter
 }
 
 // NewCPUTime returns a new CPUTime instrument.
 func NewCPUTime(m metric.Meter) (CPUTime, error) {
-	i, err := m.Float64Counter(
+	i, err := m.Float64ObservableCounter(
 	    "process.cpu.time",
 	    metric.WithDescription("Total CPU seconds broken down by different states."),
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return CPUTime{inst: noop.Float64Counter{}}, err
+	    return CPUTime{inst: noop.Float64ObservableCounter{}}, err
 	}
 	return CPUTime{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
-func (m CPUTime) Inst() metric.Float64Counter {
+func (m CPUTime) Inst() metric.Float64ObservableCounter {
 	return m.inst
 }
 
@@ -185,23 +185,6 @@ func (CPUTime) Unit() string {
 // Description returns the semantic convention description of the instrument
 func (CPUTime) Description() string {
 	return "Total CPU seconds broken down by different states."
-}
-
-// Add adds incr to the existing count.
-//
-// All additional attrs passed are included in the recorded value.
-func (m CPUTime) Add(
-	ctx context.Context,
-	incr float64,
-	attrs ...attribute.KeyValue,
-) {
-	m.inst.Add(
-		ctx,
-		incr,
-		metric.WithAttributes(
-			attrs...,
-		),
-	)
 }
 
 // AttrCPUMode returns an optional attribute for the "cpu.mode" semantic

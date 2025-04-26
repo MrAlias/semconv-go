@@ -1216,24 +1216,24 @@ func (m MemoryShared) Add(ctx context.Context, incr int64, attrs ...attribute.Ke
 // "system.memory.usage" semantic conventions. It represents the reports memory
 // in use by state.
 type MemoryUsage struct {
-	inst metric.Int64UpDownCounter
+	inst metric.Int64ObservableGauge
 }
 
 // NewMemoryUsage returns a new MemoryUsage instrument.
 func NewMemoryUsage(m metric.Meter) (MemoryUsage, error) {
-	i, err := m.Int64UpDownCounter(
+	i, err := m.Int64ObservableGauge(
 	    "system.memory.usage",
 	    metric.WithDescription("Reports memory in use by state."),
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return MemoryUsage{inst: noop.Int64UpDownCounter{}}, err
+	    return MemoryUsage{inst: noop.Int64ObservableGauge{}}, err
 	}
 	return MemoryUsage{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
-func (m MemoryUsage) Inst() metric.Int64UpDownCounter {
+func (m MemoryUsage) Inst() metric.Int64ObservableGauge {
 	return m.inst
 }
 
@@ -1252,26 +1252,6 @@ func (MemoryUsage) Description() string {
 	return "Reports memory in use by state."
 }
 
-// Add adds incr to the existing count.
-//
-// All additional attrs passed are included in the recorded value.
-//
-// The sum over all `system.memory.state` values SHOULD equal the total memory
-// available on the system, that is `system.memory.limit`.
-func (m MemoryUsage) Add(
-	ctx context.Context,
-	incr int64,
-	attrs ...attribute.KeyValue,
-) {
-	m.inst.Add(
-		ctx,
-		incr,
-		metric.WithAttributes(
-			attrs...,
-		),
-	)
-}
-
 // AttrMemoryState returns an optional attribute for the "system.memory.state"
 // semantic convention. It represents the memory state.
 func (MemoryUsage) AttrMemoryState(val MemoryStateAttr) attribute.KeyValue {
@@ -1281,24 +1261,24 @@ func (MemoryUsage) AttrMemoryState(val MemoryStateAttr) attribute.KeyValue {
 // MemoryUtilization is an instrument used to record metric values conforming to
 // the "system.memory.utilization" semantic conventions.
 type MemoryUtilization struct {
-	inst metric.Int64Gauge
+	inst metric.Float64ObservableGauge
 }
 
 // NewMemoryUtilization returns a new MemoryUtilization instrument.
 func NewMemoryUtilization(m metric.Meter) (MemoryUtilization, error) {
-	i, err := m.Int64Gauge(
+	i, err := m.Float64ObservableGauge(
 	    "system.memory.utilization",
 	    metric.WithDescription(""),
 	    metric.WithUnit("1"),
 	)
 	if err != nil {
-	    return MemoryUtilization{inst: noop.Int64Gauge{}}, err
+	    return MemoryUtilization{inst: noop.Float64ObservableGauge{}}, err
 	}
 	return MemoryUtilization{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
-func (m MemoryUtilization) Inst() metric.Int64Gauge {
+func (m MemoryUtilization) Inst() metric.Float64ObservableGauge {
 	return m.inst
 }
 
@@ -1310,23 +1290,6 @@ func (MemoryUtilization) Name() string {
 // Unit returns the semantic convention unit of the instrument
 func (MemoryUtilization) Unit() string {
 	return "1"
-}
-
-// Record records val to the current distribution.
-//
-// All additional attrs passed are included in the recorded value.
-func (m MemoryUtilization) Record(
-	ctx context.Context,
-	val int64,
-	attrs ...attribute.KeyValue,
-) {
-	m.inst.Record(
-		ctx,
-		val,
-		metric.WithAttributes(
-			attrs...,
-		),
-	)
 }
 
 // AttrMemoryState returns an optional attribute for the "system.memory.state"
@@ -1577,24 +1540,24 @@ func (NetworkErrors) AttrNetworkIODirection(val NetworkIODirectionAttr) attribut
 // NetworkIO is an instrument used to record metric values conforming to the
 // "system.network.io" semantic conventions.
 type NetworkIO struct {
-	inst metric.Int64Counter
+	inst metric.Int64ObservableCounter
 }
 
 // NewNetworkIO returns a new NetworkIO instrument.
 func NewNetworkIO(m metric.Meter) (NetworkIO, error) {
-	i, err := m.Int64Counter(
+	i, err := m.Int64ObservableCounter(
 	    "system.network.io",
 	    metric.WithDescription(""),
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return NetworkIO{inst: noop.Int64Counter{}}, err
+	    return NetworkIO{inst: noop.Int64ObservableCounter{}}, err
 	}
 	return NetworkIO{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
-func (m NetworkIO) Inst() metric.Int64Counter {
+func (m NetworkIO) Inst() metric.Int64ObservableCounter {
 	return m.inst
 }
 
@@ -1606,23 +1569,6 @@ func (NetworkIO) Name() string {
 // Unit returns the semantic convention unit of the instrument
 func (NetworkIO) Unit() string {
 	return "By"
-}
-
-// Add adds incr to the existing count.
-//
-// All additional attrs passed are included in the recorded value.
-func (m NetworkIO) Add(
-	ctx context.Context,
-	incr int64,
-	attrs ...attribute.KeyValue,
-) {
-	m.inst.Add(
-		ctx,
-		incr,
-		metric.WithAttributes(
-			attrs...,
-		),
-	)
 }
 
 // AttrNetworkInterfaceName returns an optional attribute for the
