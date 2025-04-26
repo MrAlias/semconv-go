@@ -1,30 +1,33 @@
 {% import 'helpers.j2' as h -%}
 
-{%- macro instrument_kind(instrument) -%}
-{%- if instrument == "counter" -%}
-Counter
-{%- elif instrument == "updowncounter" -%}
-UpDownCounter
-{%- elif instrument == "gauge" -%}
-Gauge
-{%- elif instrument == "histogram" -%}
-Histogram
-{%- else -%}
-unknown
+{%- macro instrument_default(metric) -%}
+{%- set ns = namespace(value="Int64", inst="unknown") -%}
+{%- set divisible = ["s", "ms"] -%}
+{%- if metric.unit is in divisible -%}
+{%- set ns.value="Float64" -%}
 {%- endif -%}
+{%- if metric.instrument == "counter" -%}
+{%- set ns.inst="Counter" -%}
+{%- elif metric.instrument == "updowncounter" -%}
+{%- set ns.inst="UpDownCounter" -%}
+{%- elif metric.instrument == "gauge" -%}
+{%- set ns.inst="Gauge" -%}
+{%- elif metric.instrument == "histogram" -%}
+{%- set ns.inst="Histogram" -%}
+{%- endif -%}
+{{ ns.value ~ ns.inst }}
+{%- endmacro -%}
+
+{%- macro instrument(metric) -%}
+{{ metric.metric_name | map_text("instrument", instrument_default(metric)) }}
 {%- endmacro -%}
 
 {%- macro value_type(metric) -%}
-{%- set divisible = ["s", "ms"] -%}
-{%- if metric.unit is in divisible -%}
+{%- if instrument(metric)[:7] == "Float64" -%}
 Float64
 {%- else -%}
 Int64
 {%- endif -%}
-{%- endmacro -%}
-
-{%- macro instrument(metric) -%}
-{{ value_type(metric) ~ instrument_kind(metric.instrument) }}
 {%- endmacro -%}
 
 {%- macro param_name(raw="", pkg="") -%}
