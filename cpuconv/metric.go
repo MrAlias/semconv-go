@@ -100,24 +100,24 @@ func (Frequency) AttrLogicalNumber(val int) attribute.KeyValue {
 // "cpu.time" semantic conventions. It represents the seconds each logical CPU
 // spent on each mode.
 type Time struct {
-	inst metric.Float64Counter
+	inst metric.Float64ObservableCounter
 }
 
 // NewTime returns a new Time instrument.
 func NewTime(m metric.Meter) (Time, error) {
-	i, err := m.Float64Counter(
+	i, err := m.Float64ObservableCounter(
 	    "cpu.time",
 	    metric.WithDescription("Seconds each logical CPU spent on each mode"),
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return Time{inst: noop.Float64Counter{}}, err
+	    return Time{inst: noop.Float64ObservableCounter{}}, err
 	}
 	return Time{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
-func (m Time) Inst() metric.Float64Counter {
+func (m Time) Inst() metric.Float64ObservableCounter {
 	return m.inst
 }
 
@@ -134,23 +134,6 @@ func (Time) Unit() string {
 // Description returns the semantic convention description of the instrument
 func (Time) Description() string {
 	return "Seconds each logical CPU spent on each mode"
-}
-
-// Add adds incr to the existing count.
-//
-// All additional attrs passed are included in the recorded value.
-func (m Time) Add(
-	ctx context.Context,
-	incr float64,
-	attrs ...attribute.KeyValue,
-) {
-	m.inst.Add(
-		ctx,
-		incr,
-		metric.WithAttributes(
-			attrs...,
-		),
-	)
 }
 
 // AttrLogicalNumber returns an optional attribute for the "cpu.logical_number"
