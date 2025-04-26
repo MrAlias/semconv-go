@@ -32,27 +32,28 @@ var (
 
 {%- for metric in ctx.metrics if not metric.deprecated %}
 {%- set metric_name = h.to_go_name(metric.metric_name, ctx.root_namespace) %}
+{%- set metric_inst = metric.metric_name | map_text("instrument", i.instrument_default(metric)) %}
 
 {{ h.metric_typedoc(metric, ctx.root_namespace) | comment | trim }}
 type {{ metric_name }} struct {
-	inst metric.{{ i.instrument(metric) }}
+	inst metric.{{ metric_inst }}
 }
 
 {{ ["New" ~ metric_name ~ " returns a new " ~ metric_name ~ " instrument."] | comment }}
 func New{{ metric_name }}(m metric.Meter) ({{ metric_name }}, error) {
-	i, err := m.{{ i.instrument(metric) }}(
+	i, err := m.{{ metric_inst }}(
 	    "{{metric.metric_name}}",
 	    metric.WithDescription("{{metric.brief | trim}}"),
 	    metric.WithUnit("{{metric.unit}}"),
 	)
 	if err != nil {
-	    return {{metric_name}}{inst: noop.{{ i.instrument(metric) }}{}}, err
+	    return {{metric_name}}{inst: noop.{{ metric_inst }}{}}, err
 	}
 	return {{ metric_name }}{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
-func (m {{ metric_name }}) Inst() metric.{{ i.instrument(metric) }} {
+func (m {{ metric_name }}) Inst() metric.{{ metric_inst }} {
 	return m.inst
 }
 
@@ -72,7 +73,8 @@ func ({{ metric_name }}) Description() string {
 	return "{{ metric.brief | trim }}"
 }
 {%- endif %}
-{%- if metric.instrument == "counter" or metric.instrument == "updowncounter" %}
+{%- if "Observable" is in metric_inst %}
+{%- elif metric.instrument == "counter" or metric.instrument == "updowncounter" %}
 
 {{ i.add_method(metric, ctx.root_namespace) }}
 {%- elif metric.instrument == "histogram" or metric.instrument == "gauge" %}
