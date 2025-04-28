@@ -36,11 +36,7 @@ var (
 
 {{ h.metric_typedoc(metric, ctx.root_namespace) | comment | trim }}
 type {{ metric_name }} struct {
-{%- if "Observable" is in metric_inst %}
 	metric.{{ metric_inst }}
-{%- else %}
-	inst metric.{{ metric_inst }}
-{%- endif %}
 }
 
 {{ ["New" ~ metric_name ~ " returns a new " ~ metric_name ~ " instrument."] | comment }}
@@ -58,11 +54,7 @@ func New{{ metric_name }}(m metric.Meter) ({{ metric_name }}, error) {
 
 // Inst returns the underlying metric instrument.
 func (m {{ metric_name }}) Inst() metric.{{ metric_inst }} {
-{%- if "Observable" is in metric_inst %}
 	return m.{{ metric_inst }}
-{%- else %}
-	return m.inst
-{%- endif %}
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -84,10 +76,10 @@ func ({{ metric_name }}) Description() string {
 {%- if "Observable" is in metric_inst %}
 {%- elif metric.instrument == "counter" or metric.instrument == "updowncounter" %}
 
-{{ i.add_method(metric, ctx.root_namespace) }}
+{{ i.add_method(metric, metric_inst, ctx.root_namespace) }}
 {%- elif metric.instrument == "histogram" or metric.instrument == "gauge" %}
 
-{{ i.record_method(metric, ctx.root_namespace) }}
+{{ i.record_method(metric, metric_inst, ctx.root_namespace) }}
 {%- endif %}
 {%- for attr in metric.attributes | not_required | attribute_sort %}
 {%- set name = h.to_go_name(attr.name, ctx.root_namespace) %}

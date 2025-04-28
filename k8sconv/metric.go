@@ -42,7 +42,7 @@ var (
 // the "k8s.cronjob.active_jobs" semantic conventions. It represents the number
 // of actively running jobs for a cronjob.
 type CronJobActiveJobs struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewCronJobActiveJobs returns a new CronJobActiveJobs instrument.
@@ -60,7 +60,7 @@ func NewCronJobActiveJobs(m metric.Meter) (CronJobActiveJobs, error) {
 
 // Inst returns the underlying metric instrument.
 func (m CronJobActiveJobs) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -90,9 +90,9 @@ func (CronJobActiveJobs) Description() string {
 // [`k8s.cronjob`]: ../resource/k8s.md#cronjob
 func (m CronJobActiveJobs) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -101,7 +101,7 @@ func (m CronJobActiveJobs) Add(ctx context.Context, incr int64, attrs ...attribu
 // conventions. It represents the number of nodes that are running at least 1
 // daemon pod and are supposed to run the daemon pod.
 type DaemonSetCurrentScheduledNodes struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewDaemonSetCurrentScheduledNodes returns a new DaemonSetCurrentScheduledNodes
@@ -120,7 +120,7 @@ func NewDaemonSetCurrentScheduledNodes(m metric.Meter) (DaemonSetCurrentSchedule
 
 // Inst returns the underlying metric instrument.
 func (m DaemonSetCurrentScheduledNodes) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -150,9 +150,9 @@ func (DaemonSetCurrentScheduledNodes) Description() string {
 // [`k8s.daemonset`]: ../resource/k8s.md#daemonset
 func (m DaemonSetCurrentScheduledNodes) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -161,7 +161,7 @@ func (m DaemonSetCurrentScheduledNodes) Add(ctx context.Context, incr int64, att
 // conventions. It represents the number of nodes that should be running the
 // daemon pod (including nodes currently running the daemon pod).
 type DaemonSetDesiredScheduledNodes struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewDaemonSetDesiredScheduledNodes returns a new DaemonSetDesiredScheduledNodes
@@ -180,7 +180,7 @@ func NewDaemonSetDesiredScheduledNodes(m metric.Meter) (DaemonSetDesiredSchedule
 
 // Inst returns the underlying metric instrument.
 func (m DaemonSetDesiredScheduledNodes) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -210,9 +210,9 @@ func (DaemonSetDesiredScheduledNodes) Description() string {
 // [`k8s.daemonset`]: ../resource/k8s.md#daemonset
 func (m DaemonSetDesiredScheduledNodes) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -221,7 +221,7 @@ func (m DaemonSetDesiredScheduledNodes) Add(ctx context.Context, incr int64, att
 // represents the number of nodes that are running the daemon pod, but are not
 // supposed to run the daemon pod.
 type DaemonSetMisscheduledNodes struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewDaemonSetMisscheduledNodes returns a new DaemonSetMisscheduledNodes
@@ -240,7 +240,7 @@ func NewDaemonSetMisscheduledNodes(m metric.Meter) (DaemonSetMisscheduledNodes, 
 
 // Inst returns the underlying metric instrument.
 func (m DaemonSetMisscheduledNodes) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -270,9 +270,9 @@ func (DaemonSetMisscheduledNodes) Description() string {
 // [`k8s.daemonset`]: ../resource/k8s.md#daemonset
 func (m DaemonSetMisscheduledNodes) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -281,7 +281,7 @@ func (m DaemonSetMisscheduledNodes) Add(ctx context.Context, incr int64, attrs .
 // number of nodes that should be running the daemon pod and have one or more of
 // the daemon pod running and ready.
 type DaemonSetReadyNodes struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewDaemonSetReadyNodes returns a new DaemonSetReadyNodes instrument.
@@ -299,7 +299,7 @@ func NewDaemonSetReadyNodes(m metric.Meter) (DaemonSetReadyNodes, error) {
 
 // Inst returns the underlying metric instrument.
 func (m DaemonSetReadyNodes) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -329,9 +329,9 @@ func (DaemonSetReadyNodes) Description() string {
 // [`k8s.daemonset`]: ../resource/k8s.md#daemonset
 func (m DaemonSetReadyNodes) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -340,7 +340,7 @@ func (m DaemonSetReadyNodes) Add(ctx context.Context, incr int64, attrs ...attri
 // represents the total number of available replica pods (ready for at least
 // minReadySeconds) targeted by this deployment.
 type DeploymentAvailablePods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewDeploymentAvailablePods returns a new DeploymentAvailablePods instrument.
@@ -358,7 +358,7 @@ func NewDeploymentAvailablePods(m metric.Meter) (DeploymentAvailablePods, error)
 
 // Inst returns the underlying metric instrument.
 func (m DeploymentAvailablePods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -388,9 +388,9 @@ func (DeploymentAvailablePods) Description() string {
 // [`k8s.deployment`]: ../resource/k8s.md#deployment
 func (m DeploymentAvailablePods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -398,7 +398,7 @@ func (m DeploymentAvailablePods) Add(ctx context.Context, incr int64, attrs ...a
 // to the "k8s.deployment.desired_pods" semantic conventions. It represents the
 // number of desired replica pods in this deployment.
 type DeploymentDesiredPods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewDeploymentDesiredPods returns a new DeploymentDesiredPods instrument.
@@ -416,7 +416,7 @@ func NewDeploymentDesiredPods(m metric.Meter) (DeploymentDesiredPods, error) {
 
 // Inst returns the underlying metric instrument.
 func (m DeploymentDesiredPods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -446,9 +446,9 @@ func (DeploymentDesiredPods) Description() string {
 // [`k8s.deployment`]: ../resource/k8s.md#deployment
 func (m DeploymentDesiredPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -457,7 +457,7 @@ func (m DeploymentDesiredPods) Add(ctx context.Context, incr int64, attrs ...att
 // of replica pods managed by this horizontal pod autoscaler, as last seen by the
 // autoscaler.
 type HpaCurrentPods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewHpaCurrentPods returns a new HpaCurrentPods instrument.
@@ -475,7 +475,7 @@ func NewHpaCurrentPods(m metric.Meter) (HpaCurrentPods, error) {
 
 // Inst returns the underlying metric instrument.
 func (m HpaCurrentPods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -505,9 +505,9 @@ func (HpaCurrentPods) Description() string {
 // [`k8s.hpa`]: ../resource/k8s.md#horizontalpodautoscaler
 func (m HpaCurrentPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -516,7 +516,7 @@ func (m HpaCurrentPods) Add(ctx context.Context, incr int64, attrs ...attribute.
 // of replica pods managed by this horizontal pod autoscaler, as last calculated
 // by the autoscaler.
 type HpaDesiredPods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewHpaDesiredPods returns a new HpaDesiredPods instrument.
@@ -534,7 +534,7 @@ func NewHpaDesiredPods(m metric.Meter) (HpaDesiredPods, error) {
 
 // Inst returns the underlying metric instrument.
 func (m HpaDesiredPods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -564,9 +564,9 @@ func (HpaDesiredPods) Description() string {
 // [`k8s.hpa`]: ../resource/k8s.md#horizontalpodautoscaler
 func (m HpaDesiredPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -574,7 +574,7 @@ func (m HpaDesiredPods) Add(ctx context.Context, incr int64, attrs ...attribute.
 // "k8s.hpa.max_pods" semantic conventions. It represents the upper limit for the
 // number of replica pods to which the autoscaler can scale up.
 type HpaMaxPods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewHpaMaxPods returns a new HpaMaxPods instrument.
@@ -592,7 +592,7 @@ func NewHpaMaxPods(m metric.Meter) (HpaMaxPods, error) {
 
 // Inst returns the underlying metric instrument.
 func (m HpaMaxPods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -622,9 +622,9 @@ func (HpaMaxPods) Description() string {
 // [`k8s.hpa`]: ../resource/k8s.md#horizontalpodautoscaler
 func (m HpaMaxPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -632,7 +632,7 @@ func (m HpaMaxPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyV
 // "k8s.hpa.min_pods" semantic conventions. It represents the lower limit for the
 // number of replica pods to which the autoscaler can scale down.
 type HpaMinPods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewHpaMinPods returns a new HpaMinPods instrument.
@@ -650,7 +650,7 @@ func NewHpaMinPods(m metric.Meter) (HpaMinPods, error) {
 
 // Inst returns the underlying metric instrument.
 func (m HpaMinPods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -680,9 +680,9 @@ func (HpaMinPods) Description() string {
 // [`k8s.hpa`]: ../resource/k8s.md#horizontalpodautoscaler
 func (m HpaMinPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -690,7 +690,7 @@ func (m HpaMinPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyV
 // "k8s.job.active_pods" semantic conventions. It represents the number of
 // pending and actively running pods for a job.
 type JobActivePods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewJobActivePods returns a new JobActivePods instrument.
@@ -708,7 +708,7 @@ func NewJobActivePods(m metric.Meter) (JobActivePods, error) {
 
 // Inst returns the underlying metric instrument.
 func (m JobActivePods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -738,9 +738,9 @@ func (JobActivePods) Description() string {
 // [`k8s.job`]: ../resource/k8s.md#job
 func (m JobActivePods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -749,7 +749,7 @@ func (m JobActivePods) Add(ctx context.Context, incr int64, attrs ...attribute.K
 // represents the desired number of successfully finished pods the job should be
 // run with.
 type JobDesiredSuccessfulPods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewJobDesiredSuccessfulPods returns a new JobDesiredSuccessfulPods instrument.
@@ -767,7 +767,7 @@ func NewJobDesiredSuccessfulPods(m metric.Meter) (JobDesiredSuccessfulPods, erro
 
 // Inst returns the underlying metric instrument.
 func (m JobDesiredSuccessfulPods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -797,9 +797,9 @@ func (JobDesiredSuccessfulPods) Description() string {
 // [`k8s.job`]: ../resource/k8s.md#job
 func (m JobDesiredSuccessfulPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -807,7 +807,7 @@ func (m JobDesiredSuccessfulPods) Add(ctx context.Context, incr int64, attrs ...
 // "k8s.job.failed_pods" semantic conventions. It represents the number of pods
 // which reached phase Failed for a job.
 type JobFailedPods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewJobFailedPods returns a new JobFailedPods instrument.
@@ -825,7 +825,7 @@ func NewJobFailedPods(m metric.Meter) (JobFailedPods, error) {
 
 // Inst returns the underlying metric instrument.
 func (m JobFailedPods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -855,9 +855,9 @@ func (JobFailedPods) Description() string {
 // [`k8s.job`]: ../resource/k8s.md#job
 func (m JobFailedPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -865,7 +865,7 @@ func (m JobFailedPods) Add(ctx context.Context, incr int64, attrs ...attribute.K
 // the "k8s.job.max_parallel_pods" semantic conventions. It represents the max
 // desired number of pods the job should run at any given time.
 type JobMaxParallelPods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewJobMaxParallelPods returns a new JobMaxParallelPods instrument.
@@ -883,7 +883,7 @@ func NewJobMaxParallelPods(m metric.Meter) (JobMaxParallelPods, error) {
 
 // Inst returns the underlying metric instrument.
 func (m JobMaxParallelPods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -913,9 +913,9 @@ func (JobMaxParallelPods) Description() string {
 // [`k8s.job`]: ../resource/k8s.md#job
 func (m JobMaxParallelPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -923,7 +923,7 @@ func (m JobMaxParallelPods) Add(ctx context.Context, incr int64, attrs ...attrib
 // the "k8s.job.successful_pods" semantic conventions. It represents the number
 // of pods which reached phase Succeeded for a job.
 type JobSuccessfulPods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewJobSuccessfulPods returns a new JobSuccessfulPods instrument.
@@ -941,7 +941,7 @@ func NewJobSuccessfulPods(m metric.Meter) (JobSuccessfulPods, error) {
 
 // Inst returns the underlying metric instrument.
 func (m JobSuccessfulPods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -971,9 +971,9 @@ func (JobSuccessfulPods) Description() string {
 // [`k8s.job`]: ../resource/k8s.md#job
 func (m JobSuccessfulPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -981,7 +981,7 @@ func (m JobSuccessfulPods) Add(ctx context.Context, incr int64, attrs ...attribu
 // "k8s.namespace.phase" semantic conventions. It represents the describes number
 // of K8s namespaces that are currently in a given phase.
 type NamespacePhase struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewNamespacePhase returns a new NamespacePhase instrument.
@@ -999,7 +999,7 @@ func NewNamespacePhase(m metric.Meter) (NamespacePhase, error) {
 
 // Inst returns the underlying metric instrument.
 func (m NamespacePhase) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1031,7 +1031,7 @@ func (m NamespacePhase) Add(
 	namespacePhase NamespacePhaseAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -1047,7 +1047,7 @@ func (m NamespacePhase) Add(
 // "k8s.node.cpu.time" semantic conventions. It represents the total CPU time
 // consumed.
 type NodeCPUTime struct {
-	inst metric.Float64Counter
+	metric.Float64Counter
 }
 
 // NewNodeCPUTime returns a new NodeCPUTime instrument.
@@ -1065,7 +1065,7 @@ func NewNodeCPUTime(m metric.Meter) (NodeCPUTime, error) {
 
 // Inst returns the underlying metric instrument.
 func (m NodeCPUTime) Inst() metric.Float64Counter {
-	return m.inst
+	return m.Float64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1088,9 +1088,9 @@ func (NodeCPUTime) Description() string {
 // Total CPU time consumed by the specific Node on all available CPU cores
 func (m NodeCPUTime) Add(ctx context.Context, incr float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Float64Counter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Float64Counter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -1098,7 +1098,7 @@ func (m NodeCPUTime) Add(ctx context.Context, incr float64, attrs ...attribute.K
 // "k8s.node.cpu.usage" semantic conventions. It represents the node's CPU usage,
 // measured in cpus. Range from 0 to the number of allocatable CPUs.
 type NodeCPUUsage struct {
-	inst metric.Int64Gauge
+	metric.Int64Gauge
 }
 
 // NewNodeCPUUsage returns a new NodeCPUUsage instrument.
@@ -1116,7 +1116,7 @@ func NewNodeCPUUsage(m metric.Meter) (NodeCPUUsage, error) {
 
 // Inst returns the underlying metric instrument.
 func (m NodeCPUUsage) Inst() metric.Int64Gauge {
-	return m.inst
+	return m.Int64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1140,9 +1140,9 @@ func (NodeCPUUsage) Description() string {
 // sample window
 func (m NodeCPUUsage) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Int64Gauge.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Int64Gauge.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -1150,7 +1150,7 @@ func (m NodeCPUUsage) Record(ctx context.Context, val int64, attrs ...attribute.
 // the "k8s.node.memory.usage" semantic conventions. It represents the memory
 // usage of the Node.
 type NodeMemoryUsage struct {
-	inst metric.Int64Gauge
+	metric.Int64Gauge
 }
 
 // NewNodeMemoryUsage returns a new NodeMemoryUsage instrument.
@@ -1168,7 +1168,7 @@ func NewNodeMemoryUsage(m metric.Meter) (NodeMemoryUsage, error) {
 
 // Inst returns the underlying metric instrument.
 func (m NodeMemoryUsage) Inst() metric.Int64Gauge {
-	return m.inst
+	return m.Int64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1191,9 +1191,9 @@ func (NodeMemoryUsage) Description() string {
 // Total memory usage of the Node
 func (m NodeMemoryUsage) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Int64Gauge.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Int64Gauge.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -1201,7 +1201,7 @@ func (m NodeMemoryUsage) Record(ctx context.Context, val int64, attrs ...attribu
 // the "k8s.node.network.errors" semantic conventions. It represents the node
 // network errors.
 type NodeNetworkErrors struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewNodeNetworkErrors returns a new NodeNetworkErrors instrument.
@@ -1219,7 +1219,7 @@ func NewNodeNetworkErrors(m metric.Meter) (NodeNetworkErrors, error) {
 
 // Inst returns the underlying metric instrument.
 func (m NodeNetworkErrors) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1245,7 +1245,7 @@ func (m NodeNetworkErrors) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -1272,7 +1272,7 @@ func (NodeNetworkErrors) AttrNetworkIODirection(val NetworkIODirectionAttr) attr
 // "k8s.node.network.io" semantic conventions. It represents the network bytes
 // for the Node.
 type NodeNetworkIO struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewNodeNetworkIO returns a new NodeNetworkIO instrument.
@@ -1290,7 +1290,7 @@ func NewNodeNetworkIO(m metric.Meter) (NodeNetworkIO, error) {
 
 // Inst returns the underlying metric instrument.
 func (m NodeNetworkIO) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1316,7 +1316,7 @@ func (m NodeNetworkIO) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -1343,7 +1343,7 @@ func (NodeNetworkIO) AttrNetworkIODirection(val NetworkIODirectionAttr) attribut
 // "k8s.node.uptime" semantic conventions. It represents the time the Node has
 // been running.
 type NodeUptime struct {
-	inst metric.Float64Gauge
+	metric.Float64Gauge
 }
 
 // NewNodeUptime returns a new NodeUptime instrument.
@@ -1361,7 +1361,7 @@ func NewNodeUptime(m metric.Meter) (NodeUptime, error) {
 
 // Inst returns the underlying metric instrument.
 func (m NodeUptime) Inst() metric.Float64Gauge {
-	return m.inst
+	return m.Float64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1386,9 +1386,9 @@ func (NodeUptime) Description() string {
 // The actual accuracy would depend on the instrumentation and operating system.
 func (m NodeUptime) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Float64Gauge.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Float64Gauge.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -1396,7 +1396,7 @@ func (m NodeUptime) Record(ctx context.Context, val float64, attrs ...attribute.
 // "k8s.pod.cpu.time" semantic conventions. It represents the total CPU time
 // consumed.
 type PodCPUTime struct {
-	inst metric.Float64Counter
+	metric.Float64Counter
 }
 
 // NewPodCPUTime returns a new PodCPUTime instrument.
@@ -1414,7 +1414,7 @@ func NewPodCPUTime(m metric.Meter) (PodCPUTime, error) {
 
 // Inst returns the underlying metric instrument.
 func (m PodCPUTime) Inst() metric.Float64Counter {
-	return m.inst
+	return m.Float64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1437,9 +1437,9 @@ func (PodCPUTime) Description() string {
 // Total CPU time consumed by the specific Pod on all available CPU cores
 func (m PodCPUTime) Add(ctx context.Context, incr float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Float64Counter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Float64Counter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -1447,7 +1447,7 @@ func (m PodCPUTime) Add(ctx context.Context, incr float64, attrs ...attribute.Ke
 // "k8s.pod.cpu.usage" semantic conventions. It represents the pod's CPU usage,
 // measured in cpus. Range from 0 to the number of allocatable CPUs.
 type PodCPUUsage struct {
-	inst metric.Int64Gauge
+	metric.Int64Gauge
 }
 
 // NewPodCPUUsage returns a new PodCPUUsage instrument.
@@ -1465,7 +1465,7 @@ func NewPodCPUUsage(m metric.Meter) (PodCPUUsage, error) {
 
 // Inst returns the underlying metric instrument.
 func (m PodCPUUsage) Inst() metric.Int64Gauge {
-	return m.inst
+	return m.Int64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1489,9 +1489,9 @@ func (PodCPUUsage) Description() string {
 // sample window
 func (m PodCPUUsage) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Int64Gauge.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Int64Gauge.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -1499,7 +1499,7 @@ func (m PodCPUUsage) Record(ctx context.Context, val int64, attrs ...attribute.K
 // "k8s.pod.memory.usage" semantic conventions. It represents the memory usage of
 // the Pod.
 type PodMemoryUsage struct {
-	inst metric.Int64Gauge
+	metric.Int64Gauge
 }
 
 // NewPodMemoryUsage returns a new PodMemoryUsage instrument.
@@ -1517,7 +1517,7 @@ func NewPodMemoryUsage(m metric.Meter) (PodMemoryUsage, error) {
 
 // Inst returns the underlying metric instrument.
 func (m PodMemoryUsage) Inst() metric.Int64Gauge {
-	return m.inst
+	return m.Int64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1540,9 +1540,9 @@ func (PodMemoryUsage) Description() string {
 // Total memory usage of the Pod
 func (m PodMemoryUsage) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Int64Gauge.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Int64Gauge.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -1550,7 +1550,7 @@ func (m PodMemoryUsage) Record(ctx context.Context, val int64, attrs ...attribut
 // the "k8s.pod.network.errors" semantic conventions. It represents the pod
 // network errors.
 type PodNetworkErrors struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewPodNetworkErrors returns a new PodNetworkErrors instrument.
@@ -1568,7 +1568,7 @@ func NewPodNetworkErrors(m metric.Meter) (PodNetworkErrors, error) {
 
 // Inst returns the underlying metric instrument.
 func (m PodNetworkErrors) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1594,7 +1594,7 @@ func (m PodNetworkErrors) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -1621,7 +1621,7 @@ func (PodNetworkErrors) AttrNetworkIODirection(val NetworkIODirectionAttr) attri
 // "k8s.pod.network.io" semantic conventions. It represents the network bytes for
 // the Pod.
 type PodNetworkIO struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewPodNetworkIO returns a new PodNetworkIO instrument.
@@ -1639,7 +1639,7 @@ func NewPodNetworkIO(m metric.Meter) (PodNetworkIO, error) {
 
 // Inst returns the underlying metric instrument.
 func (m PodNetworkIO) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1665,7 +1665,7 @@ func (m PodNetworkIO) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -1692,7 +1692,7 @@ func (PodNetworkIO) AttrNetworkIODirection(val NetworkIODirectionAttr) attribute
 // "k8s.pod.uptime" semantic conventions. It represents the time the Pod has been
 // running.
 type PodUptime struct {
-	inst metric.Float64Gauge
+	metric.Float64Gauge
 }
 
 // NewPodUptime returns a new PodUptime instrument.
@@ -1710,7 +1710,7 @@ func NewPodUptime(m metric.Meter) (PodUptime, error) {
 
 // Inst returns the underlying metric instrument.
 func (m PodUptime) Inst() metric.Float64Gauge {
-	return m.inst
+	return m.Float64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1735,9 +1735,9 @@ func (PodUptime) Description() string {
 // The actual accuracy would depend on the instrumentation and operating system.
 func (m PodUptime) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Float64Gauge.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Float64Gauge.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -1746,7 +1746,7 @@ func (m PodUptime) Record(ctx context.Context, val float64, attrs ...attribute.K
 // represents the total number of available replica pods (ready for at least
 // minReadySeconds) targeted by this replicaset.
 type ReplicaSetAvailablePods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewReplicaSetAvailablePods returns a new ReplicaSetAvailablePods instrument.
@@ -1764,7 +1764,7 @@ func NewReplicaSetAvailablePods(m metric.Meter) (ReplicaSetAvailablePods, error)
 
 // Inst returns the underlying metric instrument.
 func (m ReplicaSetAvailablePods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1794,9 +1794,9 @@ func (ReplicaSetAvailablePods) Description() string {
 // [`k8s.replicaset`]: ../resource/k8s.md#replicaset
 func (m ReplicaSetAvailablePods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -1804,7 +1804,7 @@ func (m ReplicaSetAvailablePods) Add(ctx context.Context, incr int64, attrs ...a
 // to the "k8s.replicaset.desired_pods" semantic conventions. It represents the
 // number of desired replica pods in this replicaset.
 type ReplicaSetDesiredPods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewReplicaSetDesiredPods returns a new ReplicaSetDesiredPods instrument.
@@ -1822,7 +1822,7 @@ func NewReplicaSetDesiredPods(m metric.Meter) (ReplicaSetDesiredPods, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ReplicaSetDesiredPods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1852,9 +1852,9 @@ func (ReplicaSetDesiredPods) Description() string {
 // [`k8s.replicaset`]: ../resource/k8s.md#replicaset
 func (m ReplicaSetDesiredPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -1863,7 +1863,7 @@ func (m ReplicaSetDesiredPods) Add(ctx context.Context, incr int64, attrs ...att
 // conventions. It represents the total number of available replica pods (ready
 // for at least minReadySeconds) targeted by this replication controller.
 type ReplicationControllerAvailablePods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewReplicationControllerAvailablePods returns a new
@@ -1882,7 +1882,7 @@ func NewReplicationControllerAvailablePods(m metric.Meter) (ReplicationControlle
 
 // Inst returns the underlying metric instrument.
 func (m ReplicationControllerAvailablePods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1912,9 +1912,9 @@ func (ReplicationControllerAvailablePods) Description() string {
 // [`k8s.replicationcontroller`]: ../resource/k8s.md#replicationcontroller
 func (m ReplicationControllerAvailablePods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -1923,7 +1923,7 @@ func (m ReplicationControllerAvailablePods) Add(ctx context.Context, incr int64,
 // conventions. It represents the number of desired replica pods in this
 // replication controller.
 type ReplicationControllerDesiredPods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewReplicationControllerDesiredPods returns a new
@@ -1942,7 +1942,7 @@ func NewReplicationControllerDesiredPods(m metric.Meter) (ReplicationControllerD
 
 // Inst returns the underlying metric instrument.
 func (m ReplicationControllerDesiredPods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1972,9 +1972,9 @@ func (ReplicationControllerDesiredPods) Description() string {
 // [`k8s.replicationcontroller`]: ../resource/k8s.md#replicationcontroller
 func (m ReplicationControllerDesiredPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -1983,7 +1983,7 @@ func (m ReplicationControllerDesiredPods) Add(ctx context.Context, incr int64, a
 // represents the number of replica pods created by the statefulset controller
 // from the statefulset version indicated by currentRevision.
 type StatefulSetCurrentPods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewStatefulSetCurrentPods returns a new StatefulSetCurrentPods instrument.
@@ -2001,7 +2001,7 @@ func NewStatefulSetCurrentPods(m metric.Meter) (StatefulSetCurrentPods, error) {
 
 // Inst returns the underlying metric instrument.
 func (m StatefulSetCurrentPods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -2031,9 +2031,9 @@ func (StatefulSetCurrentPods) Description() string {
 // [`k8s.statefulset`]: ../resource/k8s.md#statefulset
 func (m StatefulSetCurrentPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -2041,7 +2041,7 @@ func (m StatefulSetCurrentPods) Add(ctx context.Context, incr int64, attrs ...at
 // conforming to the "k8s.statefulset.desired_pods" semantic conventions. It
 // represents the number of desired replica pods in this statefulset.
 type StatefulSetDesiredPods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewStatefulSetDesiredPods returns a new StatefulSetDesiredPods instrument.
@@ -2059,7 +2059,7 @@ func NewStatefulSetDesiredPods(m metric.Meter) (StatefulSetDesiredPods, error) {
 
 // Inst returns the underlying metric instrument.
 func (m StatefulSetDesiredPods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -2089,9 +2089,9 @@ func (StatefulSetDesiredPods) Description() string {
 // [`k8s.statefulset`]: ../resource/k8s.md#statefulset
 func (m StatefulSetDesiredPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -2099,7 +2099,7 @@ func (m StatefulSetDesiredPods) Add(ctx context.Context, incr int64, attrs ...at
 // to the "k8s.statefulset.ready_pods" semantic conventions. It represents the
 // number of replica pods created for this statefulset with a Ready Condition.
 type StatefulSetReadyPods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewStatefulSetReadyPods returns a new StatefulSetReadyPods instrument.
@@ -2117,7 +2117,7 @@ func NewStatefulSetReadyPods(m metric.Meter) (StatefulSetReadyPods, error) {
 
 // Inst returns the underlying metric instrument.
 func (m StatefulSetReadyPods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -2147,9 +2147,9 @@ func (StatefulSetReadyPods) Description() string {
 // [`k8s.statefulset`]: ../resource/k8s.md#statefulset
 func (m StatefulSetReadyPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -2158,7 +2158,7 @@ func (m StatefulSetReadyPods) Add(ctx context.Context, incr int64, attrs ...attr
 // represents the number of replica pods created by the statefulset controller
 // from the statefulset version indicated by updateRevision.
 type StatefulSetUpdatedPods struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewStatefulSetUpdatedPods returns a new StatefulSetUpdatedPods instrument.
@@ -2176,7 +2176,7 @@ func NewStatefulSetUpdatedPods(m metric.Meter) (StatefulSetUpdatedPods, error) {
 
 // Inst returns the underlying metric instrument.
 func (m StatefulSetUpdatedPods) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -2206,8 +2206,8 @@ func (StatefulSetUpdatedPods) Description() string {
 // [`k8s.statefulset`]: ../resource/k8s.md#statefulset
 func (m StatefulSetUpdatedPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }

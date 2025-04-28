@@ -98,7 +98,7 @@ var (
 // conforming to the "gen_ai.client.operation.duration" semantic conventions. It
 // represents the genAI operation duration.
 type ClientOperationDuration struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewClientOperationDuration returns a new ClientOperationDuration instrument.
@@ -116,7 +116,7 @@ func NewClientOperationDuration(m metric.Meter) (ClientOperationDuration, error)
 
 // Inst returns the underlying metric instrument.
 func (m ClientOperationDuration) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -149,7 +149,7 @@ func (m ClientOperationDuration) Record(
 	system SystemAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -199,7 +199,7 @@ func (ClientOperationDuration) AttrServerAddress(val string) attribute.KeyValue 
 // the "gen_ai.client.token.usage" semantic conventions. It represents the
 // measures number of input and output tokens used.
 type ClientTokenUsage struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewClientTokenUsage returns a new ClientTokenUsage instrument.
@@ -217,7 +217,7 @@ func NewClientTokenUsage(m metric.Meter) (ClientTokenUsage, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ClientTokenUsage) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -253,7 +253,7 @@ func (m ClientTokenUsage) Record(
 	tokenType TokenTypeAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -298,7 +298,7 @@ func (ClientTokenUsage) AttrServerAddress(val string) attribute.KeyValue {
 // the generative AI server request duration such as time-to-last byte or last
 // output token.
 type ServerRequestDuration struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewServerRequestDuration returns a new ServerRequestDuration instrument.
@@ -316,7 +316,7 @@ func NewServerRequestDuration(m metric.Meter) (ServerRequestDuration, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ServerRequestDuration) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -349,7 +349,7 @@ func (m ServerRequestDuration) Record(
 	system SystemAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -400,7 +400,7 @@ func (ServerRequestDuration) AttrServerAddress(val string) attribute.KeyValue {
 // It represents the time per output token generated after the first token for
 // successful responses.
 type ServerTimePerOutputToken struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewServerTimePerOutputToken returns a new ServerTimePerOutputToken instrument.
@@ -418,7 +418,7 @@ func NewServerTimePerOutputToken(m metric.Meter) (ServerTimePerOutputToken, erro
 
 // Inst returns the underlying metric instrument.
 func (m ServerTimePerOutputToken) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -451,7 +451,7 @@ func (m ServerTimePerOutputToken) Record(
 	system SystemAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -494,7 +494,7 @@ func (ServerTimePerOutputToken) AttrServerAddress(val string) attribute.KeyValue
 // conforming to the "gen_ai.server.time_to_first_token" semantic conventions. It
 // represents the time to generate first token for successful responses.
 type ServerTimeToFirstToken struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewServerTimeToFirstToken returns a new ServerTimeToFirstToken instrument.
@@ -512,7 +512,7 @@ func NewServerTimeToFirstToken(m metric.Meter) (ServerTimeToFirstToken, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ServerTimeToFirstToken) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -545,7 +545,7 @@ func (m ServerTimeToFirstToken) Record(
 	system SystemAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(

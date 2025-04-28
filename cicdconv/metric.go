@@ -83,7 +83,7 @@ var (
 // the "cicd.pipeline.run.active" semantic conventions. It represents the number
 // of pipeline runs currently active in the system by state.
 type PipelineRunActive struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewPipelineRunActive returns a new PipelineRunActive instrument.
@@ -101,7 +101,7 @@ func NewPipelineRunActive(m metric.Meter) (PipelineRunActive, error) {
 
 // Inst returns the underlying metric instrument.
 func (m PipelineRunActive) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -133,7 +133,7 @@ func (m PipelineRunActive) Add(
 	pipelineRunState PipelineRunStateAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -150,7 +150,7 @@ func (m PipelineRunActive) Add(
 // to the "cicd.pipeline.run.duration" semantic conventions. It represents the
 // duration of a pipeline run grouped by pipeline, state and result.
 type PipelineRunDuration struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewPipelineRunDuration returns a new PipelineRunDuration instrument.
@@ -168,7 +168,7 @@ func NewPipelineRunDuration(m metric.Meter) (PipelineRunDuration, error) {
 
 // Inst returns the underlying metric instrument.
 func (m PipelineRunDuration) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -202,7 +202,7 @@ func (m PipelineRunDuration) Record(
 	pipelineRunState PipelineRunStateAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -233,7 +233,7 @@ func (PipelineRunDuration) AttrErrorType(val ErrorTypeAttr) attribute.KeyValue {
 // the "cicd.pipeline.run.errors" semantic conventions. It represents the number
 // of errors encountered in pipeline runs (eg. compile, test failures).
 type PipelineRunErrors struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewPipelineRunErrors returns a new PipelineRunErrors instrument.
@@ -251,7 +251,7 @@ func NewPipelineRunErrors(m metric.Meter) (PipelineRunErrors, error) {
 
 // Inst returns the underlying metric instrument.
 func (m PipelineRunErrors) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -287,7 +287,7 @@ func (m PipelineRunErrors) Add(
 	errorType ErrorTypeAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -304,7 +304,7 @@ func (m PipelineRunErrors) Add(
 // "cicd.system.errors" semantic conventions. It represents the number of errors
 // in a component of the CICD system (eg. controller, scheduler, agent).
 type SystemErrors struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewSystemErrors returns a new SystemErrors instrument.
@@ -322,7 +322,7 @@ func NewSystemErrors(m metric.Meter) (SystemErrors, error) {
 
 // Inst returns the underlying metric instrument.
 func (m SystemErrors) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -355,7 +355,7 @@ func (m SystemErrors) Add(
 	errorType ErrorTypeAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -372,7 +372,7 @@ func (m SystemErrors) Add(
 // "cicd.worker.count" semantic conventions. It represents the number of workers
 // on the CICD system by state.
 type WorkerCount struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewWorkerCount returns a new WorkerCount instrument.
@@ -390,7 +390,7 @@ func NewWorkerCount(m metric.Meter) (WorkerCount, error) {
 
 // Inst returns the underlying metric instrument.
 func (m WorkerCount) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -417,7 +417,7 @@ func (m WorkerCount) Add(
 	workerState WorkerStateAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(

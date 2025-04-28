@@ -72,7 +72,7 @@ var (
 // "hw.energy" semantic conventions. It represents the energy consumed by the
 // component.
 type Energy struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewEnergy returns a new Energy instrument.
@@ -90,7 +90,7 @@ func NewEnergy(m metric.Meter) (Energy, error) {
 
 // Inst returns the underlying metric instrument.
 func (m Energy) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -123,7 +123,7 @@ func (m Energy) Add(
 	hwType TypeAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -153,7 +153,7 @@ func (Energy) AttrParent(val string) attribute.KeyValue {
 // "hw.errors" semantic conventions. It represents the number of errors
 // encountered by the component.
 type Errors struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewErrors returns a new Errors instrument.
@@ -171,7 +171,7 @@ func NewErrors(m metric.Meter) (Errors, error) {
 
 // Inst returns the underlying metric instrument.
 func (m Errors) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -204,7 +204,7 @@ func (m Errors) Add(
 	hwType TypeAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -240,7 +240,7 @@ func (Errors) AttrParent(val string) attribute.KeyValue {
 // conforming to the "hw.host.ambient_temperature" semantic conventions. It
 // represents the ambient (external) temperature of the physical host.
 type HostAmbientTemperature struct {
-	inst metric.Int64Gauge
+	metric.Int64Gauge
 }
 
 // NewHostAmbientTemperature returns a new HostAmbientTemperature instrument.
@@ -258,7 +258,7 @@ func NewHostAmbientTemperature(m metric.Meter) (HostAmbientTemperature, error) {
 
 // Inst returns the underlying metric instrument.
 func (m HostAmbientTemperature) Inst() metric.Int64Gauge {
-	return m.inst
+	return m.Int64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -288,7 +288,7 @@ func (m HostAmbientTemperature) Record(
 	id string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Gauge.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -317,7 +317,7 @@ func (HostAmbientTemperature) AttrParent(val string) attribute.KeyValue {
 // "hw.host.energy" semantic conventions. It represents the total energy consumed
 // by the entire physical host, in joules.
 type HostEnergy struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewHostEnergy returns a new HostEnergy instrument.
@@ -335,7 +335,7 @@ func NewHostEnergy(m metric.Meter) (HostEnergy, error) {
 
 // Inst returns the underlying metric instrument.
 func (m HostEnergy) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -370,7 +370,7 @@ func (m HostEnergy) Add(
 	id string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -400,7 +400,7 @@ func (HostEnergy) AttrParent(val string) attribute.KeyValue {
 // many degrees Celsius the temperature of the physical host can be increased,
 // before reaching a warning threshold on one of the internal sensors.
 type HostHeatingMargin struct {
-	inst metric.Int64Gauge
+	metric.Int64Gauge
 }
 
 // NewHostHeatingMargin returns a new HostHeatingMargin instrument.
@@ -418,7 +418,7 @@ func NewHostHeatingMargin(m metric.Meter) (HostHeatingMargin, error) {
 
 // Inst returns the underlying metric instrument.
 func (m HostHeatingMargin) Inst() metric.Int64Gauge {
-	return m.inst
+	return m.Int64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -448,7 +448,7 @@ func (m HostHeatingMargin) Record(
 	id string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Gauge.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -477,7 +477,7 @@ func (HostHeatingMargin) AttrParent(val string) attribute.KeyValue {
 // "hw.host.power" semantic conventions. It represents the instantaneous power
 // consumed by the entire physical host in Watts (`hw.host.energy` is preferred).
 type HostPower struct {
-	inst metric.Int64Gauge
+	metric.Int64Gauge
 }
 
 // NewHostPower returns a new HostPower instrument.
@@ -495,7 +495,7 @@ func NewHostPower(m metric.Meter) (HostPower, error) {
 
 // Inst returns the underlying metric instrument.
 func (m HostPower) Inst() metric.Int64Gauge {
-	return m.inst
+	return m.Int64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -530,7 +530,7 @@ func (m HostPower) Record(
 	id string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Gauge.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -559,7 +559,7 @@ func (HostPower) AttrParent(val string) attribute.KeyValue {
 // "hw.power" semantic conventions. It represents the instantaneous power
 // consumed by the component.
 type Power struct {
-	inst metric.Int64Gauge
+	metric.Int64Gauge
 }
 
 // NewPower returns a new Power instrument.
@@ -577,7 +577,7 @@ func NewPower(m metric.Meter) (Power, error) {
 
 // Inst returns the underlying metric instrument.
 func (m Power) Inst() metric.Int64Gauge {
-	return m.inst
+	return m.Int64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -612,7 +612,7 @@ func (m Power) Record(
 	hwType TypeAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Gauge.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -642,7 +642,7 @@ func (Power) AttrParent(val string) attribute.KeyValue {
 // "hw.status" semantic conventions. It represents the operational status: `1`
 // (true) or `0` (false) for each of the possible states.
 type Status struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewStatus returns a new Status instrument.
@@ -660,7 +660,7 @@ func NewStatus(m metric.Meter) (Status, error) {
 
 // Inst returns the underlying metric instrument.
 func (m Status) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -704,7 +704,7 @@ func (m Status) Add(
 	hwType TypeAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(

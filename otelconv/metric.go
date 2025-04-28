@@ -77,7 +77,7 @@ var (
 // represents the number of log records for which the export has finished, either
 // successful or failed.
 type SDKExporterLogExported struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewSDKExporterLogExported returns a new SDKExporterLogExported instrument.
@@ -95,7 +95,7 @@ func NewSDKExporterLogExported(m metric.Meter) (SDKExporterLogExported, error) {
 
 // Inst returns the underlying metric instrument.
 func (m SDKExporterLogExported) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -129,7 +129,7 @@ func (m SDKExporterLogExported) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -177,7 +177,7 @@ func (SDKExporterLogExported) AttrServerPort(val int) attribute.KeyValue {
 // represents the number of log records which were passed to the exporter, but
 // that have not been exported yet (neither successful, nor failed).
 type SDKExporterLogInflight struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewSDKExporterLogInflight returns a new SDKExporterLogInflight instrument.
@@ -195,7 +195,7 @@ func NewSDKExporterLogInflight(m metric.Meter) (SDKExporterLogInflight, error) {
 
 // Inst returns the underlying metric instrument.
 func (m SDKExporterLogInflight) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -224,7 +224,7 @@ func (m SDKExporterLogInflight) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -265,7 +265,7 @@ func (SDKExporterLogInflight) AttrServerPort(val int) attribute.KeyValue {
 // conventions. It represents the number of spans for which the export has
 // finished, either successful or failed.
 type SDKExporterSpanExportedCount struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewSDKExporterSpanExportedCount returns a new SDKExporterSpanExportedCount
@@ -284,7 +284,7 @@ func NewSDKExporterSpanExportedCount(m metric.Meter) (SDKExporterSpanExportedCou
 
 // Inst returns the underlying metric instrument.
 func (m SDKExporterSpanExportedCount) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -318,7 +318,7 @@ func (m SDKExporterSpanExportedCount) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -367,7 +367,7 @@ func (SDKExporterSpanExportedCount) AttrServerPort(val int) attribute.KeyValue {
 // exporter, but that have not been exported yet (neither successful, nor
 // failed).
 type SDKExporterSpanInflightCount struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewSDKExporterSpanInflightCount returns a new SDKExporterSpanInflightCount
@@ -386,7 +386,7 @@ func NewSDKExporterSpanInflightCount(m metric.Meter) (SDKExporterSpanInflightCou
 
 // Inst returns the underlying metric instrument.
 func (m SDKExporterSpanInflightCount) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -415,7 +415,7 @@ func (m SDKExporterSpanInflightCount) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -455,7 +455,7 @@ func (SDKExporterSpanInflightCount) AttrServerPort(val int) attribute.KeyValue {
 // "otel.sdk.log.created" semantic conventions. It represents the number of logs
 // submitted to enabled SDK Loggers.
 type SDKLogCreated struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewSDKLogCreated returns a new SDKLogCreated instrument.
@@ -473,7 +473,7 @@ func NewSDKLogCreated(m metric.Meter) (SDKLogCreated, error) {
 
 // Inst returns the underlying metric instrument.
 func (m SDKLogCreated) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -494,9 +494,9 @@ func (SDKLogCreated) Description() string {
 // Add adds incr to the existing count.
 func (m SDKLogCreated) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64Counter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64Counter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -505,7 +505,7 @@ func (m SDKLogCreated) Add(ctx context.Context, incr int64, attrs ...attribute.K
 // represents the number of log records for which the processing has finished,
 // either successful or failed.
 type SDKProcessorLogProcessed struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewSDKProcessorLogProcessed returns a new SDKProcessorLogProcessed instrument.
@@ -523,7 +523,7 @@ func NewSDKProcessorLogProcessed(m metric.Meter) (SDKProcessorLogProcessed, erro
 
 // Inst returns the underlying metric instrument.
 func (m SDKProcessorLogProcessed) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -555,7 +555,7 @@ func (m SDKProcessorLogProcessed) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -591,7 +591,7 @@ func (SDKProcessorLogProcessed) AttrComponentType(val ComponentTypeAttr) attribu
 // conventions. It represents the maximum number of log records the queue of a
 // given instance of an SDK Log Record processor can hold.
 type SDKProcessorLogQueueCapacity struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewSDKProcessorLogQueueCapacity returns a new SDKProcessorLogQueueCapacity
@@ -610,7 +610,7 @@ func NewSDKProcessorLogQueueCapacity(m metric.Meter) (SDKProcessorLogQueueCapaci
 
 // Inst returns the underlying metric instrument.
 func (m SDKProcessorLogQueueCapacity) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -639,7 +639,7 @@ func (m SDKProcessorLogQueueCapacity) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -667,7 +667,7 @@ func (SDKProcessorLogQueueCapacity) AttrComponentType(val ComponentTypeAttr) att
 // represents the number of log records in the queue of a given instance of an
 // SDK log processor.
 type SDKProcessorLogQueueSize struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewSDKProcessorLogQueueSize returns a new SDKProcessorLogQueueSize instrument.
@@ -685,7 +685,7 @@ func NewSDKProcessorLogQueueSize(m metric.Meter) (SDKProcessorLogQueueSize, erro
 
 // Inst returns the underlying metric instrument.
 func (m SDKProcessorLogQueueSize) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -714,7 +714,7 @@ func (m SDKProcessorLogQueueSize) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -742,7 +742,7 @@ func (SDKProcessorLogQueueSize) AttrComponentType(val ComponentTypeAttr) attribu
 // conventions. It represents the number of spans for which the processing has
 // finished, either successful or failed.
 type SDKProcessorSpanProcessedCount struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewSDKProcessorSpanProcessedCount returns a new SDKProcessorSpanProcessedCount
@@ -761,7 +761,7 @@ func NewSDKProcessorSpanProcessedCount(m metric.Meter) (SDKProcessorSpanProcesse
 
 // Inst returns the underlying metric instrument.
 func (m SDKProcessorSpanProcessedCount) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -793,7 +793,7 @@ func (m SDKProcessorSpanProcessedCount) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -829,7 +829,7 @@ func (SDKProcessorSpanProcessedCount) AttrComponentType(val ComponentTypeAttr) a
 // conventions. It represents the maximum number of spans the queue of a given
 // instance of an SDK span processor can hold.
 type SDKProcessorSpanQueueCapacity struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewSDKProcessorSpanQueueCapacity returns a new SDKProcessorSpanQueueCapacity
@@ -848,7 +848,7 @@ func NewSDKProcessorSpanQueueCapacity(m metric.Meter) (SDKProcessorSpanQueueCapa
 
 // Inst returns the underlying metric instrument.
 func (m SDKProcessorSpanQueueCapacity) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -877,7 +877,7 @@ func (m SDKProcessorSpanQueueCapacity) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -905,7 +905,7 @@ func (SDKProcessorSpanQueueCapacity) AttrComponentType(val ComponentTypeAttr) at
 // It represents the number of spans in the queue of a given instance of an SDK
 // span processor.
 type SDKProcessorSpanQueueSize struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewSDKProcessorSpanQueueSize returns a new SDKProcessorSpanQueueSize
@@ -924,7 +924,7 @@ func NewSDKProcessorSpanQueueSize(m metric.Meter) (SDKProcessorSpanQueueSize, er
 
 // Inst returns the underlying metric instrument.
 func (m SDKProcessorSpanQueueSize) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -953,7 +953,7 @@ func (m SDKProcessorSpanQueueSize) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -980,7 +980,7 @@ func (SDKProcessorSpanQueueSize) AttrComponentType(val ComponentTypeAttr) attrib
 // the "otel.sdk.span.ended.count" semantic conventions. It represents the number
 // of created spans for which the end operation was called.
 type SDKSpanEndedCount struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewSDKSpanEndedCount returns a new SDKSpanEndedCount instrument.
@@ -998,7 +998,7 @@ func NewSDKSpanEndedCount(m metric.Meter) (SDKSpanEndedCount, error) {
 
 // Inst returns the underlying metric instrument.
 func (m SDKSpanEndedCount) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1029,7 +1029,7 @@ func (m SDKSpanEndedCount) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -1049,7 +1049,7 @@ func (SDKSpanEndedCount) AttrSpanSamplingResult(val SpanSamplingResultAttr) attr
 // the "otel.sdk.span.live.count" semantic conventions. It represents the number
 // of created spans for which the end operation has not been called yet.
 type SDKSpanLiveCount struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewSDKSpanLiveCount returns a new SDKSpanLiveCount instrument.
@@ -1067,7 +1067,7 @@ func NewSDKSpanLiveCount(m metric.Meter) (SDKSpanLiveCount, error) {
 
 // Inst returns the underlying metric instrument.
 func (m SDKSpanLiveCount) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1098,7 +1098,7 @@ func (m SDKSpanLiveCount) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(

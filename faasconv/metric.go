@@ -34,7 +34,7 @@ var (
 // "faas.coldstarts" semantic conventions. It represents the number of invocation
 // cold starts.
 type Coldstarts struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewColdstarts returns a new Coldstarts instrument.
@@ -52,7 +52,7 @@ func NewColdstarts(m metric.Meter) (Coldstarts, error) {
 
 // Inst returns the underlying metric instrument.
 func (m Coldstarts) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -78,7 +78,7 @@ func (m Coldstarts) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -98,7 +98,7 @@ func (Coldstarts) AttrTrigger(val TriggerAttr) attribute.KeyValue {
 // "faas.cpu_usage" semantic conventions. It represents the distribution of CPU
 // usage per invocation.
 type CPUUsage struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewCPUUsage returns a new CPUUsage instrument.
@@ -116,7 +116,7 @@ func NewCPUUsage(m metric.Meter) (CPUUsage, error) {
 
 // Inst returns the underlying metric instrument.
 func (m CPUUsage) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -142,7 +142,7 @@ func (m CPUUsage) Record(
 	val float64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -162,7 +162,7 @@ func (CPUUsage) AttrTrigger(val TriggerAttr) attribute.KeyValue {
 // "faas.errors" semantic conventions. It represents the number of invocation
 // errors.
 type Errors struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewErrors returns a new Errors instrument.
@@ -180,7 +180,7 @@ func NewErrors(m metric.Meter) (Errors, error) {
 
 // Inst returns the underlying metric instrument.
 func (m Errors) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -206,7 +206,7 @@ func (m Errors) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -226,7 +226,7 @@ func (Errors) AttrTrigger(val TriggerAttr) attribute.KeyValue {
 // "faas.init_duration" semantic conventions. It represents the measures the
 // duration of the function's initialization, such as a cold start.
 type InitDuration struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewInitDuration returns a new InitDuration instrument.
@@ -244,7 +244,7 @@ func NewInitDuration(m metric.Meter) (InitDuration, error) {
 
 // Inst returns the underlying metric instrument.
 func (m InitDuration) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -270,7 +270,7 @@ func (m InitDuration) Record(
 	val float64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -290,7 +290,7 @@ func (InitDuration) AttrTrigger(val TriggerAttr) attribute.KeyValue {
 // "faas.invocations" semantic conventions. It represents the number of
 // successful invocations.
 type Invocations struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewInvocations returns a new Invocations instrument.
@@ -308,7 +308,7 @@ func NewInvocations(m metric.Meter) (Invocations, error) {
 
 // Inst returns the underlying metric instrument.
 func (m Invocations) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -334,7 +334,7 @@ func (m Invocations) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -354,7 +354,7 @@ func (Invocations) AttrTrigger(val TriggerAttr) attribute.KeyValue {
 // "faas.invoke_duration" semantic conventions. It represents the measures the
 // duration of the function's logic execution.
 type InvokeDuration struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewInvokeDuration returns a new InvokeDuration instrument.
@@ -372,7 +372,7 @@ func NewInvokeDuration(m metric.Meter) (InvokeDuration, error) {
 
 // Inst returns the underlying metric instrument.
 func (m InvokeDuration) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -398,7 +398,7 @@ func (m InvokeDuration) Record(
 	val float64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -418,7 +418,7 @@ func (InvokeDuration) AttrTrigger(val TriggerAttr) attribute.KeyValue {
 // "faas.mem_usage" semantic conventions. It represents the distribution of max
 // memory usage per invocation.
 type MemUsage struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewMemUsage returns a new MemUsage instrument.
@@ -436,7 +436,7 @@ func NewMemUsage(m metric.Meter) (MemUsage, error) {
 
 // Inst returns the underlying metric instrument.
 func (m MemUsage) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -462,7 +462,7 @@ func (m MemUsage) Record(
 	val int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -482,7 +482,7 @@ func (MemUsage) AttrTrigger(val TriggerAttr) attribute.KeyValue {
 // "faas.net_io" semantic conventions. It represents the distribution of net I/O
 // usage per invocation.
 type NetIO struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewNetIO returns a new NetIO instrument.
@@ -500,7 +500,7 @@ func NewNetIO(m metric.Meter) (NetIO, error) {
 
 // Inst returns the underlying metric instrument.
 func (m NetIO) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -526,7 +526,7 @@ func (m NetIO) Record(
 	val int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -546,7 +546,7 @@ func (NetIO) AttrTrigger(val TriggerAttr) attribute.KeyValue {
 // "faas.timeouts" semantic conventions. It represents the number of invocation
 // timeouts.
 type Timeouts struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewTimeouts returns a new Timeouts instrument.
@@ -564,7 +564,7 @@ func NewTimeouts(m metric.Meter) (Timeouts, error) {
 
 // Inst returns the underlying metric instrument.
 func (m Timeouts) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -590,7 +590,7 @@ func (m Timeouts) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(

@@ -37,7 +37,7 @@ var (
 // "cpu.frequency" semantic conventions. It represents the operating frequency of
 // the logical CPU in Hertz.
 type Frequency struct {
-	inst metric.Int64Gauge
+	metric.Int64Gauge
 }
 
 // NewFrequency returns a new Frequency instrument.
@@ -55,7 +55,7 @@ func NewFrequency(m metric.Meter) (Frequency, error) {
 
 // Inst returns the underlying metric instrument.
 func (m Frequency) Inst() metric.Int64Gauge {
-	return m.inst
+	return m.Int64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -81,7 +81,7 @@ func (m Frequency) Record(
 	val int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Gauge.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -153,7 +153,7 @@ func (Time) AttrMode(val ModeAttr) attribute.KeyValue {
 // CPU, the utilization is calculated as the change in cumulative CPU time
 // (cpu.time) over a measurement interval, divided by the elapsed time.
 type Utilization struct {
-	inst metric.Int64Gauge
+	metric.Int64Gauge
 }
 
 // NewUtilization returns a new Utilization instrument.
@@ -171,7 +171,7 @@ func NewUtilization(m metric.Meter) (Utilization, error) {
 
 // Inst returns the underlying metric instrument.
 func (m Utilization) Inst() metric.Int64Gauge {
-	return m.inst
+	return m.Int64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -197,7 +197,7 @@ func (m Utilization) Record(
 	val int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Gauge.Record(
 		ctx,
 		val,
 		metric.WithAttributes(

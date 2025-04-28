@@ -107,7 +107,7 @@ Int64
 {%- endif -%}
 {%- endmacro -%}
 
-{%- macro add_method_with_optional(metric, pkg="") -%}
+{%- macro add_method_with_optional(metric, inst, pkg="") -%}
 {%- set name = h.to_go_name(metric.metric_name, pkg) -%}
 {%- set req_attr = metric.attributes | required | attribute_sort -%}
 func (m {{ name }}) Add(
@@ -115,7 +115,7 @@ func (m {{ name }}) Add(
 	incr {{ value_type(metric) | lower }},
 {{ params(metric.attributes, pkg=pkg, prefix="\t") }}
 ) {
-	m.inst.Add(
+	m.{{ inst }}.Add(
 		ctx,
 		incr,
 {{ with_attributes_opt(metric.attributes, pkg=pkg, prefix="\t\t") }}
@@ -123,7 +123,7 @@ func (m {{ name }}) Add(
 }
 {%- endmacro -%}
 
-{%- macro add_method(metric, pkg="") -%}
+{%- macro add_method(metric, inst, pkg="") -%}
 
 // Add adds incr to the existing count.
 {%- if metric.attributes | length > 0 %}
@@ -132,7 +132,7 @@ func (m {{ name }}) Add(
 //
 {{ metric.note | comment }}
 {%- endif %}
-{{ add_method_with_optional(metric, pkg) }}
+{{ add_method_with_optional(metric, inst, pkg) }}
 {%- else %}
 {%- if metric.note is defined %}
 //
@@ -140,15 +140,15 @@ func (m {{ name }}) Add(
 {%- endif %}
 func (m {{ h.to_go_name(metric.metric_name, pkg) }}) Add(ctx context.Context, incr {{ value_type(metric) | lower }}, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.{{ inst }}.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.{{ inst }}.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 {%- endif -%}
 {%- endmacro -%}
 
-{%- macro record_method_with_optional(metric, pkg="") -%}
+{%- macro record_method_with_optional(metric, inst, pkg="") -%}
 {%- set name = h.to_go_name(metric.metric_name, pkg) -%}
 {%- set req_attr = metric.attributes | required | attribute_sort -%}
 func (m {{ name }}) Record(
@@ -156,7 +156,7 @@ func (m {{ name }}) Record(
 	val {{ value_type(metric) | lower }},
 {{ params(metric.attributes, pkg=pkg, prefix="\t") }}
 ) {
-	m.inst.Record(
+	m.{{ inst }}.Record(
 		ctx,
 		val,
 {{ with_attributes_opt(metric.attributes, pkg=pkg, prefix="\t\t") }}
@@ -164,7 +164,7 @@ func (m {{ name }}) Record(
 }
 {%- endmacro -%}
 
-{%- macro record_method(metric, pkg="") -%}
+{%- macro record_method(metric, inst, pkg="") -%}
 
 // Record records val to the current distribution.
 {%- if metric.attributes | length > 0 %}
@@ -173,7 +173,7 @@ func (m {{ name }}) Record(
 //
 {{ metric.note | comment }}
 {%- endif %}
-{{ record_method_with_optional(metric, pkg) }}
+{{ record_method_with_optional(metric, inst, pkg) }}
 {%- else %}
 {%- set name = h.to_go_name(metric.metric_name, pkg) -%}
 {%- if metric.note is defined %}
@@ -182,9 +182,9 @@ func (m {{ name }}) Record(
 {%- endif %}
 func (m {{ name }}) Record(ctx context.Context, val {{ value_type(metric) | lower }}, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.{{ inst }}.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.{{ inst }}.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }
 {%- endif -%}

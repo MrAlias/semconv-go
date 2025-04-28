@@ -238,7 +238,7 @@ var (
 // number of connections that are currently in state described by the `state`
 // attribute.
 type ClientConnectionCount struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewClientConnectionCount returns a new ClientConnectionCount instrument.
@@ -256,7 +256,7 @@ func NewClientConnectionCount(m metric.Meter) (ClientConnectionCount, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ClientConnectionCount) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -292,7 +292,7 @@ func (m ClientConnectionCount) Add(
 	clientConnectionState ClientConnectionStateAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -309,7 +309,7 @@ func (m ClientConnectionCount) Add(
 // conforming to the "db.client.connection.create_time" semantic conventions. It
 // represents the time it took to create a new connection.
 type ClientConnectionCreateTime struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewClientConnectionCreateTime returns a new ClientConnectionCreateTime
@@ -328,7 +328,7 @@ func NewClientConnectionCreateTime(m metric.Meter) (ClientConnectionCreateTime, 
 
 // Inst returns the underlying metric instrument.
 func (m ClientConnectionCreateTime) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -361,7 +361,7 @@ func (m ClientConnectionCreateTime) Record(
 	clientConnectionPoolName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -377,7 +377,7 @@ func (m ClientConnectionCreateTime) Record(
 // conforming to the "db.client.connection.idle.max" semantic conventions. It
 // represents the maximum number of idle open connections allowed.
 type ClientConnectionIdleMax struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewClientConnectionIdleMax returns a new ClientConnectionIdleMax instrument.
@@ -395,7 +395,7 @@ func NewClientConnectionIdleMax(m metric.Meter) (ClientConnectionIdleMax, error)
 
 // Inst returns the underlying metric instrument.
 func (m ClientConnectionIdleMax) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -428,7 +428,7 @@ func (m ClientConnectionIdleMax) Add(
 	clientConnectionPoolName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -444,7 +444,7 @@ func (m ClientConnectionIdleMax) Add(
 // conforming to the "db.client.connection.idle.min" semantic conventions. It
 // represents the minimum number of idle open connections allowed.
 type ClientConnectionIdleMin struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewClientConnectionIdleMin returns a new ClientConnectionIdleMin instrument.
@@ -462,7 +462,7 @@ func NewClientConnectionIdleMin(m metric.Meter) (ClientConnectionIdleMin, error)
 
 // Inst returns the underlying metric instrument.
 func (m ClientConnectionIdleMin) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -495,7 +495,7 @@ func (m ClientConnectionIdleMin) Add(
 	clientConnectionPoolName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -511,7 +511,7 @@ func (m ClientConnectionIdleMin) Add(
 // to the "db.client.connection.max" semantic conventions. It represents the
 // maximum number of open connections allowed.
 type ClientConnectionMax struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewClientConnectionMax returns a new ClientConnectionMax instrument.
@@ -529,7 +529,7 @@ func NewClientConnectionMax(m metric.Meter) (ClientConnectionMax, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ClientConnectionMax) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -562,7 +562,7 @@ func (m ClientConnectionMax) Add(
 	clientConnectionPoolName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -579,7 +579,7 @@ func (m ClientConnectionMax) Add(
 // conventions. It represents the number of current pending requests for an open
 // connection.
 type ClientConnectionPendingRequests struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewClientConnectionPendingRequests returns a new
@@ -598,7 +598,7 @@ func NewClientConnectionPendingRequests(m metric.Meter) (ClientConnectionPending
 
 // Inst returns the underlying metric instrument.
 func (m ClientConnectionPendingRequests) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -631,7 +631,7 @@ func (m ClientConnectionPendingRequests) Add(
 	clientConnectionPoolName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -648,7 +648,7 @@ func (m ClientConnectionPendingRequests) Add(
 // represents the number of connection timeouts that have occurred trying to
 // obtain a connection from the pool.
 type ClientConnectionTimeouts struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewClientConnectionTimeouts returns a new ClientConnectionTimeouts instrument.
@@ -666,7 +666,7 @@ func NewClientConnectionTimeouts(m metric.Meter) (ClientConnectionTimeouts, erro
 
 // Inst returns the underlying metric instrument.
 func (m ClientConnectionTimeouts) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -699,7 +699,7 @@ func (m ClientConnectionTimeouts) Add(
 	clientConnectionPoolName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -716,7 +716,7 @@ func (m ClientConnectionTimeouts) Add(
 // represents the time between borrowing a connection and returning it to the
 // pool.
 type ClientConnectionUseTime struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewClientConnectionUseTime returns a new ClientConnectionUseTime instrument.
@@ -734,7 +734,7 @@ func NewClientConnectionUseTime(m metric.Meter) (ClientConnectionUseTime, error)
 
 // Inst returns the underlying metric instrument.
 func (m ClientConnectionUseTime) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -767,7 +767,7 @@ func (m ClientConnectionUseTime) Record(
 	clientConnectionPoolName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -783,7 +783,7 @@ func (m ClientConnectionUseTime) Record(
 // conforming to the "db.client.connection.wait_time" semantic conventions. It
 // represents the time it took to obtain an open connection from the pool.
 type ClientConnectionWaitTime struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewClientConnectionWaitTime returns a new ClientConnectionWaitTime instrument.
@@ -801,7 +801,7 @@ func NewClientConnectionWaitTime(m metric.Meter) (ClientConnectionWaitTime, erro
 
 // Inst returns the underlying metric instrument.
 func (m ClientConnectionWaitTime) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -834,7 +834,7 @@ func (m ClientConnectionWaitTime) Record(
 	clientConnectionPoolName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -850,7 +850,7 @@ func (m ClientConnectionWaitTime) Record(
 // conforming to the "db.client.operation.duration" semantic conventions. It
 // represents the duration of database client operations.
 type ClientOperationDuration struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewClientOperationDuration returns a new ClientOperationDuration instrument.
@@ -868,7 +868,7 @@ func NewClientOperationDuration(m metric.Meter) (ClientOperationDuration, error)
 
 // Inst returns the underlying metric instrument.
 func (m ClientOperationDuration) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -900,7 +900,7 @@ func (m ClientOperationDuration) Record(
 	systemName SystemNameAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -997,7 +997,7 @@ func (ClientOperationDuration) AttrQueryText(val string) attribute.KeyValue {
 // conforming to the "db.client.response.returned_rows" semantic conventions. It
 // represents the actual number of records returned by the database operation.
 type ClientResponseReturnedRows struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewClientResponseReturnedRows returns a new ClientResponseReturnedRows
@@ -1016,7 +1016,7 @@ func NewClientResponseReturnedRows(m metric.Meter) (ClientResponseReturnedRows, 
 
 // Inst returns the underlying metric instrument.
 func (m ClientResponseReturnedRows) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1046,7 +1046,7 @@ func (m ClientResponseReturnedRows) Record(
 	systemName SystemNameAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(

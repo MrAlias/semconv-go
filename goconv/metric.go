@@ -354,7 +354,7 @@ func (ProcessorLimit) Description() string {
 // goroutines have spent in the scheduler in a runnable state before actually
 // running.
 type ScheduleDuration struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewScheduleDuration returns a new ScheduleDuration instrument.
@@ -372,7 +372,7 @@ func NewScheduleDuration(m metric.Meter) (ScheduleDuration, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ScheduleDuration) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -396,8 +396,8 @@ func (ScheduleDuration) Description() string {
 // the runtime, and are subject to change.
 func (m ScheduleDuration) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Float64Histogram.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Float64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }

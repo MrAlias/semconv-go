@@ -79,7 +79,7 @@ var (
 // conforming to the "messaging.client.consumed.messages" semantic conventions.
 // It represents the number of messages that were delivered to the application.
 type ClientConsumedMessages struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewClientConsumedMessages returns a new ClientConsumedMessages instrument.
@@ -97,7 +97,7 @@ func NewClientConsumedMessages(m metric.Meter) (ClientConsumedMessages, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ClientConsumedMessages) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -137,7 +137,7 @@ func (m ClientConsumedMessages) Add(
 	system SystemAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -211,7 +211,7 @@ func (ClientConsumedMessages) AttrServerPort(val int) attribute.KeyValue {
 // It represents the duration of messaging operation initiated by a producer or
 // consumer client.
 type ClientOperationDuration struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewClientOperationDuration returns a new ClientOperationDuration instrument.
@@ -229,7 +229,7 @@ func NewClientOperationDuration(m metric.Meter) (ClientOperationDuration, error)
 
 // Inst returns the underlying metric instrument.
 func (m ClientOperationDuration) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -265,7 +265,7 @@ func (m ClientOperationDuration) Record(
 	system SystemAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -345,7 +345,7 @@ func (ClientOperationDuration) AttrServerPort(val int) attribute.KeyValue {
 // the "messaging.client.sent.messages" semantic conventions. It represents the
 // number of messages producer attempted to send to the broker.
 type ClientSentMessages struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewClientSentMessages returns a new ClientSentMessages instrument.
@@ -363,7 +363,7 @@ func NewClientSentMessages(m metric.Meter) (ClientSentMessages, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ClientSentMessages) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -399,7 +399,7 @@ func (m ClientSentMessages) Add(
 	system SystemAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -458,7 +458,7 @@ func (ClientSentMessages) AttrServerPort(val int) attribute.KeyValue {
 // the "messaging.process.duration" semantic conventions. It represents the
 // duration of processing operation.
 type ProcessDuration struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewProcessDuration returns a new ProcessDuration instrument.
@@ -476,7 +476,7 @@ func NewProcessDuration(m metric.Meter) (ProcessDuration, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ProcessDuration) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -512,7 +512,7 @@ func (m ProcessDuration) Record(
 	system SystemAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(

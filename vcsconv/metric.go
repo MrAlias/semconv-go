@@ -139,7 +139,7 @@ var (
 // (pull requests/merge requests/changelists) in a repository, categorized by
 // their state (e.g. open or merged).
 type ChangeCount struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewChangeCount returns a new ChangeCount instrument.
@@ -157,7 +157,7 @@ func NewChangeCount(m metric.Meter) (ChangeCount, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ChangeCount) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -194,7 +194,7 @@ func (m ChangeCount) Add(
 	repositoryUrlFull string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -232,7 +232,7 @@ func (ChangeCount) AttrProviderName(val ProviderNameAttr) attribute.KeyValue {
 // "vcs.change.duration" semantic conventions. It represents the time duration a
 // change (pull request/merge request/changelist) has been in a given state.
 type ChangeDuration struct {
-	inst metric.Float64Gauge
+	metric.Float64Gauge
 }
 
 // NewChangeDuration returns a new ChangeDuration instrument.
@@ -250,7 +250,7 @@ func NewChangeDuration(m metric.Meter) (ChangeDuration, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ChangeDuration) Inst() metric.Float64Gauge {
-	return m.inst
+	return m.Float64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -292,7 +292,7 @@ func (m ChangeDuration) Record(
 	repositoryUrlFull string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Gauge.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -332,7 +332,7 @@ func (ChangeDuration) AttrProviderName(val ProviderNameAttr) attribute.KeyValue 
 // amount of time since its creation it took a change (pull request/merge
 // request/changelist) to get the first approval.
 type ChangeTimeToApproval struct {
-	inst metric.Float64Gauge
+	metric.Float64Gauge
 }
 
 // NewChangeTimeToApproval returns a new ChangeTimeToApproval instrument.
@@ -350,7 +350,7 @@ func NewChangeTimeToApproval(m metric.Meter) (ChangeTimeToApproval, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ChangeTimeToApproval) Inst() metric.Float64Gauge {
-	return m.inst
+	return m.Float64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -388,7 +388,7 @@ func (m ChangeTimeToApproval) Record(
 	repositoryUrlFull string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Gauge.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -456,7 +456,7 @@ func (ChangeTimeToApproval) AttrRefHeadRevision(val string) attribute.KeyValue {
 // of time since its creation it took a change (pull request/merge
 // request/changelist) to get merged into the target(base) ref.
 type ChangeTimeToMerge struct {
-	inst metric.Float64Gauge
+	metric.Float64Gauge
 }
 
 // NewChangeTimeToMerge returns a new ChangeTimeToMerge instrument.
@@ -474,7 +474,7 @@ func NewChangeTimeToMerge(m metric.Meter) (ChangeTimeToMerge, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ChangeTimeToMerge) Inst() metric.Float64Gauge {
-	return m.inst
+	return m.Float64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -512,7 +512,7 @@ func (m ChangeTimeToMerge) Record(
 	repositoryUrlFull string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Gauge.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -579,7 +579,7 @@ func (ChangeTimeToMerge) AttrRefHeadRevision(val string) attribute.KeyValue {
 // the "vcs.contributor.count" semantic conventions. It represents the number of
 // unique contributors to a repository.
 type ContributorCount struct {
-	inst metric.Int64Gauge
+	metric.Int64Gauge
 }
 
 // NewContributorCount returns a new ContributorCount instrument.
@@ -597,7 +597,7 @@ func NewContributorCount(m metric.Meter) (ContributorCount, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ContributorCount) Inst() metric.Int64Gauge {
-	return m.inst
+	return m.Int64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -630,7 +630,7 @@ func (m ContributorCount) Record(
 	repositoryUrlFull string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Gauge.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -667,7 +667,7 @@ func (ContributorCount) AttrProviderName(val ProviderNameAttr) attribute.KeyValu
 // "vcs.ref.count" semantic conventions. It represents the number of refs of type
 // branch or tag in a repository.
 type RefCount struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewRefCount returns a new RefCount instrument.
@@ -685,7 +685,7 @@ func NewRefCount(m metric.Meter) (RefCount, error) {
 
 // Inst returns the underlying metric instrument.
 func (m RefCount) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -722,7 +722,7 @@ func (m RefCount) Add(
 	repositoryUrlFull string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -761,7 +761,7 @@ func (RefCount) AttrProviderName(val ProviderNameAttr) attribute.KeyValue {
 // added/removed in a ref (branch) relative to the ref from the
 // `vcs.ref.base.name` attribute.
 type RefLinesDelta struct {
-	inst metric.Int64Gauge
+	metric.Int64Gauge
 }
 
 // NewRefLinesDelta returns a new RefLinesDelta instrument.
@@ -779,7 +779,7 @@ func NewRefLinesDelta(m metric.Meter) (RefLinesDelta, error) {
 
 // Inst returns the underlying metric instrument.
 func (m RefLinesDelta) Inst() metric.Int64Gauge {
-	return m.inst
+	return m.Int64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -841,7 +841,7 @@ func (m RefLinesDelta) Record(
 	repositoryUrlFull string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Gauge.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -892,7 +892,7 @@ func (RefLinesDelta) AttrProviderName(val ProviderNameAttr) attribute.KeyValue {
 // of revisions (commits) a ref (branch) is ahead/behind the branch from the
 // `vcs.ref.base.name` attribute.
 type RefRevisionsDelta struct {
-	inst metric.Int64Gauge
+	metric.Int64Gauge
 }
 
 // NewRefRevisionsDelta returns a new RefRevisionsDelta instrument.
@@ -910,7 +910,7 @@ func NewRefRevisionsDelta(m metric.Meter) (RefRevisionsDelta, error) {
 
 // Inst returns the underlying metric instrument.
 func (m RefRevisionsDelta) Inst() metric.Int64Gauge {
-	return m.inst
+	return m.Int64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -969,7 +969,7 @@ func (m RefRevisionsDelta) Record(
 	revisionDeltaDirection RevisionDeltaDirectionAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Gauge.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -1020,7 +1020,7 @@ func (RefRevisionsDelta) AttrProviderName(val ProviderNameAttr) attribute.KeyVal
 // created from the default branch (trunk) has existed. The `ref.type` attribute
 // will always be `branch`.
 type RefTime struct {
-	inst metric.Float64Gauge
+	metric.Float64Gauge
 }
 
 // NewRefTime returns a new RefTime instrument.
@@ -1038,7 +1038,7 @@ func NewRefTime(m metric.Meter) (RefTime, error) {
 
 // Inst returns the underlying metric instrument.
 func (m RefTime) Inst() metric.Float64Gauge {
-	return m.inst
+	return m.Float64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1080,7 +1080,7 @@ func (m RefTime) Record(
 	repositoryUrlFull string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Gauge.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -1119,7 +1119,7 @@ func (RefTime) AttrProviderName(val ProviderNameAttr) attribute.KeyValue {
 // the "vcs.repository.count" semantic conventions. It represents the number of
 // repositories in an organization.
 type RepositoryCount struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewRepositoryCount returns a new RepositoryCount instrument.
@@ -1137,7 +1137,7 @@ func NewRepositoryCount(m metric.Meter) (RepositoryCount, error) {
 
 // Inst returns the underlying metric instrument.
 func (m RepositoryCount) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1163,7 +1163,7 @@ func (m RepositoryCount) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(

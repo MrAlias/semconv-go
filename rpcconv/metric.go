@@ -14,7 +14,7 @@ import (
 // "rpc.client.duration" semantic conventions. It represents the measures the
 // duration of outbound RPC.
 type ClientDuration struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewClientDuration returns a new ClientDuration instrument.
@@ -32,7 +32,7 @@ func NewClientDuration(m metric.Meter) (ClientDuration, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ClientDuration) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -58,9 +58,9 @@ func (ClientDuration) Description() string {
 // **Streaming**: N/A.
 func (m ClientDuration) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Float64Histogram.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Float64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -68,7 +68,7 @@ func (m ClientDuration) Record(ctx context.Context, val float64, attrs ...attrib
 // the "rpc.client.request.size" semantic conventions. It represents the measures
 // the size of RPC request messages (uncompressed).
 type ClientRequestSize struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewClientRequestSize returns a new ClientRequestSize instrument.
@@ -86,7 +86,7 @@ func NewClientRequestSize(m metric.Meter) (ClientRequestSize, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ClientRequestSize) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -109,9 +109,9 @@ func (ClientRequestSize) Description() string {
 // **Streaming**: Recorded per message in a streaming batch
 func (m ClientRequestSize) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Int64Histogram.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Int64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -119,7 +119,7 @@ func (m ClientRequestSize) Record(ctx context.Context, val int64, attrs ...attri
 // to the "rpc.client.requests_per_rpc" semantic conventions. It represents the
 // measures the number of messages received per RPC.
 type ClientRequestsPerRPC struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewClientRequestsPerRPC returns a new ClientRequestsPerRPC instrument.
@@ -137,7 +137,7 @@ func NewClientRequestsPerRPC(m metric.Meter) (ClientRequestsPerRPC, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ClientRequestsPerRPC) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -162,9 +162,9 @@ func (ClientRequestsPerRPC) Description() string {
 // **Streaming**: This metric is required for server and client streaming RPCs
 func (m ClientRequestsPerRPC) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Int64Histogram.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Int64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -172,7 +172,7 @@ func (m ClientRequestsPerRPC) Record(ctx context.Context, val int64, attrs ...at
 // the "rpc.client.response.size" semantic conventions. It represents the
 // measures the size of RPC response messages (uncompressed).
 type ClientResponseSize struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewClientResponseSize returns a new ClientResponseSize instrument.
@@ -190,7 +190,7 @@ func NewClientResponseSize(m metric.Meter) (ClientResponseSize, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ClientResponseSize) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -213,9 +213,9 @@ func (ClientResponseSize) Description() string {
 // **Streaming**: Recorded per response in a streaming batch
 func (m ClientResponseSize) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Int64Histogram.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Int64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -223,7 +223,7 @@ func (m ClientResponseSize) Record(ctx context.Context, val int64, attrs ...attr
 // to the "rpc.client.responses_per_rpc" semantic conventions. It represents the
 // measures the number of messages sent per RPC.
 type ClientResponsesPerRPC struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewClientResponsesPerRPC returns a new ClientResponsesPerRPC instrument.
@@ -241,7 +241,7 @@ func NewClientResponsesPerRPC(m metric.Meter) (ClientResponsesPerRPC, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ClientResponsesPerRPC) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -266,9 +266,9 @@ func (ClientResponsesPerRPC) Description() string {
 // **Streaming**: This metric is required for server and client streaming RPCs
 func (m ClientResponsesPerRPC) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Int64Histogram.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Int64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -276,7 +276,7 @@ func (m ClientResponsesPerRPC) Record(ctx context.Context, val int64, attrs ...a
 // "rpc.server.duration" semantic conventions. It represents the measures the
 // duration of inbound RPC.
 type ServerDuration struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewServerDuration returns a new ServerDuration instrument.
@@ -294,7 +294,7 @@ func NewServerDuration(m metric.Meter) (ServerDuration, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ServerDuration) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -320,9 +320,9 @@ func (ServerDuration) Description() string {
 // **Streaming**: N/A.
 func (m ServerDuration) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Float64Histogram.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Float64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -330,7 +330,7 @@ func (m ServerDuration) Record(ctx context.Context, val float64, attrs ...attrib
 // the "rpc.server.request.size" semantic conventions. It represents the measures
 // the size of RPC request messages (uncompressed).
 type ServerRequestSize struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewServerRequestSize returns a new ServerRequestSize instrument.
@@ -348,7 +348,7 @@ func NewServerRequestSize(m metric.Meter) (ServerRequestSize, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ServerRequestSize) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -371,9 +371,9 @@ func (ServerRequestSize) Description() string {
 // **Streaming**: Recorded per message in a streaming batch
 func (m ServerRequestSize) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Int64Histogram.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Int64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -381,7 +381,7 @@ func (m ServerRequestSize) Record(ctx context.Context, val int64, attrs ...attri
 // to the "rpc.server.requests_per_rpc" semantic conventions. It represents the
 // measures the number of messages received per RPC.
 type ServerRequestsPerRPC struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewServerRequestsPerRPC returns a new ServerRequestsPerRPC instrument.
@@ -399,7 +399,7 @@ func NewServerRequestsPerRPC(m metric.Meter) (ServerRequestsPerRPC, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ServerRequestsPerRPC) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -424,9 +424,9 @@ func (ServerRequestsPerRPC) Description() string {
 // **Streaming** : This metric is required for server and client streaming RPCs
 func (m ServerRequestsPerRPC) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Int64Histogram.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Int64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -434,7 +434,7 @@ func (m ServerRequestsPerRPC) Record(ctx context.Context, val int64, attrs ...at
 // the "rpc.server.response.size" semantic conventions. It represents the
 // measures the size of RPC response messages (uncompressed).
 type ServerResponseSize struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewServerResponseSize returns a new ServerResponseSize instrument.
@@ -452,7 +452,7 @@ func NewServerResponseSize(m metric.Meter) (ServerResponseSize, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ServerResponseSize) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -475,9 +475,9 @@ func (ServerResponseSize) Description() string {
 // **Streaming**: Recorded per response in a streaming batch
 func (m ServerResponseSize) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Int64Histogram.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Int64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -485,7 +485,7 @@ func (m ServerResponseSize) Record(ctx context.Context, val int64, attrs ...attr
 // to the "rpc.server.responses_per_rpc" semantic conventions. It represents the
 // measures the number of messages sent per RPC.
 type ServerResponsesPerRPC struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewServerResponsesPerRPC returns a new ServerResponsesPerRPC instrument.
@@ -503,7 +503,7 @@ func NewServerResponsesPerRPC(m metric.Meter) (ServerResponsesPerRPC, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ServerResponsesPerRPC) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -528,8 +528,8 @@ func (ServerResponsesPerRPC) Description() string {
 // **Streaming**: This metric is required for server and client streaming RPCs
 func (m ServerResponsesPerRPC) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Int64Histogram.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Int64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }

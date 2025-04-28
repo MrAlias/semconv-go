@@ -198,7 +198,7 @@ var (
 // the number of logical (virtual) processor cores created by the operating
 // system to manage multitasking.
 type CPULogicalCount struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewCPULogicalCount returns a new CPULogicalCount instrument.
@@ -216,7 +216,7 @@ func NewCPULogicalCount(m metric.Meter) (CPULogicalCount, error) {
 
 // Inst returns the underlying metric instrument.
 func (m CPULogicalCount) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -240,9 +240,9 @@ func (CPULogicalCount) Description() string {
 // socket, and then by the number of threads per core
 func (m CPULogicalCount) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -250,7 +250,7 @@ func (m CPULogicalCount) Add(ctx context.Context, incr int64, attrs ...attribute
 // the "system.cpu.physical.count" semantic conventions. It represents the
 // reports the number of actual physical processor cores on the hardware.
 type CPUPhysicalCount struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewCPUPhysicalCount returns a new CPUPhysicalCount instrument.
@@ -268,7 +268,7 @@ func NewCPUPhysicalCount(m metric.Meter) (CPUPhysicalCount, error) {
 
 // Inst returns the underlying metric instrument.
 func (m CPUPhysicalCount) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -292,16 +292,16 @@ func (CPUPhysicalCount) Description() string {
 // socket
 func (m CPUPhysicalCount) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
 // DiskIO is an instrument used to record metric values conforming to the
 // "system.disk.io" semantic conventions.
 type DiskIO struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewDiskIO returns a new DiskIO instrument.
@@ -319,7 +319,7 @@ func NewDiskIO(m metric.Meter) (DiskIO, error) {
 
 // Inst returns the underlying metric instrument.
 func (m DiskIO) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -340,7 +340,7 @@ func (m DiskIO) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -365,7 +365,7 @@ func (DiskIO) AttrDevice(val string) attribute.KeyValue {
 // "system.disk.io_time" semantic conventions. It represents the time disk spent
 // activated.
 type DiskIOTime struct {
-	inst metric.Float64Counter
+	metric.Float64Counter
 }
 
 // NewDiskIOTime returns a new DiskIOTime instrument.
@@ -383,7 +383,7 @@ func NewDiskIOTime(m metric.Meter) (DiskIOTime, error) {
 
 // Inst returns the underlying metric instrument.
 func (m DiskIOTime) Inst() metric.Float64Counter {
-	return m.inst
+	return m.Float64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -421,7 +421,7 @@ func (m DiskIOTime) Add(
 	incr float64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Float64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -440,7 +440,7 @@ func (DiskIOTime) AttrDevice(val string) attribute.KeyValue {
 // "system.disk.limit" semantic conventions. It represents the total storage
 // capacity of the disk.
 type DiskLimit struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewDiskLimit returns a new DiskLimit instrument.
@@ -458,7 +458,7 @@ func NewDiskLimit(m metric.Meter) (DiskLimit, error) {
 
 // Inst returns the underlying metric instrument.
 func (m DiskLimit) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -484,7 +484,7 @@ func (m DiskLimit) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -502,7 +502,7 @@ func (DiskLimit) AttrDevice(val string) attribute.KeyValue {
 // DiskMerged is an instrument used to record metric values conforming to the
 // "system.disk.merged" semantic conventions.
 type DiskMerged struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewDiskMerged returns a new DiskMerged instrument.
@@ -520,7 +520,7 @@ func NewDiskMerged(m metric.Meter) (DiskMerged, error) {
 
 // Inst returns the underlying metric instrument.
 func (m DiskMerged) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -541,7 +541,7 @@ func (m DiskMerged) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -566,7 +566,7 @@ func (DiskMerged) AttrDevice(val string) attribute.KeyValue {
 // the "system.disk.operation_time" semantic conventions. It represents the sum
 // of the time each operation took to complete.
 type DiskOperationTime struct {
-	inst metric.Float64Counter
+	metric.Float64Counter
 }
 
 // NewDiskOperationTime returns a new DiskOperationTime instrument.
@@ -584,7 +584,7 @@ func NewDiskOperationTime(m metric.Meter) (DiskOperationTime, error) {
 
 // Inst returns the underlying metric instrument.
 func (m DiskOperationTime) Inst() metric.Float64Counter {
-	return m.inst
+	return m.Float64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -620,7 +620,7 @@ func (m DiskOperationTime) Add(
 	incr float64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Float64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -644,7 +644,7 @@ func (DiskOperationTime) AttrDevice(val string) attribute.KeyValue {
 // DiskOperations is an instrument used to record metric values conforming to the
 // "system.disk.operations" semantic conventions.
 type DiskOperations struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewDiskOperations returns a new DiskOperations instrument.
@@ -662,7 +662,7 @@ func NewDiskOperations(m metric.Meter) (DiskOperations, error) {
 
 // Inst returns the underlying metric instrument.
 func (m DiskOperations) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -683,7 +683,7 @@ func (m DiskOperations) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -708,7 +708,7 @@ func (DiskOperations) AttrDevice(val string) attribute.KeyValue {
 // the "system.filesystem.limit" semantic conventions. It represents the total
 // storage capacity of the filesystem.
 type FilesystemLimit struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewFilesystemLimit returns a new FilesystemLimit instrument.
@@ -726,7 +726,7 @@ func NewFilesystemLimit(m metric.Meter) (FilesystemLimit, error) {
 
 // Inst returns the underlying metric instrument.
 func (m FilesystemLimit) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -752,7 +752,7 @@ func (m FilesystemLimit) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -793,7 +793,7 @@ func (FilesystemLimit) AttrFilesystemType(val FilesystemTypeAttr) attribute.KeyV
 // the "system.filesystem.usage" semantic conventions. It represents the reports
 // a filesystem's space usage across different states.
 type FilesystemUsage struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewFilesystemUsage returns a new FilesystemUsage instrument.
@@ -811,7 +811,7 @@ func NewFilesystemUsage(m metric.Meter) (FilesystemUsage, error) {
 
 // Inst returns the underlying metric instrument.
 func (m FilesystemUsage) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -842,7 +842,7 @@ func (m FilesystemUsage) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -889,7 +889,7 @@ func (FilesystemUsage) AttrFilesystemType(val FilesystemTypeAttr) attribute.KeyV
 // FilesystemUtilization is an instrument used to record metric values conforming
 // to the "system.filesystem.utilization" semantic conventions.
 type FilesystemUtilization struct {
-	inst metric.Int64Gauge
+	metric.Int64Gauge
 }
 
 // NewFilesystemUtilization returns a new FilesystemUtilization instrument.
@@ -907,7 +907,7 @@ func NewFilesystemUtilization(m metric.Meter) (FilesystemUtilization, error) {
 
 // Inst returns the underlying metric instrument.
 func (m FilesystemUtilization) Inst() metric.Int64Gauge {
-	return m.inst
+	return m.Int64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -928,7 +928,7 @@ func (m FilesystemUtilization) Record(
 	val int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Gauge.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -977,7 +977,7 @@ func (FilesystemUtilization) AttrFilesystemType(val FilesystemTypeAttr) attribut
 // estimate of how much memory is available for starting new applications,
 // without causing swapping.
 type LinuxMemoryAvailable struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewLinuxMemoryAvailable returns a new LinuxMemoryAvailable instrument.
@@ -995,7 +995,7 @@ func NewLinuxMemoryAvailable(m metric.Meter) (LinuxMemoryAvailable, error) {
 
 // Inst returns the underlying metric instrument.
 func (m LinuxMemoryAvailable) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1026,9 +1026,9 @@ func (LinuxMemoryAvailable) Description() string {
 // [/proc/meminfo]: https://man7.org/linux/man-pages/man5/proc.5.html
 func (m LinuxMemoryAvailable) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -1037,7 +1037,7 @@ func (m LinuxMemoryAvailable) Add(ctx context.Context, incr int64, attrs ...attr
 // the reports the memory used by the Linux kernel for managing caches of
 // frequently used objects.
 type LinuxMemorySlabUsage struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewLinuxMemorySlabUsage returns a new LinuxMemorySlabUsage instrument.
@@ -1055,7 +1055,7 @@ func NewLinuxMemorySlabUsage(m metric.Meter) (LinuxMemorySlabUsage, error) {
 
 // Inst returns the underlying metric instrument.
 func (m LinuxMemorySlabUsage) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1090,7 +1090,7 @@ func (m LinuxMemorySlabUsage) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -1110,7 +1110,7 @@ func (LinuxMemorySlabUsage) AttrLinuxMemorySlabState(val LinuxMemorySlabStateAtt
 // "system.memory.limit" semantic conventions. It represents the total memory
 // available in the system.
 type MemoryLimit struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewMemoryLimit returns a new MemoryLimit instrument.
@@ -1128,7 +1128,7 @@ func NewMemoryLimit(m metric.Meter) (MemoryLimit, error) {
 
 // Inst returns the underlying metric instrument.
 func (m MemoryLimit) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1151,9 +1151,9 @@ func (MemoryLimit) Description() string {
 // Its value SHOULD equal the sum of `system.memory.state` over all states.
 func (m MemoryLimit) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -1161,7 +1161,7 @@ func (m MemoryLimit) Add(ctx context.Context, incr int64, attrs ...attribute.Key
 // "system.memory.shared" semantic conventions. It represents the shared memory
 // used (mostly by tmpfs).
 type MemoryShared struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewMemoryShared returns a new MemoryShared instrument.
@@ -1179,7 +1179,7 @@ func NewMemoryShared(m metric.Meter) (MemoryShared, error) {
 
 // Inst returns the underlying metric instrument.
 func (m MemoryShared) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1206,9 +1206,9 @@ func (MemoryShared) Description() string {
 // [`/proc/meminfo`]: https://man7.org/linux/man-pages/man5/proc.5.html
 func (m MemoryShared) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64UpDownCounter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -1301,7 +1301,7 @@ func (MemoryUtilization) AttrMemoryState(val MemoryStateAttr) attribute.KeyValue
 // NetworkConnections is an instrument used to record metric values conforming to
 // the "system.network.connections" semantic conventions.
 type NetworkConnections struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewNetworkConnections returns a new NetworkConnections instrument.
@@ -1319,7 +1319,7 @@ func NewNetworkConnections(m metric.Meter) (NetworkConnections, error) {
 
 // Inst returns the underlying metric instrument.
 func (m NetworkConnections) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1340,7 +1340,7 @@ func (m NetworkConnections) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -1377,7 +1377,7 @@ func (NetworkConnections) AttrNetworkTransport(val NetworkTransportAttr) attribu
 // "system.network.dropped" semantic conventions. It represents the count of
 // packets that are dropped or discarded even though there was no error.
 type NetworkDropped struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewNetworkDropped returns a new NetworkDropped instrument.
@@ -1395,7 +1395,7 @@ func NewNetworkDropped(m metric.Meter) (NetworkDropped, error) {
 
 // Inst returns the underlying metric instrument.
 func (m NetworkDropped) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1432,7 +1432,7 @@ func (m NetworkDropped) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -1459,7 +1459,7 @@ func (NetworkDropped) AttrNetworkIODirection(val NetworkIODirectionAttr) attribu
 // "system.network.errors" semantic conventions. It represents the count of
 // network errors detected.
 type NetworkErrors struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewNetworkErrors returns a new NetworkErrors instrument.
@@ -1477,7 +1477,7 @@ func NewNetworkErrors(m metric.Meter) (NetworkErrors, error) {
 
 // Inst returns the underlying metric instrument.
 func (m NetworkErrors) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1514,7 +1514,7 @@ func (m NetworkErrors) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -1588,7 +1588,7 @@ func (NetworkIO) AttrNetworkIODirection(val NetworkIODirectionAttr) attribute.Ke
 // NetworkPackets is an instrument used to record metric values conforming to the
 // "system.network.packets" semantic conventions.
 type NetworkPackets struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewNetworkPackets returns a new NetworkPackets instrument.
@@ -1606,7 +1606,7 @@ func NewNetworkPackets(m metric.Meter) (NetworkPackets, error) {
 
 // Inst returns the underlying metric instrument.
 func (m NetworkPackets) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1627,7 +1627,7 @@ func (m NetworkPackets) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -1652,7 +1652,7 @@ func (NetworkPackets) AttrDevice(val string) attribute.KeyValue {
 // PagingFaults is an instrument used to record metric values conforming to the
 // "system.paging.faults" semantic conventions.
 type PagingFaults struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewPagingFaults returns a new PagingFaults instrument.
@@ -1670,7 +1670,7 @@ func NewPagingFaults(m metric.Meter) (PagingFaults, error) {
 
 // Inst returns the underlying metric instrument.
 func (m PagingFaults) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1691,7 +1691,7 @@ func (m PagingFaults) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -1709,7 +1709,7 @@ func (PagingFaults) AttrPagingType(val PagingTypeAttr) attribute.KeyValue {
 // PagingOperations is an instrument used to record metric values conforming to
 // the "system.paging.operations" semantic conventions.
 type PagingOperations struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewPagingOperations returns a new PagingOperations instrument.
@@ -1727,7 +1727,7 @@ func NewPagingOperations(m metric.Meter) (PagingOperations, error) {
 
 // Inst returns the underlying metric instrument.
 func (m PagingOperations) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1748,7 +1748,7 @@ func (m PagingOperations) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -1774,7 +1774,7 @@ func (PagingOperations) AttrPagingType(val PagingTypeAttr) attribute.KeyValue {
 // "system.paging.usage" semantic conventions. It represents the unix swap or
 // windows pagefile usage.
 type PagingUsage struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewPagingUsage returns a new PagingUsage instrument.
@@ -1792,7 +1792,7 @@ func NewPagingUsage(m metric.Meter) (PagingUsage, error) {
 
 // Inst returns the underlying metric instrument.
 func (m PagingUsage) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1818,7 +1818,7 @@ func (m PagingUsage) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -1843,7 +1843,7 @@ func (PagingUsage) AttrPagingState(val PagingStateAttr) attribute.KeyValue {
 // PagingUtilization is an instrument used to record metric values conforming to
 // the "system.paging.utilization" semantic conventions.
 type PagingUtilization struct {
-	inst metric.Int64Gauge
+	metric.Int64Gauge
 }
 
 // NewPagingUtilization returns a new PagingUtilization instrument.
@@ -1861,7 +1861,7 @@ func NewPagingUtilization(m metric.Meter) (PagingUtilization, error) {
 
 // Inst returns the underlying metric instrument.
 func (m PagingUtilization) Inst() metric.Int64Gauge {
-	return m.inst
+	return m.Int64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1882,7 +1882,7 @@ func (m PagingUtilization) Record(
 	val int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Gauge.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -1908,7 +1908,7 @@ func (PagingUtilization) AttrPagingState(val PagingStateAttr) attribute.KeyValue
 // "system.process.count" semantic conventions. It represents the total number of
 // processes in each state.
 type ProcessCount struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewProcessCount returns a new ProcessCount instrument.
@@ -1926,7 +1926,7 @@ func NewProcessCount(m metric.Meter) (ProcessCount, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ProcessCount) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1952,7 +1952,7 @@ func (m ProcessCount) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -1974,7 +1974,7 @@ func (ProcessCount) AttrProcessStatus(val ProcessStatusAttr) attribute.KeyValue 
 // "system.process.created" semantic conventions. It represents the total number
 // of processes created over uptime of the host.
 type ProcessCreated struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewProcessCreated returns a new ProcessCreated instrument.
@@ -1992,7 +1992,7 @@ func NewProcessCreated(m metric.Meter) (ProcessCreated, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ProcessCreated) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -2013,9 +2013,9 @@ func (ProcessCreated) Description() string {
 // Add adds incr to the existing count.
 func (m ProcessCreated) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64Counter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64Counter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -2023,7 +2023,7 @@ func (m ProcessCreated) Add(ctx context.Context, incr int64, attrs ...attribute.
 // "system.uptime" semantic conventions. It represents the time the system has
 // been running.
 type Uptime struct {
-	inst metric.Float64Gauge
+	metric.Float64Gauge
 }
 
 // NewUptime returns a new Uptime instrument.
@@ -2041,7 +2041,7 @@ func NewUptime(m metric.Meter) (Uptime, error) {
 
 // Inst returns the underlying metric instrument.
 func (m Uptime) Inst() metric.Float64Gauge {
-	return m.inst
+	return m.Float64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -2066,8 +2066,8 @@ func (Uptime) Description() string {
 // The actual accuracy would depend on the instrumentation and operating system.
 func (m Uptime) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Float64Gauge.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Float64Gauge.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }

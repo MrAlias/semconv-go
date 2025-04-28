@@ -45,7 +45,7 @@ var (
 // values conforming to the "azure.cosmosdb.client.active_instance.count"
 // semantic conventions. It represents the number of active client instances.
 type CosmosDBClientActiveInstanceCount struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewCosmosDBClientActiveInstanceCount returns a new
@@ -64,7 +64,7 @@ func NewCosmosDBClientActiveInstanceCount(m metric.Meter) (CosmosDBClientActiveI
 
 // Inst returns the underlying metric instrument.
 func (m CosmosDBClientActiveInstanceCount) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -90,7 +90,7 @@ func (m CosmosDBClientActiveInstanceCount) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -118,7 +118,7 @@ func (CosmosDBClientActiveInstanceCount) AttrServerAddress(val string) attribute
 //
 // [Request units]: https://learn.microsoft.com/azure/cosmos-db/request-units
 type CosmosDBClientOperationRequestCharge struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewCosmosDBClientOperationRequestCharge returns a new
@@ -137,7 +137,7 @@ func NewCosmosDBClientOperationRequestCharge(m metric.Meter) (CosmosDBClientOper
 
 // Inst returns the underlying metric instrument.
 func (m CosmosDBClientOperationRequestCharge) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -163,7 +163,7 @@ func (m CosmosDBClientOperationRequestCharge) Record(
 	val int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(

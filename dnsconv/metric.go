@@ -24,7 +24,7 @@ var (
 // "dns.lookup.duration" semantic conventions. It represents the measures the
 // time taken to perform a DNS lookup.
 type LookupDuration struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewLookupDuration returns a new LookupDuration instrument.
@@ -42,7 +42,7 @@ func NewLookupDuration(m metric.Meter) (LookupDuration, error) {
 
 // Inst returns the underlying metric instrument.
 func (m LookupDuration) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -71,7 +71,7 @@ func (m LookupDuration) Record(
 	questionName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(

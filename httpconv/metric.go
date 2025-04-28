@@ -77,7 +77,7 @@ var (
 // to the "http.client.active_requests" semantic conventions. It represents the
 // number of active HTTP requests.
 type ClientActiveRequests struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewClientActiveRequests returns a new ClientActiveRequests instrument.
@@ -95,7 +95,7 @@ func NewClientActiveRequests(m metric.Meter) (ClientActiveRequests, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ClientActiveRequests) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -131,7 +131,7 @@ func (m ClientActiveRequests) Add(
 	serverPort int,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -173,7 +173,7 @@ func (ClientActiveRequests) AttrURLScheme(val string) attribute.KeyValue {
 // represents the duration of the successfully established outbound HTTP
 // connections.
 type ClientConnectionDuration struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewClientConnectionDuration returns a new ClientConnectionDuration instrument.
@@ -191,7 +191,7 @@ func NewClientConnectionDuration(m metric.Meter) (ClientConnectionDuration, erro
 
 // Inst returns the underlying metric instrument.
 func (m ClientConnectionDuration) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -227,7 +227,7 @@ func (m ClientConnectionDuration) Record(
 	serverPort int,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -268,7 +268,7 @@ func (ClientConnectionDuration) AttrURLScheme(val string) attribute.KeyValue {
 // number of outbound HTTP connections that are currently active or idle on the
 // client.
 type ClientOpenConnections struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewClientOpenConnections returns a new ClientOpenConnections instrument.
@@ -286,7 +286,7 @@ func NewClientOpenConnections(m metric.Meter) (ClientOpenConnections, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ClientOpenConnections) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -326,7 +326,7 @@ func (m ClientOpenConnections) Add(
 	serverPort int,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -367,7 +367,7 @@ func (ClientOpenConnections) AttrURLScheme(val string) attribute.KeyValue {
 // to the "http.client.request.body.size" semantic conventions. It represents the
 // size of HTTP client request bodies.
 type ClientRequestBodySize struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewClientRequestBodySize returns a new ClientRequestBodySize instrument.
@@ -385,7 +385,7 @@ func NewClientRequestBodySize(m metric.Meter) (ClientRequestBodySize, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ClientRequestBodySize) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -432,7 +432,7 @@ func (m ClientRequestBodySize) Record(
 	serverPort int,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -500,7 +500,7 @@ func (ClientRequestBodySize) AttrURLScheme(val string) attribute.KeyValue {
 // to the "http.client.request.duration" semantic conventions. It represents the
 // duration of HTTP client requests.
 type ClientRequestDuration struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewClientRequestDuration returns a new ClientRequestDuration instrument.
@@ -518,7 +518,7 @@ func NewClientRequestDuration(m metric.Meter) (ClientRequestDuration, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ClientRequestDuration) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -558,7 +558,7 @@ func (m ClientRequestDuration) Record(
 	serverPort int,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -626,7 +626,7 @@ func (ClientRequestDuration) AttrURLTemplate(val string) attribute.KeyValue {
 // conforming to the "http.client.response.body.size" semantic conventions. It
 // represents the size of HTTP client response bodies.
 type ClientResponseBodySize struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewClientResponseBodySize returns a new ClientResponseBodySize instrument.
@@ -644,7 +644,7 @@ func NewClientResponseBodySize(m metric.Meter) (ClientResponseBodySize, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ClientResponseBodySize) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -691,7 +691,7 @@ func (m ClientResponseBodySize) Record(
 	serverPort int,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -759,7 +759,7 @@ func (ClientResponseBodySize) AttrURLScheme(val string) attribute.KeyValue {
 // to the "http.server.active_requests" semantic conventions. It represents the
 // number of active HTTP server requests.
 type ServerActiveRequests struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewServerActiveRequests returns a new ServerActiveRequests instrument.
@@ -777,7 +777,7 @@ func NewServerActiveRequests(m metric.Meter) (ServerActiveRequests, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ServerActiveRequests) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -811,7 +811,7 @@ func (m ServerActiveRequests) Add(
 	urlScheme string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -842,7 +842,7 @@ func (ServerActiveRequests) AttrServerPort(val int) attribute.KeyValue {
 // to the "http.server.request.body.size" semantic conventions. It represents the
 // size of HTTP server request bodies.
 type ServerRequestBodySize struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewServerRequestBodySize returns a new ServerRequestBodySize instrument.
@@ -860,7 +860,7 @@ func NewServerRequestBodySize(m metric.Meter) (ServerRequestBodySize, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ServerRequestBodySize) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -901,7 +901,7 @@ func (m ServerRequestBodySize) Record(
 	urlScheme string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -978,7 +978,7 @@ func (ServerRequestBodySize) AttrUserAgentSyntheticType(val UserAgentSyntheticTy
 // to the "http.server.request.duration" semantic conventions. It represents the
 // duration of HTTP server requests.
 type ServerRequestDuration struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewServerRequestDuration returns a new ServerRequestDuration instrument.
@@ -996,7 +996,7 @@ func NewServerRequestDuration(m metric.Meter) (ServerRequestDuration, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ServerRequestDuration) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1030,7 +1030,7 @@ func (m ServerRequestDuration) Record(
 	urlScheme string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -1107,7 +1107,7 @@ func (ServerRequestDuration) AttrUserAgentSyntheticType(val UserAgentSyntheticTy
 // conforming to the "http.server.response.body.size" semantic conventions. It
 // represents the size of HTTP server response bodies.
 type ServerResponseBodySize struct {
-	inst metric.Int64Histogram
+	metric.Int64Histogram
 }
 
 // NewServerResponseBodySize returns a new ServerResponseBodySize instrument.
@@ -1125,7 +1125,7 @@ func NewServerResponseBodySize(m metric.Meter) (ServerResponseBodySize, error) {
 
 // Inst returns the underlying metric instrument.
 func (m ServerResponseBodySize) Inst() metric.Int64Histogram {
-	return m.inst
+	return m.Int64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1166,7 +1166,7 @@ func (m ServerResponseBodySize) Record(
 	urlScheme string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(

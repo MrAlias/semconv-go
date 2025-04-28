@@ -61,7 +61,7 @@ var (
 // "container.cpu.time" semantic conventions. It represents the total CPU time
 // consumed.
 type CPUTime struct {
-	inst metric.Float64Counter
+	metric.Float64Counter
 }
 
 // NewCPUTime returns a new CPUTime instrument.
@@ -79,7 +79,7 @@ func NewCPUTime(m metric.Meter) (CPUTime, error) {
 
 // Inst returns the underlying metric instrument.
 func (m CPUTime) Inst() metric.Float64Counter {
-	return m.inst
+	return m.Float64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -107,7 +107,7 @@ func (m CPUTime) Add(
 	incr float64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Float64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -128,7 +128,7 @@ func (CPUTime) AttrCPUMode(val CPUModeAttr) attribute.KeyValue {
 // "container.cpu.usage" semantic conventions. It represents the container's CPU
 // usage, measured in cpus. Range from 0 to the number of allocatable CPUs.
 type CPUUsage struct {
-	inst metric.Int64Gauge
+	metric.Int64Gauge
 }
 
 // NewCPUUsage returns a new CPUUsage instrument.
@@ -146,7 +146,7 @@ func NewCPUUsage(m metric.Meter) (CPUUsage, error) {
 
 // Inst returns the underlying metric instrument.
 func (m CPUUsage) Inst() metric.Int64Gauge {
-	return m.inst
+	return m.Int64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -175,7 +175,7 @@ func (m CPUUsage) Record(
 	val int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Int64Gauge.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
@@ -196,7 +196,7 @@ func (CPUUsage) AttrCPUMode(val CPUModeAttr) attribute.KeyValue {
 // "container.disk.io" semantic conventions. It represents the disk bytes for the
 // container.
 type DiskIO struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewDiskIO returns a new DiskIO instrument.
@@ -214,7 +214,7 @@ func NewDiskIO(m metric.Meter) (DiskIO, error) {
 
 // Inst returns the underlying metric instrument.
 func (m DiskIO) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -243,7 +243,7 @@ func (m DiskIO) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -268,7 +268,7 @@ func (DiskIO) AttrSystemDevice(val string) attribute.KeyValue {
 // "container.memory.usage" semantic conventions. It represents the memory usage
 // of the container.
 type MemoryUsage struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewMemoryUsage returns a new MemoryUsage instrument.
@@ -286,7 +286,7 @@ func NewMemoryUsage(m metric.Meter) (MemoryUsage, error) {
 
 // Inst returns the underlying metric instrument.
 func (m MemoryUsage) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -309,9 +309,9 @@ func (MemoryUsage) Description() string {
 // Memory usage of the container.
 func (m MemoryUsage) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Add(ctx, incr)
+		m.Int64Counter.Add(ctx, incr)
 	} else {
-		m.inst.Add(ctx, incr, metric.WithAttributes(attrs...))
+		m.Int64Counter.Add(ctx, incr, metric.WithAttributes(attrs...))
 	}
 }
 
@@ -319,7 +319,7 @@ func (m MemoryUsage) Add(ctx context.Context, incr int64, attrs ...attribute.Key
 // "container.network.io" semantic conventions. It represents the network bytes
 // for the container.
 type NetworkIO struct {
-	inst metric.Int64Counter
+	metric.Int64Counter
 }
 
 // NewNetworkIO returns a new NetworkIO instrument.
@@ -337,7 +337,7 @@ func NewNetworkIO(m metric.Meter) (NetworkIO, error) {
 
 // Inst returns the underlying metric instrument.
 func (m NetworkIO) Inst() metric.Int64Counter {
-	return m.inst
+	return m.Int64Counter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -365,7 +365,7 @@ func (m NetworkIO) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64Counter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -392,7 +392,7 @@ func (NetworkIO) AttrNetworkIODirection(val NetworkIODirectionAttr) attribute.Ke
 // "container.uptime" semantic conventions. It represents the time the container
 // has been running.
 type Uptime struct {
-	inst metric.Float64Gauge
+	metric.Float64Gauge
 }
 
 // NewUptime returns a new Uptime instrument.
@@ -410,7 +410,7 @@ func NewUptime(m metric.Meter) (Uptime, error) {
 
 // Inst returns the underlying metric instrument.
 func (m Uptime) Inst() metric.Float64Gauge {
-	return m.inst
+	return m.Float64Gauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -435,8 +435,8 @@ func (Uptime) Description() string {
 // The actual accuracy would depend on the instrumentation and operating system.
 func (m Uptime) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
-		m.inst.Record(ctx, val)
+		m.Float64Gauge.Record(ctx, val)
 	} else {
-		m.inst.Record(ctx, val, metric.WithAttributes(attrs...))
+		m.Float64Gauge.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
 }

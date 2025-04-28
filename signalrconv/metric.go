@@ -44,7 +44,7 @@ var (
 // conforming to the "signalr.server.active_connections" semantic conventions. It
 // represents the number of connections that are currently active on the server.
 type ServerActiveConnections struct {
-	inst metric.Int64UpDownCounter
+	metric.Int64UpDownCounter
 }
 
 // NewServerActiveConnections returns a new ServerActiveConnections instrument.
@@ -62,7 +62,7 @@ func NewServerActiveConnections(m metric.Meter) (ServerActiveConnections, error)
 
 // Inst returns the underlying metric instrument.
 func (m ServerActiveConnections) Inst() metric.Int64UpDownCounter {
-	return m.inst
+	return m.Int64UpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -91,7 +91,7 @@ func (m ServerActiveConnections) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Add(
+	m.Int64UpDownCounter.Add(
 		ctx,
 		incr,
 		metric.WithAttributes(
@@ -119,7 +119,7 @@ func (ServerActiveConnections) AttrTransport(val TransportAttr) attribute.KeyVal
 // conforming to the "signalr.server.connection.duration" semantic conventions.
 // It represents the duration of connections on the server.
 type ServerConnectionDuration struct {
-	inst metric.Float64Histogram
+	metric.Float64Histogram
 }
 
 // NewServerConnectionDuration returns a new ServerConnectionDuration instrument.
@@ -137,7 +137,7 @@ func NewServerConnectionDuration(m metric.Meter) (ServerConnectionDuration, erro
 
 // Inst returns the underlying metric instrument.
 func (m ServerConnectionDuration) Inst() metric.Float64Histogram {
-	return m.inst
+	return m.Float64Histogram
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -166,7 +166,7 @@ func (m ServerConnectionDuration) Record(
 	val float64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.inst.Record(
+	m.Float64Histogram.Record(
 		ctx,
 		val,
 		metric.WithAttributes(
