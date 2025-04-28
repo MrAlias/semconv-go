@@ -112,6 +112,11 @@ func NewClientOperationDuration(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ClientOperationDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientOperationDuration{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"gen_ai.client.operation.duration",
 		append([]metric.Float64HistogramOption{
@@ -225,6 +230,11 @@ func NewClientTokenUsage(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (ClientTokenUsage, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientTokenUsage{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"gen_ai.client.token.usage",
 		append([]metric.Int64HistogramOption{
@@ -336,6 +346,11 @@ func NewServerRequestDuration(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ServerRequestDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ServerRequestDuration{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"gen_ai.server.request.duration",
 		append([]metric.Float64HistogramOption{
@@ -450,6 +465,11 @@ func NewServerTimePerOutputToken(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ServerTimePerOutputToken, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ServerTimePerOutputToken{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"gen_ai.server.time_per_output_token",
 		append([]metric.Float64HistogramOption{
@@ -556,6 +576,11 @@ func NewServerTimeToFirstToken(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ServerTimeToFirstToken, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ServerTimeToFirstToken{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"gen_ai.server.time_to_first_token",
 		append([]metric.Float64HistogramOption{

@@ -91,6 +91,11 @@ func NewSDKExporterLogExported(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (SDKExporterLogExported, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return SDKExporterLogExported{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"otel.sdk.exporter.log.exported",
 		append([]metric.Int64CounterOption{
@@ -203,6 +208,11 @@ func NewSDKExporterLogInflight(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (SDKExporterLogInflight, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return SDKExporterLogInflight{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"otel.sdk.exporter.log.inflight",
 		append([]metric.Int64UpDownCounterOption{
@@ -304,6 +314,11 @@ func NewSDKExporterSpanExportedCount(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (SDKExporterSpanExportedCount, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return SDKExporterSpanExportedCount{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"otel.sdk.exporter.span.exported.count",
 		append([]metric.Int64CounterOption{
@@ -418,6 +433,11 @@ func NewSDKExporterSpanInflightCount(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (SDKExporterSpanInflightCount, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return SDKExporterSpanInflightCount{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"otel.sdk.exporter.span.inflight.count",
 		append([]metric.Int64UpDownCounterOption{
@@ -517,6 +537,11 @@ func NewSDKLogCreated(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (SDKLogCreated, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return SDKLogCreated{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"otel.sdk.log.created",
 		append([]metric.Int64CounterOption{
@@ -580,6 +605,11 @@ func NewSDKProcessorLogProcessed(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (SDKProcessorLogProcessed, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return SDKProcessorLogProcessed{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"otel.sdk.processor.log.processed",
 		append([]metric.Int64CounterOption{
@@ -679,6 +709,11 @@ func NewSDKProcessorLogQueueCapacity(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (SDKProcessorLogQueueCapacity, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return SDKProcessorLogQueueCapacity{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"otel.sdk.processor.log.queue.capacity",
 		append([]metric.Int64UpDownCounterOption{
@@ -766,6 +801,11 @@ func NewSDKProcessorLogQueueSize(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (SDKProcessorLogQueueSize, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return SDKProcessorLogQueueSize{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"otel.sdk.processor.log.queue.size",
 		append([]metric.Int64UpDownCounterOption{
@@ -854,6 +894,11 @@ func NewSDKProcessorSpanProcessedCount(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (SDKProcessorSpanProcessedCount, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return SDKProcessorSpanProcessedCount{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"otel.sdk.processor.span.processed.count",
 		append([]metric.Int64CounterOption{
@@ -953,6 +998,11 @@ func NewSDKProcessorSpanQueueCapacity(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (SDKProcessorSpanQueueCapacity, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return SDKProcessorSpanQueueCapacity{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"otel.sdk.processor.span.queue.capacity",
 		append([]metric.Int64UpDownCounterOption{
@@ -1041,6 +1091,11 @@ func NewSDKProcessorSpanQueueSize(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (SDKProcessorSpanQueueSize, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return SDKProcessorSpanQueueSize{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"otel.sdk.processor.span.queue.size",
 		append([]metric.Int64UpDownCounterOption{
@@ -1127,6 +1182,11 @@ func NewSDKSpanEndedCount(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (SDKSpanEndedCount, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return SDKSpanEndedCount{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"otel.sdk.span.ended.count",
 		append([]metric.Int64CounterOption{
@@ -1208,6 +1268,11 @@ func NewSDKSpanLiveCount(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (SDKSpanLiveCount, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return SDKSpanLiveCount{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"otel.sdk.span.live.count",
 		append([]metric.Int64UpDownCounterOption{

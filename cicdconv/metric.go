@@ -97,6 +97,11 @@ func NewPipelineRunActive(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (PipelineRunActive, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return PipelineRunActive{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"cicd.pipeline.run.active",
 		append([]metric.Int64UpDownCounterOption{
@@ -176,6 +181,11 @@ func NewPipelineRunDuration(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (PipelineRunDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return PipelineRunDuration{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"cicd.pipeline.run.duration",
 		append([]metric.Float64HistogramOption{
@@ -271,6 +281,11 @@ func NewPipelineRunErrors(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (PipelineRunErrors, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return PipelineRunErrors{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"cicd.pipeline.run.errors",
 		append([]metric.Int64CounterOption{
@@ -354,6 +369,11 @@ func NewSystemErrors(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (SystemErrors, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return SystemErrors{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"cicd.system.errors",
 		append([]metric.Int64CounterOption{
@@ -434,6 +454,11 @@ func NewWorkerCount(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (WorkerCount, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return WorkerCount{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"cicd.worker.count",
 		append([]metric.Int64UpDownCounterOption{

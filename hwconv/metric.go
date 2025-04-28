@@ -86,6 +86,11 @@ func NewEnergy(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (Energy, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return Energy{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"hw.energy",
 		append([]metric.Int64CounterOption{
@@ -179,6 +184,11 @@ func NewErrors(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (Errors, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return Errors{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"hw.errors",
 		append([]metric.Int64CounterOption{
@@ -278,6 +288,11 @@ func NewHostAmbientTemperature(
 	m metric.Meter,
 	opt ...metric.Int64GaugeOption,
 ) (HostAmbientTemperature, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return HostAmbientTemperature{noop.Int64Gauge{}}, nil
+	}
+
 	i, err := m.Int64Gauge(
 		"hw.host.ambient_temperature",
 		append([]metric.Int64GaugeOption{
@@ -367,6 +382,11 @@ func NewHostEnergy(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (HostEnergy, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return HostEnergy{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"hw.host.energy",
 		append([]metric.Int64CounterOption{
@@ -462,6 +482,11 @@ func NewHostHeatingMargin(
 	m metric.Meter,
 	opt ...metric.Int64GaugeOption,
 ) (HostHeatingMargin, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return HostHeatingMargin{noop.Int64Gauge{}}, nil
+	}
+
 	i, err := m.Int64Gauge(
 		"hw.host.heating_margin",
 		append([]metric.Int64GaugeOption{
@@ -551,6 +576,11 @@ func NewHostPower(
 	m metric.Meter,
 	opt ...metric.Int64GaugeOption,
 ) (HostPower, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return HostPower{noop.Int64Gauge{}}, nil
+	}
+
 	i, err := m.Int64Gauge(
 		"hw.host.power",
 		append([]metric.Int64GaugeOption{
@@ -645,6 +675,11 @@ func NewPower(
 	m metric.Meter,
 	opt ...metric.Int64GaugeOption,
 ) (Power, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return Power{noop.Int64Gauge{}}, nil
+	}
+
 	i, err := m.Int64Gauge(
 		"hw.power",
 		append([]metric.Int64GaugeOption{
@@ -740,6 +775,11 @@ func NewStatus(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (Status, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return Status{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"hw.status",
 		append([]metric.Int64UpDownCounterOption{

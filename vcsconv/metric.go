@@ -153,6 +153,11 @@ func NewChangeCount(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (ChangeCount, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ChangeCount{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"vcs.change.count",
 		append([]metric.Int64UpDownCounterOption{
@@ -258,6 +263,11 @@ func NewChangeDuration(
 	m metric.Meter,
 	opt ...metric.Float64GaugeOption,
 ) (ChangeDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ChangeDuration{noop.Float64Gauge{}}, nil
+	}
+
 	i, err := m.Float64Gauge(
 		"vcs.change.duration",
 		append([]metric.Float64GaugeOption{
@@ -370,6 +380,11 @@ func NewChangeTimeToApproval(
 	m metric.Meter,
 	opt ...metric.Float64GaugeOption,
 ) (ChangeTimeToApproval, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ChangeTimeToApproval{noop.Float64Gauge{}}, nil
+	}
+
 	i, err := m.Float64Gauge(
 		"vcs.change.time_to_approval",
 		append([]metric.Float64GaugeOption{
@@ -506,6 +521,11 @@ func NewChangeTimeToMerge(
 	m metric.Meter,
 	opt ...metric.Float64GaugeOption,
 ) (ChangeTimeToMerge, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ChangeTimeToMerge{noop.Float64Gauge{}}, nil
+	}
+
 	i, err := m.Float64Gauge(
 		"vcs.change.time_to_merge",
 		append([]metric.Float64GaugeOption{
@@ -641,6 +661,11 @@ func NewContributorCount(
 	m metric.Meter,
 	opt ...metric.Int64GaugeOption,
 ) (ContributorCount, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ContributorCount{noop.Int64Gauge{}}, nil
+	}
+
 	i, err := m.Int64Gauge(
 		"vcs.contributor.count",
 		append([]metric.Int64GaugeOption{
@@ -741,6 +766,11 @@ func NewRefCount(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (RefCount, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return RefCount{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"vcs.ref.count",
 		append([]metric.Int64UpDownCounterOption{
@@ -847,6 +877,11 @@ func NewRefLinesDelta(
 	m metric.Meter,
 	opt ...metric.Int64GaugeOption,
 ) (RefLinesDelta, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return RefLinesDelta{noop.Int64Gauge{}}, nil
+	}
+
 	i, err := m.Int64Gauge(
 		"vcs.ref.lines_delta",
 		append([]metric.Int64GaugeOption{
@@ -990,6 +1025,11 @@ func NewRefRevisionsDelta(
 	m metric.Meter,
 	opt ...metric.Int64GaugeOption,
 ) (RefRevisionsDelta, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return RefRevisionsDelta{noop.Int64Gauge{}}, nil
+	}
+
 	i, err := m.Int64Gauge(
 		"vcs.ref.revisions_delta",
 		append([]metric.Int64GaugeOption{
@@ -1130,6 +1170,11 @@ func NewRefTime(
 	m metric.Meter,
 	opt ...metric.Float64GaugeOption,
 ) (RefTime, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return RefTime{noop.Float64Gauge{}}, nil
+	}
+
 	i, err := m.Float64Gauge(
 		"vcs.ref.time",
 		append([]metric.Float64GaugeOption{
@@ -1241,6 +1286,11 @@ func NewRepositoryCount(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (RepositoryCount, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return RepositoryCount{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"vcs.repository.count",
 		append([]metric.Int64UpDownCounterOption{

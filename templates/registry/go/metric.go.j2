@@ -50,6 +50,11 @@ func New{{ metric_name }}(
 	m metric.Meter,
 	opt ...metric.{{ metric_inst}}Option,
 ) ({{ metric_name }}, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return {{metric_name}}{noop.{{ metric_inst }}{}}, nil
+	}
+
 	i, err := m.{{ metric_inst }}(
 		"{{metric.metric_name}}",
 		append([]metric.{{ metric_inst }}Option{

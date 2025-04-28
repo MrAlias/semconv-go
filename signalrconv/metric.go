@@ -58,6 +58,11 @@ func NewServerActiveConnections(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (ServerActiveConnections, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ServerActiveConnections{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"signalr.server.active_connections",
 		append([]metric.Int64UpDownCounterOption{
@@ -145,6 +150,11 @@ func NewServerConnectionDuration(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ServerConnectionDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ServerConnectionDuration{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"signalr.server.connection.duration",
 		append([]metric.Float64HistogramOption{

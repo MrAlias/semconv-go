@@ -252,6 +252,11 @@ func NewClientConnectionCount(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (ClientConnectionCount, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientConnectionCount{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"db.client.connection.count",
 		append([]metric.Int64UpDownCounterOption{
@@ -336,6 +341,11 @@ func NewClientConnectionCreateTime(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ClientConnectionCreateTime, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientConnectionCreateTime{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"db.client.connection.create_time",
 		append([]metric.Float64HistogramOption{
@@ -415,6 +425,11 @@ func NewClientConnectionIdleMax(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (ClientConnectionIdleMax, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientConnectionIdleMax{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"db.client.connection.idle.max",
 		append([]metric.Int64UpDownCounterOption{
@@ -494,6 +509,11 @@ func NewClientConnectionIdleMin(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (ClientConnectionIdleMin, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientConnectionIdleMin{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"db.client.connection.idle.min",
 		append([]metric.Int64UpDownCounterOption{
@@ -573,6 +593,11 @@ func NewClientConnectionMax(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (ClientConnectionMax, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientConnectionMax{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"db.client.connection.max",
 		append([]metric.Int64UpDownCounterOption{
@@ -654,6 +679,11 @@ func NewClientConnectionPendingRequests(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (ClientConnectionPendingRequests, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientConnectionPendingRequests{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"db.client.connection.pending_requests",
 		append([]metric.Int64UpDownCounterOption{
@@ -734,6 +764,11 @@ func NewClientConnectionTimeouts(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (ClientConnectionTimeouts, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientConnectionTimeouts{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"db.client.connection.timeouts",
 		append([]metric.Int64CounterOption{
@@ -814,6 +849,11 @@ func NewClientConnectionUseTime(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ClientConnectionUseTime, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientConnectionUseTime{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"db.client.connection.use_time",
 		append([]metric.Float64HistogramOption{
@@ -893,6 +933,11 @@ func NewClientConnectionWaitTime(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ClientConnectionWaitTime, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientConnectionWaitTime{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"db.client.connection.wait_time",
 		append([]metric.Float64HistogramOption{
@@ -972,6 +1017,11 @@ func NewClientOperationDuration(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ClientOperationDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientOperationDuration{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"db.client.operation.duration",
 		append([]metric.Float64HistogramOption{
@@ -1132,6 +1182,11 @@ func NewClientResponseReturnedRows(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (ClientResponseReturnedRows, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientResponseReturnedRows{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"db.client.response.returned_rows",
 		append([]metric.Int64HistogramOption{

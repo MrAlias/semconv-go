@@ -38,6 +38,11 @@ func NewLookupDuration(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (LookupDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return LookupDuration{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"dns.lookup.duration",
 		append([]metric.Float64HistogramOption{

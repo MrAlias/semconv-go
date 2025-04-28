@@ -60,6 +60,11 @@ func NewCosmosDBClientActiveInstanceCount(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (CosmosDBClientActiveInstanceCount, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return CosmosDBClientActiveInstanceCount{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"azure.cosmosdb.client.active_instance.count",
 		append([]metric.Int64UpDownCounterOption{
@@ -145,6 +150,11 @@ func NewCosmosDBClientOperationRequestCharge(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (CosmosDBClientOperationRequestCharge, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return CosmosDBClientOperationRequestCharge{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"azure.cosmosdb.client.operation.request_charge",
 		append([]metric.Int64HistogramOption{

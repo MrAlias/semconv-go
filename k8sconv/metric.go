@@ -56,6 +56,11 @@ func NewCronJobActiveJobs(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (CronJobActiveJobs, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return CronJobActiveJobs{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.cronjob.active_jobs",
 		append([]metric.Int64UpDownCounterOption{
@@ -129,6 +134,11 @@ func NewDaemonSetCurrentScheduledNodes(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (DaemonSetCurrentScheduledNodes, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return DaemonSetCurrentScheduledNodes{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.daemonset.current_scheduled_nodes",
 		append([]metric.Int64UpDownCounterOption{
@@ -202,6 +212,11 @@ func NewDaemonSetDesiredScheduledNodes(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (DaemonSetDesiredScheduledNodes, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return DaemonSetDesiredScheduledNodes{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.daemonset.desired_scheduled_nodes",
 		append([]metric.Int64UpDownCounterOption{
@@ -275,6 +290,11 @@ func NewDaemonSetMisscheduledNodes(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (DaemonSetMisscheduledNodes, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return DaemonSetMisscheduledNodes{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.daemonset.misscheduled_nodes",
 		append([]metric.Int64UpDownCounterOption{
@@ -347,6 +367,11 @@ func NewDaemonSetReadyNodes(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (DaemonSetReadyNodes, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return DaemonSetReadyNodes{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.daemonset.ready_nodes",
 		append([]metric.Int64UpDownCounterOption{
@@ -419,6 +444,11 @@ func NewDeploymentAvailablePods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (DeploymentAvailablePods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return DeploymentAvailablePods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.deployment.available_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -490,6 +520,11 @@ func NewDeploymentDesiredPods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (DeploymentDesiredPods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return DeploymentDesiredPods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.deployment.desired_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -562,6 +597,11 @@ func NewHpaCurrentPods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (HpaCurrentPods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return HpaCurrentPods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.hpa.current_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -634,6 +674,11 @@ func NewHpaDesiredPods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (HpaDesiredPods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return HpaDesiredPods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.hpa.desired_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -705,6 +750,11 @@ func NewHpaMaxPods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (HpaMaxPods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return HpaMaxPods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.hpa.max_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -776,6 +826,11 @@ func NewHpaMinPods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (HpaMinPods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return HpaMinPods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.hpa.min_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -847,6 +902,11 @@ func NewJobActivePods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (JobActivePods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return JobActivePods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.job.active_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -919,6 +979,11 @@ func NewJobDesiredSuccessfulPods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (JobDesiredSuccessfulPods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return JobDesiredSuccessfulPods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.job.desired_successful_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -990,6 +1055,11 @@ func NewJobFailedPods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (JobFailedPods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return JobFailedPods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.job.failed_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -1061,6 +1131,11 @@ func NewJobMaxParallelPods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (JobMaxParallelPods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return JobMaxParallelPods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.job.max_parallel_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -1132,6 +1207,11 @@ func NewJobSuccessfulPods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (JobSuccessfulPods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return JobSuccessfulPods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.job.successful_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -1203,6 +1283,11 @@ func NewNamespacePhase(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (NamespacePhase, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return NamespacePhase{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.namespace.phase",
 		append([]metric.Int64UpDownCounterOption{
@@ -1281,6 +1366,11 @@ func NewNodeCPUTime(
 	m metric.Meter,
 	opt ...metric.Float64CounterOption,
 ) (NodeCPUTime, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return NodeCPUTime{noop.Float64Counter{}}, nil
+	}
+
 	i, err := m.Float64Counter(
 		"k8s.node.cpu.time",
 		append([]metric.Float64CounterOption{
@@ -1345,6 +1435,11 @@ func NewNodeCPUUsage(
 	m metric.Meter,
 	opt ...metric.Int64GaugeOption,
 ) (NodeCPUUsage, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return NodeCPUUsage{noop.Int64Gauge{}}, nil
+	}
+
 	i, err := m.Int64Gauge(
 		"k8s.node.cpu.usage",
 		append([]metric.Int64GaugeOption{
@@ -1409,6 +1504,11 @@ func NewNodeMemoryUsage(
 	m metric.Meter,
 	opt ...metric.Int64GaugeOption,
 ) (NodeMemoryUsage, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return NodeMemoryUsage{noop.Int64Gauge{}}, nil
+	}
+
 	i, err := m.Int64Gauge(
 		"k8s.node.memory.usage",
 		append([]metric.Int64GaugeOption{
@@ -1472,6 +1572,11 @@ func NewNodeNetworkErrors(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (NodeNetworkErrors, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return NodeNetworkErrors{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"k8s.node.network.errors",
 		append([]metric.Int64CounterOption{
@@ -1555,6 +1660,11 @@ func NewNodeNetworkIO(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (NodeNetworkIO, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return NodeNetworkIO{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"k8s.node.network.io",
 		append([]metric.Int64CounterOption{
@@ -1638,6 +1748,11 @@ func NewNodeUptime(
 	m metric.Meter,
 	opt ...metric.Float64GaugeOption,
 ) (NodeUptime, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return NodeUptime{noop.Float64Gauge{}}, nil
+	}
+
 	i, err := m.Float64Gauge(
 		"k8s.node.uptime",
 		append([]metric.Float64GaugeOption{
@@ -1703,6 +1818,11 @@ func NewPodCPUTime(
 	m metric.Meter,
 	opt ...metric.Float64CounterOption,
 ) (PodCPUTime, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return PodCPUTime{noop.Float64Counter{}}, nil
+	}
+
 	i, err := m.Float64Counter(
 		"k8s.pod.cpu.time",
 		append([]metric.Float64CounterOption{
@@ -1767,6 +1887,11 @@ func NewPodCPUUsage(
 	m metric.Meter,
 	opt ...metric.Int64GaugeOption,
 ) (PodCPUUsage, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return PodCPUUsage{noop.Int64Gauge{}}, nil
+	}
+
 	i, err := m.Int64Gauge(
 		"k8s.pod.cpu.usage",
 		append([]metric.Int64GaugeOption{
@@ -1831,6 +1956,11 @@ func NewPodMemoryUsage(
 	m metric.Meter,
 	opt ...metric.Int64GaugeOption,
 ) (PodMemoryUsage, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return PodMemoryUsage{noop.Int64Gauge{}}, nil
+	}
+
 	i, err := m.Int64Gauge(
 		"k8s.pod.memory.usage",
 		append([]metric.Int64GaugeOption{
@@ -1894,6 +2024,11 @@ func NewPodNetworkErrors(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (PodNetworkErrors, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return PodNetworkErrors{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"k8s.pod.network.errors",
 		append([]metric.Int64CounterOption{
@@ -1977,6 +2112,11 @@ func NewPodNetworkIO(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (PodNetworkIO, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return PodNetworkIO{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"k8s.pod.network.io",
 		append([]metric.Int64CounterOption{
@@ -2060,6 +2200,11 @@ func NewPodUptime(
 	m metric.Meter,
 	opt ...metric.Float64GaugeOption,
 ) (PodUptime, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return PodUptime{noop.Float64Gauge{}}, nil
+	}
+
 	i, err := m.Float64Gauge(
 		"k8s.pod.uptime",
 		append([]metric.Float64GaugeOption{
@@ -2126,6 +2271,11 @@ func NewReplicaSetAvailablePods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (ReplicaSetAvailablePods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ReplicaSetAvailablePods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.replicaset.available_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -2197,6 +2347,11 @@ func NewReplicaSetDesiredPods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (ReplicaSetDesiredPods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ReplicaSetDesiredPods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.replicaset.desired_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -2270,6 +2425,11 @@ func NewReplicationControllerAvailablePods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (ReplicationControllerAvailablePods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ReplicationControllerAvailablePods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.replicationcontroller.available_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -2343,6 +2503,11 @@ func NewReplicationControllerDesiredPods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (ReplicationControllerDesiredPods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ReplicationControllerDesiredPods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.replicationcontroller.desired_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -2415,6 +2580,11 @@ func NewStatefulSetCurrentPods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (StatefulSetCurrentPods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return StatefulSetCurrentPods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.statefulset.current_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -2486,6 +2656,11 @@ func NewStatefulSetDesiredPods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (StatefulSetDesiredPods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return StatefulSetDesiredPods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.statefulset.desired_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -2557,6 +2732,11 @@ func NewStatefulSetReadyPods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (StatefulSetReadyPods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return StatefulSetReadyPods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.statefulset.ready_pods",
 		append([]metric.Int64UpDownCounterOption{
@@ -2629,6 +2809,11 @@ func NewStatefulSetUpdatedPods(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (StatefulSetUpdatedPods, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return StatefulSetUpdatedPods{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"k8s.statefulset.updated_pods",
 		append([]metric.Int64UpDownCounterOption{

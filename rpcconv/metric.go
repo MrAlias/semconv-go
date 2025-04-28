@@ -28,6 +28,11 @@ func NewClientDuration(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ClientDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientDuration{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"rpc.client.duration",
 		append([]metric.Float64HistogramOption{
@@ -94,6 +99,11 @@ func NewClientRequestSize(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (ClientRequestSize, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientRequestSize{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"rpc.client.request.size",
 		append([]metric.Int64HistogramOption{
@@ -157,6 +167,11 @@ func NewClientRequestsPerRPC(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (ClientRequestsPerRPC, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientRequestsPerRPC{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"rpc.client.requests_per_rpc",
 		append([]metric.Int64HistogramOption{
@@ -222,6 +237,11 @@ func NewClientResponseSize(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (ClientResponseSize, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientResponseSize{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"rpc.client.response.size",
 		append([]metric.Int64HistogramOption{
@@ -285,6 +305,11 @@ func NewClientResponsesPerRPC(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (ClientResponsesPerRPC, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientResponsesPerRPC{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"rpc.client.responses_per_rpc",
 		append([]metric.Int64HistogramOption{
@@ -350,6 +375,11 @@ func NewServerDuration(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ServerDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ServerDuration{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"rpc.server.duration",
 		append([]metric.Float64HistogramOption{
@@ -416,6 +446,11 @@ func NewServerRequestSize(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (ServerRequestSize, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ServerRequestSize{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"rpc.server.request.size",
 		append([]metric.Int64HistogramOption{
@@ -479,6 +514,11 @@ func NewServerRequestsPerRPC(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (ServerRequestsPerRPC, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ServerRequestsPerRPC{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"rpc.server.requests_per_rpc",
 		append([]metric.Int64HistogramOption{
@@ -544,6 +584,11 @@ func NewServerResponseSize(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (ServerResponseSize, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ServerResponseSize{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"rpc.server.response.size",
 		append([]metric.Int64HistogramOption{
@@ -607,6 +652,11 @@ func NewServerResponsesPerRPC(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (ServerResponsesPerRPC, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ServerResponsesPerRPC{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"rpc.server.responses_per_rpc",
 		append([]metric.Int64HistogramOption{

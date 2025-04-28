@@ -93,6 +93,11 @@ func NewClientConsumedMessages(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (ClientConsumedMessages, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientConsumedMessages{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"messaging.client.consumed.messages",
 		append([]metric.Int64CounterOption{
@@ -237,6 +242,11 @@ func NewClientOperationDuration(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ClientOperationDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientOperationDuration{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"messaging.client.operation.duration",
 		append([]metric.Float64HistogramOption{
@@ -383,6 +393,11 @@ func NewClientSentMessages(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (ClientSentMessages, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientSentMessages{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"messaging.client.sent.messages",
 		append([]metric.Int64CounterOption{
@@ -508,6 +523,11 @@ func NewProcessDuration(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ProcessDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ProcessDuration{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"messaging.process.duration",
 		append([]metric.Float64HistogramOption{

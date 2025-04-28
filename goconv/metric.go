@@ -41,6 +41,11 @@ func NewConfigGogc(
 	m metric.Meter,
 	opt ...metric.Int64ObservableUpDownCounterOption,
 ) (ConfigGogc, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ConfigGogc{noop.Int64ObservableUpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64ObservableUpDownCounter(
 		"go.config.gogc",
 		append([]metric.Int64ObservableUpDownCounterOption{
@@ -86,6 +91,11 @@ func NewGoroutineCount(
 	m metric.Meter,
 	opt ...metric.Int64ObservableUpDownCounterOption,
 ) (GoroutineCount, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return GoroutineCount{noop.Int64ObservableUpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64ObservableUpDownCounter(
 		"go.goroutine.count",
 		append([]metric.Int64ObservableUpDownCounterOption{
@@ -131,6 +141,11 @@ func NewMemoryAllocated(
 	m metric.Meter,
 	opt ...metric.Int64ObservableCounterOption,
 ) (MemoryAllocated, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return MemoryAllocated{noop.Int64ObservableCounter{}}, nil
+	}
+
 	i, err := m.Int64ObservableCounter(
 		"go.memory.allocated",
 		append([]metric.Int64ObservableCounterOption{
@@ -176,6 +191,11 @@ func NewMemoryAllocations(
 	m metric.Meter,
 	opt ...metric.Int64ObservableCounterOption,
 ) (MemoryAllocations, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return MemoryAllocations{noop.Int64ObservableCounter{}}, nil
+	}
+
 	i, err := m.Int64ObservableCounter(
 		"go.memory.allocations",
 		append([]metric.Int64ObservableCounterOption{
@@ -221,6 +241,11 @@ func NewMemoryGCGoal(
 	m metric.Meter,
 	opt ...metric.Int64ObservableUpDownCounterOption,
 ) (MemoryGCGoal, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return MemoryGCGoal{noop.Int64ObservableUpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64ObservableUpDownCounter(
 		"go.memory.gc.goal",
 		append([]metric.Int64ObservableUpDownCounterOption{
@@ -266,6 +291,11 @@ func NewMemoryLimit(
 	m metric.Meter,
 	opt ...metric.Int64ObservableUpDownCounterOption,
 ) (MemoryLimit, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return MemoryLimit{noop.Int64ObservableUpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64ObservableUpDownCounter(
 		"go.memory.limit",
 		append([]metric.Int64ObservableUpDownCounterOption{
@@ -311,6 +341,11 @@ func NewMemoryUsed(
 	m metric.Meter,
 	opt ...metric.Int64ObservableCounterOption,
 ) (MemoryUsed, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return MemoryUsed{noop.Int64ObservableCounter{}}, nil
+	}
+
 	i, err := m.Int64ObservableCounter(
 		"go.memory.used",
 		append([]metric.Int64ObservableCounterOption{
@@ -362,6 +397,11 @@ func NewProcessorLimit(
 	m metric.Meter,
 	opt ...metric.Int64ObservableUpDownCounterOption,
 ) (ProcessorLimit, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ProcessorLimit{noop.Int64ObservableUpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64ObservableUpDownCounter(
 		"go.processor.limit",
 		append([]metric.Int64ObservableUpDownCounterOption{
@@ -408,6 +448,11 @@ func NewScheduleDuration(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ScheduleDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ScheduleDuration{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"go.schedule.duration",
 		append([]metric.Float64HistogramOption{

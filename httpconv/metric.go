@@ -91,6 +91,11 @@ func NewClientActiveRequests(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (ClientActiveRequests, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientActiveRequests{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"http.client.active_requests",
 		append([]metric.Int64UpDownCounterOption{
@@ -199,6 +204,11 @@ func NewClientConnectionDuration(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ClientConnectionDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientConnectionDuration{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"http.client.connection.duration",
 		append([]metric.Float64HistogramOption{
@@ -306,6 +316,11 @@ func NewClientOpenConnections(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (ClientOpenConnections, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientOpenConnections{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"http.client.open_connections",
 		append([]metric.Int64UpDownCounterOption{
@@ -417,6 +432,11 @@ func NewClientRequestBodySize(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (ClientRequestBodySize, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientRequestBodySize{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"http.client.request.body.size",
 		append([]metric.Int64HistogramOption{
@@ -562,6 +582,11 @@ func NewClientRequestDuration(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ClientRequestDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientRequestDuration{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"http.client.request.duration",
 		append([]metric.Float64HistogramOption{
@@ -700,6 +725,11 @@ func NewClientResponseBodySize(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (ClientResponseBodySize, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ClientResponseBodySize{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"http.client.response.body.size",
 		append([]metric.Int64HistogramOption{
@@ -845,6 +875,11 @@ func NewServerActiveRequests(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (ServerActiveRequests, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ServerActiveRequests{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"http.server.active_requests",
 		append([]metric.Int64UpDownCounterOption{
@@ -940,6 +975,11 @@ func NewServerRequestBodySize(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (ServerRequestBodySize, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ServerRequestBodySize{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"http.server.request.body.size",
 		append([]metric.Int64HistogramOption{
@@ -1088,6 +1128,11 @@ func NewServerRequestDuration(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (ServerRequestDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ServerRequestDuration{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"http.server.request.duration",
 		append([]metric.Float64HistogramOption{
@@ -1229,6 +1274,11 @@ func NewServerResponseBodySize(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (ServerResponseBodySize, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ServerResponseBodySize{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"http.server.response.body.size",
 		append([]metric.Int64HistogramOption{

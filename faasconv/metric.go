@@ -48,6 +48,11 @@ func NewColdstarts(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (Coldstarts, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return Coldstarts{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"faas.coldstarts",
 		append([]metric.Int64CounterOption{
@@ -124,6 +129,11 @@ func NewCPUUsage(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (CPUUsage, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return CPUUsage{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"faas.cpu_usage",
 		append([]metric.Float64HistogramOption{
@@ -200,6 +210,11 @@ func NewErrors(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (Errors, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return Errors{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"faas.errors",
 		append([]metric.Int64CounterOption{
@@ -276,6 +291,11 @@ func NewInitDuration(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (InitDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return InitDuration{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"faas.init_duration",
 		append([]metric.Float64HistogramOption{
@@ -352,6 +372,11 @@ func NewInvocations(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (Invocations, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return Invocations{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"faas.invocations",
 		append([]metric.Int64CounterOption{
@@ -428,6 +453,11 @@ func NewInvokeDuration(
 	m metric.Meter,
 	opt ...metric.Float64HistogramOption,
 ) (InvokeDuration, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return InvokeDuration{noop.Float64Histogram{}}, nil
+	}
+
 	i, err := m.Float64Histogram(
 		"faas.invoke_duration",
 		append([]metric.Float64HistogramOption{
@@ -504,6 +534,11 @@ func NewMemUsage(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (MemUsage, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return MemUsage{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"faas.mem_usage",
 		append([]metric.Int64HistogramOption{
@@ -580,6 +615,11 @@ func NewNetIO(
 	m metric.Meter,
 	opt ...metric.Int64HistogramOption,
 ) (NetIO, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return NetIO{noop.Int64Histogram{}}, nil
+	}
+
 	i, err := m.Int64Histogram(
 		"faas.net_io",
 		append([]metric.Int64HistogramOption{
@@ -656,6 +696,11 @@ func NewTimeouts(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (Timeouts, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return Timeouts{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"faas.timeouts",
 		append([]metric.Int64CounterOption{

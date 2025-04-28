@@ -51,6 +51,11 @@ func NewFrequency(
 	m metric.Meter,
 	opt ...metric.Int64GaugeOption,
 ) (Frequency, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return Frequency{noop.Int64Gauge{}}, nil
+	}
+
 	i, err := m.Int64Gauge(
 		"cpu.frequency",
 		append([]metric.Int64GaugeOption{
@@ -126,6 +131,11 @@ func NewTime(
 	m metric.Meter,
 	opt ...metric.Float64ObservableCounterOption,
 ) (Time, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return Time{noop.Float64ObservableCounter{}}, nil
+	}
+
 	i, err := m.Float64ObservableCounter(
 		"cpu.time",
 		append([]metric.Float64ObservableCounterOption{
@@ -184,6 +194,11 @@ func NewUtilization(
 	m metric.Meter,
 	opt ...metric.Int64GaugeOption,
 ) (Utilization, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return Utilization{noop.Int64Gauge{}}, nil
+	}
+
 	i, err := m.Int64Gauge(
 		"cpu.utilization",
 		append([]metric.Int64GaugeOption{

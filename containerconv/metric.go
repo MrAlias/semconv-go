@@ -75,6 +75,11 @@ func NewCPUTime(
 	m metric.Meter,
 	opt ...metric.Float64CounterOption,
 ) (CPUTime, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return CPUTime{noop.Float64Counter{}}, nil
+	}
+
 	i, err := m.Float64Counter(
 		"container.cpu.time",
 		append([]metric.Float64CounterOption{
@@ -154,6 +159,11 @@ func NewCPUUsage(
 	m metric.Meter,
 	opt ...metric.Int64GaugeOption,
 ) (CPUUsage, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return CPUUsage{noop.Int64Gauge{}}, nil
+	}
+
 	i, err := m.Int64Gauge(
 		"container.cpu.usage",
 		append([]metric.Int64GaugeOption{
@@ -234,6 +244,11 @@ func NewDiskIO(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (DiskIO, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return DiskIO{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"container.disk.io",
 		append([]metric.Int64CounterOption{
@@ -318,6 +333,11 @@ func NewMemoryUsage(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (MemoryUsage, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return MemoryUsage{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"container.memory.usage",
 		append([]metric.Int64CounterOption{
@@ -382,6 +402,11 @@ func NewNetworkIO(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (NetworkIO, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return NetworkIO{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"container.network.io",
 		append([]metric.Int64CounterOption{
@@ -467,6 +492,11 @@ func NewUptime(
 	m metric.Meter,
 	opt ...metric.Float64GaugeOption,
 ) (Uptime, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return Uptime{noop.Float64Gauge{}}, nil
+	}
+
 	i, err := m.Float64Gauge(
 		"container.uptime",
 		append([]metric.Float64GaugeOption{

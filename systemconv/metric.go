@@ -212,6 +212,11 @@ func NewCPULogicalCount(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (CPULogicalCount, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return CPULogicalCount{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"system.cpu.logical.count",
 		append([]metric.Int64UpDownCounterOption{
@@ -277,6 +282,11 @@ func NewCPUPhysicalCount(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (CPUPhysicalCount, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return CPUPhysicalCount{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"system.cpu.physical.count",
 		append([]metric.Int64UpDownCounterOption{
@@ -341,6 +351,11 @@ func NewDiskIO(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (DiskIO, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return DiskIO{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"system.disk.io",
 		append([]metric.Int64CounterOption{
@@ -417,6 +432,11 @@ func NewDiskIOTime(
 	m metric.Meter,
 	opt ...metric.Float64CounterOption,
 ) (DiskIOTime, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return DiskIOTime{noop.Float64Counter{}}, nil
+	}
+
 	i, err := m.Float64Counter(
 		"system.disk.io_time",
 		append([]metric.Float64CounterOption{
@@ -504,6 +524,11 @@ func NewDiskLimit(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (DiskLimit, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return DiskLimit{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"system.disk.limit",
 		append([]metric.Int64UpDownCounterOption{
@@ -578,6 +603,11 @@ func NewDiskMerged(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (DiskMerged, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return DiskMerged{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"system.disk.merged",
 		append([]metric.Int64CounterOption{
@@ -654,6 +684,11 @@ func NewDiskOperationTime(
 	m metric.Meter,
 	opt ...metric.Float64CounterOption,
 ) (DiskOperationTime, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return DiskOperationTime{noop.Float64Counter{}}, nil
+	}
+
 	i, err := m.Float64Counter(
 		"system.disk.operation_time",
 		append([]metric.Float64CounterOption{
@@ -744,6 +779,11 @@ func NewDiskOperations(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (DiskOperations, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return DiskOperations{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"system.disk.operations",
 		append([]metric.Int64CounterOption{
@@ -820,6 +860,11 @@ func NewFilesystemLimit(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (FilesystemLimit, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return FilesystemLimit{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"system.filesystem.limit",
 		append([]metric.Int64UpDownCounterOption{
@@ -917,6 +962,11 @@ func NewFilesystemUsage(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (FilesystemUsage, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return FilesystemUsage{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"system.filesystem.usage",
 		append([]metric.Int64UpDownCounterOption{
@@ -1025,6 +1075,11 @@ func NewFilesystemUtilization(
 	m metric.Meter,
 	opt ...metric.Int64GaugeOption,
 ) (FilesystemUtilization, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return FilesystemUtilization{noop.Int64Gauge{}}, nil
+	}
+
 	i, err := m.Int64Gauge(
 		"system.filesystem.utilization",
 		append([]metric.Int64GaugeOption{
@@ -1125,6 +1180,11 @@ func NewLinuxMemoryAvailable(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (LinuxMemoryAvailable, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return LinuxMemoryAvailable{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"system.linux.memory.available",
 		append([]metric.Int64UpDownCounterOption{
@@ -1198,6 +1258,11 @@ func NewLinuxMemorySlabUsage(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (LinuxMemorySlabUsage, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return LinuxMemorySlabUsage{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"system.linux.memory.slab.usage",
 		append([]metric.Int64UpDownCounterOption{
@@ -1283,6 +1348,11 @@ func NewMemoryLimit(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (MemoryLimit, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return MemoryLimit{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"system.memory.limit",
 		append([]metric.Int64UpDownCounterOption{
@@ -1347,6 +1417,11 @@ func NewMemoryShared(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (MemoryShared, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return MemoryShared{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"system.memory.shared",
 		append([]metric.Int64UpDownCounterOption{
@@ -1415,6 +1490,11 @@ func NewMemoryUsage(
 	m metric.Meter,
 	opt ...metric.Int64ObservableGaugeOption,
 ) (MemoryUsage, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return MemoryUsage{noop.Int64ObservableGauge{}}, nil
+	}
+
 	i, err := m.Int64ObservableGauge(
 		"system.memory.usage",
 		append([]metric.Int64ObservableGaugeOption{
@@ -1465,6 +1545,11 @@ func NewMemoryUtilization(
 	m metric.Meter,
 	opt ...metric.Float64ObservableGaugeOption,
 ) (MemoryUtilization, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return MemoryUtilization{noop.Float64ObservableGauge{}}, nil
+	}
+
 	i, err := m.Float64ObservableGauge(
 		"system.memory.utilization",
 		append([]metric.Float64ObservableGaugeOption{
@@ -1510,6 +1595,11 @@ func NewNetworkConnections(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (NetworkConnections, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return NetworkConnections{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"system.network.connections",
 		append([]metric.Int64UpDownCounterOption{
@@ -1598,6 +1688,11 @@ func NewNetworkDropped(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (NetworkDropped, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return NetworkDropped{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"system.network.dropped",
 		append([]metric.Int64CounterOption{
@@ -1692,6 +1787,11 @@ func NewNetworkErrors(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (NetworkErrors, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return NetworkErrors{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"system.network.errors",
 		append([]metric.Int64CounterOption{
@@ -1785,6 +1885,11 @@ func NewNetworkIO(
 	m metric.Meter,
 	opt ...metric.Int64ObservableCounterOption,
 ) (NetworkIO, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return NetworkIO{noop.Int64ObservableCounter{}}, nil
+	}
+
 	i, err := m.Int64ObservableCounter(
 		"system.network.io",
 		append([]metric.Int64ObservableCounterOption{
@@ -1838,6 +1943,11 @@ func NewNetworkPackets(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (NetworkPackets, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return NetworkPackets{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"system.network.packets",
 		append([]metric.Int64CounterOption{
@@ -1914,6 +2024,11 @@ func NewPagingFaults(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (PagingFaults, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return PagingFaults{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"system.paging.faults",
 		append([]metric.Int64CounterOption{
@@ -1983,6 +2098,11 @@ func NewPagingOperations(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (PagingOperations, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return PagingOperations{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"system.paging.operations",
 		append([]metric.Int64CounterOption{
@@ -2060,6 +2180,11 @@ func NewPagingUsage(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (PagingUsage, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return PagingUsage{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"system.paging.usage",
 		append([]metric.Int64UpDownCounterOption{
@@ -2141,6 +2266,11 @@ func NewPagingUtilization(
 	m metric.Meter,
 	opt ...metric.Int64GaugeOption,
 ) (PagingUtilization, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return PagingUtilization{noop.Int64Gauge{}}, nil
+	}
+
 	i, err := m.Int64Gauge(
 		"system.paging.utilization",
 		append([]metric.Int64GaugeOption{
@@ -2218,6 +2348,11 @@ func NewProcessCount(
 	m metric.Meter,
 	opt ...metric.Int64UpDownCounterOption,
 ) (ProcessCount, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ProcessCount{noop.Int64UpDownCounter{}}, nil
+	}
+
 	i, err := m.Int64UpDownCounter(
 		"system.process.count",
 		append([]metric.Int64UpDownCounterOption{
@@ -2296,6 +2431,11 @@ func NewProcessCreated(
 	m metric.Meter,
 	opt ...metric.Int64CounterOption,
 ) (ProcessCreated, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return ProcessCreated{noop.Int64Counter{}}, nil
+	}
+
 	i, err := m.Int64Counter(
 		"system.process.created",
 		append([]metric.Int64CounterOption{
@@ -2358,6 +2498,11 @@ func NewUptime(
 	m metric.Meter,
 	opt ...metric.Float64GaugeOption,
 ) (Uptime, error) {
+	// Check if the meter is nil.
+	if m == nil {
+		return Uptime{noop.Float64Gauge{}}, nil
+	}
+
 	i, err := m.Float64Gauge(
 		"system.uptime",
 		append([]metric.Float64GaugeOption{
