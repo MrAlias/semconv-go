@@ -1,4 +1,7 @@
-.DEFAULT_GOAL := generate
+.DEFAULT_GOAL := all
+
+.PHONY: all
+all: generate lint
 
 # The weaver docker image to use for semconv-generate.
 WEAVER_IMAGE := $(shell awk '$$4=="weaver" {print $$2}' ./dependencies.Dockerfile)
@@ -33,3 +36,22 @@ generate:
 		--future \
 		go \
 		/home/weaver/target
+
+TOOLS = $(CURDIR)/.tools
+
+$(TOOLS):
+	@mkdir -p $@
+$(TOOLS)/%: ./internal/tools/go.mod | $(TOOLS)
+	@cd ./internal/tools && go build -o $@ $(PACKAGE)
+
+GOLANGCI_LINT = $(TOOLS)/golangci-lint
+$(TOOLS)/golangci-lint: PACKAGE=github.com/golangci/golangci-lint/v2/cmd/golangci-lint
+
+.PHONY: tools
+tools: $(GOLANGCI_LINT)
+
+.PHONY: lint lint-fix
+lint-fix: ARGS=--fix
+lint-fix: lint
+lint: $(GOLANGCI_LINT)
+	@$(GOLANGCI_LINT) run --allow-serial-runners $(ARGS)
