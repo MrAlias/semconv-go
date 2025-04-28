@@ -25,7 +25,7 @@ func NewClientDuration(m metric.Meter) (ClientDuration, error) {
 	    metric.WithUnit("ms"),
 	)
 	if err != nil {
-	    return ClientDuration{inst: noop.Float64Histogram{}}, err
+	    return ClientDuration{noop.Float64Histogram{}}, err
 	}
 	return ClientDuration{i}, nil
 }
@@ -79,7 +79,7 @@ func NewClientRequestSize(m metric.Meter) (ClientRequestSize, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return ClientRequestSize{inst: noop.Int64Histogram{}}, err
+	    return ClientRequestSize{noop.Int64Histogram{}}, err
 	}
 	return ClientRequestSize{i}, nil
 }
@@ -130,7 +130,7 @@ func NewClientRequestsPerRPC(m metric.Meter) (ClientRequestsPerRPC, error) {
 	    metric.WithUnit("{count}"),
 	)
 	if err != nil {
-	    return ClientRequestsPerRPC{inst: noop.Int64Histogram{}}, err
+	    return ClientRequestsPerRPC{noop.Int64Histogram{}}, err
 	}
 	return ClientRequestsPerRPC{i}, nil
 }
@@ -183,7 +183,7 @@ func NewClientResponseSize(m metric.Meter) (ClientResponseSize, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return ClientResponseSize{inst: noop.Int64Histogram{}}, err
+	    return ClientResponseSize{noop.Int64Histogram{}}, err
 	}
 	return ClientResponseSize{i}, nil
 }
@@ -234,7 +234,7 @@ func NewClientResponsesPerRPC(m metric.Meter) (ClientResponsesPerRPC, error) {
 	    metric.WithUnit("{count}"),
 	)
 	if err != nil {
-	    return ClientResponsesPerRPC{inst: noop.Int64Histogram{}}, err
+	    return ClientResponsesPerRPC{noop.Int64Histogram{}}, err
 	}
 	return ClientResponsesPerRPC{i}, nil
 }
@@ -287,7 +287,7 @@ func NewServerDuration(m metric.Meter) (ServerDuration, error) {
 	    metric.WithUnit("ms"),
 	)
 	if err != nil {
-	    return ServerDuration{inst: noop.Float64Histogram{}}, err
+	    return ServerDuration{noop.Float64Histogram{}}, err
 	}
 	return ServerDuration{i}, nil
 }
@@ -341,7 +341,7 @@ func NewServerRequestSize(m metric.Meter) (ServerRequestSize, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return ServerRequestSize{inst: noop.Int64Histogram{}}, err
+	    return ServerRequestSize{noop.Int64Histogram{}}, err
 	}
 	return ServerRequestSize{i}, nil
 }
@@ -392,7 +392,7 @@ func NewServerRequestsPerRPC(m metric.Meter) (ServerRequestsPerRPC, error) {
 	    metric.WithUnit("{count}"),
 	)
 	if err != nil {
-	    return ServerRequestsPerRPC{inst: noop.Int64Histogram{}}, err
+	    return ServerRequestsPerRPC{noop.Int64Histogram{}}, err
 	}
 	return ServerRequestsPerRPC{i}, nil
 }
@@ -445,7 +445,7 @@ func NewServerResponseSize(m metric.Meter) (ServerResponseSize, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return ServerResponseSize{inst: noop.Int64Histogram{}}, err
+	    return ServerResponseSize{noop.Int64Histogram{}}, err
 	}
 	return ServerResponseSize{i}, nil
 }
@@ -496,7 +496,7 @@ func NewServerResponsesPerRPC(m metric.Meter) (ServerResponsesPerRPC, error) {
 	    metric.WithUnit("{count}"),
 	)
 	if err != nil {
-	    return ServerResponsesPerRPC{inst: noop.Int64Histogram{}}, err
+	    return ServerResponsesPerRPC{noop.Int64Histogram{}}, err
 	}
 	return ServerResponsesPerRPC{i}, nil
 }

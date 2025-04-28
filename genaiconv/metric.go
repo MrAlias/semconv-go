@@ -109,7 +109,7 @@ func NewClientOperationDuration(m metric.Meter) (ClientOperationDuration, error)
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ClientOperationDuration{inst: noop.Float64Histogram{}}, err
+	    return ClientOperationDuration{noop.Float64Histogram{}}, err
 	}
 	return ClientOperationDuration{i}, nil
 }
@@ -210,7 +210,7 @@ func NewClientTokenUsage(m metric.Meter) (ClientTokenUsage, error) {
 	    metric.WithUnit("{token}"),
 	)
 	if err != nil {
-	    return ClientTokenUsage{inst: noop.Int64Histogram{}}, err
+	    return ClientTokenUsage{noop.Int64Histogram{}}, err
 	}
 	return ClientTokenUsage{i}, nil
 }
@@ -309,7 +309,7 @@ func NewServerRequestDuration(m metric.Meter) (ServerRequestDuration, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ServerRequestDuration{inst: noop.Float64Histogram{}}, err
+	    return ServerRequestDuration{noop.Float64Histogram{}}, err
 	}
 	return ServerRequestDuration{i}, nil
 }
@@ -411,7 +411,7 @@ func NewServerTimePerOutputToken(m metric.Meter) (ServerTimePerOutputToken, erro
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ServerTimePerOutputToken{inst: noop.Float64Histogram{}}, err
+	    return ServerTimePerOutputToken{noop.Float64Histogram{}}, err
 	}
 	return ServerTimePerOutputToken{i}, nil
 }
@@ -505,7 +505,7 @@ func NewServerTimeToFirstToken(m metric.Meter) (ServerTimeToFirstToken, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ServerTimeToFirstToken{inst: noop.Float64Histogram{}}, err
+	    return ServerTimeToFirstToken{noop.Float64Histogram{}}, err
 	}
 	return ServerTimeToFirstToken{i}, nil
 }

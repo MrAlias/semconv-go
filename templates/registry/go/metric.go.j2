@@ -36,7 +36,11 @@ var (
 
 {{ h.metric_typedoc(metric, ctx.root_namespace) | comment | trim }}
 type {{ metric_name }} struct {
+{%- if "Observable" is in metric_inst %}
+	metric.{{ metric_inst }}
+{%- else %}
 	inst metric.{{ metric_inst }}
+{%- endif %}
 }
 
 {{ ["New" ~ metric_name ~ " returns a new " ~ metric_name ~ " instrument."] | comment }}
@@ -47,14 +51,18 @@ func New{{ metric_name }}(m metric.Meter) ({{ metric_name }}, error) {
 	    metric.WithUnit("{{metric.unit}}"),
 	)
 	if err != nil {
-	    return {{metric_name}}{inst: noop.{{ metric_inst }}{}}, err
+	    return {{metric_name}}{noop.{{ metric_inst }}{}}, err
 	}
 	return {{ metric_name }}{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
 func (m {{ metric_name }}) Inst() metric.{{ metric_inst }} {
+{%- if "Observable" is in metric_inst %}
+	return m.{{ metric_inst }}
+{%- else %}
 	return m.inst
+{%- endif %}
 }
 
 // Name returns the semantic convention name of the instrument.

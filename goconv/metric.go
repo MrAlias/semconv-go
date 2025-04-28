@@ -27,7 +27,7 @@ var (
 // "go.config.gogc" semantic conventions. It represents the heap size target
 // percentage configured by the user, otherwise 100.
 type ConfigGogc struct {
-	inst metric.Int64ObservableUpDownCounter
+	metric.Int64ObservableUpDownCounter
 }
 
 // NewConfigGogc returns a new ConfigGogc instrument.
@@ -38,14 +38,14 @@ func NewConfigGogc(m metric.Meter) (ConfigGogc, error) {
 	    metric.WithUnit("%"),
 	)
 	if err != nil {
-	    return ConfigGogc{inst: noop.Int64ObservableUpDownCounter{}}, err
+	    return ConfigGogc{noop.Int64ObservableUpDownCounter{}}, err
 	}
 	return ConfigGogc{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
 func (m ConfigGogc) Inst() metric.Int64ObservableUpDownCounter {
-	return m.inst
+	return m.Int64ObservableUpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -67,7 +67,7 @@ func (ConfigGogc) Description() string {
 // "go.goroutine.count" semantic conventions. It represents the count of live
 // goroutines.
 type GoroutineCount struct {
-	inst metric.Int64ObservableUpDownCounter
+	metric.Int64ObservableUpDownCounter
 }
 
 // NewGoroutineCount returns a new GoroutineCount instrument.
@@ -78,14 +78,14 @@ func NewGoroutineCount(m metric.Meter) (GoroutineCount, error) {
 	    metric.WithUnit("{goroutine}"),
 	)
 	if err != nil {
-	    return GoroutineCount{inst: noop.Int64ObservableUpDownCounter{}}, err
+	    return GoroutineCount{noop.Int64ObservableUpDownCounter{}}, err
 	}
 	return GoroutineCount{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
 func (m GoroutineCount) Inst() metric.Int64ObservableUpDownCounter {
-	return m.inst
+	return m.Int64ObservableUpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -107,7 +107,7 @@ func (GoroutineCount) Description() string {
 // the "go.memory.allocated" semantic conventions. It represents the memory
 // allocated to the heap by the application.
 type MemoryAllocated struct {
-	inst metric.Int64ObservableCounter
+	metric.Int64ObservableCounter
 }
 
 // NewMemoryAllocated returns a new MemoryAllocated instrument.
@@ -118,14 +118,14 @@ func NewMemoryAllocated(m metric.Meter) (MemoryAllocated, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return MemoryAllocated{inst: noop.Int64ObservableCounter{}}, err
+	    return MemoryAllocated{noop.Int64ObservableCounter{}}, err
 	}
 	return MemoryAllocated{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
 func (m MemoryAllocated) Inst() metric.Int64ObservableCounter {
-	return m.inst
+	return m.Int64ObservableCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -147,7 +147,7 @@ func (MemoryAllocated) Description() string {
 // the "go.memory.allocations" semantic conventions. It represents the count of
 // allocations to the heap by the application.
 type MemoryAllocations struct {
-	inst metric.Int64ObservableCounter
+	metric.Int64ObservableCounter
 }
 
 // NewMemoryAllocations returns a new MemoryAllocations instrument.
@@ -158,14 +158,14 @@ func NewMemoryAllocations(m metric.Meter) (MemoryAllocations, error) {
 	    metric.WithUnit("{allocation}"),
 	)
 	if err != nil {
-	    return MemoryAllocations{inst: noop.Int64ObservableCounter{}}, err
+	    return MemoryAllocations{noop.Int64ObservableCounter{}}, err
 	}
 	return MemoryAllocations{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
 func (m MemoryAllocations) Inst() metric.Int64ObservableCounter {
-	return m.inst
+	return m.Int64ObservableCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -187,7 +187,7 @@ func (MemoryAllocations) Description() string {
 // "go.memory.gc.goal" semantic conventions. It represents the heap size target
 // for the end of the GC cycle.
 type MemoryGCGoal struct {
-	inst metric.Int64ObservableUpDownCounter
+	metric.Int64ObservableUpDownCounter
 }
 
 // NewMemoryGCGoal returns a new MemoryGCGoal instrument.
@@ -198,14 +198,14 @@ func NewMemoryGCGoal(m metric.Meter) (MemoryGCGoal, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return MemoryGCGoal{inst: noop.Int64ObservableUpDownCounter{}}, err
+	    return MemoryGCGoal{noop.Int64ObservableUpDownCounter{}}, err
 	}
 	return MemoryGCGoal{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
 func (m MemoryGCGoal) Inst() metric.Int64ObservableUpDownCounter {
-	return m.inst
+	return m.Int64ObservableUpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -227,7 +227,7 @@ func (MemoryGCGoal) Description() string {
 // "go.memory.limit" semantic conventions. It represents the go runtime memory
 // limit configured by the user, if a limit exists.
 type MemoryLimit struct {
-	inst metric.Int64ObservableUpDownCounter
+	metric.Int64ObservableUpDownCounter
 }
 
 // NewMemoryLimit returns a new MemoryLimit instrument.
@@ -238,14 +238,14 @@ func NewMemoryLimit(m metric.Meter) (MemoryLimit, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return MemoryLimit{inst: noop.Int64ObservableUpDownCounter{}}, err
+	    return MemoryLimit{noop.Int64ObservableUpDownCounter{}}, err
 	}
 	return MemoryLimit{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
 func (m MemoryLimit) Inst() metric.Int64ObservableUpDownCounter {
-	return m.inst
+	return m.Int64ObservableUpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -267,7 +267,7 @@ func (MemoryLimit) Description() string {
 // "go.memory.used" semantic conventions. It represents the memory used by the Go
 // runtime.
 type MemoryUsed struct {
-	inst metric.Int64ObservableCounter
+	metric.Int64ObservableCounter
 }
 
 // NewMemoryUsed returns a new MemoryUsed instrument.
@@ -278,14 +278,14 @@ func NewMemoryUsed(m metric.Meter) (MemoryUsed, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return MemoryUsed{inst: noop.Int64ObservableCounter{}}, err
+	    return MemoryUsed{noop.Int64ObservableCounter{}}, err
 	}
 	return MemoryUsed{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
 func (m MemoryUsed) Inst() metric.Int64ObservableCounter {
-	return m.inst
+	return m.Int64ObservableCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -313,7 +313,7 @@ func (MemoryUsed) AttrMemoryType(val MemoryTypeAttr) attribute.KeyValue {
 // "go.processor.limit" semantic conventions. It represents the number of OS
 // threads that can execute user-level Go code simultaneously.
 type ProcessorLimit struct {
-	inst metric.Int64ObservableUpDownCounter
+	metric.Int64ObservableUpDownCounter
 }
 
 // NewProcessorLimit returns a new ProcessorLimit instrument.
@@ -324,14 +324,14 @@ func NewProcessorLimit(m metric.Meter) (ProcessorLimit, error) {
 	    metric.WithUnit("{thread}"),
 	)
 	if err != nil {
-	    return ProcessorLimit{inst: noop.Int64ObservableUpDownCounter{}}, err
+	    return ProcessorLimit{noop.Int64ObservableUpDownCounter{}}, err
 	}
 	return ProcessorLimit{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
 func (m ProcessorLimit) Inst() metric.Int64ObservableUpDownCounter {
-	return m.inst
+	return m.Int64ObservableUpDownCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -365,7 +365,7 @@ func NewScheduleDuration(m metric.Meter) (ScheduleDuration, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return ScheduleDuration{inst: noop.Float64Histogram{}}, err
+	    return ScheduleDuration{noop.Float64Histogram{}}, err
 	}
 	return ScheduleDuration{i}, nil
 }

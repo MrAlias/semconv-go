@@ -209,7 +209,7 @@ func NewCPULogicalCount(m metric.Meter) (CPULogicalCount, error) {
 	    metric.WithUnit("{cpu}"),
 	)
 	if err != nil {
-	    return CPULogicalCount{inst: noop.Int64UpDownCounter{}}, err
+	    return CPULogicalCount{noop.Int64UpDownCounter{}}, err
 	}
 	return CPULogicalCount{i}, nil
 }
@@ -261,7 +261,7 @@ func NewCPUPhysicalCount(m metric.Meter) (CPUPhysicalCount, error) {
 	    metric.WithUnit("{cpu}"),
 	)
 	if err != nil {
-	    return CPUPhysicalCount{inst: noop.Int64UpDownCounter{}}, err
+	    return CPUPhysicalCount{noop.Int64UpDownCounter{}}, err
 	}
 	return CPUPhysicalCount{i}, nil
 }
@@ -312,7 +312,7 @@ func NewDiskIO(m metric.Meter) (DiskIO, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return DiskIO{inst: noop.Int64Counter{}}, err
+	    return DiskIO{noop.Int64Counter{}}, err
 	}
 	return DiskIO{i}, nil
 }
@@ -376,7 +376,7 @@ func NewDiskIOTime(m metric.Meter) (DiskIOTime, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return DiskIOTime{inst: noop.Float64Counter{}}, err
+	    return DiskIOTime{noop.Float64Counter{}}, err
 	}
 	return DiskIOTime{i}, nil
 }
@@ -451,7 +451,7 @@ func NewDiskLimit(m metric.Meter) (DiskLimit, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return DiskLimit{inst: noop.Int64UpDownCounter{}}, err
+	    return DiskLimit{noop.Int64UpDownCounter{}}, err
 	}
 	return DiskLimit{i}, nil
 }
@@ -513,7 +513,7 @@ func NewDiskMerged(m metric.Meter) (DiskMerged, error) {
 	    metric.WithUnit("{operation}"),
 	)
 	if err != nil {
-	    return DiskMerged{inst: noop.Int64Counter{}}, err
+	    return DiskMerged{noop.Int64Counter{}}, err
 	}
 	return DiskMerged{i}, nil
 }
@@ -577,7 +577,7 @@ func NewDiskOperationTime(m metric.Meter) (DiskOperationTime, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return DiskOperationTime{inst: noop.Float64Counter{}}, err
+	    return DiskOperationTime{noop.Float64Counter{}}, err
 	}
 	return DiskOperationTime{i}, nil
 }
@@ -655,7 +655,7 @@ func NewDiskOperations(m metric.Meter) (DiskOperations, error) {
 	    metric.WithUnit("{operation}"),
 	)
 	if err != nil {
-	    return DiskOperations{inst: noop.Int64Counter{}}, err
+	    return DiskOperations{noop.Int64Counter{}}, err
 	}
 	return DiskOperations{i}, nil
 }
@@ -719,7 +719,7 @@ func NewFilesystemLimit(m metric.Meter) (FilesystemLimit, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return FilesystemLimit{inst: noop.Int64UpDownCounter{}}, err
+	    return FilesystemLimit{noop.Int64UpDownCounter{}}, err
 	}
 	return FilesystemLimit{i}, nil
 }
@@ -804,7 +804,7 @@ func NewFilesystemUsage(m metric.Meter) (FilesystemUsage, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return FilesystemUsage{inst: noop.Int64UpDownCounter{}}, err
+	    return FilesystemUsage{noop.Int64UpDownCounter{}}, err
 	}
 	return FilesystemUsage{i}, nil
 }
@@ -900,7 +900,7 @@ func NewFilesystemUtilization(m metric.Meter) (FilesystemUtilization, error) {
 	    metric.WithUnit("1"),
 	)
 	if err != nil {
-	    return FilesystemUtilization{inst: noop.Int64Gauge{}}, err
+	    return FilesystemUtilization{noop.Int64Gauge{}}, err
 	}
 	return FilesystemUtilization{i}, nil
 }
@@ -988,7 +988,7 @@ func NewLinuxMemoryAvailable(m metric.Meter) (LinuxMemoryAvailable, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return LinuxMemoryAvailable{inst: noop.Int64UpDownCounter{}}, err
+	    return LinuxMemoryAvailable{noop.Int64UpDownCounter{}}, err
 	}
 	return LinuxMemoryAvailable{i}, nil
 }
@@ -1048,7 +1048,7 @@ func NewLinuxMemorySlabUsage(m metric.Meter) (LinuxMemorySlabUsage, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return LinuxMemorySlabUsage{inst: noop.Int64UpDownCounter{}}, err
+	    return LinuxMemorySlabUsage{noop.Int64UpDownCounter{}}, err
 	}
 	return LinuxMemorySlabUsage{i}, nil
 }
@@ -1121,7 +1121,7 @@ func NewMemoryLimit(m metric.Meter) (MemoryLimit, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return MemoryLimit{inst: noop.Int64UpDownCounter{}}, err
+	    return MemoryLimit{noop.Int64UpDownCounter{}}, err
 	}
 	return MemoryLimit{i}, nil
 }
@@ -1172,7 +1172,7 @@ func NewMemoryShared(m metric.Meter) (MemoryShared, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return MemoryShared{inst: noop.Int64UpDownCounter{}}, err
+	    return MemoryShared{noop.Int64UpDownCounter{}}, err
 	}
 	return MemoryShared{i}, nil
 }
@@ -1216,7 +1216,7 @@ func (m MemoryShared) Add(ctx context.Context, incr int64, attrs ...attribute.Ke
 // "system.memory.usage" semantic conventions. It represents the reports memory
 // in use by state.
 type MemoryUsage struct {
-	inst metric.Int64ObservableGauge
+	metric.Int64ObservableGauge
 }
 
 // NewMemoryUsage returns a new MemoryUsage instrument.
@@ -1227,14 +1227,14 @@ func NewMemoryUsage(m metric.Meter) (MemoryUsage, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return MemoryUsage{inst: noop.Int64ObservableGauge{}}, err
+	    return MemoryUsage{noop.Int64ObservableGauge{}}, err
 	}
 	return MemoryUsage{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
 func (m MemoryUsage) Inst() metric.Int64ObservableGauge {
-	return m.inst
+	return m.Int64ObservableGauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1261,7 +1261,7 @@ func (MemoryUsage) AttrMemoryState(val MemoryStateAttr) attribute.KeyValue {
 // MemoryUtilization is an instrument used to record metric values conforming to
 // the "system.memory.utilization" semantic conventions.
 type MemoryUtilization struct {
-	inst metric.Float64ObservableGauge
+	metric.Float64ObservableGauge
 }
 
 // NewMemoryUtilization returns a new MemoryUtilization instrument.
@@ -1272,14 +1272,14 @@ func NewMemoryUtilization(m metric.Meter) (MemoryUtilization, error) {
 	    metric.WithUnit("1"),
 	)
 	if err != nil {
-	    return MemoryUtilization{inst: noop.Float64ObservableGauge{}}, err
+	    return MemoryUtilization{noop.Float64ObservableGauge{}}, err
 	}
 	return MemoryUtilization{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
 func (m MemoryUtilization) Inst() metric.Float64ObservableGauge {
-	return m.inst
+	return m.Float64ObservableGauge
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1312,7 +1312,7 @@ func NewNetworkConnections(m metric.Meter) (NetworkConnections, error) {
 	    metric.WithUnit("{connection}"),
 	)
 	if err != nil {
-	    return NetworkConnections{inst: noop.Int64UpDownCounter{}}, err
+	    return NetworkConnections{noop.Int64UpDownCounter{}}, err
 	}
 	return NetworkConnections{i}, nil
 }
@@ -1388,7 +1388,7 @@ func NewNetworkDropped(m metric.Meter) (NetworkDropped, error) {
 	    metric.WithUnit("{packet}"),
 	)
 	if err != nil {
-	    return NetworkDropped{inst: noop.Int64Counter{}}, err
+	    return NetworkDropped{noop.Int64Counter{}}, err
 	}
 	return NetworkDropped{i}, nil
 }
@@ -1470,7 +1470,7 @@ func NewNetworkErrors(m metric.Meter) (NetworkErrors, error) {
 	    metric.WithUnit("{error}"),
 	)
 	if err != nil {
-	    return NetworkErrors{inst: noop.Int64Counter{}}, err
+	    return NetworkErrors{noop.Int64Counter{}}, err
 	}
 	return NetworkErrors{i}, nil
 }
@@ -1540,7 +1540,7 @@ func (NetworkErrors) AttrNetworkIODirection(val NetworkIODirectionAttr) attribut
 // NetworkIO is an instrument used to record metric values conforming to the
 // "system.network.io" semantic conventions.
 type NetworkIO struct {
-	inst metric.Int64ObservableCounter
+	metric.Int64ObservableCounter
 }
 
 // NewNetworkIO returns a new NetworkIO instrument.
@@ -1551,14 +1551,14 @@ func NewNetworkIO(m metric.Meter) (NetworkIO, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return NetworkIO{inst: noop.Int64ObservableCounter{}}, err
+	    return NetworkIO{noop.Int64ObservableCounter{}}, err
 	}
 	return NetworkIO{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
 func (m NetworkIO) Inst() metric.Int64ObservableCounter {
-	return m.inst
+	return m.Int64ObservableCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -1599,7 +1599,7 @@ func NewNetworkPackets(m metric.Meter) (NetworkPackets, error) {
 	    metric.WithUnit("{packet}"),
 	)
 	if err != nil {
-	    return NetworkPackets{inst: noop.Int64Counter{}}, err
+	    return NetworkPackets{noop.Int64Counter{}}, err
 	}
 	return NetworkPackets{i}, nil
 }
@@ -1663,7 +1663,7 @@ func NewPagingFaults(m metric.Meter) (PagingFaults, error) {
 	    metric.WithUnit("{fault}"),
 	)
 	if err != nil {
-	    return PagingFaults{inst: noop.Int64Counter{}}, err
+	    return PagingFaults{noop.Int64Counter{}}, err
 	}
 	return PagingFaults{i}, nil
 }
@@ -1720,7 +1720,7 @@ func NewPagingOperations(m metric.Meter) (PagingOperations, error) {
 	    metric.WithUnit("{operation}"),
 	)
 	if err != nil {
-	    return PagingOperations{inst: noop.Int64Counter{}}, err
+	    return PagingOperations{noop.Int64Counter{}}, err
 	}
 	return PagingOperations{i}, nil
 }
@@ -1785,7 +1785,7 @@ func NewPagingUsage(m metric.Meter) (PagingUsage, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return PagingUsage{inst: noop.Int64UpDownCounter{}}, err
+	    return PagingUsage{noop.Int64UpDownCounter{}}, err
 	}
 	return PagingUsage{i}, nil
 }
@@ -1854,7 +1854,7 @@ func NewPagingUtilization(m metric.Meter) (PagingUtilization, error) {
 	    metric.WithUnit("1"),
 	)
 	if err != nil {
-	    return PagingUtilization{inst: noop.Int64Gauge{}}, err
+	    return PagingUtilization{noop.Int64Gauge{}}, err
 	}
 	return PagingUtilization{i}, nil
 }
@@ -1919,7 +1919,7 @@ func NewProcessCount(m metric.Meter) (ProcessCount, error) {
 	    metric.WithUnit("{process}"),
 	)
 	if err != nil {
-	    return ProcessCount{inst: noop.Int64UpDownCounter{}}, err
+	    return ProcessCount{noop.Int64UpDownCounter{}}, err
 	}
 	return ProcessCount{i}, nil
 }
@@ -1985,7 +1985,7 @@ func NewProcessCreated(m metric.Meter) (ProcessCreated, error) {
 	    metric.WithUnit("{process}"),
 	)
 	if err != nil {
-	    return ProcessCreated{inst: noop.Int64Counter{}}, err
+	    return ProcessCreated{noop.Int64Counter{}}, err
 	}
 	return ProcessCreated{i}, nil
 }
@@ -2034,7 +2034,7 @@ func NewUptime(m metric.Meter) (Uptime, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return Uptime{inst: noop.Float64Gauge{}}, err
+	    return Uptime{noop.Float64Gauge{}}, err
 	}
 	return Uptime{i}, nil
 }

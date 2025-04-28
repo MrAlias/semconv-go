@@ -53,7 +53,7 @@ func NewCronJobActiveJobs(m metric.Meter) (CronJobActiveJobs, error) {
 	    metric.WithUnit("{job}"),
 	)
 	if err != nil {
-	    return CronJobActiveJobs{inst: noop.Int64UpDownCounter{}}, err
+	    return CronJobActiveJobs{noop.Int64UpDownCounter{}}, err
 	}
 	return CronJobActiveJobs{i}, nil
 }
@@ -113,7 +113,7 @@ func NewDaemonSetCurrentScheduledNodes(m metric.Meter) (DaemonSetCurrentSchedule
 	    metric.WithUnit("{node}"),
 	)
 	if err != nil {
-	    return DaemonSetCurrentScheduledNodes{inst: noop.Int64UpDownCounter{}}, err
+	    return DaemonSetCurrentScheduledNodes{noop.Int64UpDownCounter{}}, err
 	}
 	return DaemonSetCurrentScheduledNodes{i}, nil
 }
@@ -173,7 +173,7 @@ func NewDaemonSetDesiredScheduledNodes(m metric.Meter) (DaemonSetDesiredSchedule
 	    metric.WithUnit("{node}"),
 	)
 	if err != nil {
-	    return DaemonSetDesiredScheduledNodes{inst: noop.Int64UpDownCounter{}}, err
+	    return DaemonSetDesiredScheduledNodes{noop.Int64UpDownCounter{}}, err
 	}
 	return DaemonSetDesiredScheduledNodes{i}, nil
 }
@@ -233,7 +233,7 @@ func NewDaemonSetMisscheduledNodes(m metric.Meter) (DaemonSetMisscheduledNodes, 
 	    metric.WithUnit("{node}"),
 	)
 	if err != nil {
-	    return DaemonSetMisscheduledNodes{inst: noop.Int64UpDownCounter{}}, err
+	    return DaemonSetMisscheduledNodes{noop.Int64UpDownCounter{}}, err
 	}
 	return DaemonSetMisscheduledNodes{i}, nil
 }
@@ -292,7 +292,7 @@ func NewDaemonSetReadyNodes(m metric.Meter) (DaemonSetReadyNodes, error) {
 	    metric.WithUnit("{node}"),
 	)
 	if err != nil {
-	    return DaemonSetReadyNodes{inst: noop.Int64UpDownCounter{}}, err
+	    return DaemonSetReadyNodes{noop.Int64UpDownCounter{}}, err
 	}
 	return DaemonSetReadyNodes{i}, nil
 }
@@ -351,7 +351,7 @@ func NewDeploymentAvailablePods(m metric.Meter) (DeploymentAvailablePods, error)
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return DeploymentAvailablePods{inst: noop.Int64UpDownCounter{}}, err
+	    return DeploymentAvailablePods{noop.Int64UpDownCounter{}}, err
 	}
 	return DeploymentAvailablePods{i}, nil
 }
@@ -409,7 +409,7 @@ func NewDeploymentDesiredPods(m metric.Meter) (DeploymentDesiredPods, error) {
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return DeploymentDesiredPods{inst: noop.Int64UpDownCounter{}}, err
+	    return DeploymentDesiredPods{noop.Int64UpDownCounter{}}, err
 	}
 	return DeploymentDesiredPods{i}, nil
 }
@@ -468,7 +468,7 @@ func NewHpaCurrentPods(m metric.Meter) (HpaCurrentPods, error) {
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return HpaCurrentPods{inst: noop.Int64UpDownCounter{}}, err
+	    return HpaCurrentPods{noop.Int64UpDownCounter{}}, err
 	}
 	return HpaCurrentPods{i}, nil
 }
@@ -527,7 +527,7 @@ func NewHpaDesiredPods(m metric.Meter) (HpaDesiredPods, error) {
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return HpaDesiredPods{inst: noop.Int64UpDownCounter{}}, err
+	    return HpaDesiredPods{noop.Int64UpDownCounter{}}, err
 	}
 	return HpaDesiredPods{i}, nil
 }
@@ -585,7 +585,7 @@ func NewHpaMaxPods(m metric.Meter) (HpaMaxPods, error) {
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return HpaMaxPods{inst: noop.Int64UpDownCounter{}}, err
+	    return HpaMaxPods{noop.Int64UpDownCounter{}}, err
 	}
 	return HpaMaxPods{i}, nil
 }
@@ -643,7 +643,7 @@ func NewHpaMinPods(m metric.Meter) (HpaMinPods, error) {
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return HpaMinPods{inst: noop.Int64UpDownCounter{}}, err
+	    return HpaMinPods{noop.Int64UpDownCounter{}}, err
 	}
 	return HpaMinPods{i}, nil
 }
@@ -701,7 +701,7 @@ func NewJobActivePods(m metric.Meter) (JobActivePods, error) {
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return JobActivePods{inst: noop.Int64UpDownCounter{}}, err
+	    return JobActivePods{noop.Int64UpDownCounter{}}, err
 	}
 	return JobActivePods{i}, nil
 }
@@ -760,7 +760,7 @@ func NewJobDesiredSuccessfulPods(m metric.Meter) (JobDesiredSuccessfulPods, erro
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return JobDesiredSuccessfulPods{inst: noop.Int64UpDownCounter{}}, err
+	    return JobDesiredSuccessfulPods{noop.Int64UpDownCounter{}}, err
 	}
 	return JobDesiredSuccessfulPods{i}, nil
 }
@@ -818,7 +818,7 @@ func NewJobFailedPods(m metric.Meter) (JobFailedPods, error) {
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return JobFailedPods{inst: noop.Int64UpDownCounter{}}, err
+	    return JobFailedPods{noop.Int64UpDownCounter{}}, err
 	}
 	return JobFailedPods{i}, nil
 }
@@ -876,7 +876,7 @@ func NewJobMaxParallelPods(m metric.Meter) (JobMaxParallelPods, error) {
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return JobMaxParallelPods{inst: noop.Int64UpDownCounter{}}, err
+	    return JobMaxParallelPods{noop.Int64UpDownCounter{}}, err
 	}
 	return JobMaxParallelPods{i}, nil
 }
@@ -934,7 +934,7 @@ func NewJobSuccessfulPods(m metric.Meter) (JobSuccessfulPods, error) {
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return JobSuccessfulPods{inst: noop.Int64UpDownCounter{}}, err
+	    return JobSuccessfulPods{noop.Int64UpDownCounter{}}, err
 	}
 	return JobSuccessfulPods{i}, nil
 }
@@ -992,7 +992,7 @@ func NewNamespacePhase(m metric.Meter) (NamespacePhase, error) {
 	    metric.WithUnit("{namespace}"),
 	)
 	if err != nil {
-	    return NamespacePhase{inst: noop.Int64UpDownCounter{}}, err
+	    return NamespacePhase{noop.Int64UpDownCounter{}}, err
 	}
 	return NamespacePhase{i}, nil
 }
@@ -1058,7 +1058,7 @@ func NewNodeCPUTime(m metric.Meter) (NodeCPUTime, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return NodeCPUTime{inst: noop.Float64Counter{}}, err
+	    return NodeCPUTime{noop.Float64Counter{}}, err
 	}
 	return NodeCPUTime{i}, nil
 }
@@ -1109,7 +1109,7 @@ func NewNodeCPUUsage(m metric.Meter) (NodeCPUUsage, error) {
 	    metric.WithUnit("{cpu}"),
 	)
 	if err != nil {
-	    return NodeCPUUsage{inst: noop.Int64Gauge{}}, err
+	    return NodeCPUUsage{noop.Int64Gauge{}}, err
 	}
 	return NodeCPUUsage{i}, nil
 }
@@ -1161,7 +1161,7 @@ func NewNodeMemoryUsage(m metric.Meter) (NodeMemoryUsage, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return NodeMemoryUsage{inst: noop.Int64Gauge{}}, err
+	    return NodeMemoryUsage{noop.Int64Gauge{}}, err
 	}
 	return NodeMemoryUsage{i}, nil
 }
@@ -1212,7 +1212,7 @@ func NewNodeNetworkErrors(m metric.Meter) (NodeNetworkErrors, error) {
 	    metric.WithUnit("{error}"),
 	)
 	if err != nil {
-	    return NodeNetworkErrors{inst: noop.Int64Counter{}}, err
+	    return NodeNetworkErrors{noop.Int64Counter{}}, err
 	}
 	return NodeNetworkErrors{i}, nil
 }
@@ -1283,7 +1283,7 @@ func NewNodeNetworkIO(m metric.Meter) (NodeNetworkIO, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return NodeNetworkIO{inst: noop.Int64Counter{}}, err
+	    return NodeNetworkIO{noop.Int64Counter{}}, err
 	}
 	return NodeNetworkIO{i}, nil
 }
@@ -1354,7 +1354,7 @@ func NewNodeUptime(m metric.Meter) (NodeUptime, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return NodeUptime{inst: noop.Float64Gauge{}}, err
+	    return NodeUptime{noop.Float64Gauge{}}, err
 	}
 	return NodeUptime{i}, nil
 }
@@ -1407,7 +1407,7 @@ func NewPodCPUTime(m metric.Meter) (PodCPUTime, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return PodCPUTime{inst: noop.Float64Counter{}}, err
+	    return PodCPUTime{noop.Float64Counter{}}, err
 	}
 	return PodCPUTime{i}, nil
 }
@@ -1458,7 +1458,7 @@ func NewPodCPUUsage(m metric.Meter) (PodCPUUsage, error) {
 	    metric.WithUnit("{cpu}"),
 	)
 	if err != nil {
-	    return PodCPUUsage{inst: noop.Int64Gauge{}}, err
+	    return PodCPUUsage{noop.Int64Gauge{}}, err
 	}
 	return PodCPUUsage{i}, nil
 }
@@ -1510,7 +1510,7 @@ func NewPodMemoryUsage(m metric.Meter) (PodMemoryUsage, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return PodMemoryUsage{inst: noop.Int64Gauge{}}, err
+	    return PodMemoryUsage{noop.Int64Gauge{}}, err
 	}
 	return PodMemoryUsage{i}, nil
 }
@@ -1561,7 +1561,7 @@ func NewPodNetworkErrors(m metric.Meter) (PodNetworkErrors, error) {
 	    metric.WithUnit("{error}"),
 	)
 	if err != nil {
-	    return PodNetworkErrors{inst: noop.Int64Counter{}}, err
+	    return PodNetworkErrors{noop.Int64Counter{}}, err
 	}
 	return PodNetworkErrors{i}, nil
 }
@@ -1632,7 +1632,7 @@ func NewPodNetworkIO(m metric.Meter) (PodNetworkIO, error) {
 	    metric.WithUnit("By"),
 	)
 	if err != nil {
-	    return PodNetworkIO{inst: noop.Int64Counter{}}, err
+	    return PodNetworkIO{noop.Int64Counter{}}, err
 	}
 	return PodNetworkIO{i}, nil
 }
@@ -1703,7 +1703,7 @@ func NewPodUptime(m metric.Meter) (PodUptime, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return PodUptime{inst: noop.Float64Gauge{}}, err
+	    return PodUptime{noop.Float64Gauge{}}, err
 	}
 	return PodUptime{i}, nil
 }
@@ -1757,7 +1757,7 @@ func NewReplicaSetAvailablePods(m metric.Meter) (ReplicaSetAvailablePods, error)
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return ReplicaSetAvailablePods{inst: noop.Int64UpDownCounter{}}, err
+	    return ReplicaSetAvailablePods{noop.Int64UpDownCounter{}}, err
 	}
 	return ReplicaSetAvailablePods{i}, nil
 }
@@ -1815,7 +1815,7 @@ func NewReplicaSetDesiredPods(m metric.Meter) (ReplicaSetDesiredPods, error) {
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return ReplicaSetDesiredPods{inst: noop.Int64UpDownCounter{}}, err
+	    return ReplicaSetDesiredPods{noop.Int64UpDownCounter{}}, err
 	}
 	return ReplicaSetDesiredPods{i}, nil
 }
@@ -1875,7 +1875,7 @@ func NewReplicationControllerAvailablePods(m metric.Meter) (ReplicationControlle
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return ReplicationControllerAvailablePods{inst: noop.Int64UpDownCounter{}}, err
+	    return ReplicationControllerAvailablePods{noop.Int64UpDownCounter{}}, err
 	}
 	return ReplicationControllerAvailablePods{i}, nil
 }
@@ -1935,7 +1935,7 @@ func NewReplicationControllerDesiredPods(m metric.Meter) (ReplicationControllerD
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return ReplicationControllerDesiredPods{inst: noop.Int64UpDownCounter{}}, err
+	    return ReplicationControllerDesiredPods{noop.Int64UpDownCounter{}}, err
 	}
 	return ReplicationControllerDesiredPods{i}, nil
 }
@@ -1994,7 +1994,7 @@ func NewStatefulSetCurrentPods(m metric.Meter) (StatefulSetCurrentPods, error) {
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return StatefulSetCurrentPods{inst: noop.Int64UpDownCounter{}}, err
+	    return StatefulSetCurrentPods{noop.Int64UpDownCounter{}}, err
 	}
 	return StatefulSetCurrentPods{i}, nil
 }
@@ -2052,7 +2052,7 @@ func NewStatefulSetDesiredPods(m metric.Meter) (StatefulSetDesiredPods, error) {
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return StatefulSetDesiredPods{inst: noop.Int64UpDownCounter{}}, err
+	    return StatefulSetDesiredPods{noop.Int64UpDownCounter{}}, err
 	}
 	return StatefulSetDesiredPods{i}, nil
 }
@@ -2110,7 +2110,7 @@ func NewStatefulSetReadyPods(m metric.Meter) (StatefulSetReadyPods, error) {
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return StatefulSetReadyPods{inst: noop.Int64UpDownCounter{}}, err
+	    return StatefulSetReadyPods{noop.Int64UpDownCounter{}}, err
 	}
 	return StatefulSetReadyPods{i}, nil
 }
@@ -2169,7 +2169,7 @@ func NewStatefulSetUpdatedPods(m metric.Meter) (StatefulSetUpdatedPods, error) {
 	    metric.WithUnit("{pod}"),
 	)
 	if err != nil {
-	    return StatefulSetUpdatedPods{inst: noop.Int64UpDownCounter{}}, err
+	    return StatefulSetUpdatedPods{noop.Int64UpDownCounter{}}, err
 	}
 	return StatefulSetUpdatedPods{i}, nil
 }

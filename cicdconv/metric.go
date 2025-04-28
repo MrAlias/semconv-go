@@ -94,7 +94,7 @@ func NewPipelineRunActive(m metric.Meter) (PipelineRunActive, error) {
 	    metric.WithUnit("{run}"),
 	)
 	if err != nil {
-	    return PipelineRunActive{inst: noop.Int64UpDownCounter{}}, err
+	    return PipelineRunActive{noop.Int64UpDownCounter{}}, err
 	}
 	return PipelineRunActive{i}, nil
 }
@@ -161,7 +161,7 @@ func NewPipelineRunDuration(m metric.Meter) (PipelineRunDuration, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return PipelineRunDuration{inst: noop.Float64Histogram{}}, err
+	    return PipelineRunDuration{noop.Float64Histogram{}}, err
 	}
 	return PipelineRunDuration{i}, nil
 }
@@ -244,7 +244,7 @@ func NewPipelineRunErrors(m metric.Meter) (PipelineRunErrors, error) {
 	    metric.WithUnit("{error}"),
 	)
 	if err != nil {
-	    return PipelineRunErrors{inst: noop.Int64Counter{}}, err
+	    return PipelineRunErrors{noop.Int64Counter{}}, err
 	}
 	return PipelineRunErrors{i}, nil
 }
@@ -315,7 +315,7 @@ func NewSystemErrors(m metric.Meter) (SystemErrors, error) {
 	    metric.WithUnit("{error}"),
 	)
 	if err != nil {
-	    return SystemErrors{inst: noop.Int64Counter{}}, err
+	    return SystemErrors{noop.Int64Counter{}}, err
 	}
 	return SystemErrors{i}, nil
 }
@@ -383,7 +383,7 @@ func NewWorkerCount(m metric.Meter) (WorkerCount, error) {
 	    metric.WithUnit("{count}"),
 	)
 	if err != nil {
-	    return WorkerCount{inst: noop.Int64UpDownCounter{}}, err
+	    return WorkerCount{noop.Int64UpDownCounter{}}, err
 	}
 	return WorkerCount{i}, nil
 }

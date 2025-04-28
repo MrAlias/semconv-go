@@ -48,7 +48,7 @@ func NewFrequency(m metric.Meter) (Frequency, error) {
 	    metric.WithUnit("Hz"),
 	)
 	if err != nil {
-	    return Frequency{inst: noop.Int64Gauge{}}, err
+	    return Frequency{noop.Int64Gauge{}}, err
 	}
 	return Frequency{i}, nil
 }
@@ -100,7 +100,7 @@ func (Frequency) AttrLogicalNumber(val int) attribute.KeyValue {
 // "cpu.time" semantic conventions. It represents the seconds each logical CPU
 // spent on each mode.
 type Time struct {
-	inst metric.Float64ObservableCounter
+	metric.Float64ObservableCounter
 }
 
 // NewTime returns a new Time instrument.
@@ -111,14 +111,14 @@ func NewTime(m metric.Meter) (Time, error) {
 	    metric.WithUnit("s"),
 	)
 	if err != nil {
-	    return Time{inst: noop.Float64ObservableCounter{}}, err
+	    return Time{noop.Float64ObservableCounter{}}, err
 	}
 	return Time{i}, nil
 }
 
 // Inst returns the underlying metric instrument.
 func (m Time) Inst() metric.Float64ObservableCounter {
-	return m.inst
+	return m.Float64ObservableCounter
 }
 
 // Name returns the semantic convention name of the instrument.
@@ -164,7 +164,7 @@ func NewUtilization(m metric.Meter) (Utilization, error) {
 	    metric.WithUnit("1"),
 	)
 	if err != nil {
-	    return Utilization{inst: noop.Int64Gauge{}}, err
+	    return Utilization{noop.Int64Gauge{}}, err
 	}
 	return Utilization{i}, nil
 }
