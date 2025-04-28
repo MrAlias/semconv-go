@@ -4,10 +4,16 @@ package genaiconv
 
 import (
 	"context"
+	"sync"
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/metric/noop"
+)
+
+var (
+	addOptPool = &sync.Pool{New: func() any { return &[]metric.AddOption{} }}
+	recOptPool = &sync.Pool{New: func() any { return &[]metric.RecordOption{} }}
 )
 
 // ErrorTypeAttr is an attribute conforming to the error.type semantic
@@ -149,9 +155,14 @@ func (m ClientOperationDuration) Record(
 	system SystemAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Float64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -160,6 +171,8 @@ func (m ClientOperationDuration) Record(
 			)...,
 		),
 	)
+
+	m.Float64Histogram.Record(ctx, val, *o...)
 }
 
 // AttrErrorType returns an optional attribute for the "error.type" semantic
@@ -253,9 +266,14 @@ func (m ClientTokenUsage) Record(
 	tokenType TokenTypeAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -265,6 +283,8 @@ func (m ClientTokenUsage) Record(
 			)...,
 		),
 	)
+
+	m.Int64Histogram.Record(ctx, val, *o...)
 }
 
 // AttrRequestModel returns an optional attribute for the "gen_ai.request.model"
@@ -349,9 +369,14 @@ func (m ServerRequestDuration) Record(
 	system SystemAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Float64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -360,6 +385,8 @@ func (m ServerRequestDuration) Record(
 			)...,
 		),
 	)
+
+	m.Float64Histogram.Record(ctx, val, *o...)
 }
 
 // AttrErrorType returns an optional attribute for the "error.type" semantic
@@ -451,9 +478,14 @@ func (m ServerTimePerOutputToken) Record(
 	system SystemAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Float64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -462,6 +494,8 @@ func (m ServerTimePerOutputToken) Record(
 			)...,
 		),
 	)
+
+	m.Float64Histogram.Record(ctx, val, *o...)
 }
 
 // AttrRequestModel returns an optional attribute for the "gen_ai.request.model"
@@ -545,9 +579,14 @@ func (m ServerTimeToFirstToken) Record(
 	system SystemAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Float64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -556,6 +595,8 @@ func (m ServerTimeToFirstToken) Record(
 			)...,
 		),
 	)
+
+	m.Float64Histogram.Record(ctx, val, *o...)
 }
 
 // AttrRequestModel returns an optional attribute for the "gen_ai.request.model"

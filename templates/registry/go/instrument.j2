@@ -115,11 +115,18 @@ func (m {{ name }}) Add(
 	incr {{ value_type(metric) | lower }},
 {{ params(metric.attributes, pkg=pkg, prefix="\t") }}
 ) {
-	m.{{ inst }}.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 {{ with_attributes_opt(metric.attributes, pkg=pkg, prefix="\t\t") }}
 	)
+
+	m.{{ inst }}.Add(ctx, incr, *o...)
 }
 {%- endmacro -%}
 
@@ -141,9 +148,17 @@ func (m {{ name }}) Add(
 func (m {{ h.to_go_name(metric.metric_name, pkg) }}) Add(ctx context.Context, incr {{ value_type(metric) | lower }}, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.{{ inst }}.Add(ctx, incr)
-	} else {
-		m.{{ inst }}.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.{{ inst }}.Add(ctx, incr, *o...)
 }
 {%- endif -%}
 {%- endmacro -%}
@@ -156,11 +171,18 @@ func (m {{ name }}) Record(
 	val {{ value_type(metric) | lower }},
 {{ params(metric.attributes, pkg=pkg, prefix="\t") }}
 ) {
-	m.{{ inst }}.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 {{ with_attributes_opt(metric.attributes, pkg=pkg, prefix="\t\t") }}
 	)
+
+	m.{{ inst }}.Record(ctx, val, *o...)
 }
 {%- endmacro -%}
 
@@ -183,9 +205,16 @@ func (m {{ name }}) Record(
 func (m {{ name }}) Record(ctx context.Context, val {{ value_type(metric) | lower }}, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.{{ inst }}.Record(ctx, val)
-	} else {
-		m.{{ inst }}.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.{{ inst }}.Record(ctx, val, *o...)
 }
 {%- endif -%}
 {%- endmacro -%}

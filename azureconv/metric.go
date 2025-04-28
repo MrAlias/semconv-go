@@ -4,10 +4,16 @@ package azureconv
 
 import (
 	"context"
+	"sync"
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/metric/noop"
+)
+
+var (
+	addOptPool = &sync.Pool{New: func() any { return &[]metric.AddOption{} }}
+	recOptPool = &sync.Pool{New: func() any { return &[]metric.RecordOption{} }}
 )
 
 // CosmosDBConsistencyLevelAttr is an attribute conforming to the
@@ -90,13 +96,20 @@ func (m CosmosDBClientActiveInstanceCount) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // AttrServerPort returns an optional attribute for the "server.port" semantic
@@ -163,13 +176,20 @@ func (m CosmosDBClientOperationRequestCharge) Record(
 	val int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Histogram.Record(ctx, val, *o...)
 }
 
 // AttrCosmosDBConsistencyLevel returns an optional attribute for the

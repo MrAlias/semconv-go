@@ -4,10 +4,16 @@ package otelconv
 
 import (
 	"context"
+	"sync"
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/metric/noop"
+)
+
+var (
+	addOptPool = &sync.Pool{New: func() any { return &[]metric.AddOption{} }}
+	recOptPool = &sync.Pool{New: func() any { return &[]metric.RecordOption{} }}
 )
 
 // ErrorTypeAttr is an attribute conforming to the error.type semantic
@@ -129,13 +135,20 @@ func (m SDKExporterLogExported) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // AttrErrorType returns an optional attribute for the "error.type" semantic
@@ -224,13 +237,20 @@ func (m SDKExporterLogInflight) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // AttrComponentName returns an optional attribute for the "otel.component.name"
@@ -318,13 +338,20 @@ func (m SDKExporterSpanExportedCount) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // AttrErrorType returns an optional attribute for the "error.type" semantic
@@ -415,13 +442,20 @@ func (m SDKExporterSpanInflightCount) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // AttrComponentName returns an optional attribute for the "otel.component.name"
@@ -495,9 +529,17 @@ func (SDKLogCreated) Description() string {
 func (m SDKLogCreated) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64Counter.Add(ctx, incr)
-	} else {
-		m.Int64Counter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // SDKProcessorLogProcessed is an instrument used to record metric values
@@ -555,13 +597,20 @@ func (m SDKProcessorLogProcessed) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // AttrErrorType returns an optional attribute for the "error.type" semantic
@@ -639,13 +688,20 @@ func (m SDKProcessorLogQueueCapacity) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // AttrComponentName returns an optional attribute for the "otel.component.name"
@@ -714,13 +770,20 @@ func (m SDKProcessorLogQueueSize) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // AttrComponentName returns an optional attribute for the "otel.component.name"
@@ -793,13 +856,20 @@ func (m SDKProcessorSpanProcessedCount) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // AttrErrorType returns an optional attribute for the "error.type" semantic
@@ -877,13 +947,20 @@ func (m SDKProcessorSpanQueueCapacity) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // AttrComponentName returns an optional attribute for the "otel.component.name"
@@ -953,13 +1030,20 @@ func (m SDKProcessorSpanQueueSize) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // AttrComponentName returns an optional attribute for the "otel.component.name"
@@ -1029,13 +1113,20 @@ func (m SDKSpanEndedCount) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // AttrSpanSamplingResult returns an optional attribute for the
@@ -1098,13 +1189,20 @@ func (m SDKSpanLiveCount) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // AttrSpanSamplingResult returns an optional attribute for the

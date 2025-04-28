@@ -4,10 +4,16 @@ package vcsconv
 
 import (
 	"context"
+	"sync"
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/metric/noop"
+)
+
+var (
+	addOptPool = &sync.Pool{New: func() any { return &[]metric.AddOption{} }}
+	recOptPool = &sync.Pool{New: func() any { return &[]metric.RecordOption{} }}
 )
 
 // ChangeStateAttr is an attribute conforming to the vcs.change.state semantic
@@ -194,9 +200,14 @@ func (m ChangeCount) Add(
 	repositoryUrlFull string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -205,6 +216,8 @@ func (m ChangeCount) Add(
 			)...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // AttrOwnerName returns an optional attribute for the "vcs.owner.name" semantic
@@ -292,9 +305,14 @@ func (m ChangeDuration) Record(
 	repositoryUrlFull string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Float64Gauge.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -304,6 +322,8 @@ func (m ChangeDuration) Record(
 			)...,
 		),
 	)
+
+	m.Float64Gauge.Record(ctx, val, *o...)
 }
 
 // AttrOwnerName returns an optional attribute for the "vcs.owner.name" semantic
@@ -388,9 +408,14 @@ func (m ChangeTimeToApproval) Record(
 	repositoryUrlFull string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Float64Gauge.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -399,6 +424,8 @@ func (m ChangeTimeToApproval) Record(
 			)...,
 		),
 	)
+
+	m.Float64Gauge.Record(ctx, val, *o...)
 }
 
 // AttrOwnerName returns an optional attribute for the "vcs.owner.name" semantic
@@ -512,9 +539,14 @@ func (m ChangeTimeToMerge) Record(
 	repositoryUrlFull string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Float64Gauge.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -523,6 +555,8 @@ func (m ChangeTimeToMerge) Record(
 			)...,
 		),
 	)
+
+	m.Float64Gauge.Record(ctx, val, *o...)
 }
 
 // AttrOwnerName returns an optional attribute for the "vcs.owner.name" semantic
@@ -630,9 +664,14 @@ func (m ContributorCount) Record(
 	repositoryUrlFull string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Gauge.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -640,6 +679,8 @@ func (m ContributorCount) Record(
 			)...,
 		),
 	)
+
+	m.Int64Gauge.Record(ctx, val, *o...)
 }
 
 // AttrOwnerName returns an optional attribute for the "vcs.owner.name" semantic
@@ -722,9 +763,14 @@ func (m RefCount) Add(
 	repositoryUrlFull string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -733,6 +779,8 @@ func (m RefCount) Add(
 			)...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // AttrOwnerName returns an optional attribute for the "vcs.owner.name" semantic
@@ -841,9 +889,14 @@ func (m RefLinesDelta) Record(
 	repositoryUrlFull string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Gauge.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -856,6 +909,8 @@ func (m RefLinesDelta) Record(
 			)...,
 		),
 	)
+
+	m.Int64Gauge.Record(ctx, val, *o...)
 }
 
 // AttrChangeID returns an optional attribute for the "vcs.change.id" semantic
@@ -969,9 +1024,14 @@ func (m RefRevisionsDelta) Record(
 	revisionDeltaDirection RevisionDeltaDirectionAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Gauge.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -984,6 +1044,8 @@ func (m RefRevisionsDelta) Record(
 			)...,
 		),
 	)
+
+	m.Int64Gauge.Record(ctx, val, *o...)
 }
 
 // AttrChangeID returns an optional attribute for the "vcs.change.id" semantic
@@ -1080,9 +1142,14 @@ func (m RefTime) Record(
 	repositoryUrlFull string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Float64Gauge.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -1092,6 +1159,8 @@ func (m RefTime) Record(
 			)...,
 		),
 	)
+
+	m.Float64Gauge.Record(ctx, val, *o...)
 }
 
 // AttrOwnerName returns an optional attribute for the "vcs.owner.name" semantic
@@ -1163,13 +1232,20 @@ func (m RepositoryCount) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // AttrOwnerName returns an optional attribute for the "vcs.owner.name" semantic

@@ -4,10 +4,16 @@ package dbconv
 
 import (
 	"context"
+	"sync"
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/metric/noop"
+)
+
+var (
+	addOptPool = &sync.Pool{New: func() any { return &[]metric.AddOption{} }}
+	recOptPool = &sync.Pool{New: func() any { return &[]metric.RecordOption{} }}
 )
 
 // ClientConnectionStateAttr is an attribute conforming to the
@@ -292,9 +298,14 @@ func (m ClientConnectionCount) Add(
 	clientConnectionState ClientConnectionStateAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -303,6 +314,8 @@ func (m ClientConnectionCount) Add(
 			)...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // ClientConnectionCreateTime is an instrument used to record metric values
@@ -361,9 +374,14 @@ func (m ClientConnectionCreateTime) Record(
 	clientConnectionPoolName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Float64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -371,6 +389,8 @@ func (m ClientConnectionCreateTime) Record(
 			)...,
 		),
 	)
+
+	m.Float64Histogram.Record(ctx, val, *o...)
 }
 
 // ClientConnectionIdleMax is an instrument used to record metric values
@@ -428,9 +448,14 @@ func (m ClientConnectionIdleMax) Add(
 	clientConnectionPoolName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -438,6 +463,8 @@ func (m ClientConnectionIdleMax) Add(
 			)...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // ClientConnectionIdleMin is an instrument used to record metric values
@@ -495,9 +522,14 @@ func (m ClientConnectionIdleMin) Add(
 	clientConnectionPoolName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -505,6 +537,8 @@ func (m ClientConnectionIdleMin) Add(
 			)...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // ClientConnectionMax is an instrument used to record metric values conforming
@@ -562,9 +596,14 @@ func (m ClientConnectionMax) Add(
 	clientConnectionPoolName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -572,6 +611,8 @@ func (m ClientConnectionMax) Add(
 			)...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // ClientConnectionPendingRequests is an instrument used to record metric values
@@ -631,9 +672,14 @@ func (m ClientConnectionPendingRequests) Add(
 	clientConnectionPoolName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -641,6 +687,8 @@ func (m ClientConnectionPendingRequests) Add(
 			)...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // ClientConnectionTimeouts is an instrument used to record metric values
@@ -699,9 +747,14 @@ func (m ClientConnectionTimeouts) Add(
 	clientConnectionPoolName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -709,6 +762,8 @@ func (m ClientConnectionTimeouts) Add(
 			)...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // ClientConnectionUseTime is an instrument used to record metric values
@@ -767,9 +822,14 @@ func (m ClientConnectionUseTime) Record(
 	clientConnectionPoolName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Float64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -777,6 +837,8 @@ func (m ClientConnectionUseTime) Record(
 			)...,
 		),
 	)
+
+	m.Float64Histogram.Record(ctx, val, *o...)
 }
 
 // ClientConnectionWaitTime is an instrument used to record metric values
@@ -834,9 +896,14 @@ func (m ClientConnectionWaitTime) Record(
 	clientConnectionPoolName string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Float64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -844,6 +911,8 @@ func (m ClientConnectionWaitTime) Record(
 			)...,
 		),
 	)
+
+	m.Float64Histogram.Record(ctx, val, *o...)
 }
 
 // ClientOperationDuration is an instrument used to record metric values
@@ -900,9 +969,14 @@ func (m ClientOperationDuration) Record(
 	systemName SystemNameAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Float64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -910,6 +984,8 @@ func (m ClientOperationDuration) Record(
 			)...,
 		),
 	)
+
+	m.Float64Histogram.Record(ctx, val, *o...)
 }
 
 // AttrCollectionName returns an optional attribute for the "db.collection.name"
@@ -1046,9 +1122,14 @@ func (m ClientResponseReturnedRows) Record(
 	systemName SystemNameAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -1056,6 +1137,8 @@ func (m ClientResponseReturnedRows) Record(
 			)...,
 		),
 	)
+
+	m.Int64Histogram.Record(ctx, val, *o...)
 }
 
 // AttrCollectionName returns an optional attribute for the "db.collection.name"

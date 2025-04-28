@@ -4,10 +4,16 @@ package cicdconv
 
 import (
 	"context"
+	"sync"
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/metric/noop"
+)
+
+var (
+	addOptPool = &sync.Pool{New: func() any { return &[]metric.AddOption{} }}
+	recOptPool = &sync.Pool{New: func() any { return &[]metric.RecordOption{} }}
 )
 
 // PipelineResultAttr is an attribute conforming to the cicd.pipeline.result
@@ -133,9 +139,14 @@ func (m PipelineRunActive) Add(
 	pipelineRunState PipelineRunStateAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -144,6 +155,8 @@ func (m PipelineRunActive) Add(
 			)...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // PipelineRunDuration is an instrument used to record metric values conforming
@@ -202,9 +215,14 @@ func (m PipelineRunDuration) Record(
 	pipelineRunState PipelineRunStateAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Float64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -213,6 +231,8 @@ func (m PipelineRunDuration) Record(
 			)...,
 		),
 	)
+
+	m.Float64Histogram.Record(ctx, val, *o...)
 }
 
 // AttrPipelineResult returns an optional attribute for the
@@ -287,9 +307,14 @@ func (m PipelineRunErrors) Add(
 	errorType ErrorTypeAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -298,6 +323,8 @@ func (m PipelineRunErrors) Add(
 			)...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // SystemErrors is an instrument used to record metric values conforming to the
@@ -355,9 +382,14 @@ func (m SystemErrors) Add(
 	errorType ErrorTypeAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -366,6 +398,8 @@ func (m SystemErrors) Add(
 			)...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // WorkerCount is an instrument used to record metric values conforming to the
@@ -417,9 +451,14 @@ func (m WorkerCount) Add(
 	workerState WorkerStateAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -427,4 +466,6 @@ func (m WorkerCount) Add(
 			)...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }

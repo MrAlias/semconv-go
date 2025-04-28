@@ -4,10 +4,16 @@ package httpconv
 
 import (
 	"context"
+	"sync"
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/metric/noop"
+)
+
+var (
+	addOptPool = &sync.Pool{New: func() any { return &[]metric.AddOption{} }}
+	recOptPool = &sync.Pool{New: func() any { return &[]metric.RecordOption{} }}
 )
 
 // ErrorTypeAttr is an attribute conforming to the error.type semantic
@@ -131,9 +137,14 @@ func (m ClientActiveRequests) Add(
 	serverPort int,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -142,6 +153,8 @@ func (m ClientActiveRequests) Add(
 			)...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // AttrURLTemplate returns an optional attribute for the "url.template" semantic
@@ -227,9 +240,14 @@ func (m ClientConnectionDuration) Record(
 	serverPort int,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Float64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -238,6 +256,8 @@ func (m ClientConnectionDuration) Record(
 			)...,
 		),
 	)
+
+	m.Float64Histogram.Record(ctx, val, *o...)
 }
 
 // AttrNetworkPeerAddress returns an optional attribute for the
@@ -326,9 +346,14 @@ func (m ClientOpenConnections) Add(
 	serverPort int,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -338,6 +363,8 @@ func (m ClientOpenConnections) Add(
 			)...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // AttrNetworkPeerAddress returns an optional attribute for the
@@ -432,9 +459,14 @@ func (m ClientRequestBodySize) Record(
 	serverPort int,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -444,6 +476,8 @@ func (m ClientRequestBodySize) Record(
 			)...,
 		),
 	)
+
+	m.Int64Histogram.Record(ctx, val, *o...)
 }
 
 // AttrErrorType returns an optional attribute for the "error.type" semantic
@@ -558,9 +592,14 @@ func (m ClientRequestDuration) Record(
 	serverPort int,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Float64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -570,6 +609,8 @@ func (m ClientRequestDuration) Record(
 			)...,
 		),
 	)
+
+	m.Float64Histogram.Record(ctx, val, *o...)
 }
 
 // AttrErrorType returns an optional attribute for the "error.type" semantic
@@ -691,9 +732,14 @@ func (m ClientResponseBodySize) Record(
 	serverPort int,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -703,6 +749,8 @@ func (m ClientResponseBodySize) Record(
 			)...,
 		),
 	)
+
+	m.Int64Histogram.Record(ctx, val, *o...)
 }
 
 // AttrErrorType returns an optional attribute for the "error.type" semantic
@@ -811,9 +859,14 @@ func (m ServerActiveRequests) Add(
 	urlScheme string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -822,6 +875,8 @@ func (m ServerActiveRequests) Add(
 			)...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // AttrServerAddress returns an optional attribute for the "server.address"
@@ -901,9 +956,14 @@ func (m ServerRequestBodySize) Record(
 	urlScheme string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -912,6 +972,8 @@ func (m ServerRequestBodySize) Record(
 			)...,
 		),
 	)
+
+	m.Int64Histogram.Record(ctx, val, *o...)
 }
 
 // AttrErrorType returns an optional attribute for the "error.type" semantic
@@ -1030,9 +1092,14 @@ func (m ServerRequestDuration) Record(
 	urlScheme string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Float64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -1041,6 +1108,8 @@ func (m ServerRequestDuration) Record(
 			)...,
 		),
 	)
+
+	m.Float64Histogram.Record(ctx, val, *o...)
 }
 
 // AttrErrorType returns an optional attribute for the "error.type" semantic
@@ -1166,9 +1235,14 @@ func (m ServerResponseBodySize) Record(
 	urlScheme string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Histogram.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -1177,6 +1251,8 @@ func (m ServerResponseBodySize) Record(
 			)...,
 		),
 	)
+
+	m.Int64Histogram.Record(ctx, val, *o...)
 }
 
 // AttrErrorType returns an optional attribute for the "error.type" semantic

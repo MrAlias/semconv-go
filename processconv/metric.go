@@ -4,10 +4,16 @@ package processconv
 
 import (
 	"context"
+	"sync"
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/metric/noop"
+)
+
+var (
+	addOptPool = &sync.Pool{New: func() any { return &[]metric.AddOption{} }}
+	recOptPool = &sync.Pool{New: func() any { return &[]metric.RecordOption{} }}
 )
 
 // CPUModeAttr is an attribute conforming to the cpu.mode semantic conventions.
@@ -130,13 +136,20 @@ func (m ContextSwitches) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // AttrContextSwitchType returns an optional attribute for the
@@ -243,13 +256,20 @@ func (m CPUUtilization) Record(
 	val int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Gauge.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Gauge.Record(ctx, val, *o...)
 }
 
 // AttrCPUMode returns an optional attribute for the "cpu.mode" semantic
@@ -307,13 +327,20 @@ func (m DiskIO) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // AttrDiskIODirection returns an optional attribute for the "disk.io.direction"
@@ -366,9 +393,17 @@ func (MemoryUsage) Description() string {
 func (m MemoryUsage) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // MemoryVirtual is an instrument used to record metric values conforming to the
@@ -415,9 +450,17 @@ func (MemoryVirtual) Description() string {
 func (m MemoryVirtual) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // NetworkIO is an instrument used to record metric values conforming to the
@@ -468,13 +511,20 @@ func (m NetworkIO) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // AttrNetworkIODirection returns an optional attribute for the
@@ -528,9 +578,17 @@ func (OpenFileDescriptorCount) Description() string {
 func (m OpenFileDescriptorCount) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // PagingFaults is an instrument used to record metric values conforming to the
@@ -581,13 +639,20 @@ func (m PagingFaults) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // AttrPagingFaultType returns an optional attribute for the
@@ -642,9 +707,17 @@ func (ThreadCount) Description() string {
 func (m ThreadCount) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // Uptime is an instrument used to record metric values conforming to the
@@ -695,7 +768,14 @@ func (Uptime) Description() string {
 func (m Uptime) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Float64Gauge.Record(ctx, val)
-	} else {
-		m.Float64Gauge.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Float64Gauge.Record(ctx, val, *o...)
 }

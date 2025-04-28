@@ -4,10 +4,16 @@ package goconv
 
 import (
 	"context"
+	"sync"
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/metric/noop"
+)
+
+var (
+	addOptPool = &sync.Pool{New: func() any { return &[]metric.AddOption{} }}
+	recOptPool = &sync.Pool{New: func() any { return &[]metric.RecordOption{} }}
 )
 
 // MemoryTypeAttr is an attribute conforming to the go.memory.type semantic
@@ -397,7 +403,14 @@ func (ScheduleDuration) Description() string {
 func (m ScheduleDuration) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Float64Histogram.Record(ctx, val)
-	} else {
-		m.Float64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Float64Histogram.Record(ctx, val, *o...)
 }

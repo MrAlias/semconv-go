@@ -4,10 +4,16 @@ package cpuconv
 
 import (
 	"context"
+	"sync"
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/metric/noop"
+)
+
+var (
+	addOptPool = &sync.Pool{New: func() any { return &[]metric.AddOption{} }}
+	recOptPool = &sync.Pool{New: func() any { return &[]metric.RecordOption{} }}
 )
 
 // ModeAttr is an attribute conforming to the cpu.mode semantic conventions. It
@@ -81,13 +87,20 @@ func (m Frequency) Record(
 	val int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Gauge.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Gauge.Record(ctx, val, *o...)
 }
 
 // AttrLogicalNumber returns an optional attribute for the "cpu.logical_number"
@@ -197,13 +210,20 @@ func (m Utilization) Record(
 	val int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Gauge.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Gauge.Record(ctx, val, *o...)
 }
 
 // AttrLogicalNumber returns an optional attribute for the "cpu.logical_number"

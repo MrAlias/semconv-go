@@ -4,10 +4,16 @@ package k8sconv
 
 import (
 	"context"
+	"sync"
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/metric/noop"
+)
+
+var (
+	addOptPool = &sync.Pool{New: func() any { return &[]metric.AddOption{} }}
+	recOptPool = &sync.Pool{New: func() any { return &[]metric.RecordOption{} }}
 )
 
 // NamespacePhaseAttr is an attribute conforming to the k8s.namespace.phase
@@ -91,9 +97,17 @@ func (CronJobActiveJobs) Description() string {
 func (m CronJobActiveJobs) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // DaemonSetCurrentScheduledNodes is an instrument used to record metric values
@@ -151,9 +165,17 @@ func (DaemonSetCurrentScheduledNodes) Description() string {
 func (m DaemonSetCurrentScheduledNodes) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // DaemonSetDesiredScheduledNodes is an instrument used to record metric values
@@ -211,9 +233,17 @@ func (DaemonSetDesiredScheduledNodes) Description() string {
 func (m DaemonSetDesiredScheduledNodes) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // DaemonSetMisscheduledNodes is an instrument used to record metric values
@@ -271,9 +301,17 @@ func (DaemonSetMisscheduledNodes) Description() string {
 func (m DaemonSetMisscheduledNodes) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // DaemonSetReadyNodes is an instrument used to record metric values conforming
@@ -330,9 +368,17 @@ func (DaemonSetReadyNodes) Description() string {
 func (m DaemonSetReadyNodes) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // DeploymentAvailablePods is an instrument used to record metric values
@@ -389,9 +435,17 @@ func (DeploymentAvailablePods) Description() string {
 func (m DeploymentAvailablePods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // DeploymentDesiredPods is an instrument used to record metric values conforming
@@ -447,9 +501,17 @@ func (DeploymentDesiredPods) Description() string {
 func (m DeploymentDesiredPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // HpaCurrentPods is an instrument used to record metric values conforming to the
@@ -506,9 +568,17 @@ func (HpaCurrentPods) Description() string {
 func (m HpaCurrentPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // HpaDesiredPods is an instrument used to record metric values conforming to the
@@ -565,9 +635,17 @@ func (HpaDesiredPods) Description() string {
 func (m HpaDesiredPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // HpaMaxPods is an instrument used to record metric values conforming to the
@@ -623,9 +701,17 @@ func (HpaMaxPods) Description() string {
 func (m HpaMaxPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // HpaMinPods is an instrument used to record metric values conforming to the
@@ -681,9 +767,17 @@ func (HpaMinPods) Description() string {
 func (m HpaMinPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // JobActivePods is an instrument used to record metric values conforming to the
@@ -739,9 +833,17 @@ func (JobActivePods) Description() string {
 func (m JobActivePods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // JobDesiredSuccessfulPods is an instrument used to record metric values
@@ -798,9 +900,17 @@ func (JobDesiredSuccessfulPods) Description() string {
 func (m JobDesiredSuccessfulPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // JobFailedPods is an instrument used to record metric values conforming to the
@@ -856,9 +966,17 @@ func (JobFailedPods) Description() string {
 func (m JobFailedPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // JobMaxParallelPods is an instrument used to record metric values conforming to
@@ -914,9 +1032,17 @@ func (JobMaxParallelPods) Description() string {
 func (m JobMaxParallelPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // JobSuccessfulPods is an instrument used to record metric values conforming to
@@ -972,9 +1098,17 @@ func (JobSuccessfulPods) Description() string {
 func (m JobSuccessfulPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // NamespacePhase is an instrument used to record metric values conforming to the
@@ -1031,9 +1165,14 @@ func (m NamespacePhase) Add(
 	namespacePhase NamespacePhaseAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -1041,6 +1180,8 @@ func (m NamespacePhase) Add(
 			)...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // NodeCPUTime is an instrument used to record metric values conforming to the
@@ -1089,9 +1230,17 @@ func (NodeCPUTime) Description() string {
 func (m NodeCPUTime) Add(ctx context.Context, incr float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Float64Counter.Add(ctx, incr)
-	} else {
-		m.Float64Counter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Float64Counter.Add(ctx, incr, *o...)
 }
 
 // NodeCPUUsage is an instrument used to record metric values conforming to the
@@ -1141,9 +1290,16 @@ func (NodeCPUUsage) Description() string {
 func (m NodeCPUUsage) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64Gauge.Record(ctx, val)
-	} else {
-		m.Int64Gauge.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64Gauge.Record(ctx, val, *o...)
 }
 
 // NodeMemoryUsage is an instrument used to record metric values conforming to
@@ -1192,9 +1348,16 @@ func (NodeMemoryUsage) Description() string {
 func (m NodeMemoryUsage) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64Gauge.Record(ctx, val)
-	} else {
-		m.Int64Gauge.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64Gauge.Record(ctx, val, *o...)
 }
 
 // NodeNetworkErrors is an instrument used to record metric values conforming to
@@ -1245,13 +1408,20 @@ func (m NodeNetworkErrors) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // AttrNetworkInterfaceName returns an optional attribute for the
@@ -1316,13 +1486,20 @@ func (m NodeNetworkIO) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // AttrNetworkInterfaceName returns an optional attribute for the
@@ -1387,9 +1564,16 @@ func (NodeUptime) Description() string {
 func (m NodeUptime) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Float64Gauge.Record(ctx, val)
-	} else {
-		m.Float64Gauge.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Float64Gauge.Record(ctx, val, *o...)
 }
 
 // PodCPUTime is an instrument used to record metric values conforming to the
@@ -1438,9 +1622,17 @@ func (PodCPUTime) Description() string {
 func (m PodCPUTime) Add(ctx context.Context, incr float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Float64Counter.Add(ctx, incr)
-	} else {
-		m.Float64Counter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Float64Counter.Add(ctx, incr, *o...)
 }
 
 // PodCPUUsage is an instrument used to record metric values conforming to the
@@ -1490,9 +1682,16 @@ func (PodCPUUsage) Description() string {
 func (m PodCPUUsage) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64Gauge.Record(ctx, val)
-	} else {
-		m.Int64Gauge.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64Gauge.Record(ctx, val, *o...)
 }
 
 // PodMemoryUsage is an instrument used to record metric values conforming to the
@@ -1541,9 +1740,16 @@ func (PodMemoryUsage) Description() string {
 func (m PodMemoryUsage) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64Gauge.Record(ctx, val)
-	} else {
-		m.Int64Gauge.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64Gauge.Record(ctx, val, *o...)
 }
 
 // PodNetworkErrors is an instrument used to record metric values conforming to
@@ -1594,13 +1800,20 @@ func (m PodNetworkErrors) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // AttrNetworkInterfaceName returns an optional attribute for the
@@ -1665,13 +1878,20 @@ func (m PodNetworkIO) Add(
 	incr int64,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			attrs...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // AttrNetworkInterfaceName returns an optional attribute for the
@@ -1736,9 +1956,16 @@ func (PodUptime) Description() string {
 func (m PodUptime) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Float64Gauge.Record(ctx, val)
-	} else {
-		m.Float64Gauge.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Float64Gauge.Record(ctx, val, *o...)
 }
 
 // ReplicaSetAvailablePods is an instrument used to record metric values
@@ -1795,9 +2022,17 @@ func (ReplicaSetAvailablePods) Description() string {
 func (m ReplicaSetAvailablePods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // ReplicaSetDesiredPods is an instrument used to record metric values conforming
@@ -1853,9 +2088,17 @@ func (ReplicaSetDesiredPods) Description() string {
 func (m ReplicaSetDesiredPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // ReplicationControllerAvailablePods is an instrument used to record metric
@@ -1913,9 +2156,17 @@ func (ReplicationControllerAvailablePods) Description() string {
 func (m ReplicationControllerAvailablePods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // ReplicationControllerDesiredPods is an instrument used to record metric values
@@ -1973,9 +2224,17 @@ func (ReplicationControllerDesiredPods) Description() string {
 func (m ReplicationControllerDesiredPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // StatefulSetCurrentPods is an instrument used to record metric values
@@ -2032,9 +2291,17 @@ func (StatefulSetCurrentPods) Description() string {
 func (m StatefulSetCurrentPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // StatefulSetDesiredPods is an instrument used to record metric values
@@ -2090,9 +2357,17 @@ func (StatefulSetDesiredPods) Description() string {
 func (m StatefulSetDesiredPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // StatefulSetReadyPods is an instrument used to record metric values conforming
@@ -2148,9 +2423,17 @@ func (StatefulSetReadyPods) Description() string {
 func (m StatefulSetReadyPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // StatefulSetUpdatedPods is an instrument used to record metric values
@@ -2207,7 +2490,15 @@ func (StatefulSetUpdatedPods) Description() string {
 func (m StatefulSetUpdatedPods) Add(ctx context.Context, incr int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64UpDownCounter.Add(ctx, incr)
-	} else {
-		m.Int64UpDownCounter.Add(ctx, incr, metric.WithAttributes(attrs...))
+		return
 	}
+
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }

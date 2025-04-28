@@ -4,10 +4,16 @@ package hwconv
 
 import (
 	"context"
+	"sync"
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/metric/noop"
+)
+
+var (
+	addOptPool = &sync.Pool{New: func() any { return &[]metric.AddOption{} }}
+	recOptPool = &sync.Pool{New: func() any { return &[]metric.RecordOption{} }}
 )
 
 // ErrorTypeAttr is an attribute conforming to the error.type semantic
@@ -123,9 +129,14 @@ func (m Energy) Add(
 	hwType TypeAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -134,6 +145,8 @@ func (m Energy) Add(
 			)...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // AttrName returns an optional attribute for the "hw.name" semantic convention.
@@ -204,9 +217,14 @@ func (m Errors) Add(
 	hwType TypeAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -215,6 +233,8 @@ func (m Errors) Add(
 			)...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // AttrErrorType returns an optional attribute for the "error.type" semantic
@@ -288,9 +308,14 @@ func (m HostAmbientTemperature) Record(
 	id string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Gauge.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -298,6 +323,8 @@ func (m HostAmbientTemperature) Record(
 			)...,
 		),
 	)
+
+	m.Int64Gauge.Record(ctx, val, *o...)
 }
 
 // AttrName returns an optional attribute for the "hw.name" semantic convention.
@@ -370,9 +397,14 @@ func (m HostEnergy) Add(
 	id string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Counter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -380,6 +412,8 @@ func (m HostEnergy) Add(
 			)...,
 		),
 	)
+
+	m.Int64Counter.Add(ctx, incr, *o...)
 }
 
 // AttrName returns an optional attribute for the "hw.name" semantic convention.
@@ -448,9 +482,14 @@ func (m HostHeatingMargin) Record(
 	id string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Gauge.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -458,6 +497,8 @@ func (m HostHeatingMargin) Record(
 			)...,
 		),
 	)
+
+	m.Int64Gauge.Record(ctx, val, *o...)
 }
 
 // AttrName returns an optional attribute for the "hw.name" semantic convention.
@@ -530,9 +571,14 @@ func (m HostPower) Record(
 	id string,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Gauge.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -540,6 +586,8 @@ func (m HostPower) Record(
 			)...,
 		),
 	)
+
+	m.Int64Gauge.Record(ctx, val, *o...)
 }
 
 // AttrName returns an optional attribute for the "hw.name" semantic convention.
@@ -612,9 +660,14 @@ func (m Power) Record(
 	hwType TypeAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64Gauge.Record(
-		ctx,
-		val,
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -623,6 +676,8 @@ func (m Power) Record(
 			)...,
 		),
 	)
+
+	m.Int64Gauge.Record(ctx, val, *o...)
 }
 
 // AttrName returns an optional attribute for the "hw.name" semantic convention.
@@ -704,9 +759,14 @@ func (m Status) Add(
 	hwType TypeAttr,
 	attrs ...attribute.KeyValue,
 ) {
-	m.Int64UpDownCounter.Add(
-		ctx,
-		incr,
+	o := addOptPool.Get().(*[]metric.AddOption)
+	defer func() {
+		*o = (*o)[:0]
+		addOptPool.Put(o)
+	}()
+
+	*o = append(
+		*o,
 		metric.WithAttributes(
 			append(
 				attrs,
@@ -716,6 +776,8 @@ func (m Status) Add(
 			)...,
 		),
 	)
+
+	m.Int64UpDownCounter.Add(ctx, incr, *o...)
 }
 
 // AttrName returns an optional attribute for the "hw.name" semantic convention.

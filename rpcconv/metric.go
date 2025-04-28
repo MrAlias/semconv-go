@@ -4,10 +4,16 @@ package rpcconv
 
 import (
 	"context"
+	"sync"
 
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
 	"go.opentelemetry.io/otel/metric/noop"
+)
+
+var (
+	addOptPool = &sync.Pool{New: func() any { return &[]metric.AddOption{} }}
+	recOptPool = &sync.Pool{New: func() any { return &[]metric.RecordOption{} }}
 )
 
 // ClientDuration is an instrument used to record metric values conforming to the
@@ -59,9 +65,16 @@ func (ClientDuration) Description() string {
 func (m ClientDuration) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Float64Histogram.Record(ctx, val)
-	} else {
-		m.Float64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Float64Histogram.Record(ctx, val, *o...)
 }
 
 // ClientRequestSize is an instrument used to record metric values conforming to
@@ -110,9 +123,16 @@ func (ClientRequestSize) Description() string {
 func (m ClientRequestSize) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64Histogram.Record(ctx, val)
-	} else {
-		m.Int64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64Histogram.Record(ctx, val, *o...)
 }
 
 // ClientRequestsPerRPC is an instrument used to record metric values conforming
@@ -163,9 +183,16 @@ func (ClientRequestsPerRPC) Description() string {
 func (m ClientRequestsPerRPC) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64Histogram.Record(ctx, val)
-	} else {
-		m.Int64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64Histogram.Record(ctx, val, *o...)
 }
 
 // ClientResponseSize is an instrument used to record metric values conforming to
@@ -214,9 +241,16 @@ func (ClientResponseSize) Description() string {
 func (m ClientResponseSize) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64Histogram.Record(ctx, val)
-	} else {
-		m.Int64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64Histogram.Record(ctx, val, *o...)
 }
 
 // ClientResponsesPerRPC is an instrument used to record metric values conforming
@@ -267,9 +301,16 @@ func (ClientResponsesPerRPC) Description() string {
 func (m ClientResponsesPerRPC) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64Histogram.Record(ctx, val)
-	} else {
-		m.Int64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64Histogram.Record(ctx, val, *o...)
 }
 
 // ServerDuration is an instrument used to record metric values conforming to the
@@ -321,9 +362,16 @@ func (ServerDuration) Description() string {
 func (m ServerDuration) Record(ctx context.Context, val float64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Float64Histogram.Record(ctx, val)
-	} else {
-		m.Float64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Float64Histogram.Record(ctx, val, *o...)
 }
 
 // ServerRequestSize is an instrument used to record metric values conforming to
@@ -372,9 +420,16 @@ func (ServerRequestSize) Description() string {
 func (m ServerRequestSize) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64Histogram.Record(ctx, val)
-	} else {
-		m.Int64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64Histogram.Record(ctx, val, *o...)
 }
 
 // ServerRequestsPerRPC is an instrument used to record metric values conforming
@@ -425,9 +480,16 @@ func (ServerRequestsPerRPC) Description() string {
 func (m ServerRequestsPerRPC) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64Histogram.Record(ctx, val)
-	} else {
-		m.Int64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64Histogram.Record(ctx, val, *o...)
 }
 
 // ServerResponseSize is an instrument used to record metric values conforming to
@@ -476,9 +538,16 @@ func (ServerResponseSize) Description() string {
 func (m ServerResponseSize) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64Histogram.Record(ctx, val)
-	} else {
-		m.Int64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64Histogram.Record(ctx, val, *o...)
 }
 
 // ServerResponsesPerRPC is an instrument used to record metric values conforming
@@ -529,7 +598,14 @@ func (ServerResponsesPerRPC) Description() string {
 func (m ServerResponsesPerRPC) Record(ctx context.Context, val int64, attrs ...attribute.KeyValue) {
 	if len(attrs) == 0 {
 		m.Int64Histogram.Record(ctx, val)
-	} else {
-		m.Int64Histogram.Record(ctx, val, metric.WithAttributes(attrs...))
 	}
+
+	o := recOptPool.Get().(*[]metric.RecordOption)
+	defer func() {
+		*o = (*o)[:0]
+		recOptPool.Put(o)
+	}()
+
+	*o = append(*o, metric.WithAttributes(attrs...))
+	m.Int64Histogram.Record(ctx, val, *o...)
 }
