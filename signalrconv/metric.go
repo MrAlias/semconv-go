@@ -54,11 +54,16 @@ type ServerActiveConnections struct {
 }
 
 // NewServerActiveConnections returns a new ServerActiveConnections instrument.
-func NewServerActiveConnections(m metric.Meter) (ServerActiveConnections, error) {
+func NewServerActiveConnections(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (ServerActiveConnections, error) {
 	i, err := m.Int64UpDownCounter(
-	    "signalr.server.active_connections",
-	    metric.WithDescription("Number of connections that are currently active on the server."),
-	    metric.WithUnit("{connection}"),
+		"signalr.server.active_connections",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Number of connections that are currently active on the server."),
+			metric.WithUnit("{connection}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ServerActiveConnections{noop.Int64UpDownCounter{}}, err
@@ -136,11 +141,16 @@ type ServerConnectionDuration struct {
 }
 
 // NewServerConnectionDuration returns a new ServerConnectionDuration instrument.
-func NewServerConnectionDuration(m metric.Meter) (ServerConnectionDuration, error) {
+func NewServerConnectionDuration(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (ServerConnectionDuration, error) {
 	i, err := m.Float64Histogram(
-	    "signalr.server.connection.duration",
-	    metric.WithDescription("The duration of connections on the server."),
-	    metric.WithUnit("s"),
+		"signalr.server.connection.duration",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("The duration of connections on the server."),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ServerConnectionDuration{noop.Float64Histogram{}}, err

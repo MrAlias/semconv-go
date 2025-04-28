@@ -44,11 +44,16 @@ type Coldstarts struct {
 }
 
 // NewColdstarts returns a new Coldstarts instrument.
-func NewColdstarts(m metric.Meter) (Coldstarts, error) {
+func NewColdstarts(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (Coldstarts, error) {
 	i, err := m.Int64Counter(
-	    "faas.coldstarts",
-	    metric.WithDescription("Number of invocation cold starts"),
-	    metric.WithUnit("{coldstart}"),
+		"faas.coldstarts",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Number of invocation cold starts"),
+			metric.WithUnit("{coldstart}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return Coldstarts{noop.Int64Counter{}}, err
@@ -115,11 +120,16 @@ type CPUUsage struct {
 }
 
 // NewCPUUsage returns a new CPUUsage instrument.
-func NewCPUUsage(m metric.Meter) (CPUUsage, error) {
+func NewCPUUsage(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (CPUUsage, error) {
 	i, err := m.Float64Histogram(
-	    "faas.cpu_usage",
-	    metric.WithDescription("Distribution of CPU usage per invocation"),
-	    metric.WithUnit("s"),
+		"faas.cpu_usage",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("Distribution of CPU usage per invocation"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return CPUUsage{noop.Float64Histogram{}}, err
@@ -186,11 +196,16 @@ type Errors struct {
 }
 
 // NewErrors returns a new Errors instrument.
-func NewErrors(m metric.Meter) (Errors, error) {
+func NewErrors(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (Errors, error) {
 	i, err := m.Int64Counter(
-	    "faas.errors",
-	    metric.WithDescription("Number of invocation errors"),
-	    metric.WithUnit("{error}"),
+		"faas.errors",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Number of invocation errors"),
+			metric.WithUnit("{error}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return Errors{noop.Int64Counter{}}, err
@@ -257,11 +272,16 @@ type InitDuration struct {
 }
 
 // NewInitDuration returns a new InitDuration instrument.
-func NewInitDuration(m metric.Meter) (InitDuration, error) {
+func NewInitDuration(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (InitDuration, error) {
 	i, err := m.Float64Histogram(
-	    "faas.init_duration",
-	    metric.WithDescription("Measures the duration of the function's initialization, such as a cold start"),
-	    metric.WithUnit("s"),
+		"faas.init_duration",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("Measures the duration of the function's initialization, such as a cold start"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return InitDuration{noop.Float64Histogram{}}, err
@@ -328,11 +348,16 @@ type Invocations struct {
 }
 
 // NewInvocations returns a new Invocations instrument.
-func NewInvocations(m metric.Meter) (Invocations, error) {
+func NewInvocations(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (Invocations, error) {
 	i, err := m.Int64Counter(
-	    "faas.invocations",
-	    metric.WithDescription("Number of successful invocations"),
-	    metric.WithUnit("{invocation}"),
+		"faas.invocations",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Number of successful invocations"),
+			metric.WithUnit("{invocation}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return Invocations{noop.Int64Counter{}}, err
@@ -399,11 +424,16 @@ type InvokeDuration struct {
 }
 
 // NewInvokeDuration returns a new InvokeDuration instrument.
-func NewInvokeDuration(m metric.Meter) (InvokeDuration, error) {
+func NewInvokeDuration(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (InvokeDuration, error) {
 	i, err := m.Float64Histogram(
-	    "faas.invoke_duration",
-	    metric.WithDescription("Measures the duration of the function's logic execution"),
-	    metric.WithUnit("s"),
+		"faas.invoke_duration",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("Measures the duration of the function's logic execution"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return InvokeDuration{noop.Float64Histogram{}}, err
@@ -470,11 +500,16 @@ type MemUsage struct {
 }
 
 // NewMemUsage returns a new MemUsage instrument.
-func NewMemUsage(m metric.Meter) (MemUsage, error) {
+func NewMemUsage(
+	m metric.Meter,
+	opt ...metric.Int64HistogramOption,
+) (MemUsage, error) {
 	i, err := m.Int64Histogram(
-	    "faas.mem_usage",
-	    metric.WithDescription("Distribution of max memory usage per invocation"),
-	    metric.WithUnit("By"),
+		"faas.mem_usage",
+		append([]metric.Int64HistogramOption{
+			metric.WithDescription("Distribution of max memory usage per invocation"),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return MemUsage{noop.Int64Histogram{}}, err
@@ -541,11 +576,16 @@ type NetIO struct {
 }
 
 // NewNetIO returns a new NetIO instrument.
-func NewNetIO(m metric.Meter) (NetIO, error) {
+func NewNetIO(
+	m metric.Meter,
+	opt ...metric.Int64HistogramOption,
+) (NetIO, error) {
 	i, err := m.Int64Histogram(
-	    "faas.net_io",
-	    metric.WithDescription("Distribution of net I/O usage per invocation"),
-	    metric.WithUnit("By"),
+		"faas.net_io",
+		append([]metric.Int64HistogramOption{
+			metric.WithDescription("Distribution of net I/O usage per invocation"),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return NetIO{noop.Int64Histogram{}}, err
@@ -612,11 +652,16 @@ type Timeouts struct {
 }
 
 // NewTimeouts returns a new Timeouts instrument.
-func NewTimeouts(m metric.Meter) (Timeouts, error) {
+func NewTimeouts(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (Timeouts, error) {
 	i, err := m.Int64Counter(
-	    "faas.timeouts",
-	    metric.WithDescription("Number of invocation timeouts"),
-	    metric.WithUnit("{timeout}"),
+		"faas.timeouts",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Number of invocation timeouts"),
+			metric.WithUnit("{timeout}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return Timeouts{noop.Int64Counter{}}, err

@@ -56,11 +56,16 @@ type CosmosDBClientActiveInstanceCount struct {
 
 // NewCosmosDBClientActiveInstanceCount returns a new
 // CosmosDBClientActiveInstanceCount instrument.
-func NewCosmosDBClientActiveInstanceCount(m metric.Meter) (CosmosDBClientActiveInstanceCount, error) {
+func NewCosmosDBClientActiveInstanceCount(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (CosmosDBClientActiveInstanceCount, error) {
 	i, err := m.Int64UpDownCounter(
-	    "azure.cosmosdb.client.active_instance.count",
-	    metric.WithDescription("Number of active client instances"),
-	    metric.WithUnit("{instance}"),
+		"azure.cosmosdb.client.active_instance.count",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Number of active client instances"),
+			metric.WithUnit("{instance}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return CosmosDBClientActiveInstanceCount{noop.Int64UpDownCounter{}}, err
@@ -136,11 +141,16 @@ type CosmosDBClientOperationRequestCharge struct {
 
 // NewCosmosDBClientOperationRequestCharge returns a new
 // CosmosDBClientOperationRequestCharge instrument.
-func NewCosmosDBClientOperationRequestCharge(m metric.Meter) (CosmosDBClientOperationRequestCharge, error) {
+func NewCosmosDBClientOperationRequestCharge(
+	m metric.Meter,
+	opt ...metric.Int64HistogramOption,
+) (CosmosDBClientOperationRequestCharge, error) {
 	i, err := m.Int64Histogram(
-	    "azure.cosmosdb.client.operation.request_charge",
-	    metric.WithDescription("[Request units](https://learn.microsoft.com/azure/cosmos-db/request-units) consumed by the operation"),
-	    metric.WithUnit("{request_unit}"),
+		"azure.cosmosdb.client.operation.request_charge",
+		append([]metric.Int64HistogramOption{
+			metric.WithDescription("[Request units](https://learn.microsoft.com/azure/cosmos-db/request-units) consumed by the operation"),
+			metric.WithUnit("{request_unit}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return CosmosDBClientOperationRequestCharge{noop.Int64Histogram{}}, err

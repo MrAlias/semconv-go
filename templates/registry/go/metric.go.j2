@@ -46,11 +46,16 @@ type {{ metric_name }} struct {
 }
 
 {{ ["New" ~ metric_name ~ " returns a new " ~ metric_name ~ " instrument."] | comment }}
-func New{{ metric_name }}(m metric.Meter) ({{ metric_name }}, error) {
+func New{{ metric_name }}(
+	m metric.Meter,
+	opt ...metric.{{ metric_inst}}Option,
+) ({{ metric_name }}, error) {
 	i, err := m.{{ metric_inst }}(
-	    "{{metric.metric_name}}",
-	    metric.WithDescription("{{metric.brief | trim}}"),
-	    metric.WithUnit("{{metric.unit}}"),
+		"{{metric.metric_name}}",
+		append([]metric.{{ metric_inst }}Option{
+			metric.WithDescription("{{metric.brief | trim}}"),
+			metric.WithUnit("{{metric.unit}}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return {{metric_name}}{noop.{{ metric_inst }}{}}, err

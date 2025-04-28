@@ -37,11 +37,16 @@ type ConfigGogc struct {
 }
 
 // NewConfigGogc returns a new ConfigGogc instrument.
-func NewConfigGogc(m metric.Meter) (ConfigGogc, error) {
+func NewConfigGogc(
+	m metric.Meter,
+	opt ...metric.Int64ObservableUpDownCounterOption,
+) (ConfigGogc, error) {
 	i, err := m.Int64ObservableUpDownCounter(
-	    "go.config.gogc",
-	    metric.WithDescription("Heap size target percentage configured by the user, otherwise 100."),
-	    metric.WithUnit("%"),
+		"go.config.gogc",
+		append([]metric.Int64ObservableUpDownCounterOption{
+			metric.WithDescription("Heap size target percentage configured by the user, otherwise 100."),
+			metric.WithUnit("%"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ConfigGogc{noop.Int64ObservableUpDownCounter{}}, err
@@ -77,11 +82,16 @@ type GoroutineCount struct {
 }
 
 // NewGoroutineCount returns a new GoroutineCount instrument.
-func NewGoroutineCount(m metric.Meter) (GoroutineCount, error) {
+func NewGoroutineCount(
+	m metric.Meter,
+	opt ...metric.Int64ObservableUpDownCounterOption,
+) (GoroutineCount, error) {
 	i, err := m.Int64ObservableUpDownCounter(
-	    "go.goroutine.count",
-	    metric.WithDescription("Count of live goroutines."),
-	    metric.WithUnit("{goroutine}"),
+		"go.goroutine.count",
+		append([]metric.Int64ObservableUpDownCounterOption{
+			metric.WithDescription("Count of live goroutines."),
+			metric.WithUnit("{goroutine}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return GoroutineCount{noop.Int64ObservableUpDownCounter{}}, err
@@ -117,11 +127,16 @@ type MemoryAllocated struct {
 }
 
 // NewMemoryAllocated returns a new MemoryAllocated instrument.
-func NewMemoryAllocated(m metric.Meter) (MemoryAllocated, error) {
+func NewMemoryAllocated(
+	m metric.Meter,
+	opt ...metric.Int64ObservableCounterOption,
+) (MemoryAllocated, error) {
 	i, err := m.Int64ObservableCounter(
-	    "go.memory.allocated",
-	    metric.WithDescription("Memory allocated to the heap by the application."),
-	    metric.WithUnit("By"),
+		"go.memory.allocated",
+		append([]metric.Int64ObservableCounterOption{
+			metric.WithDescription("Memory allocated to the heap by the application."),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return MemoryAllocated{noop.Int64ObservableCounter{}}, err
@@ -157,11 +172,16 @@ type MemoryAllocations struct {
 }
 
 // NewMemoryAllocations returns a new MemoryAllocations instrument.
-func NewMemoryAllocations(m metric.Meter) (MemoryAllocations, error) {
+func NewMemoryAllocations(
+	m metric.Meter,
+	opt ...metric.Int64ObservableCounterOption,
+) (MemoryAllocations, error) {
 	i, err := m.Int64ObservableCounter(
-	    "go.memory.allocations",
-	    metric.WithDescription("Count of allocations to the heap by the application."),
-	    metric.WithUnit("{allocation}"),
+		"go.memory.allocations",
+		append([]metric.Int64ObservableCounterOption{
+			metric.WithDescription("Count of allocations to the heap by the application."),
+			metric.WithUnit("{allocation}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return MemoryAllocations{noop.Int64ObservableCounter{}}, err
@@ -197,11 +217,16 @@ type MemoryGCGoal struct {
 }
 
 // NewMemoryGCGoal returns a new MemoryGCGoal instrument.
-func NewMemoryGCGoal(m metric.Meter) (MemoryGCGoal, error) {
+func NewMemoryGCGoal(
+	m metric.Meter,
+	opt ...metric.Int64ObservableUpDownCounterOption,
+) (MemoryGCGoal, error) {
 	i, err := m.Int64ObservableUpDownCounter(
-	    "go.memory.gc.goal",
-	    metric.WithDescription("Heap size target for the end of the GC cycle."),
-	    metric.WithUnit("By"),
+		"go.memory.gc.goal",
+		append([]metric.Int64ObservableUpDownCounterOption{
+			metric.WithDescription("Heap size target for the end of the GC cycle."),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return MemoryGCGoal{noop.Int64ObservableUpDownCounter{}}, err
@@ -237,11 +262,16 @@ type MemoryLimit struct {
 }
 
 // NewMemoryLimit returns a new MemoryLimit instrument.
-func NewMemoryLimit(m metric.Meter) (MemoryLimit, error) {
+func NewMemoryLimit(
+	m metric.Meter,
+	opt ...metric.Int64ObservableUpDownCounterOption,
+) (MemoryLimit, error) {
 	i, err := m.Int64ObservableUpDownCounter(
-	    "go.memory.limit",
-	    metric.WithDescription("Go runtime memory limit configured by the user, if a limit exists."),
-	    metric.WithUnit("By"),
+		"go.memory.limit",
+		append([]metric.Int64ObservableUpDownCounterOption{
+			metric.WithDescription("Go runtime memory limit configured by the user, if a limit exists."),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return MemoryLimit{noop.Int64ObservableUpDownCounter{}}, err
@@ -277,11 +307,16 @@ type MemoryUsed struct {
 }
 
 // NewMemoryUsed returns a new MemoryUsed instrument.
-func NewMemoryUsed(m metric.Meter) (MemoryUsed, error) {
+func NewMemoryUsed(
+	m metric.Meter,
+	opt ...metric.Int64ObservableCounterOption,
+) (MemoryUsed, error) {
 	i, err := m.Int64ObservableCounter(
-	    "go.memory.used",
-	    metric.WithDescription("Memory used by the Go runtime."),
-	    metric.WithUnit("By"),
+		"go.memory.used",
+		append([]metric.Int64ObservableCounterOption{
+			metric.WithDescription("Memory used by the Go runtime."),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return MemoryUsed{noop.Int64ObservableCounter{}}, err
@@ -323,11 +358,16 @@ type ProcessorLimit struct {
 }
 
 // NewProcessorLimit returns a new ProcessorLimit instrument.
-func NewProcessorLimit(m metric.Meter) (ProcessorLimit, error) {
+func NewProcessorLimit(
+	m metric.Meter,
+	opt ...metric.Int64ObservableUpDownCounterOption,
+) (ProcessorLimit, error) {
 	i, err := m.Int64ObservableUpDownCounter(
-	    "go.processor.limit",
-	    metric.WithDescription("The number of OS threads that can execute user-level Go code simultaneously."),
-	    metric.WithUnit("{thread}"),
+		"go.processor.limit",
+		append([]metric.Int64ObservableUpDownCounterOption{
+			metric.WithDescription("The number of OS threads that can execute user-level Go code simultaneously."),
+			metric.WithUnit("{thread}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ProcessorLimit{noop.Int64ObservableUpDownCounter{}}, err
@@ -364,11 +404,16 @@ type ScheduleDuration struct {
 }
 
 // NewScheduleDuration returns a new ScheduleDuration instrument.
-func NewScheduleDuration(m metric.Meter) (ScheduleDuration, error) {
+func NewScheduleDuration(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (ScheduleDuration, error) {
 	i, err := m.Float64Histogram(
-	    "go.schedule.duration",
-	    metric.WithDescription("The time goroutines have spent in the scheduler in a runnable state before actually running."),
-	    metric.WithUnit("s"),
+		"go.schedule.duration",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("The time goroutines have spent in the scheduler in a runnable state before actually running."),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ScheduleDuration{noop.Float64Histogram{}}, err

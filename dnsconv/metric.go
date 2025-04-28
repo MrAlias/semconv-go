@@ -34,11 +34,16 @@ type LookupDuration struct {
 }
 
 // NewLookupDuration returns a new LookupDuration instrument.
-func NewLookupDuration(m metric.Meter) (LookupDuration, error) {
+func NewLookupDuration(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (LookupDuration, error) {
 	i, err := m.Float64Histogram(
-	    "dns.lookup.duration",
-	    metric.WithDescription("Measures the time taken to perform a DNS lookup."),
-	    metric.WithUnit("s"),
+		"dns.lookup.duration",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("Measures the time taken to perform a DNS lookup."),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return LookupDuration{noop.Float64Histogram{}}, err

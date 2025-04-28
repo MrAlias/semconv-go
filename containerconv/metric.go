@@ -71,11 +71,16 @@ type CPUTime struct {
 }
 
 // NewCPUTime returns a new CPUTime instrument.
-func NewCPUTime(m metric.Meter) (CPUTime, error) {
+func NewCPUTime(
+	m metric.Meter,
+	opt ...metric.Float64CounterOption,
+) (CPUTime, error) {
 	i, err := m.Float64Counter(
-	    "container.cpu.time",
-	    metric.WithDescription("Total CPU time consumed"),
-	    metric.WithUnit("s"),
+		"container.cpu.time",
+		append([]metric.Float64CounterOption{
+			metric.WithDescription("Total CPU time consumed"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return CPUTime{noop.Float64Counter{}}, err
@@ -145,11 +150,16 @@ type CPUUsage struct {
 }
 
 // NewCPUUsage returns a new CPUUsage instrument.
-func NewCPUUsage(m metric.Meter) (CPUUsage, error) {
+func NewCPUUsage(
+	m metric.Meter,
+	opt ...metric.Int64GaugeOption,
+) (CPUUsage, error) {
 	i, err := m.Int64Gauge(
-	    "container.cpu.usage",
-	    metric.WithDescription("Container's CPU usage, measured in cpus. Range from 0 to the number of allocatable CPUs"),
-	    metric.WithUnit("{cpu}"),
+		"container.cpu.usage",
+		append([]metric.Int64GaugeOption{
+			metric.WithDescription("Container's CPU usage, measured in cpus. Range from 0 to the number of allocatable CPUs"),
+			metric.WithUnit("{cpu}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return CPUUsage{noop.Int64Gauge{}}, err
@@ -220,11 +230,16 @@ type DiskIO struct {
 }
 
 // NewDiskIO returns a new DiskIO instrument.
-func NewDiskIO(m metric.Meter) (DiskIO, error) {
+func NewDiskIO(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (DiskIO, error) {
 	i, err := m.Int64Counter(
-	    "container.disk.io",
-	    metric.WithDescription("Disk bytes for the container."),
-	    metric.WithUnit("By"),
+		"container.disk.io",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Disk bytes for the container."),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return DiskIO{noop.Int64Counter{}}, err
@@ -299,11 +314,16 @@ type MemoryUsage struct {
 }
 
 // NewMemoryUsage returns a new MemoryUsage instrument.
-func NewMemoryUsage(m metric.Meter) (MemoryUsage, error) {
+func NewMemoryUsage(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (MemoryUsage, error) {
 	i, err := m.Int64Counter(
-	    "container.memory.usage",
-	    metric.WithDescription("Memory usage of the container."),
-	    metric.WithUnit("By"),
+		"container.memory.usage",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Memory usage of the container."),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return MemoryUsage{noop.Int64Counter{}}, err
@@ -358,11 +378,16 @@ type NetworkIO struct {
 }
 
 // NewNetworkIO returns a new NetworkIO instrument.
-func NewNetworkIO(m metric.Meter) (NetworkIO, error) {
+func NewNetworkIO(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (NetworkIO, error) {
 	i, err := m.Int64Counter(
-	    "container.network.io",
-	    metric.WithDescription("Network bytes for the container."),
-	    metric.WithUnit("By"),
+		"container.network.io",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Network bytes for the container."),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return NetworkIO{noop.Int64Counter{}}, err
@@ -438,11 +463,16 @@ type Uptime struct {
 }
 
 // NewUptime returns a new Uptime instrument.
-func NewUptime(m metric.Meter) (Uptime, error) {
+func NewUptime(
+	m metric.Meter,
+	opt ...metric.Float64GaugeOption,
+) (Uptime, error) {
 	i, err := m.Float64Gauge(
-	    "container.uptime",
-	    metric.WithDescription("The time the container has been running"),
-	    metric.WithUnit("s"),
+		"container.uptime",
+		append([]metric.Float64GaugeOption{
+			metric.WithDescription("The time the container has been running"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return Uptime{noop.Float64Gauge{}}, err

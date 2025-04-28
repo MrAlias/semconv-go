@@ -248,11 +248,16 @@ type ClientConnectionCount struct {
 }
 
 // NewClientConnectionCount returns a new ClientConnectionCount instrument.
-func NewClientConnectionCount(m metric.Meter) (ClientConnectionCount, error) {
+func NewClientConnectionCount(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (ClientConnectionCount, error) {
 	i, err := m.Int64UpDownCounter(
-	    "db.client.connection.count",
-	    metric.WithDescription("The number of connections that are currently in state described by the `state` attribute"),
-	    metric.WithUnit("{connection}"),
+		"db.client.connection.count",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The number of connections that are currently in state described by the `state` attribute"),
+			metric.WithUnit("{connection}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientConnectionCount{noop.Int64UpDownCounter{}}, err
@@ -327,11 +332,16 @@ type ClientConnectionCreateTime struct {
 
 // NewClientConnectionCreateTime returns a new ClientConnectionCreateTime
 // instrument.
-func NewClientConnectionCreateTime(m metric.Meter) (ClientConnectionCreateTime, error) {
+func NewClientConnectionCreateTime(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (ClientConnectionCreateTime, error) {
 	i, err := m.Float64Histogram(
-	    "db.client.connection.create_time",
-	    metric.WithDescription("The time it took to create a new connection"),
-	    metric.WithUnit("s"),
+		"db.client.connection.create_time",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("The time it took to create a new connection"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientConnectionCreateTime{noop.Float64Histogram{}}, err
@@ -401,11 +411,16 @@ type ClientConnectionIdleMax struct {
 }
 
 // NewClientConnectionIdleMax returns a new ClientConnectionIdleMax instrument.
-func NewClientConnectionIdleMax(m metric.Meter) (ClientConnectionIdleMax, error) {
+func NewClientConnectionIdleMax(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (ClientConnectionIdleMax, error) {
 	i, err := m.Int64UpDownCounter(
-	    "db.client.connection.idle.max",
-	    metric.WithDescription("The maximum number of idle open connections allowed"),
-	    metric.WithUnit("{connection}"),
+		"db.client.connection.idle.max",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The maximum number of idle open connections allowed"),
+			metric.WithUnit("{connection}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientConnectionIdleMax{noop.Int64UpDownCounter{}}, err
@@ -475,11 +490,16 @@ type ClientConnectionIdleMin struct {
 }
 
 // NewClientConnectionIdleMin returns a new ClientConnectionIdleMin instrument.
-func NewClientConnectionIdleMin(m metric.Meter) (ClientConnectionIdleMin, error) {
+func NewClientConnectionIdleMin(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (ClientConnectionIdleMin, error) {
 	i, err := m.Int64UpDownCounter(
-	    "db.client.connection.idle.min",
-	    metric.WithDescription("The minimum number of idle open connections allowed"),
-	    metric.WithUnit("{connection}"),
+		"db.client.connection.idle.min",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The minimum number of idle open connections allowed"),
+			metric.WithUnit("{connection}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientConnectionIdleMin{noop.Int64UpDownCounter{}}, err
@@ -549,11 +569,16 @@ type ClientConnectionMax struct {
 }
 
 // NewClientConnectionMax returns a new ClientConnectionMax instrument.
-func NewClientConnectionMax(m metric.Meter) (ClientConnectionMax, error) {
+func NewClientConnectionMax(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (ClientConnectionMax, error) {
 	i, err := m.Int64UpDownCounter(
-	    "db.client.connection.max",
-	    metric.WithDescription("The maximum number of open connections allowed"),
-	    metric.WithUnit("{connection}"),
+		"db.client.connection.max",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The maximum number of open connections allowed"),
+			metric.WithUnit("{connection}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientConnectionMax{noop.Int64UpDownCounter{}}, err
@@ -625,11 +650,16 @@ type ClientConnectionPendingRequests struct {
 
 // NewClientConnectionPendingRequests returns a new
 // ClientConnectionPendingRequests instrument.
-func NewClientConnectionPendingRequests(m metric.Meter) (ClientConnectionPendingRequests, error) {
+func NewClientConnectionPendingRequests(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (ClientConnectionPendingRequests, error) {
 	i, err := m.Int64UpDownCounter(
-	    "db.client.connection.pending_requests",
-	    metric.WithDescription("The number of current pending requests for an open connection"),
-	    metric.WithUnit("{request}"),
+		"db.client.connection.pending_requests",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The number of current pending requests for an open connection"),
+			metric.WithUnit("{request}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientConnectionPendingRequests{noop.Int64UpDownCounter{}}, err
@@ -700,11 +730,16 @@ type ClientConnectionTimeouts struct {
 }
 
 // NewClientConnectionTimeouts returns a new ClientConnectionTimeouts instrument.
-func NewClientConnectionTimeouts(m metric.Meter) (ClientConnectionTimeouts, error) {
+func NewClientConnectionTimeouts(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (ClientConnectionTimeouts, error) {
 	i, err := m.Int64Counter(
-	    "db.client.connection.timeouts",
-	    metric.WithDescription("The number of connection timeouts that have occurred trying to obtain a connection from the pool"),
-	    metric.WithUnit("{timeout}"),
+		"db.client.connection.timeouts",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("The number of connection timeouts that have occurred trying to obtain a connection from the pool"),
+			metric.WithUnit("{timeout}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientConnectionTimeouts{noop.Int64Counter{}}, err
@@ -775,11 +810,16 @@ type ClientConnectionUseTime struct {
 }
 
 // NewClientConnectionUseTime returns a new ClientConnectionUseTime instrument.
-func NewClientConnectionUseTime(m metric.Meter) (ClientConnectionUseTime, error) {
+func NewClientConnectionUseTime(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (ClientConnectionUseTime, error) {
 	i, err := m.Float64Histogram(
-	    "db.client.connection.use_time",
-	    metric.WithDescription("The time between borrowing a connection and returning it to the pool"),
-	    metric.WithUnit("s"),
+		"db.client.connection.use_time",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("The time between borrowing a connection and returning it to the pool"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientConnectionUseTime{noop.Float64Histogram{}}, err
@@ -849,11 +889,16 @@ type ClientConnectionWaitTime struct {
 }
 
 // NewClientConnectionWaitTime returns a new ClientConnectionWaitTime instrument.
-func NewClientConnectionWaitTime(m metric.Meter) (ClientConnectionWaitTime, error) {
+func NewClientConnectionWaitTime(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (ClientConnectionWaitTime, error) {
 	i, err := m.Float64Histogram(
-	    "db.client.connection.wait_time",
-	    metric.WithDescription("The time it took to obtain an open connection from the pool"),
-	    metric.WithUnit("s"),
+		"db.client.connection.wait_time",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("The time it took to obtain an open connection from the pool"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientConnectionWaitTime{noop.Float64Histogram{}}, err
@@ -923,11 +968,16 @@ type ClientOperationDuration struct {
 }
 
 // NewClientOperationDuration returns a new ClientOperationDuration instrument.
-func NewClientOperationDuration(m metric.Meter) (ClientOperationDuration, error) {
+func NewClientOperationDuration(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (ClientOperationDuration, error) {
 	i, err := m.Float64Histogram(
-	    "db.client.operation.duration",
-	    metric.WithDescription("Duration of database client operations."),
-	    metric.WithUnit("s"),
+		"db.client.operation.duration",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("Duration of database client operations."),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientOperationDuration{noop.Float64Histogram{}}, err
@@ -1078,11 +1128,16 @@ type ClientResponseReturnedRows struct {
 
 // NewClientResponseReturnedRows returns a new ClientResponseReturnedRows
 // instrument.
-func NewClientResponseReturnedRows(m metric.Meter) (ClientResponseReturnedRows, error) {
+func NewClientResponseReturnedRows(
+	m metric.Meter,
+	opt ...metric.Int64HistogramOption,
+) (ClientResponseReturnedRows, error) {
 	i, err := m.Int64Histogram(
-	    "db.client.response.returned_rows",
-	    metric.WithDescription("The actual number of records returned by the database operation."),
-	    metric.WithUnit("{row}"),
+		"db.client.response.returned_rows",
+		append([]metric.Int64HistogramOption{
+			metric.WithDescription("The actual number of records returned by the database operation."),
+			metric.WithUnit("{row}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientResponseReturnedRows{noop.Int64Histogram{}}, err

@@ -82,11 +82,16 @@ type Energy struct {
 }
 
 // NewEnergy returns a new Energy instrument.
-func NewEnergy(m metric.Meter) (Energy, error) {
+func NewEnergy(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (Energy, error) {
 	i, err := m.Int64Counter(
-	    "hw.energy",
-	    metric.WithDescription("Energy consumed by the component"),
-	    metric.WithUnit("J"),
+		"hw.energy",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Energy consumed by the component"),
+			metric.WithUnit("J"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return Energy{noop.Int64Counter{}}, err
@@ -170,11 +175,16 @@ type Errors struct {
 }
 
 // NewErrors returns a new Errors instrument.
-func NewErrors(m metric.Meter) (Errors, error) {
+func NewErrors(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (Errors, error) {
 	i, err := m.Int64Counter(
-	    "hw.errors",
-	    metric.WithDescription("Number of errors encountered by the component"),
-	    metric.WithUnit("{error}"),
+		"hw.errors",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Number of errors encountered by the component"),
+			metric.WithUnit("{error}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return Errors{noop.Int64Counter{}}, err
@@ -264,11 +274,16 @@ type HostAmbientTemperature struct {
 }
 
 // NewHostAmbientTemperature returns a new HostAmbientTemperature instrument.
-func NewHostAmbientTemperature(m metric.Meter) (HostAmbientTemperature, error) {
+func NewHostAmbientTemperature(
+	m metric.Meter,
+	opt ...metric.Int64GaugeOption,
+) (HostAmbientTemperature, error) {
 	i, err := m.Int64Gauge(
-	    "hw.host.ambient_temperature",
-	    metric.WithDescription("Ambient (external) temperature of the physical host"),
-	    metric.WithUnit("Cel"),
+		"hw.host.ambient_temperature",
+		append([]metric.Int64GaugeOption{
+			metric.WithDescription("Ambient (external) temperature of the physical host"),
+			metric.WithUnit("Cel"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return HostAmbientTemperature{noop.Int64Gauge{}}, err
@@ -348,11 +363,16 @@ type HostEnergy struct {
 }
 
 // NewHostEnergy returns a new HostEnergy instrument.
-func NewHostEnergy(m metric.Meter) (HostEnergy, error) {
+func NewHostEnergy(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (HostEnergy, error) {
 	i, err := m.Int64Counter(
-	    "hw.host.energy",
-	    metric.WithDescription("Total energy consumed by the entire physical host, in joules"),
-	    metric.WithUnit("J"),
+		"hw.host.energy",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Total energy consumed by the entire physical host, in joules"),
+			metric.WithUnit("J"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return HostEnergy{noop.Int64Counter{}}, err
@@ -438,11 +458,16 @@ type HostHeatingMargin struct {
 }
 
 // NewHostHeatingMargin returns a new HostHeatingMargin instrument.
-func NewHostHeatingMargin(m metric.Meter) (HostHeatingMargin, error) {
+func NewHostHeatingMargin(
+	m metric.Meter,
+	opt ...metric.Int64GaugeOption,
+) (HostHeatingMargin, error) {
 	i, err := m.Int64Gauge(
-	    "hw.host.heating_margin",
-	    metric.WithDescription("By how many degrees Celsius the temperature of the physical host can be increased, before reaching a warning threshold on one of the internal sensors"),
-	    metric.WithUnit("Cel"),
+		"hw.host.heating_margin",
+		append([]metric.Int64GaugeOption{
+			metric.WithDescription("By how many degrees Celsius the temperature of the physical host can be increased, before reaching a warning threshold on one of the internal sensors"),
+			metric.WithUnit("Cel"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return HostHeatingMargin{noop.Int64Gauge{}}, err
@@ -522,11 +547,16 @@ type HostPower struct {
 }
 
 // NewHostPower returns a new HostPower instrument.
-func NewHostPower(m metric.Meter) (HostPower, error) {
+func NewHostPower(
+	m metric.Meter,
+	opt ...metric.Int64GaugeOption,
+) (HostPower, error) {
 	i, err := m.Int64Gauge(
-	    "hw.host.power",
-	    metric.WithDescription("Instantaneous power consumed by the entire physical host in Watts (`hw.host.energy` is preferred)"),
-	    metric.WithUnit("W"),
+		"hw.host.power",
+		append([]metric.Int64GaugeOption{
+			metric.WithDescription("Instantaneous power consumed by the entire physical host in Watts (`hw.host.energy` is preferred)"),
+			metric.WithUnit("W"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return HostPower{noop.Int64Gauge{}}, err
@@ -611,11 +641,16 @@ type Power struct {
 }
 
 // NewPower returns a new Power instrument.
-func NewPower(m metric.Meter) (Power, error) {
+func NewPower(
+	m metric.Meter,
+	opt ...metric.Int64GaugeOption,
+) (Power, error) {
 	i, err := m.Int64Gauge(
-	    "hw.power",
-	    metric.WithDescription("Instantaneous power consumed by the component"),
-	    metric.WithUnit("W"),
+		"hw.power",
+		append([]metric.Int64GaugeOption{
+			metric.WithDescription("Instantaneous power consumed by the component"),
+			metric.WithUnit("W"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return Power{noop.Int64Gauge{}}, err
@@ -701,11 +736,16 @@ type Status struct {
 }
 
 // NewStatus returns a new Status instrument.
-func NewStatus(m metric.Meter) (Status, error) {
+func NewStatus(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (Status, error) {
 	i, err := m.Int64UpDownCounter(
-	    "hw.status",
-	    metric.WithDescription("Operational status: `1` (true) or `0` (false) for each of the possible states"),
-	    metric.WithUnit("1"),
+		"hw.status",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Operational status: `1` (true) or `0` (false) for each of the possible states"),
+			metric.WithUnit("1"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return Status{noop.Int64UpDownCounter{}}, err

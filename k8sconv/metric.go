@@ -52,11 +52,16 @@ type CronJobActiveJobs struct {
 }
 
 // NewCronJobActiveJobs returns a new CronJobActiveJobs instrument.
-func NewCronJobActiveJobs(m metric.Meter) (CronJobActiveJobs, error) {
+func NewCronJobActiveJobs(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (CronJobActiveJobs, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.cronjob.active_jobs",
-	    metric.WithDescription("The number of actively running jobs for a cronjob"),
-	    metric.WithUnit("{job}"),
+		"k8s.cronjob.active_jobs",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The number of actively running jobs for a cronjob"),
+			metric.WithUnit("{job}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return CronJobActiveJobs{noop.Int64UpDownCounter{}}, err
@@ -120,11 +125,16 @@ type DaemonSetCurrentScheduledNodes struct {
 
 // NewDaemonSetCurrentScheduledNodes returns a new DaemonSetCurrentScheduledNodes
 // instrument.
-func NewDaemonSetCurrentScheduledNodes(m metric.Meter) (DaemonSetCurrentScheduledNodes, error) {
+func NewDaemonSetCurrentScheduledNodes(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (DaemonSetCurrentScheduledNodes, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.daemonset.current_scheduled_nodes",
-	    metric.WithDescription("Number of nodes that are running at least 1 daemon pod and are supposed to run the daemon pod"),
-	    metric.WithUnit("{node}"),
+		"k8s.daemonset.current_scheduled_nodes",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Number of nodes that are running at least 1 daemon pod and are supposed to run the daemon pod"),
+			metric.WithUnit("{node}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return DaemonSetCurrentScheduledNodes{noop.Int64UpDownCounter{}}, err
@@ -188,11 +198,16 @@ type DaemonSetDesiredScheduledNodes struct {
 
 // NewDaemonSetDesiredScheduledNodes returns a new DaemonSetDesiredScheduledNodes
 // instrument.
-func NewDaemonSetDesiredScheduledNodes(m metric.Meter) (DaemonSetDesiredScheduledNodes, error) {
+func NewDaemonSetDesiredScheduledNodes(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (DaemonSetDesiredScheduledNodes, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.daemonset.desired_scheduled_nodes",
-	    metric.WithDescription("Number of nodes that should be running the daemon pod (including nodes currently running the daemon pod)"),
-	    metric.WithUnit("{node}"),
+		"k8s.daemonset.desired_scheduled_nodes",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Number of nodes that should be running the daemon pod (including nodes currently running the daemon pod)"),
+			metric.WithUnit("{node}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return DaemonSetDesiredScheduledNodes{noop.Int64UpDownCounter{}}, err
@@ -256,11 +271,16 @@ type DaemonSetMisscheduledNodes struct {
 
 // NewDaemonSetMisscheduledNodes returns a new DaemonSetMisscheduledNodes
 // instrument.
-func NewDaemonSetMisscheduledNodes(m metric.Meter) (DaemonSetMisscheduledNodes, error) {
+func NewDaemonSetMisscheduledNodes(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (DaemonSetMisscheduledNodes, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.daemonset.misscheduled_nodes",
-	    metric.WithDescription("Number of nodes that are running the daemon pod, but are not supposed to run the daemon pod"),
-	    metric.WithUnit("{node}"),
+		"k8s.daemonset.misscheduled_nodes",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Number of nodes that are running the daemon pod, but are not supposed to run the daemon pod"),
+			metric.WithUnit("{node}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return DaemonSetMisscheduledNodes{noop.Int64UpDownCounter{}}, err
@@ -323,11 +343,16 @@ type DaemonSetReadyNodes struct {
 }
 
 // NewDaemonSetReadyNodes returns a new DaemonSetReadyNodes instrument.
-func NewDaemonSetReadyNodes(m metric.Meter) (DaemonSetReadyNodes, error) {
+func NewDaemonSetReadyNodes(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (DaemonSetReadyNodes, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.daemonset.ready_nodes",
-	    metric.WithDescription("Number of nodes that should be running the daemon pod and have one or more of the daemon pod running and ready"),
-	    metric.WithUnit("{node}"),
+		"k8s.daemonset.ready_nodes",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Number of nodes that should be running the daemon pod and have one or more of the daemon pod running and ready"),
+			metric.WithUnit("{node}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return DaemonSetReadyNodes{noop.Int64UpDownCounter{}}, err
@@ -390,11 +415,16 @@ type DeploymentAvailablePods struct {
 }
 
 // NewDeploymentAvailablePods returns a new DeploymentAvailablePods instrument.
-func NewDeploymentAvailablePods(m metric.Meter) (DeploymentAvailablePods, error) {
+func NewDeploymentAvailablePods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (DeploymentAvailablePods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.deployment.available_pods",
-	    metric.WithDescription("Total number of available replica pods (ready for at least minReadySeconds) targeted by this deployment"),
-	    metric.WithUnit("{pod}"),
+		"k8s.deployment.available_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Total number of available replica pods (ready for at least minReadySeconds) targeted by this deployment"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return DeploymentAvailablePods{noop.Int64UpDownCounter{}}, err
@@ -456,11 +486,16 @@ type DeploymentDesiredPods struct {
 }
 
 // NewDeploymentDesiredPods returns a new DeploymentDesiredPods instrument.
-func NewDeploymentDesiredPods(m metric.Meter) (DeploymentDesiredPods, error) {
+func NewDeploymentDesiredPods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (DeploymentDesiredPods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.deployment.desired_pods",
-	    metric.WithDescription("Number of desired replica pods in this deployment"),
-	    metric.WithUnit("{pod}"),
+		"k8s.deployment.desired_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Number of desired replica pods in this deployment"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return DeploymentDesiredPods{noop.Int64UpDownCounter{}}, err
@@ -523,11 +558,16 @@ type HpaCurrentPods struct {
 }
 
 // NewHpaCurrentPods returns a new HpaCurrentPods instrument.
-func NewHpaCurrentPods(m metric.Meter) (HpaCurrentPods, error) {
+func NewHpaCurrentPods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (HpaCurrentPods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.hpa.current_pods",
-	    metric.WithDescription("Current number of replica pods managed by this horizontal pod autoscaler, as last seen by the autoscaler"),
-	    metric.WithUnit("{pod}"),
+		"k8s.hpa.current_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Current number of replica pods managed by this horizontal pod autoscaler, as last seen by the autoscaler"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return HpaCurrentPods{noop.Int64UpDownCounter{}}, err
@@ -590,11 +630,16 @@ type HpaDesiredPods struct {
 }
 
 // NewHpaDesiredPods returns a new HpaDesiredPods instrument.
-func NewHpaDesiredPods(m metric.Meter) (HpaDesiredPods, error) {
+func NewHpaDesiredPods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (HpaDesiredPods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.hpa.desired_pods",
-	    metric.WithDescription("Desired number of replica pods managed by this horizontal pod autoscaler, as last calculated by the autoscaler"),
-	    metric.WithUnit("{pod}"),
+		"k8s.hpa.desired_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Desired number of replica pods managed by this horizontal pod autoscaler, as last calculated by the autoscaler"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return HpaDesiredPods{noop.Int64UpDownCounter{}}, err
@@ -656,11 +701,16 @@ type HpaMaxPods struct {
 }
 
 // NewHpaMaxPods returns a new HpaMaxPods instrument.
-func NewHpaMaxPods(m metric.Meter) (HpaMaxPods, error) {
+func NewHpaMaxPods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (HpaMaxPods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.hpa.max_pods",
-	    metric.WithDescription("The upper limit for the number of replica pods to which the autoscaler can scale up"),
-	    metric.WithUnit("{pod}"),
+		"k8s.hpa.max_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The upper limit for the number of replica pods to which the autoscaler can scale up"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return HpaMaxPods{noop.Int64UpDownCounter{}}, err
@@ -722,11 +772,16 @@ type HpaMinPods struct {
 }
 
 // NewHpaMinPods returns a new HpaMinPods instrument.
-func NewHpaMinPods(m metric.Meter) (HpaMinPods, error) {
+func NewHpaMinPods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (HpaMinPods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.hpa.min_pods",
-	    metric.WithDescription("The lower limit for the number of replica pods to which the autoscaler can scale down"),
-	    metric.WithUnit("{pod}"),
+		"k8s.hpa.min_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The lower limit for the number of replica pods to which the autoscaler can scale down"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return HpaMinPods{noop.Int64UpDownCounter{}}, err
@@ -788,11 +843,16 @@ type JobActivePods struct {
 }
 
 // NewJobActivePods returns a new JobActivePods instrument.
-func NewJobActivePods(m metric.Meter) (JobActivePods, error) {
+func NewJobActivePods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (JobActivePods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.job.active_pods",
-	    metric.WithDescription("The number of pending and actively running pods for a job"),
-	    metric.WithUnit("{pod}"),
+		"k8s.job.active_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The number of pending and actively running pods for a job"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return JobActivePods{noop.Int64UpDownCounter{}}, err
@@ -855,11 +915,16 @@ type JobDesiredSuccessfulPods struct {
 }
 
 // NewJobDesiredSuccessfulPods returns a new JobDesiredSuccessfulPods instrument.
-func NewJobDesiredSuccessfulPods(m metric.Meter) (JobDesiredSuccessfulPods, error) {
+func NewJobDesiredSuccessfulPods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (JobDesiredSuccessfulPods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.job.desired_successful_pods",
-	    metric.WithDescription("The desired number of successfully finished pods the job should be run with"),
-	    metric.WithUnit("{pod}"),
+		"k8s.job.desired_successful_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The desired number of successfully finished pods the job should be run with"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return JobDesiredSuccessfulPods{noop.Int64UpDownCounter{}}, err
@@ -921,11 +986,16 @@ type JobFailedPods struct {
 }
 
 // NewJobFailedPods returns a new JobFailedPods instrument.
-func NewJobFailedPods(m metric.Meter) (JobFailedPods, error) {
+func NewJobFailedPods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (JobFailedPods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.job.failed_pods",
-	    metric.WithDescription("The number of pods which reached phase Failed for a job"),
-	    metric.WithUnit("{pod}"),
+		"k8s.job.failed_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The number of pods which reached phase Failed for a job"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return JobFailedPods{noop.Int64UpDownCounter{}}, err
@@ -987,11 +1057,16 @@ type JobMaxParallelPods struct {
 }
 
 // NewJobMaxParallelPods returns a new JobMaxParallelPods instrument.
-func NewJobMaxParallelPods(m metric.Meter) (JobMaxParallelPods, error) {
+func NewJobMaxParallelPods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (JobMaxParallelPods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.job.max_parallel_pods",
-	    metric.WithDescription("The max desired number of pods the job should run at any given time"),
-	    metric.WithUnit("{pod}"),
+		"k8s.job.max_parallel_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The max desired number of pods the job should run at any given time"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return JobMaxParallelPods{noop.Int64UpDownCounter{}}, err
@@ -1053,11 +1128,16 @@ type JobSuccessfulPods struct {
 }
 
 // NewJobSuccessfulPods returns a new JobSuccessfulPods instrument.
-func NewJobSuccessfulPods(m metric.Meter) (JobSuccessfulPods, error) {
+func NewJobSuccessfulPods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (JobSuccessfulPods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.job.successful_pods",
-	    metric.WithDescription("The number of pods which reached phase Succeeded for a job"),
-	    metric.WithUnit("{pod}"),
+		"k8s.job.successful_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The number of pods which reached phase Succeeded for a job"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return JobSuccessfulPods{noop.Int64UpDownCounter{}}, err
@@ -1119,11 +1199,16 @@ type NamespacePhase struct {
 }
 
 // NewNamespacePhase returns a new NamespacePhase instrument.
-func NewNamespacePhase(m metric.Meter) (NamespacePhase, error) {
+func NewNamespacePhase(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (NamespacePhase, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.namespace.phase",
-	    metric.WithDescription("Describes number of K8s namespaces that are currently in a given phase."),
-	    metric.WithUnit("{namespace}"),
+		"k8s.namespace.phase",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Describes number of K8s namespaces that are currently in a given phase."),
+			metric.WithUnit("{namespace}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return NamespacePhase{noop.Int64UpDownCounter{}}, err
@@ -1192,11 +1277,16 @@ type NodeCPUTime struct {
 }
 
 // NewNodeCPUTime returns a new NodeCPUTime instrument.
-func NewNodeCPUTime(m metric.Meter) (NodeCPUTime, error) {
+func NewNodeCPUTime(
+	m metric.Meter,
+	opt ...metric.Float64CounterOption,
+) (NodeCPUTime, error) {
 	i, err := m.Float64Counter(
-	    "k8s.node.cpu.time",
-	    metric.WithDescription("Total CPU time consumed"),
-	    metric.WithUnit("s"),
+		"k8s.node.cpu.time",
+		append([]metric.Float64CounterOption{
+			metric.WithDescription("Total CPU time consumed"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return NodeCPUTime{noop.Float64Counter{}}, err
@@ -1251,11 +1341,16 @@ type NodeCPUUsage struct {
 }
 
 // NewNodeCPUUsage returns a new NodeCPUUsage instrument.
-func NewNodeCPUUsage(m metric.Meter) (NodeCPUUsage, error) {
+func NewNodeCPUUsage(
+	m metric.Meter,
+	opt ...metric.Int64GaugeOption,
+) (NodeCPUUsage, error) {
 	i, err := m.Int64Gauge(
-	    "k8s.node.cpu.usage",
-	    metric.WithDescription("Node's CPU usage, measured in cpus. Range from 0 to the number of allocatable CPUs"),
-	    metric.WithUnit("{cpu}"),
+		"k8s.node.cpu.usage",
+		append([]metric.Int64GaugeOption{
+			metric.WithDescription("Node's CPU usage, measured in cpus. Range from 0 to the number of allocatable CPUs"),
+			metric.WithUnit("{cpu}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return NodeCPUUsage{noop.Int64Gauge{}}, err
@@ -1310,11 +1405,16 @@ type NodeMemoryUsage struct {
 }
 
 // NewNodeMemoryUsage returns a new NodeMemoryUsage instrument.
-func NewNodeMemoryUsage(m metric.Meter) (NodeMemoryUsage, error) {
+func NewNodeMemoryUsage(
+	m metric.Meter,
+	opt ...metric.Int64GaugeOption,
+) (NodeMemoryUsage, error) {
 	i, err := m.Int64Gauge(
-	    "k8s.node.memory.usage",
-	    metric.WithDescription("Memory usage of the Node"),
-	    metric.WithUnit("By"),
+		"k8s.node.memory.usage",
+		append([]metric.Int64GaugeOption{
+			metric.WithDescription("Memory usage of the Node"),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return NodeMemoryUsage{noop.Int64Gauge{}}, err
@@ -1368,11 +1468,16 @@ type NodeNetworkErrors struct {
 }
 
 // NewNodeNetworkErrors returns a new NodeNetworkErrors instrument.
-func NewNodeNetworkErrors(m metric.Meter) (NodeNetworkErrors, error) {
+func NewNodeNetworkErrors(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (NodeNetworkErrors, error) {
 	i, err := m.Int64Counter(
-	    "k8s.node.network.errors",
-	    metric.WithDescription("Node network errors"),
-	    metric.WithUnit("{error}"),
+		"k8s.node.network.errors",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Node network errors"),
+			metric.WithUnit("{error}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return NodeNetworkErrors{noop.Int64Counter{}}, err
@@ -1446,11 +1551,16 @@ type NodeNetworkIO struct {
 }
 
 // NewNodeNetworkIO returns a new NodeNetworkIO instrument.
-func NewNodeNetworkIO(m metric.Meter) (NodeNetworkIO, error) {
+func NewNodeNetworkIO(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (NodeNetworkIO, error) {
 	i, err := m.Int64Counter(
-	    "k8s.node.network.io",
-	    metric.WithDescription("Network bytes for the Node"),
-	    metric.WithUnit("By"),
+		"k8s.node.network.io",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Network bytes for the Node"),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return NodeNetworkIO{noop.Int64Counter{}}, err
@@ -1524,11 +1634,16 @@ type NodeUptime struct {
 }
 
 // NewNodeUptime returns a new NodeUptime instrument.
-func NewNodeUptime(m metric.Meter) (NodeUptime, error) {
+func NewNodeUptime(
+	m metric.Meter,
+	opt ...metric.Float64GaugeOption,
+) (NodeUptime, error) {
 	i, err := m.Float64Gauge(
-	    "k8s.node.uptime",
-	    metric.WithDescription("The time the Node has been running"),
-	    metric.WithUnit("s"),
+		"k8s.node.uptime",
+		append([]metric.Float64GaugeOption{
+			metric.WithDescription("The time the Node has been running"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return NodeUptime{noop.Float64Gauge{}}, err
@@ -1584,11 +1699,16 @@ type PodCPUTime struct {
 }
 
 // NewPodCPUTime returns a new PodCPUTime instrument.
-func NewPodCPUTime(m metric.Meter) (PodCPUTime, error) {
+func NewPodCPUTime(
+	m metric.Meter,
+	opt ...metric.Float64CounterOption,
+) (PodCPUTime, error) {
 	i, err := m.Float64Counter(
-	    "k8s.pod.cpu.time",
-	    metric.WithDescription("Total CPU time consumed"),
-	    metric.WithUnit("s"),
+		"k8s.pod.cpu.time",
+		append([]metric.Float64CounterOption{
+			metric.WithDescription("Total CPU time consumed"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return PodCPUTime{noop.Float64Counter{}}, err
@@ -1643,11 +1763,16 @@ type PodCPUUsage struct {
 }
 
 // NewPodCPUUsage returns a new PodCPUUsage instrument.
-func NewPodCPUUsage(m metric.Meter) (PodCPUUsage, error) {
+func NewPodCPUUsage(
+	m metric.Meter,
+	opt ...metric.Int64GaugeOption,
+) (PodCPUUsage, error) {
 	i, err := m.Int64Gauge(
-	    "k8s.pod.cpu.usage",
-	    metric.WithDescription("Pod's CPU usage, measured in cpus. Range from 0 to the number of allocatable CPUs"),
-	    metric.WithUnit("{cpu}"),
+		"k8s.pod.cpu.usage",
+		append([]metric.Int64GaugeOption{
+			metric.WithDescription("Pod's CPU usage, measured in cpus. Range from 0 to the number of allocatable CPUs"),
+			metric.WithUnit("{cpu}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return PodCPUUsage{noop.Int64Gauge{}}, err
@@ -1702,11 +1827,16 @@ type PodMemoryUsage struct {
 }
 
 // NewPodMemoryUsage returns a new PodMemoryUsage instrument.
-func NewPodMemoryUsage(m metric.Meter) (PodMemoryUsage, error) {
+func NewPodMemoryUsage(
+	m metric.Meter,
+	opt ...metric.Int64GaugeOption,
+) (PodMemoryUsage, error) {
 	i, err := m.Int64Gauge(
-	    "k8s.pod.memory.usage",
-	    metric.WithDescription("Memory usage of the Pod"),
-	    metric.WithUnit("By"),
+		"k8s.pod.memory.usage",
+		append([]metric.Int64GaugeOption{
+			metric.WithDescription("Memory usage of the Pod"),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return PodMemoryUsage{noop.Int64Gauge{}}, err
@@ -1760,11 +1890,16 @@ type PodNetworkErrors struct {
 }
 
 // NewPodNetworkErrors returns a new PodNetworkErrors instrument.
-func NewPodNetworkErrors(m metric.Meter) (PodNetworkErrors, error) {
+func NewPodNetworkErrors(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (PodNetworkErrors, error) {
 	i, err := m.Int64Counter(
-	    "k8s.pod.network.errors",
-	    metric.WithDescription("Pod network errors"),
-	    metric.WithUnit("{error}"),
+		"k8s.pod.network.errors",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Pod network errors"),
+			metric.WithUnit("{error}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return PodNetworkErrors{noop.Int64Counter{}}, err
@@ -1838,11 +1973,16 @@ type PodNetworkIO struct {
 }
 
 // NewPodNetworkIO returns a new PodNetworkIO instrument.
-func NewPodNetworkIO(m metric.Meter) (PodNetworkIO, error) {
+func NewPodNetworkIO(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (PodNetworkIO, error) {
 	i, err := m.Int64Counter(
-	    "k8s.pod.network.io",
-	    metric.WithDescription("Network bytes for the Pod"),
-	    metric.WithUnit("By"),
+		"k8s.pod.network.io",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Network bytes for the Pod"),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return PodNetworkIO{noop.Int64Counter{}}, err
@@ -1916,11 +2056,16 @@ type PodUptime struct {
 }
 
 // NewPodUptime returns a new PodUptime instrument.
-func NewPodUptime(m metric.Meter) (PodUptime, error) {
+func NewPodUptime(
+	m metric.Meter,
+	opt ...metric.Float64GaugeOption,
+) (PodUptime, error) {
 	i, err := m.Float64Gauge(
-	    "k8s.pod.uptime",
-	    metric.WithDescription("The time the Pod has been running"),
-	    metric.WithUnit("s"),
+		"k8s.pod.uptime",
+		append([]metric.Float64GaugeOption{
+			metric.WithDescription("The time the Pod has been running"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return PodUptime{noop.Float64Gauge{}}, err
@@ -1977,11 +2122,16 @@ type ReplicaSetAvailablePods struct {
 }
 
 // NewReplicaSetAvailablePods returns a new ReplicaSetAvailablePods instrument.
-func NewReplicaSetAvailablePods(m metric.Meter) (ReplicaSetAvailablePods, error) {
+func NewReplicaSetAvailablePods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (ReplicaSetAvailablePods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.replicaset.available_pods",
-	    metric.WithDescription("Total number of available replica pods (ready for at least minReadySeconds) targeted by this replicaset"),
-	    metric.WithUnit("{pod}"),
+		"k8s.replicaset.available_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Total number of available replica pods (ready for at least minReadySeconds) targeted by this replicaset"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ReplicaSetAvailablePods{noop.Int64UpDownCounter{}}, err
@@ -2043,11 +2193,16 @@ type ReplicaSetDesiredPods struct {
 }
 
 // NewReplicaSetDesiredPods returns a new ReplicaSetDesiredPods instrument.
-func NewReplicaSetDesiredPods(m metric.Meter) (ReplicaSetDesiredPods, error) {
+func NewReplicaSetDesiredPods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (ReplicaSetDesiredPods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.replicaset.desired_pods",
-	    metric.WithDescription("Number of desired replica pods in this replicaset"),
-	    metric.WithUnit("{pod}"),
+		"k8s.replicaset.desired_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Number of desired replica pods in this replicaset"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ReplicaSetDesiredPods{noop.Int64UpDownCounter{}}, err
@@ -2111,11 +2266,16 @@ type ReplicationControllerAvailablePods struct {
 
 // NewReplicationControllerAvailablePods returns a new
 // ReplicationControllerAvailablePods instrument.
-func NewReplicationControllerAvailablePods(m metric.Meter) (ReplicationControllerAvailablePods, error) {
+func NewReplicationControllerAvailablePods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (ReplicationControllerAvailablePods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.replicationcontroller.available_pods",
-	    metric.WithDescription("Total number of available replica pods (ready for at least minReadySeconds) targeted by this replication controller"),
-	    metric.WithUnit("{pod}"),
+		"k8s.replicationcontroller.available_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Total number of available replica pods (ready for at least minReadySeconds) targeted by this replication controller"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ReplicationControllerAvailablePods{noop.Int64UpDownCounter{}}, err
@@ -2179,11 +2339,16 @@ type ReplicationControllerDesiredPods struct {
 
 // NewReplicationControllerDesiredPods returns a new
 // ReplicationControllerDesiredPods instrument.
-func NewReplicationControllerDesiredPods(m metric.Meter) (ReplicationControllerDesiredPods, error) {
+func NewReplicationControllerDesiredPods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (ReplicationControllerDesiredPods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.replicationcontroller.desired_pods",
-	    metric.WithDescription("Number of desired replica pods in this replication controller"),
-	    metric.WithUnit("{pod}"),
+		"k8s.replicationcontroller.desired_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Number of desired replica pods in this replication controller"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ReplicationControllerDesiredPods{noop.Int64UpDownCounter{}}, err
@@ -2246,11 +2411,16 @@ type StatefulSetCurrentPods struct {
 }
 
 // NewStatefulSetCurrentPods returns a new StatefulSetCurrentPods instrument.
-func NewStatefulSetCurrentPods(m metric.Meter) (StatefulSetCurrentPods, error) {
+func NewStatefulSetCurrentPods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (StatefulSetCurrentPods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.statefulset.current_pods",
-	    metric.WithDescription("The number of replica pods created by the statefulset controller from the statefulset version indicated by currentRevision"),
-	    metric.WithUnit("{pod}"),
+		"k8s.statefulset.current_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The number of replica pods created by the statefulset controller from the statefulset version indicated by currentRevision"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return StatefulSetCurrentPods{noop.Int64UpDownCounter{}}, err
@@ -2312,11 +2482,16 @@ type StatefulSetDesiredPods struct {
 }
 
 // NewStatefulSetDesiredPods returns a new StatefulSetDesiredPods instrument.
-func NewStatefulSetDesiredPods(m metric.Meter) (StatefulSetDesiredPods, error) {
+func NewStatefulSetDesiredPods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (StatefulSetDesiredPods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.statefulset.desired_pods",
-	    metric.WithDescription("Number of desired replica pods in this statefulset"),
-	    metric.WithUnit("{pod}"),
+		"k8s.statefulset.desired_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Number of desired replica pods in this statefulset"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return StatefulSetDesiredPods{noop.Int64UpDownCounter{}}, err
@@ -2378,11 +2553,16 @@ type StatefulSetReadyPods struct {
 }
 
 // NewStatefulSetReadyPods returns a new StatefulSetReadyPods instrument.
-func NewStatefulSetReadyPods(m metric.Meter) (StatefulSetReadyPods, error) {
+func NewStatefulSetReadyPods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (StatefulSetReadyPods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.statefulset.ready_pods",
-	    metric.WithDescription("The number of replica pods created for this statefulset with a Ready Condition"),
-	    metric.WithUnit("{pod}"),
+		"k8s.statefulset.ready_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The number of replica pods created for this statefulset with a Ready Condition"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return StatefulSetReadyPods{noop.Int64UpDownCounter{}}, err
@@ -2445,11 +2625,16 @@ type StatefulSetUpdatedPods struct {
 }
 
 // NewStatefulSetUpdatedPods returns a new StatefulSetUpdatedPods instrument.
-func NewStatefulSetUpdatedPods(m metric.Meter) (StatefulSetUpdatedPods, error) {
+func NewStatefulSetUpdatedPods(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (StatefulSetUpdatedPods, error) {
 	i, err := m.Int64UpDownCounter(
-	    "k8s.statefulset.updated_pods",
-	    metric.WithDescription("Number of replica pods created by the statefulset controller from the statefulset version indicated by updateRevision"),
-	    metric.WithUnit("{pod}"),
+		"k8s.statefulset.updated_pods",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Number of replica pods created by the statefulset controller from the statefulset version indicated by updateRevision"),
+			metric.WithUnit("{pod}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return StatefulSetUpdatedPods{noop.Int64UpDownCounter{}}, err

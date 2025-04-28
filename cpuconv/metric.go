@@ -47,11 +47,16 @@ type Frequency struct {
 }
 
 // NewFrequency returns a new Frequency instrument.
-func NewFrequency(m metric.Meter) (Frequency, error) {
+func NewFrequency(
+	m metric.Meter,
+	opt ...metric.Int64GaugeOption,
+) (Frequency, error) {
 	i, err := m.Int64Gauge(
-	    "cpu.frequency",
-	    metric.WithDescription("Operating frequency of the logical CPU in Hertz."),
-	    metric.WithUnit("Hz"),
+		"cpu.frequency",
+		append([]metric.Int64GaugeOption{
+			metric.WithDescription("Operating frequency of the logical CPU in Hertz."),
+			metric.WithUnit("Hz"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return Frequency{noop.Int64Gauge{}}, err
@@ -117,11 +122,16 @@ type Time struct {
 }
 
 // NewTime returns a new Time instrument.
-func NewTime(m metric.Meter) (Time, error) {
+func NewTime(
+	m metric.Meter,
+	opt ...metric.Float64ObservableCounterOption,
+) (Time, error) {
 	i, err := m.Float64ObservableCounter(
-	    "cpu.time",
-	    metric.WithDescription("Seconds each logical CPU spent on each mode"),
-	    metric.WithUnit("s"),
+		"cpu.time",
+		append([]metric.Float64ObservableCounterOption{
+			metric.WithDescription("Seconds each logical CPU spent on each mode"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return Time{noop.Float64ObservableCounter{}}, err
@@ -170,11 +180,16 @@ type Utilization struct {
 }
 
 // NewUtilization returns a new Utilization instrument.
-func NewUtilization(m metric.Meter) (Utilization, error) {
+func NewUtilization(
+	m metric.Meter,
+	opt ...metric.Int64GaugeOption,
+) (Utilization, error) {
 	i, err := m.Int64Gauge(
-	    "cpu.utilization",
-	    metric.WithDescription("For each logical CPU, the utilization is calculated as the change in cumulative CPU time (cpu.time) over a measurement interval, divided by the elapsed time."),
-	    metric.WithUnit("1"),
+		"cpu.utilization",
+		append([]metric.Int64GaugeOption{
+			metric.WithDescription("For each logical CPU, the utilization is calculated as the change in cumulative CPU time (cpu.time) over a measurement interval, divided by the elapsed time."),
+			metric.WithUnit("1"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return Utilization{noop.Int64Gauge{}}, err

@@ -108,11 +108,16 @@ type ClientOperationDuration struct {
 }
 
 // NewClientOperationDuration returns a new ClientOperationDuration instrument.
-func NewClientOperationDuration(m metric.Meter) (ClientOperationDuration, error) {
+func NewClientOperationDuration(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (ClientOperationDuration, error) {
 	i, err := m.Float64Histogram(
-	    "gen_ai.client.operation.duration",
-	    metric.WithDescription("GenAI operation duration"),
-	    metric.WithUnit("s"),
+		"gen_ai.client.operation.duration",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("GenAI operation duration"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientOperationDuration{noop.Float64Histogram{}}, err
@@ -216,11 +221,16 @@ type ClientTokenUsage struct {
 }
 
 // NewClientTokenUsage returns a new ClientTokenUsage instrument.
-func NewClientTokenUsage(m metric.Meter) (ClientTokenUsage, error) {
+func NewClientTokenUsage(
+	m metric.Meter,
+	opt ...metric.Int64HistogramOption,
+) (ClientTokenUsage, error) {
 	i, err := m.Int64Histogram(
-	    "gen_ai.client.token.usage",
-	    metric.WithDescription("Measures number of input and output tokens used"),
-	    metric.WithUnit("{token}"),
+		"gen_ai.client.token.usage",
+		append([]metric.Int64HistogramOption{
+			metric.WithDescription("Measures number of input and output tokens used"),
+			metric.WithUnit("{token}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientTokenUsage{noop.Int64Histogram{}}, err
@@ -322,11 +332,16 @@ type ServerRequestDuration struct {
 }
 
 // NewServerRequestDuration returns a new ServerRequestDuration instrument.
-func NewServerRequestDuration(m metric.Meter) (ServerRequestDuration, error) {
+func NewServerRequestDuration(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (ServerRequestDuration, error) {
 	i, err := m.Float64Histogram(
-	    "gen_ai.server.request.duration",
-	    metric.WithDescription("Generative AI server request duration such as time-to-last byte or last output token"),
-	    metric.WithUnit("s"),
+		"gen_ai.server.request.duration",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("Generative AI server request duration such as time-to-last byte or last output token"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ServerRequestDuration{noop.Float64Histogram{}}, err
@@ -431,11 +446,16 @@ type ServerTimePerOutputToken struct {
 }
 
 // NewServerTimePerOutputToken returns a new ServerTimePerOutputToken instrument.
-func NewServerTimePerOutputToken(m metric.Meter) (ServerTimePerOutputToken, error) {
+func NewServerTimePerOutputToken(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (ServerTimePerOutputToken, error) {
 	i, err := m.Float64Histogram(
-	    "gen_ai.server.time_per_output_token",
-	    metric.WithDescription("Time per output token generated after the first token for successful responses"),
-	    metric.WithUnit("s"),
+		"gen_ai.server.time_per_output_token",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("Time per output token generated after the first token for successful responses"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ServerTimePerOutputToken{noop.Float64Histogram{}}, err
@@ -532,11 +552,16 @@ type ServerTimeToFirstToken struct {
 }
 
 // NewServerTimeToFirstToken returns a new ServerTimeToFirstToken instrument.
-func NewServerTimeToFirstToken(m metric.Meter) (ServerTimeToFirstToken, error) {
+func NewServerTimeToFirstToken(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (ServerTimeToFirstToken, error) {
 	i, err := m.Float64Histogram(
-	    "gen_ai.server.time_to_first_token",
-	    metric.WithDescription("Time to generate first token for successful responses"),
-	    metric.WithUnit("s"),
+		"gen_ai.server.time_to_first_token",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("Time to generate first token for successful responses"),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ServerTimeToFirstToken{noop.Float64Histogram{}}, err

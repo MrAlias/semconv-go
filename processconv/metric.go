@@ -96,11 +96,16 @@ type ContextSwitches struct {
 }
 
 // NewContextSwitches returns a new ContextSwitches instrument.
-func NewContextSwitches(m metric.Meter) (ContextSwitches, error) {
+func NewContextSwitches(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (ContextSwitches, error) {
 	i, err := m.Int64Counter(
-	    "process.context_switches",
-	    metric.WithDescription("Number of times the process has been context switched."),
-	    metric.WithUnit("{context_switch}"),
+		"process.context_switches",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Number of times the process has been context switched."),
+			metric.WithUnit("{context_switch}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ContextSwitches{noop.Int64Counter{}}, err
@@ -168,11 +173,16 @@ type CPUTime struct {
 }
 
 // NewCPUTime returns a new CPUTime instrument.
-func NewCPUTime(m metric.Meter) (CPUTime, error) {
+func NewCPUTime(
+	m metric.Meter,
+	opt ...metric.Float64ObservableCounterOption,
+) (CPUTime, error) {
 	i, err := m.Float64ObservableCounter(
-	    "process.cpu.time",
-	    metric.WithDescription("Total CPU seconds broken down by different states."),
-	    metric.WithUnit("s"),
+		"process.cpu.time",
+		append([]metric.Float64ObservableCounterOption{
+			metric.WithDescription("Total CPU seconds broken down by different states."),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return CPUTime{noop.Float64ObservableCounter{}}, err
@@ -216,11 +226,16 @@ type CPUUtilization struct {
 }
 
 // NewCPUUtilization returns a new CPUUtilization instrument.
-func NewCPUUtilization(m metric.Meter) (CPUUtilization, error) {
+func NewCPUUtilization(
+	m metric.Meter,
+	opt ...metric.Int64GaugeOption,
+) (CPUUtilization, error) {
 	i, err := m.Int64Gauge(
-	    "process.cpu.utilization",
-	    metric.WithDescription("Difference in process.cpu.time since the last measurement, divided by the elapsed time and number of CPUs available to the process."),
-	    metric.WithUnit("1"),
+		"process.cpu.utilization",
+		append([]metric.Int64GaugeOption{
+			metric.WithDescription("Difference in process.cpu.time since the last measurement, divided by the elapsed time and number of CPUs available to the process."),
+			metric.WithUnit("1"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return CPUUtilization{noop.Int64Gauge{}}, err
@@ -287,11 +302,16 @@ type DiskIO struct {
 }
 
 // NewDiskIO returns a new DiskIO instrument.
-func NewDiskIO(m metric.Meter) (DiskIO, error) {
+func NewDiskIO(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (DiskIO, error) {
 	i, err := m.Int64Counter(
-	    "process.disk.io",
-	    metric.WithDescription("Disk bytes transferred."),
-	    metric.WithUnit("By"),
+		"process.disk.io",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Disk bytes transferred."),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return DiskIO{noop.Int64Counter{}}, err
@@ -357,11 +377,16 @@ type MemoryUsage struct {
 }
 
 // NewMemoryUsage returns a new MemoryUsage instrument.
-func NewMemoryUsage(m metric.Meter) (MemoryUsage, error) {
+func NewMemoryUsage(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (MemoryUsage, error) {
 	i, err := m.Int64UpDownCounter(
-	    "process.memory.usage",
-	    metric.WithDescription("The amount of physical memory in use."),
-	    metric.WithUnit("By"),
+		"process.memory.usage",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The amount of physical memory in use."),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return MemoryUsage{noop.Int64UpDownCounter{}}, err
@@ -414,11 +439,16 @@ type MemoryVirtual struct {
 }
 
 // NewMemoryVirtual returns a new MemoryVirtual instrument.
-func NewMemoryVirtual(m metric.Meter) (MemoryVirtual, error) {
+func NewMemoryVirtual(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (MemoryVirtual, error) {
 	i, err := m.Int64UpDownCounter(
-	    "process.memory.virtual",
-	    metric.WithDescription("The amount of committed virtual memory."),
-	    metric.WithUnit("By"),
+		"process.memory.virtual",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("The amount of committed virtual memory."),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return MemoryVirtual{noop.Int64UpDownCounter{}}, err
@@ -471,11 +501,16 @@ type NetworkIO struct {
 }
 
 // NewNetworkIO returns a new NetworkIO instrument.
-func NewNetworkIO(m metric.Meter) (NetworkIO, error) {
+func NewNetworkIO(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (NetworkIO, error) {
 	i, err := m.Int64Counter(
-	    "process.network.io",
-	    metric.WithDescription("Network bytes transferred."),
-	    metric.WithUnit("By"),
+		"process.network.io",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Network bytes transferred."),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return NetworkIO{noop.Int64Counter{}}, err
@@ -542,11 +577,16 @@ type OpenFileDescriptorCount struct {
 }
 
 // NewOpenFileDescriptorCount returns a new OpenFileDescriptorCount instrument.
-func NewOpenFileDescriptorCount(m metric.Meter) (OpenFileDescriptorCount, error) {
+func NewOpenFileDescriptorCount(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (OpenFileDescriptorCount, error) {
 	i, err := m.Int64UpDownCounter(
-	    "process.open_file_descriptor.count",
-	    metric.WithDescription("Number of file descriptors in use by the process."),
-	    metric.WithUnit("{file_descriptor}"),
+		"process.open_file_descriptor.count",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Number of file descriptors in use by the process."),
+			metric.WithUnit("{file_descriptor}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return OpenFileDescriptorCount{noop.Int64UpDownCounter{}}, err
@@ -599,11 +639,16 @@ type PagingFaults struct {
 }
 
 // NewPagingFaults returns a new PagingFaults instrument.
-func NewPagingFaults(m metric.Meter) (PagingFaults, error) {
+func NewPagingFaults(
+	m metric.Meter,
+	opt ...metric.Int64CounterOption,
+) (PagingFaults, error) {
 	i, err := m.Int64Counter(
-	    "process.paging.faults",
-	    metric.WithDescription("Number of page faults the process has made."),
-	    metric.WithUnit("{fault}"),
+		"process.paging.faults",
+		append([]metric.Int64CounterOption{
+			metric.WithDescription("Number of page faults the process has made."),
+			metric.WithUnit("{fault}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return PagingFaults{noop.Int64Counter{}}, err
@@ -671,11 +716,16 @@ type ThreadCount struct {
 }
 
 // NewThreadCount returns a new ThreadCount instrument.
-func NewThreadCount(m metric.Meter) (ThreadCount, error) {
+func NewThreadCount(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (ThreadCount, error) {
 	i, err := m.Int64UpDownCounter(
-	    "process.thread.count",
-	    metric.WithDescription("Process threads count."),
-	    metric.WithUnit("{thread}"),
+		"process.thread.count",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Process threads count."),
+			metric.WithUnit("{thread}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ThreadCount{noop.Int64UpDownCounter{}}, err
@@ -728,11 +778,16 @@ type Uptime struct {
 }
 
 // NewUptime returns a new Uptime instrument.
-func NewUptime(m metric.Meter) (Uptime, error) {
+func NewUptime(
+	m metric.Meter,
+	opt ...metric.Float64GaugeOption,
+) (Uptime, error) {
 	i, err := m.Float64Gauge(
-	    "process.uptime",
-	    metric.WithDescription("The time the process has been running."),
-	    metric.WithUnit("s"),
+		"process.uptime",
+		append([]metric.Float64GaugeOption{
+			metric.WithDescription("The time the process has been running."),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return Uptime{noop.Float64Gauge{}}, err

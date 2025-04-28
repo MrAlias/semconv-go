@@ -87,11 +87,16 @@ type ClientActiveRequests struct {
 }
 
 // NewClientActiveRequests returns a new ClientActiveRequests instrument.
-func NewClientActiveRequests(m metric.Meter) (ClientActiveRequests, error) {
+func NewClientActiveRequests(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (ClientActiveRequests, error) {
 	i, err := m.Int64UpDownCounter(
-	    "http.client.active_requests",
-	    metric.WithDescription("Number of active HTTP requests."),
-	    metric.WithUnit("{request}"),
+		"http.client.active_requests",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Number of active HTTP requests."),
+			metric.WithUnit("{request}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientActiveRequests{noop.Int64UpDownCounter{}}, err
@@ -190,11 +195,16 @@ type ClientConnectionDuration struct {
 }
 
 // NewClientConnectionDuration returns a new ClientConnectionDuration instrument.
-func NewClientConnectionDuration(m metric.Meter) (ClientConnectionDuration, error) {
+func NewClientConnectionDuration(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (ClientConnectionDuration, error) {
 	i, err := m.Float64Histogram(
-	    "http.client.connection.duration",
-	    metric.WithDescription("The duration of the successfully established outbound HTTP connections."),
-	    metric.WithUnit("s"),
+		"http.client.connection.duration",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("The duration of the successfully established outbound HTTP connections."),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientConnectionDuration{noop.Float64Histogram{}}, err
@@ -292,11 +302,16 @@ type ClientOpenConnections struct {
 }
 
 // NewClientOpenConnections returns a new ClientOpenConnections instrument.
-func NewClientOpenConnections(m metric.Meter) (ClientOpenConnections, error) {
+func NewClientOpenConnections(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (ClientOpenConnections, error) {
 	i, err := m.Int64UpDownCounter(
-	    "http.client.open_connections",
-	    metric.WithDescription("Number of outbound HTTP connections that are currently active or idle on the client."),
-	    metric.WithUnit("{connection}"),
+		"http.client.open_connections",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Number of outbound HTTP connections that are currently active or idle on the client."),
+			metric.WithUnit("{connection}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientOpenConnections{noop.Int64UpDownCounter{}}, err
@@ -398,11 +413,16 @@ type ClientRequestBodySize struct {
 }
 
 // NewClientRequestBodySize returns a new ClientRequestBodySize instrument.
-func NewClientRequestBodySize(m metric.Meter) (ClientRequestBodySize, error) {
+func NewClientRequestBodySize(
+	m metric.Meter,
+	opt ...metric.Int64HistogramOption,
+) (ClientRequestBodySize, error) {
 	i, err := m.Int64Histogram(
-	    "http.client.request.body.size",
-	    metric.WithDescription("Size of HTTP client request bodies."),
-	    metric.WithUnit("By"),
+		"http.client.request.body.size",
+		append([]metric.Int64HistogramOption{
+			metric.WithDescription("Size of HTTP client request bodies."),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientRequestBodySize{noop.Int64Histogram{}}, err
@@ -538,11 +558,16 @@ type ClientRequestDuration struct {
 }
 
 // NewClientRequestDuration returns a new ClientRequestDuration instrument.
-func NewClientRequestDuration(m metric.Meter) (ClientRequestDuration, error) {
+func NewClientRequestDuration(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (ClientRequestDuration, error) {
 	i, err := m.Float64Histogram(
-	    "http.client.request.duration",
-	    metric.WithDescription("Duration of HTTP client requests."),
-	    metric.WithUnit("s"),
+		"http.client.request.duration",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("Duration of HTTP client requests."),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientRequestDuration{noop.Float64Histogram{}}, err
@@ -671,11 +696,16 @@ type ClientResponseBodySize struct {
 }
 
 // NewClientResponseBodySize returns a new ClientResponseBodySize instrument.
-func NewClientResponseBodySize(m metric.Meter) (ClientResponseBodySize, error) {
+func NewClientResponseBodySize(
+	m metric.Meter,
+	opt ...metric.Int64HistogramOption,
+) (ClientResponseBodySize, error) {
 	i, err := m.Int64Histogram(
-	    "http.client.response.body.size",
-	    metric.WithDescription("Size of HTTP client response bodies."),
-	    metric.WithUnit("By"),
+		"http.client.response.body.size",
+		append([]metric.Int64HistogramOption{
+			metric.WithDescription("Size of HTTP client response bodies."),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ClientResponseBodySize{noop.Int64Histogram{}}, err
@@ -811,11 +841,16 @@ type ServerActiveRequests struct {
 }
 
 // NewServerActiveRequests returns a new ServerActiveRequests instrument.
-func NewServerActiveRequests(m metric.Meter) (ServerActiveRequests, error) {
+func NewServerActiveRequests(
+	m metric.Meter,
+	opt ...metric.Int64UpDownCounterOption,
+) (ServerActiveRequests, error) {
 	i, err := m.Int64UpDownCounter(
-	    "http.server.active_requests",
-	    metric.WithDescription("Number of active HTTP server requests."),
-	    metric.WithUnit("{request}"),
+		"http.server.active_requests",
+		append([]metric.Int64UpDownCounterOption{
+			metric.WithDescription("Number of active HTTP server requests."),
+			metric.WithUnit("{request}"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ServerActiveRequests{noop.Int64UpDownCounter{}}, err
@@ -901,11 +936,16 @@ type ServerRequestBodySize struct {
 }
 
 // NewServerRequestBodySize returns a new ServerRequestBodySize instrument.
-func NewServerRequestBodySize(m metric.Meter) (ServerRequestBodySize, error) {
+func NewServerRequestBodySize(
+	m metric.Meter,
+	opt ...metric.Int64HistogramOption,
+) (ServerRequestBodySize, error) {
 	i, err := m.Int64Histogram(
-	    "http.server.request.body.size",
-	    metric.WithDescription("Size of HTTP server request bodies."),
-	    metric.WithUnit("By"),
+		"http.server.request.body.size",
+		append([]metric.Int64HistogramOption{
+			metric.WithDescription("Size of HTTP server request bodies."),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ServerRequestBodySize{noop.Int64Histogram{}}, err
@@ -1044,11 +1084,16 @@ type ServerRequestDuration struct {
 }
 
 // NewServerRequestDuration returns a new ServerRequestDuration instrument.
-func NewServerRequestDuration(m metric.Meter) (ServerRequestDuration, error) {
+func NewServerRequestDuration(
+	m metric.Meter,
+	opt ...metric.Float64HistogramOption,
+) (ServerRequestDuration, error) {
 	i, err := m.Float64Histogram(
-	    "http.server.request.duration",
-	    metric.WithDescription("Duration of HTTP server requests."),
-	    metric.WithUnit("s"),
+		"http.server.request.duration",
+		append([]metric.Float64HistogramOption{
+			metric.WithDescription("Duration of HTTP server requests."),
+			metric.WithUnit("s"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ServerRequestDuration{noop.Float64Histogram{}}, err
@@ -1180,11 +1225,16 @@ type ServerResponseBodySize struct {
 }
 
 // NewServerResponseBodySize returns a new ServerResponseBodySize instrument.
-func NewServerResponseBodySize(m metric.Meter) (ServerResponseBodySize, error) {
+func NewServerResponseBodySize(
+	m metric.Meter,
+	opt ...metric.Int64HistogramOption,
+) (ServerResponseBodySize, error) {
 	i, err := m.Int64Histogram(
-	    "http.server.response.body.size",
-	    metric.WithDescription("Size of HTTP server response bodies."),
-	    metric.WithUnit("By"),
+		"http.server.response.body.size",
+		append([]metric.Int64HistogramOption{
+			metric.WithDescription("Size of HTTP server response bodies."),
+			metric.WithUnit("By"),
+		}, opt...)...,
 	)
 	if err != nil {
 	    return ServerResponseBodySize{noop.Int64Histogram{}}, err
