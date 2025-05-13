@@ -280,8 +280,8 @@ github.com/nunnatsa/ginkgolinter v0.19.1 h1:mjwbOlDQxZi9Cal+KfbEJTCz327OLNfwNvoZ
 github.com/nunnatsa/ginkgolinter v0.19.1/go.mod h1:jkQ3naZDmxaZMXPWaS9rblH+i+GWXQCaS/JFIWcOH2s=
 github.com/olekukonko/errors v1.1.0 h1:RNuGIh15QdDenh+hNvKrJkmxxjV4hcS50Db478Ou5sM=
 github.com/olekukonko/errors v1.1.0/go.mod h1:ppzxA5jBKcO1vIpCXQ9ZqgDh8iwODz6OXIGKU8r5m4Y=
-github.com/olekukonko/ll v0.0.6-0.20250511102614-9564773e9d27 h1:LgDwLQDELPB6wMOx1x4DSXnH2pjQNDKFgqv2inJuiAU=
-github.com/olekukonko/ll v0.0.6-0.20250511102614-9564773e9d27/go.mod h1:En+sEW0JNETl26+K8eZ6/W4UQ7CYSrrgg/EdIYT2H8g=
+github.com/olekukonko/ll v0.0.6-0.20250513034024-62c5c2714b38 h1:Lnuzuijce7bnRJnlns11a2mUTW9lMF5kUW+ZriZh/hI=
+github.com/olekukonko/ll v0.0.6-0.20250513034024-62c5c2714b38/go.mod h1:En+sEW0JNETl26+K8eZ6/W4UQ7CYSrrgg/EdIYT2H8g=
 github.com/olekukonko/tablewriter v1.0.4 h1:Lnz32TW+q/MQhA4qwhIyLA+j5hZ3dcNpZrcpPC+4iaM=
 github.com/olekukonko/tablewriter v1.0.4/go.mod h1:eUa4ArVhHJYomS27xrJB/GyLtnzKKVkZeLM6/MNO+pA=
 github.com/onsi/ginkgo/v2 v2.23.4 h1:ktYTpKJAVZnDT4VjxSbiBenUjmlL/5QkBEocaWXiQus=
