@@ -1,2 +1,2 @@
 # This is a renovate-friendly source of Docker images.
-FROM otel/weaver:v0.15.0@sha256:1cf1c72eaed57dad813c2e359133b8a15bd4facf305aae5b13bdca6d3eccff56 AS weaver
+FROM otel/weaver:v0.15.1@sha256:95c0aaa493d84ac72a1188756bd46eec1ead8e82004e7778ff5779736be8d578 AS weaver
